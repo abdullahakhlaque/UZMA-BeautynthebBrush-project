@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { LenisProvider, useLenis } from "./components/LenisProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
@@ -29,10 +30,11 @@ const queryClient = new QueryClient();
 
 // ─── Scroll to top on every route change ───
 const ScrollToTop = () => {
+  const { scrollTo } = useLenis();
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    scrollTo(0, { immediate: true });
+  }, [pathname, scrollTo]);
   return null;
 };
 
@@ -47,33 +49,35 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => (
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <CartProvider>
-        <CustomCursor />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/" element={<PublicLayout><Index /></PublicLayout>} />
-            <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-            <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
-            <Route path="/services/salon" element={<PublicLayout><SalonServices /></PublicLayout>} />
-            <Route path="/services/makeup-hair" element={<PublicLayout><MakeupHair /></PublicLayout>} />
-            <Route path="/services/styling" element={<PublicLayout><Styling /></PublicLayout>} />
-            <Route path="/services/hair-treatments" element={<PublicLayout><HairTreatments /></PublicLayout>} />
-            <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
-            <Route path="/portfolio" element={<PublicLayout><Portfolio /></PublicLayout>} />
-            <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
-            <Route path="/blog/:id" element={<PublicLayout><BlogDetail /></PublicLayout>} />
-            <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-            <Route path="/booking" element={<PublicLayout><Booking /></PublicLayout>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </TooltipProvider>
+    <LenisProvider>
+      <TooltipProvider>
+        <CartProvider>
+          <CustomCursor />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/" element={<PublicLayout><Index /></PublicLayout>} />
+              <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+              <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+              <Route path="/services/salon" element={<PublicLayout><SalonServices /></PublicLayout>} />
+              <Route path="/services/makeup-hair" element={<PublicLayout><MakeupHair /></PublicLayout>} />
+              <Route path="/services/styling" element={<PublicLayout><Styling /></PublicLayout>} />
+              <Route path="/services/hair-treatments" element={<PublicLayout><HairTreatments /></PublicLayout>} />
+              <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
+              <Route path="/portfolio" element={<PublicLayout><Portfolio /></PublicLayout>} />
+              <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+              <Route path="/blog/:id" element={<PublicLayout><BlogDetail /></PublicLayout>} />
+              <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+              <Route path="/booking" element={<PublicLayout><Booking /></PublicLayout>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </TooltipProvider>
+    </LenisProvider>
   </QueryClientProvider>
 );
 
