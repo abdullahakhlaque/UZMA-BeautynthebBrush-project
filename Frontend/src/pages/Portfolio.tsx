@@ -13,15 +13,14 @@ interface PortfolioItem {
 
 const Portfolio = () => {
   const [items, setItems] = useState<PortfolioItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<number | null>(null);
   const { ref, isInView } = useInView();
 
   useEffect(() => {
     fetch(apiUrl('/api/portfolio'))
       .then(res => res.json())
-      .then(data => { setItems(data); setLoading(false); })
-      .catch(err => { console.error(err); setLoading(false); });
+      .then(data => setItems(data))
+      .catch(err => console.error(err));
   }, []);
 
   const navigate = (dir: 1 | -1) => {
@@ -52,18 +51,8 @@ const Portfolio = () => {
       <section ref={ref} className="px-4 md:px-8 lg:px-16 py-16 md:py-24">
         <div className="max-w-7xl mx-auto">
 
-          {loading && (
-            <div className="flex items-center justify-center py-32">
-              <div className="flex gap-2">
-                {[0,1,2].map(i => (
-                  <div key={i} className="w-2 h-2 rounded-full"
-                    style={{ background: '#c9a96e', animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite` }} />
-                ))}
-              </div>
-            </div>
-          )}
 
-          {!loading && items.length === 0 && (
+          {items.length === 0 && (
             <div className="text-center py-32">
               <div className="w-16 h-px mx-auto mb-8" style={{ background: '#c9a96e' }} />
               <p className="font-heading text-2xl font-light text-gray-400 mb-2">No items yet</p>
@@ -71,7 +60,7 @@ const Portfolio = () => {
             </div>
           )}
 
-          {!loading && items.length > 0 && (
+          {items.length > 0 && (
             <>
               {/* Count indicator */}
               <motion.div
