@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useInView } from '@/hooks/useAnimations';
-import heroBg1 from '@/assets/hero-bg-1.jpg';
+import salonImg from '@/assets/salon-interior.jpg';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
 
 interface PortfolioItem {
@@ -34,7 +34,7 @@ const Portfolio = () => {
 
       {/* ── HERO BANNER ── */}
       <div className="relative h-64 md:h-80 flex items-end justify-center overflow-hidden">
-        <img src={heroBg1} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={salonImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 60%, transparent 100%)' }} />
         <div className="relative z-10 text-center px-4 pb-10 md:pb-14">
           {/* Thin gold rule */}
