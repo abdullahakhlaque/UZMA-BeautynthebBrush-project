@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import { PremiumReveal } from '@/components/PremiumReveal';
+import { StaggerText } from '@/components/StaggerText';
 import { Link } from 'react-router-dom';
 import { useInView } from '@/hooks/useAnimations';
+import salonBg from '@/assets/salon-interior.jpg';
 
 const skinServices = [
   {
@@ -63,34 +66,37 @@ const hairServices = [
 const ServiceCategoryCard = ({ category, items, index }: { category: string; items: string[]; index: number }) => {
   const { ref, isInView } = useInView();
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
-      className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:shadow-lg transition-all duration-500 hover:-translate-y-1"
-    >
-      <h3 className="font-heading text-lg font-semibold text-foreground mb-4">{category}</h3>
-      <ul className="space-y-2">
-        {items.map((item) => (
-          <li key={item} className="font-body text-sm text-muted-foreground flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
+    <PremiumReveal delay={index * 0.1}>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: index * 0.08 }}
+        className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:shadow-lg transition-all duration-500 hover:-translate-y-1"
+      >
+        <h3 className="font-heading text-lg font-semibold text-foreground mb-4">{category}</h3>
+        <ul className="space-y-2">
+          {items.map((item) => (
+            <li key={item} className="font-body text-sm text-muted-foreground flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </PremiumReveal>
   );
 };
 
 const SalonServices = () => {
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]" />
+      <div className="fixed inset-0 -z-10" style={{ backgroundImage: 'url(' + salonBg + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
       <div className="fixed top-1/4 left-1/4 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.12] blur-[120px]" />
       <div className="fixed bottom-1/4 right-1/4 -z-10 w-[400px] h-[400px] rounded-full bg-[hsl(30,20%,90%)] opacity-[0.15] blur-[100px]" />
 
-      <section className="section-padding">
+      <PremiumReveal>
+          <section className="section-padding">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
             <p className="font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2">Salon Services</p>
@@ -144,6 +150,7 @@ const SalonServices = () => {
           </div>
         </div>
       </section>
+    </PremiumReveal>
     </div>
   );
 };
