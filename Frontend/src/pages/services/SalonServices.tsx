@@ -72,7 +72,7 @@ const ServiceCategoryCard = ({ category, items, index }: { category: string; ite
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: index * 0.08 }}
-        className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:shadow-lg transition-all duration-500 hover:-translate-y-1"
+        className="bg-white/95 backdrop-blur-md rounded-2xl p-6 border border-white/40 shadow-md transition-all duration-400 ease-in-out hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(212,175,55,0.1)] hover:border-[#D4AF37]/20"
       >
         <h3 className="font-heading text-lg font-semibold text-foreground mb-4">{category}</h3>
         <ul className="space-y-2">
