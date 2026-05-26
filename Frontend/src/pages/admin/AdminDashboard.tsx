@@ -47,6 +47,48 @@ const sniffMediaType = (mediaUrl?: string, mediaType?: 'image' | 'video'): 'imag
   return 'image'; // default
 };
 
+const MAX_PORTFOLIO_IMAGE_SIZE = 1600;
+const PORTFOLIO_IMAGE_QUALITY = 0.82;
+
+const readFileAsDataUrl = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+
+const resizeImageForPortfolio = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const image = document.createElement('img');
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      const scale = Math.min(1, MAX_PORTFOLIO_IMAGE_SIZE / Math.max(image.width, image.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.width * scale));
+      canvas.height = Math.max(1, Math.round(image.height * scale));
+
+      const context = canvas.getContext('2d');
+      if (!context) {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error('Could not prepare image'));
+        return;
+      }
+
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(objectUrl);
+      resolve(canvas.toDataURL('image/webp', PORTFOLIO_IMAGE_QUALITY));
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('Could not load image'));
+    };
+
+    image.src = objectUrl;
+  });
+
 const AdminDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState<'gallery' | 'blog' | 'bookings'>('gallery');
@@ -120,14 +162,21 @@ const AdminDashboard = () => {
   }
 
   // ── Gallery handlers ──────────────────────────────────────
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const fileType = file.type.startsWith('video') ? 'video' : 'image';
     setUploadType(fileType);
-    const reader = new FileReader();
-    reader.onloadend = () => setPreviewImage(reader.result as string);
-    reader.readAsDataURL(file);
+
+    try {
+      const dataUrl = fileType === 'image'
+        ? await resizeImageForPortfolio(file)
+        : await readFileAsDataUrl(file);
+      setPreviewImage(dataUrl);
+    } catch (err) {
+      console.error(err);
+      alert('Could not prepare this file for upload.');
+    }
   };
 
   const confirmUpload = async () => {

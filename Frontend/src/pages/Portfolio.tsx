@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Play, Plus, X } from 'lucide-react';
 import { useInView } from '@/hooks/useAnimations';
 import salonImg from '@/assets/salon-interior.jpg';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
@@ -11,32 +11,75 @@ interface PortfolioItem {
   type: 'image' | 'video';
 }
 
+const SKELETON_HEIGHTS = [220, 160, 280, 190, 240, 170, 300, 150, 210, 260, 180, 230];
+
+const SkeletonCard = ({ height }: { height: number }) => (
+  <div className="break-inside-avoid mb-4 md:mb-5" style={{ borderRadius: '4px', overflow: 'hidden' }}>
+    <div
+      style={{
+        height,
+        background: 'linear-gradient(90deg, #f0ebe4 25%, #e8e2da 50%, #f0ebe4 75%)',
+        backgroundSize: '200% 100%',
+        animation: 'shimmer 1.4s infinite',
+      }}
+    />
+  </div>
+);
+
+const ProgressiveImage = ({ src, alt, eager }: { src: string; alt: string; eager: boolean }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'sync' : 'async'}
+      onLoad={() => setLoaded(true)}
+      className="w-full h-auto block"
+      style={{
+        display: 'block',
+        filter: loaded ? 'none' : 'blur(8px)',
+        transform: loaded ? 'scale(1)' : 'scale(1.04)',
+        transition: 'filter 0.4s ease, transform 0.4s ease',
+      }}
+    />
+  );
+};
+
 const Portfolio = () => {
   const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<number | null>(null);
   const { ref, isInView } = useInView();
 
   useEffect(() => {
     fetch(apiUrl('/api/portfolio'))
       .then(res => res.json())
-      .then(data => setItems(data))
-      .catch(err => console.error(err));
+      .then(data => {
+        setItems(Array.isArray(data) ? data : []);
+      })
+      .catch(err => {
+        console.error(err);
+        setItems([]);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const navigate = (dir: 1 | -1) => {
-    if (selected === null) return;
+    if (selected === null || items.length === 0) return;
     setSelected((selected + dir + items.length) % items.length);
   };
 
   return (
     <div className="min-h-screen" style={{ background: 'hsl(30, 20%, 98%)' }}>
-
-      {/* ── HERO BANNER ── */}
       <div className="relative h-64 md:h-80 flex items-end justify-center overflow-hidden">
-        <img src={salonImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 60%, transparent 100%)' }} />
+        <img src={salonImg} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 60%, transparent 100%)' }}
+        />
         <div className="relative z-10 text-center px-4 pb-10 md:pb-14">
-          {/* Thin gold rule */}
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-12" style={{ background: 'linear-gradient(to right, transparent, #c9a96e)' }} />
             <span className="font-accent tracking-[0.35em] uppercase text-xs" style={{ color: '#c9a96e' }}>Our Work</span>
@@ -47,22 +90,26 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* ── GALLERY ── */}
       <section ref={ref} className="px-4 md:px-8 lg:px-16 py-16 md:py-24">
         <div className="max-w-7xl mx-auto">
-
-
-          {items.length === 0 && (
-            <div className="text-center py-32">
-              <div className="w-16 h-px mx-auto mb-8" style={{ background: '#c9a96e' }} />
-              <p className="font-heading text-2xl font-light text-gray-400 mb-2">No items yet</p>
-              <p className="font-body text-sm text-gray-400">Upload images from the admin panel to populate the gallery.</p>
+          {loading && (
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-5">
+              {SKELETON_HEIGHTS.map((height, index) => (
+                <SkeletonCard key={index} height={height} />
+              ))}
             </div>
           )}
 
-          {items.length > 0 && (
+          {!loading && items.length === 0 && (
+            <div className="text-center py-32">
+              <div className="w-16 h-px mx-auto mb-8" style={{ background: '#c9a96e' }} />
+              <p className="font-heading text-2xl font-light text-gray-400 mb-2">Loading</p>
+              <p className="font-body text-sm text-gray-400">Please wait while the portfolio gallery loads.</p>
+            </div>
+          )}
+
+          {!loading && items.length > 0 && (
             <>
-              {/* Count indicator */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -76,15 +123,14 @@ const Portfolio = () => {
                 <div className="h-px flex-1" style={{ background: 'linear-gradient(to left, #c9a96e, transparent)' }} />
               </motion.div>
 
-              {/* Masonry-style grid with varied sizes */}
               <div className="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-5 space-y-0">
-                {items.map((item, i) => (
+                {items.map((item, index) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: Math.min(i * 0.06, 0.5) }}
-                    onClick={() => setSelected(i)}
+                    transition={{ duration: 0.7, delay: Math.min(index * 0.06, 0.5) }}
+                    onClick={() => setSelected(index)}
                     className="break-inside-avoid mb-4 md:mb-5 group cursor-pointer"
                   >
                     <div
@@ -93,34 +139,30 @@ const Portfolio = () => {
                         borderRadius: '4px',
                         boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
                         transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                        minHeight: '80px',
+                        background: '#f0ebe4',
                       }}
-                      onMouseEnter={e => {
-                        (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 48px rgba(0,0,0,0.18)';
-                        (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)';
+                      onMouseEnter={event => {
+                        event.currentTarget.style.boxShadow = '0 12px 48px rgba(0,0,0,0.18)';
+                        event.currentTarget.style.transform = 'translateY(-3px)';
                       }}
-                      onMouseLeave={e => {
-                        (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
-                        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                      onMouseLeave={event => {
+                        event.currentTarget.style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
+                        event.currentTarget.style.transform = 'translateY(0)';
                       }}
                     >
                       {item.type === 'image' ? (
-                        <img
-                          src={resolveMediaUrl(item.url)}
-                          className="w-full h-auto block"
-                          alt="Portfolio"
-                          loading="lazy"
-                          style={{ display: 'block' }}
-                        />
+                        <ProgressiveImage src={resolveMediaUrl(item.url)} alt="Portfolio" eager={index < 4} />
                       ) : (
                         <video
                           src={resolveMediaUrl(item.url)}
                           className="w-full h-auto block"
                           muted
                           playsInline
+                          preload="metadata"
                         />
                       )}
 
-                      {/* Hover overlay — gold tinted */}
                       <div
                         className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{ background: 'rgba(201,169,110,0.15)', backdropFilter: 'blur(1px)' }}
@@ -129,7 +171,11 @@ const Portfolio = () => {
                           className="w-10 h-10 rounded-full flex items-center justify-center border"
                           style={{ borderColor: 'rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.2)' }}
                         >
-                          <span className="text-white text-lg">{item.type === 'video' ? '▶' : '+'}</span>
+                          {item.type === 'video' ? (
+                            <Play className="w-5 h-5 text-white" aria-hidden="true" />
+                          ) : (
+                            <Plus className="w-5 h-5 text-white" aria-hidden="true" />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -141,7 +187,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* ── LIGHTBOX ── */}
       <AnimatePresence>
         {selected !== null && items[selected] && (
           <motion.div
@@ -153,7 +198,6 @@ const Portfolio = () => {
             style={{ background: 'rgba(10,8,6,0.96)', backdropFilter: 'blur(16px)' }}
             onClick={() => setSelected(null)}
           >
-            {/* Close */}
             <button
               onClick={() => setSelected(null)}
               className="absolute top-6 right-6 flex items-center gap-2 transition-opacity hover:opacity-70"
@@ -163,37 +207,39 @@ const Portfolio = () => {
               <span className="font-body text-xs tracking-widest uppercase">Close</span>
             </button>
 
-            {/* Counter */}
             <div className="absolute top-6 left-6 font-accent text-xs tracking-[0.25em]" style={{ color: '#c9a96e' }}>
               {String(selected + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
             </div>
 
-            {/* Prev */}
             <button
-              onClick={e => { e.stopPropagation(); navigate(-1); }}
+              onClick={event => {
+                event.stopPropagation();
+                navigate(-1);
+              }}
               className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:bg-white/10"
               style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.7)' }}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            {/* Next */}
             <button
-              onClick={e => { e.stopPropagation(); navigate(1); }}
+              onClick={event => {
+                event.stopPropagation();
+                navigate(1);
+              }}
               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:bg-white/10"
               style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.7)' }}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Media */}
             <motion.div
               key={selected}
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              onClick={e => e.stopPropagation()}
+              onClick={event => event.stopPropagation()}
             >
               {items[selected].type === 'image' ? (
                 <img
@@ -212,7 +258,6 @@ const Portfolio = () => {
               )}
             </motion.div>
 
-            {/* Gold bottom rule */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3">
               <div className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, #c9a96e)' }} />
               <span className="font-accent text-xs tracking-[0.3em] uppercase" style={{ color: '#c9a96e40' }}>Beauty & The Brush</span>
@@ -223,9 +268,9 @@ const Portfolio = () => {
       </AnimatePresence>
 
       <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); }
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
         }
       `}</style>
     </div>
