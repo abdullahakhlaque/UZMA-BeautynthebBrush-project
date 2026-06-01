@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, Phone, ArrowLeft } from 'lucide-react';
 import { services } from '@/data/siteData';
+import { studioImages } from '@/assets/studioImages';
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -18,8 +19,10 @@ const ServiceDetail = () => {
 
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]" />
-      <div className="fixed top-1/3 right-1/4 -z-10 w-[400px] h-[400px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.1] blur-[120px]" />
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.makeupVanity} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/91" />
+      </div>
 
       <section className="section-padding">
         <div className="max-w-6xl mx-auto">

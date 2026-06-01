@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useInView } from '@/hooks/useAnimations';
+import { studioImages } from '@/assets/studioImages';
 
 const treatments = [
   { name: 'Keratin Treatment', desc: 'Smoothens and strengthens hair, reducing frizz for up to 6 months.' },
@@ -23,8 +24,10 @@ const HairTreatments = () => {
 
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]" />
-      <div className="fixed bottom-1/4 left-1/3 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.12] blur-[120px]" />
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.pedicureSpa} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/91" />
+      </div>
 
       <section ref={ref} className="section-padding">
         <div className="max-w-6xl mx-auto">

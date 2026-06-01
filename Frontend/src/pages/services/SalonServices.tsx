@@ -3,7 +3,7 @@ import { PremiumReveal } from '@/components/PremiumReveal';
 import { StaggerText } from '@/components/StaggerText';
 import { Link } from 'react-router-dom';
 import { useInView } from '@/hooks/useAnimations';
-import salonBg from '@/assets/salon-interior.jpg';
+import { studioImages } from '@/assets/studioImages';
 
 const skinServices = [
   {
@@ -91,9 +91,10 @@ const ServiceCategoryCard = ({ category, items, index }: { category: string; ite
 const SalonServices = () => {
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 -z-10" style={{ backgroundImage: 'url(' + salonBg + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-      <div className="fixed top-1/4 left-1/4 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.12] blur-[120px]" />
-      <div className="fixed bottom-1/4 right-1/4 -z-10 w-[400px] h-[400px] rounded-full bg-[hsl(30,20%,90%)] opacity-[0.15] blur-[100px]" />
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.salonStations} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/82" />
+      </div>
 
       <PremiumReveal>
           <section className="section-padding">

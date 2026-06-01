@@ -3,11 +3,7 @@ import { motion } from 'framer-motion';
 import { Star, Award, Heart, Sparkles, ArrowRight, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { useInView, useAnimatedCounter } from '@/hooks/useAnimations';
 import { services, testimonials } from '@/data/siteData';
-import heroSlide1 from '@/assets/hero-slide-1.jpg';
-import heroSlide2 from '@/assets/hero-slide-2.jpg';
-import heroSlide4 from '@/assets/hero-slide-4.jpg';
-import salonInterior from '@/assets/salon-interior.jpg';
-import salonSetup from '@/assets/salon-setup.jpg';
+import { studioImageSet } from '@/assets/studioImages';
 import soapProduct1 from '@/assets/soap-product-1.jpg';
 import soapProduct2 from '@/assets/soap-product-2.jpg';
 import soapProduct3 from '@/assets/soap-product-3.jpg';
@@ -19,11 +15,12 @@ import hairStyling from '@/assets/hair-styling.jpg';
 import HomeBlogSection from '@/components/Homeblogsection';
 import { useState, useEffect, lazy, Suspense, useRef } from 'react';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
+import { fetchPortfolio, getCachedPortfolio, preloadFirstImages, type PortfolioItem as CachedPortfolioItem } from '@/lib/portfolioCache';
 
 const SoapScrollSection = lazy(() => import('@/components/SoapScrollSection'));
 
 // ✅ Removed heroBg1 & heroBg2 (blurry slots 5 & 6) — now 5 crisp slides
-const heroSlides = [heroSlide1, heroSlide2, heroSlide4, salonInterior, salonSetup];
+const heroSlides = studioImageSet;
 
 // Static fallback for when no portfolio items uploaded yet
 const FALLBACK_PORTFOLIO = [
@@ -38,6 +35,14 @@ const FALLBACK_PORTFOLIO = [
 // ─────────────────────────────────────────
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    // Pre-warm the portfolio cache so the first 4 images are
+    // already downloading by the time the user scrolls down.
+    fetchPortfolio()
+      .then(data => preloadFirstImages(data, 4))
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     const t = setInterval(() => setCurrent(p => (p + 1) % heroSlides.length), 5000);
     return () => clearInterval(t);
@@ -162,17 +167,23 @@ interface PortfolioItem { id: string; url: string; type: string; }
 
 const PortfolioPreview = () => {
   const { ref, isInView } = useInView();
-  const [items, setItems] = useState<PortfolioItem[]>(FALLBACK_PORTFOLIO);
+  const [items, setItems] = useState<(PortfolioItem | CachedPortfolioItem)[]>(
+    () => {
+      const cached = getCachedPortfolio();
+      return cached && cached.length > 0 ? cached.slice(0, 4) : FALLBACK_PORTFOLIO;
+    },
+  );
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/portfolio')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          setItems(data.slice(0, 4));
-        }
-      })
-      .catch(() => {});
+    let cancelled = false;
+    fetchPortfolio().then(data => {
+      if (cancelled || data.length === 0) return;
+      setItems(data.slice(0, 4));
+      preloadFirstImages(data, 4);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -185,20 +196,35 @@ const PortfolioPreview = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {items.map((item, i) => (
-            <motion.div key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/5] luxury-shadow hover:shadow-lg transition-all duration-500">
-              {item.type === 'video' ? (
-                <video src={item.url} className="w-full h-full object-cover" muted playsInline />
-              ) : (
-                <img src={item.url} alt="Portfolio" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
+          {items.map((item, i) => {
+            // Admin-uploaded items come back as `/uploads/...` and need the
+            // API base prepended. Vite-bundled fallback images are already
+            // absolute frontend paths and must be left alone.
+            const mediaUrl = item.url.startsWith('/uploads/')
+              ? resolveMediaUrl(item.url)
+              : item.url;
+            return (
+              <motion.div key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="group relative rounded-2xl overflow-hidden aspect-[4/5] luxury-shadow hover:shadow-lg transition-all duration-500">
+                {item.type === 'video' ? (
+                  <video src={mediaUrl} className="w-full h-full object-cover" muted playsInline preload="metadata" />
+                ) : (
+                  <img
+                    src={mediaUrl}
+                    alt="Portfolio"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority={i < 2 ? 'high' : 'auto'}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="text-center mt-10">

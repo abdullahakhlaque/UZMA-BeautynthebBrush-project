@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, User, Phone, CheckCircle } from 'lucide-react';
+import { studioImages } from '@/assets/studioImages';
 import { apiUrl } from '@/lib/api';
 
 // ✅ FULL SERVICE LIST matching the website's offerings
@@ -117,8 +118,10 @@ const Booking = () => {
 
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]" />
-      <div className="fixed top-1/3 left-1/3 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.1] blur-[120px]" />
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.receptionWide} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/90" />
+      </div>
 
       <section className="section-padding">
         <div className="max-w-2xl mx-auto">

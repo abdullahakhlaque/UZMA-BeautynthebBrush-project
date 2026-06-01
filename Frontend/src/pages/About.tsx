@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView, useAnimatedCounter } from '@/hooks/useAnimations';
 import aboutImg from '@/assets/about-artist.png';
-import makeupTools from '@/assets/makeup-tools.jpg';
+import { studioImages } from '@/assets/studioImages';
 
 const CounterItem = ({ end, suffix, label }: { end: number; suffix: string; label: string }) => {
   const { ref, isInView } = useInView();
@@ -19,9 +19,14 @@ const About = () => {
   const { ref: ref2, isInView: isInView2 } = useInView();
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 relative overflow-hidden">
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.treatmentRoom} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/88" />
+      </div>
+
       {/* Hero */}
-      <section className="section-padding bg-cream">
+      <section className="section-padding bg-cream/90 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
             <p className="font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2">About</p>
@@ -45,7 +50,7 @@ const About = () => {
       </section>
 
       {/* Counters */}
-      <section className="section-padding">
+      <section className="section-padding bg-background/90 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           <CounterItem end={20} suffix="+" label="Years Experience" />
           <CounterItem end={30000} suffix="+" label="Happy Clients" />
@@ -55,7 +60,7 @@ const About = () => {
       </section>
 
       {/* Tools section */}
-      <section ref={ref} className="section-padding bg-cream">
+      <section ref={ref} className="section-padding bg-cream/90 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8 }}>
             <p className="font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2">Our Kit</p>
@@ -71,7 +76,7 @@ const About = () => {
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}>
-            <img src={makeupTools} alt="Premium makeup tools" className="rounded-2xl luxury-shadow-card w-full" />
+            <img src={studioImages.makeupMirrors} alt="Premium makeup tools" className="rounded-2xl luxury-shadow-card w-full" />
           </motion.div>
         </div>
       </section>

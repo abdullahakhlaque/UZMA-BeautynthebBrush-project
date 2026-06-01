@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import salonInterior from '@/assets/salon-interior.jpg';
+import { studioImages } from '@/assets/studioImages';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
 
 interface BlogPost {
@@ -53,13 +53,13 @@ const Blog = () => {
 
       {/* Background */}
       <div className="fixed inset-0 -z-10">
-        <img src={salonInterior} alt="" className="w-full h-full object-cover" />
+        <img src={studioImages.brandSign} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/92" />
       </div>
 
       {/* Hero Banner */}
       <div className="relative h-52 md:h-64 flex items-center justify-center overflow-hidden">
-        <img src={salonInterior} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={studioImages.brandSign} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 text-center px-4">
           <p className="font-accent text-white/70 tracking-[0.2em] uppercase text-sm mb-2">Latest</p>

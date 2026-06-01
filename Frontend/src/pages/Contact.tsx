@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, Instagram } from 'lucide-react';
-import makeupTools from '@/assets/makeup-tools.jpg';
+import { studioImages } from '@/assets/studioImages';
 import { apiUrl } from '@/lib/api';
 
 const Contact = () => {
@@ -60,13 +60,13 @@ const Contact = () => {
 
       {/* ✅ BACKGROUND IMAGE */}
       <div className="fixed inset-0 -z-10">
-        <img src={makeupTools} alt="" className="w-full h-full object-cover" />
+        <img src={studioImages.makeupMirrors} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/90" />
       </div>
 
       {/* HERO BANNER */}
       <div className="relative h-48 md:h-56 flex items-center justify-center overflow-hidden">
-        <img src={makeupTools} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={studioImages.makeupMirrors} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 text-center px-4">
           <p className="font-accent text-white/70 tracking-[0.2em] uppercase text-sm mb-2">Get In Touch</p>

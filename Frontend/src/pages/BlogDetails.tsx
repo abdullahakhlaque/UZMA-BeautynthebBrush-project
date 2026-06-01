@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import salonInterior from '@/assets/salon-interior.jpg';
+import { studioImages } from '@/assets/studioImages';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
 
 interface BlogPost {
@@ -64,7 +64,7 @@ const BlogDetail = () => {
   return (
     <div className="pt-20 min-h-screen relative overflow-hidden">
       <div className="fixed inset-0 -z-10">
-        <img src={salonInterior} alt="" className="w-full h-full object-cover" />
+        <img src={studioImages.brandSign} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/90" />
       </div>
 

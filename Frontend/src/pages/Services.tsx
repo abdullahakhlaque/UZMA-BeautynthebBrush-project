@@ -3,12 +3,17 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { services } from '@/data/siteData';
 import { useInView } from '@/hooks/useAnimations';
+import { studioImages } from '@/assets/studioImages';
 
 const Services = () => {
   const { ref, isInView } = useInView();
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 relative overflow-hidden">
+      <div className="fixed inset-0 -z-10">
+        <img src={studioImages.salonStations} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[hsl(30,20%,97%)]/90" />
+      </div>
       <section ref={ref} className="section-padding">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
