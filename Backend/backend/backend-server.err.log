@@ -1,0 +1,238 @@
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.blog.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:185:37
+
+  182 
+  183 app.get("/api/blog", async (req, res) => {
+  184   try {
+→ 185     const posts = await prisma.blog.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:185:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.portfolio.findMany()` invocation in
+C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:42
+
+  124 
+  125 app.get("/api/portfolio", async (req, res) => {
+  126   try {
+→ 127     const items = await prisma.portfolio.findMany(
+Error opening a TLS connection: No credentials are available in the security package (os error -2146893042)
+    at $n.handleRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\abdullah\projects\UZMA\Backend\backend\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async C:\Users\abdullah\projects\UZMA\Backend\backend\server.js:127:19 {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
