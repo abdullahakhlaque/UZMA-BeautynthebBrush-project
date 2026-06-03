@@ -36,17 +36,18 @@ interface Booking {
   createdAt?: string;
 }
 
-// Per-file upload state
+// ── Per-file upload state ─────────────────────────────────────────────────────
+// previewUrl is a lightweight object URL (revoked after use), NOT a base64 string.
+// The raw File is kept so we can resize on-demand at upload time only.
 interface UploadFile {
-  id: string; // local unique id
+  id: string;
   file: File;
-  previewUrl: string;
+  previewUrl: string; // object URL — cheap, revoked when done/removed
   type: 'image' | 'video';
   status: 'pending' | 'uploading' | 'done' | 'error';
   errorMsg?: string;
 }
 
-// Sniff media type from URL/base64 when mediaType field isn't set
 const sniffMediaType = (mediaUrl?: string, mediaType?: 'image' | 'video'): 'image' | 'video' | null => {
   if (!mediaUrl) return null;
   if (mediaType === 'video') return 'video';
@@ -60,34 +61,21 @@ const sniffMediaType = (mediaUrl?: string, mediaType?: 'image' | 'video'): 'imag
 const MAX_PORTFOLIO_IMAGE_SIZE = 1600;
 const PORTFOLIO_IMAGE_QUALITY = 0.82;
 
-const readFileAsDataUrl = (file: File) =>
+// ── Resize + encode a File to base64 on-demand (called only at upload time) ──
+const resizeAndEncodeImage = (file: File): Promise<string> =>
   new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-
-const resizeImageForPortfolio = (file: File) =>
-  new Promise<string>((resolve, reject) => {
-    const image = document.createElement('img');
     const objectUrl = URL.createObjectURL(file);
+    const image = document.createElement('img');
 
     image.onload = () => {
+      URL.revokeObjectURL(objectUrl); // free immediately after load
       const scale = Math.min(1, MAX_PORTFOLIO_IMAGE_SIZE / Math.max(image.width, image.height));
       const canvas = document.createElement('canvas');
       canvas.width = Math.max(1, Math.round(image.width * scale));
       canvas.height = Math.max(1, Math.round(image.height * scale));
-
-      const context = canvas.getContext('2d');
-      if (!context) {
-        URL.revokeObjectURL(objectUrl);
-        reject(new Error('Could not prepare image'));
-        return;
-      }
-
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      URL.revokeObjectURL(objectUrl);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { reject(new Error('Could not prepare image')); return; }
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       resolve(canvas.toDataURL('image/webp', PORTFOLIO_IMAGE_QUALITY));
     };
 
@@ -97,6 +85,15 @@ const resizeImageForPortfolio = (file: File) =>
     };
 
     image.src = objectUrl;
+  });
+
+// ── Encode a video File to base64 on-demand ───────────────────────────────────
+const encodeFileAsDataUrl = (file: File): Promise<string> =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
   });
 
 let uploadFileCounter = 0;
@@ -173,59 +170,63 @@ const AdminDashboard = () => {
     return <AdminLogin onLogin={() => setIsLoggedIn(true)} />;
   }
 
-  // ── Multi-file selection ──────────────────────────────────
-  const handleFilesSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  // ── File selection — only create cheap object URLs, NO base64 here ────────
+  const handleFilesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
     if (!files.length) return;
 
-    const newItems: UploadFile[] = await Promise.all(
-      files.map(async (file) => {
-        const type: 'image' | 'video' = file.type.startsWith('video') ? 'video' : 'image';
-        try {
-          const previewUrl = type === 'image'
-            ? await resizeImageForPortfolio(file)
-            : await readFileAsDataUrl(file);
-          return { id: makeId(), file, previewUrl, type, status: 'pending' as const };
-        } catch {
-          return { id: makeId(), file, previewUrl: '', type, status: 'error' as const, errorMsg: 'Could not read file' };
-        }
-      })
-    );
+    const newItems: UploadFile[] = files.map((file) => {
+      const type: 'image' | 'video' = file.type.startsWith('video') ? 'video' : 'image';
+      // Object URL is tiny — just a pointer, not the actual data in memory
+      const previewUrl = URL.createObjectURL(file);
+      return { id: makeId(), file, previewUrl, type, status: 'pending' as const };
+    });
 
     setUploadQueue(prev => [...prev, ...newItems]);
-    // Reset input so the same files can be re-selected if needed
     if (portfolioInputRef.current) portfolioInputRef.current.value = '';
   };
 
+  // ── Remove from queue + revoke its object URL ─────────────────────────────
   const removeFromQueue = (id: string) => {
-    setUploadQueue(prev => prev.filter(f => f.id !== id));
+    setUploadQueue(prev => {
+      const item = prev.find(f => f.id === id);
+      if (item?.previewUrl) URL.revokeObjectURL(item.previewUrl);
+      return prev.filter(f => f.id !== id);
+    });
   };
 
   const clearDoneFromQueue = () => {
-    setUploadQueue(prev => prev.filter(f => f.status !== 'done'));
+    setUploadQueue(prev => {
+      prev.filter(f => f.status === 'done').forEach(f => {
+        if (f.previewUrl) URL.revokeObjectURL(f.previewUrl);
+      });
+      return prev.filter(f => f.status !== 'done');
+    });
   };
 
-  // Upload all pending files sequentially
+  // ── Upload all pending — base64 generated here, one file at a time ────────
   const uploadAll = async () => {
     const pending = uploadQueue.filter(f => f.status === 'pending');
     if (!pending.length) return;
     setIsUploadingAll(true);
 
     for (const item of pending) {
-      // Mark as uploading
       setUploadQueue(prev => prev.map(f => f.id === item.id ? { ...f, status: 'uploading' } : f));
 
       try {
+        // Encode NOW (not at selection time) — and discard immediately after POST
+        const base64 = item.type === 'image'
+          ? await resizeAndEncodeImage(item.file)
+          : await encodeFileAsDataUrl(item.file);
+
         const res = await fetch(apiUrl('/api/portfolio'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: item.previewUrl, type: item.type }),
+          body: JSON.stringify({ url: base64, type: item.type }),
         });
         const data = await res.json();
-
         if (data.error) throw new Error(data.error);
 
-        // Add to gallery list
         setGalleryImages(prev => [{
           id: data.id,
           url: data.url,
@@ -233,12 +234,20 @@ const AdminDashboard = () => {
           date: data.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
         }, ...prev]);
 
-        setUploadQueue(prev => prev.map(f => f.id === item.id ? { ...f, status: 'done' } : f));
+        // Revoke object URL now that we're done with this file
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+
+        setUploadQueue(prev => prev.map(f =>
+          f.id === item.id ? { ...f, status: 'done', previewUrl: '' } : f
+        ));
       } catch (err: any) {
         setUploadQueue(prev => prev.map(f =>
           f.id === item.id ? { ...f, status: 'error', errorMsg: err?.message ?? 'Upload failed' } : f
         ));
       }
+
+      // Small breathing room between uploads
+      await new Promise(r => setTimeout(r, 200));
     }
 
     setIsUploadingAll(false);
@@ -289,9 +298,7 @@ const AdminDashboard = () => {
     };
 
     try {
-      const url = editingPost
-        ? apiUrl(`/api/blog/${editingPost.id}`)
-        : apiUrl('/api/blog');
+      const url = editingPost ? apiUrl(`/api/blog/${editingPost.id}`) : apiUrl('/api/blog');
       const method = editingPost ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -428,14 +435,14 @@ const AdminDashboard = () => {
                           exit={{ opacity: 0, scale: 0.85 }}
                           className="relative group"
                         >
-                          {/* Thumbnail */}
+                          {/* Thumbnail — shows placeholder once previewUrl is revoked (status=done) */}
                           {item.previewUrl ? (
                             item.type === 'image'
                               ? <img src={item.previewUrl} className="h-20 w-full object-cover rounded" alt="" />
                               : <video src={item.previewUrl} className="h-20 w-full object-cover rounded" muted />
                           ) : (
                             <div className="h-20 w-full rounded bg-gray-100 flex items-center justify-center text-xs text-gray-400">
-                              {item.type}
+                              {item.status === 'done' ? '✓' : item.type}
                             </div>
                           )}
 
@@ -454,7 +461,7 @@ const AdminDashboard = () => {
                             )}
                           </div>
 
-                          {/* Remove button — only when not uploading */}
+                          {/* Remove button */}
                           {item.status !== 'uploading' && (
                             <button
                               onClick={() => removeFromQueue(item.id)}
@@ -464,7 +471,6 @@ const AdminDashboard = () => {
                             </button>
                           )}
 
-                          {/* File name */}
                           <p className="text-[10px] text-gray-400 mt-1 truncate">{item.file.name}</p>
                         </motion.div>
                       ))}
@@ -494,7 +500,10 @@ const AdminDashboard = () => {
                     )}
                     {!isUploadingAll && (
                       <button
-                        onClick={() => setUploadQueue([])}
+                        onClick={() => {
+                          uploadQueue.forEach(f => { if (f.previewUrl) URL.revokeObjectURL(f.previewUrl); });
+                          setUploadQueue([]);
+                        }}
                         className="px-4 py-2 border rounded text-sm text-gray-500"
                       >
                         Clear all
@@ -554,7 +563,6 @@ const AdminDashboard = () => {
                   className="w-full border p-2 rounded text-sm"
                 />
 
-                {/* Media Upload */}
                 <div className="border-2 border-dashed rounded-xl p-4">
                   <p className="text-xs text-gray-500 mb-2 flex items-center gap-1">
                     <Image size={13} /> <Video size={13} /> Attach image or video to this post (optional)
@@ -615,18 +623,10 @@ const AdminDashboard = () => {
                     <div className="flex justify-between items-start gap-4">
                       <div className="flex gap-3 items-start">
                         {mediaType === 'image' && (
-                          <img
-                            src={resolveMediaUrl(post.mediaUrl!)}
-                            className="w-16 h-16 object-cover rounded flex-shrink-0"
-                            alt=""
-                          />
+                          <img src={resolveMediaUrl(post.mediaUrl!)} className="w-16 h-16 object-cover rounded flex-shrink-0" alt="" />
                         )}
                         {mediaType === 'video' && (
-                          <video
-                            src={resolveMediaUrl(post.mediaUrl!)}
-                            className="w-16 h-16 object-cover rounded flex-shrink-0"
-                            muted
-                          />
+                          <video src={resolveMediaUrl(post.mediaUrl!)} className="w-16 h-16 object-cover rounded flex-shrink-0" muted />
                         )}
                         <div>
                           <h3 className="font-semibold text-sm">{post.title}</h3>
