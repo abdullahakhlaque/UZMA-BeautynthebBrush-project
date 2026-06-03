@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Image, FileText, LogOut, Trash2, Plus, Edit, Eye, X, Video } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Image, FileText, LogOut, Trash2, Plus, Edit, Eye, X, Video, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { apiUrl, resolveMediaUrl } from '@/lib/api';
 import AdminLogin from './AdminLogin';
 
@@ -36,6 +36,16 @@ interface Booking {
   createdAt?: string;
 }
 
+// Per-file upload state
+interface UploadFile {
+  id: string; // local unique id
+  file: File;
+  previewUrl: string;
+  type: 'image' | 'video';
+  status: 'pending' | 'uploading' | 'done' | 'error';
+  errorMsg?: string;
+}
+
 // Sniff media type from URL/base64 when mediaType field isn't set
 const sniffMediaType = (mediaUrl?: string, mediaType?: 'image' | 'video'): 'image' | 'video' | null => {
   if (!mediaUrl) return null;
@@ -44,7 +54,7 @@ const sniffMediaType = (mediaUrl?: string, mediaType?: 'image' | 'video'): 'imag
   if (mediaUrl.startsWith('data:video')) return 'video';
   if (mediaUrl.startsWith('data:image')) return 'image';
   if (/\.(mp4|webm|ogg|mov)(\?|$)/i.test(mediaUrl)) return 'video';
-  return 'image'; // default
+  return 'image';
 };
 
 const MAX_PORTFOLIO_IMAGE_SIZE = 1600;
@@ -89,15 +99,18 @@ const resizeImageForPortfolio = (file: File) =>
     image.src = objectUrl;
   });
 
+let uploadFileCounter = 0;
+const makeId = () => `uf-${++uploadFileCounter}-${Date.now()}`;
+
 const AdminDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState<'gallery' | 'blog' | 'bookings'>('gallery');
 
   // ── Gallery ──────────────────────────────────────────────
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [uploadType, setUploadType] = useState<'image' | 'video'>('image');
-  const [uploading, setUploading] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState<UploadFile[]>([]);
+  const [isUploadingAll, setIsUploadingAll] = useState(false);
+  const portfolioInputRef = useRef<HTMLInputElement>(null);
 
   // ── Blog ─────────────────────────────────────────────────
   const [blogPostList, setBlogPostList] = useState<BlogPost[]>([]);
@@ -146,11 +159,10 @@ const AdminDashboard = () => {
       .then(res => res.json())
       .then(data => {
         if (!Array.isArray(data)) { setBookings([]); return; }
-        // Sort newest first — by createdAt if available, else by date field
         const sorted = [...data].sort((a, b) => {
           const aTime = new Date(a.createdAt || a.date || 0).getTime();
           const bTime = new Date(b.createdAt || b.date || 0).getTime();
-          return bTime - aTime; // descending = newest first
+          return bTime - aTime;
         });
         setBookings(sorted);
       })
@@ -161,49 +173,75 @@ const AdminDashboard = () => {
     return <AdminLogin onLogin={() => setIsLoggedIn(true)} />;
   }
 
-  // ── Gallery handlers ──────────────────────────────────────
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const fileType = file.type.startsWith('video') ? 'video' : 'image';
-    setUploadType(fileType);
+  // ── Multi-file selection ──────────────────────────────────
+  const handleFilesSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
 
-    try {
-      const dataUrl = fileType === 'image'
-        ? await resizeImageForPortfolio(file)
-        : await readFileAsDataUrl(file);
-      setPreviewImage(dataUrl);
-    } catch (err) {
-      console.error(err);
-      alert('Could not prepare this file for upload.');
-    }
+    const newItems: UploadFile[] = await Promise.all(
+      files.map(async (file) => {
+        const type: 'image' | 'video' = file.type.startsWith('video') ? 'video' : 'image';
+        try {
+          const previewUrl = type === 'image'
+            ? await resizeImageForPortfolio(file)
+            : await readFileAsDataUrl(file);
+          return { id: makeId(), file, previewUrl, type, status: 'pending' as const };
+        } catch {
+          return { id: makeId(), file, previewUrl: '', type, status: 'error' as const, errorMsg: 'Could not read file' };
+        }
+      })
+    );
+
+    setUploadQueue(prev => [...prev, ...newItems]);
+    // Reset input so the same files can be re-selected if needed
+    if (portfolioInputRef.current) portfolioInputRef.current.value = '';
   };
 
-  const confirmUpload = async () => {
-    if (!previewImage) return;
-    setUploading(true);
-    try {
-      const res = await fetch(apiUrl('/api/portfolio'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: previewImage, type: uploadType }),
-      });
-      const data = await res.json();
-      if (data.error) { alert('Upload failed: ' + data.error); return; }
-      setGalleryImages(prev => [{
-        id: data.id,
-        url: data.url,
-        type: data.type,
-        date: data.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
-      }, ...prev]);
-      setPreviewImage(null);
-      alert('Uploaded successfully ✅');
-    } catch (err) {
-      console.error(err);
-      alert('Upload failed — is the server running?');
-    } finally {
-      setUploading(false);
+  const removeFromQueue = (id: string) => {
+    setUploadQueue(prev => prev.filter(f => f.id !== id));
+  };
+
+  const clearDoneFromQueue = () => {
+    setUploadQueue(prev => prev.filter(f => f.status !== 'done'));
+  };
+
+  // Upload all pending files sequentially
+  const uploadAll = async () => {
+    const pending = uploadQueue.filter(f => f.status === 'pending');
+    if (!pending.length) return;
+    setIsUploadingAll(true);
+
+    for (const item of pending) {
+      // Mark as uploading
+      setUploadQueue(prev => prev.map(f => f.id === item.id ? { ...f, status: 'uploading' } : f));
+
+      try {
+        const res = await fetch(apiUrl('/api/portfolio'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: item.previewUrl, type: item.type }),
+        });
+        const data = await res.json();
+
+        if (data.error) throw new Error(data.error);
+
+        // Add to gallery list
+        setGalleryImages(prev => [{
+          id: data.id,
+          url: data.url,
+          type: data.type,
+          date: data.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+        }, ...prev]);
+
+        setUploadQueue(prev => prev.map(f => f.id === item.id ? { ...f, status: 'done' } : f));
+      } catch (err: any) {
+        setUploadQueue(prev => prev.map(f =>
+          f.id === item.id ? { ...f, status: 'error', errorMsg: err?.message ?? 'Upload failed' } : f
+        ));
+      }
     }
+
+    setIsUploadingAll(false);
   };
 
   const deleteImage = async (id: string) => {
@@ -236,7 +274,6 @@ const AdminDashboard = () => {
     if (blogMediaRef.current) blogMediaRef.current.value = '';
   };
 
-  // ── Blog save (create + update) ───────────────────────────
   const saveBlogPost = async () => {
     if (!blogTitle.trim() || !blogContent.trim()) {
       alert('Title and content are required.');
@@ -308,6 +345,12 @@ const AdminDashboard = () => {
     }
   };
 
+  // ── Derived upload stats ───────────────────────────────────
+  const pendingCount = uploadQueue.filter(f => f.status === 'pending').length;
+  const doneCount = uploadQueue.filter(f => f.status === 'done').length;
+  const errorCount = uploadQueue.filter(f => f.status === 'error').length;
+  const uploadingCount = uploadQueue.filter(f => f.status === 'uploading').length;
+
   // ── Render ────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-cream">
@@ -347,27 +390,122 @@ const AdminDashboard = () => {
         {/* ── PORTFOLIO TAB ─────────────────────────────────── */}
         {activeTab === 'gallery' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <div className="mb-6 p-4 border-2 border-dashed rounded-xl">
-              <p className="text-sm text-gray-500 mb-3">Upload image or video to Portfolio</p>
-              <input type="file" accept="image/*,video/*" onChange={handleImageUpload} className="mb-3" />
-              {previewImage && (
-                <div className="mt-4">
-                  {uploadType === 'image'
-                    ? <img src={resolveMediaUrl(previewImage)} className="h-40 rounded object-cover" alt="Preview" />
-                    : <video src={resolveMediaUrl(previewImage)} className="h-40 rounded" controls />}
-                  <div className="mt-3 flex gap-3">
-                    <button onClick={confirmUpload} disabled={uploading}
-                      className="px-4 py-2 bg-black text-white rounded disabled:opacity-50">
-                      {uploading ? 'Uploading...' : 'Save to Portfolio'}
-                    </button>
-                    <button onClick={() => setPreviewImage(null)} className="px-4 py-2 border rounded">
-                      Cancel
-                    </button>
+
+            {/* Upload zone */}
+            <div className="mb-6 p-5 border-2 border-dashed rounded-xl">
+              <p className="text-sm text-gray-500 mb-3">
+                Select one or more images / videos to add to Portfolio
+              </p>
+
+              <input
+                ref={portfolioInputRef}
+                type="file"
+                accept="image/*,video/*"
+                multiple
+                onChange={handleFilesSelected}
+                className="mb-3"
+              />
+
+              {/* Queue preview */}
+              {uploadQueue.length > 0 && (
+                <div className="mt-4 space-y-3">
+                  {/* Summary bar */}
+                  <div className="flex items-center gap-3 text-xs text-gray-500 flex-wrap">
+                    <span>{uploadQueue.length} file{uploadQueue.length !== 1 ? 's' : ''} selected</span>
+                    {doneCount > 0 && <span className="text-green-600 flex items-center gap-1"><CheckCircle size={12} />{doneCount} uploaded</span>}
+                    {errorCount > 0 && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12} />{errorCount} failed</span>}
+                    {uploadingCount > 0 && <span className="text-blue-500 flex items-center gap-1"><Loader2 size={12} className="animate-spin" />{uploadingCount} uploading…</span>}
+                  </div>
+
+                  {/* Thumbnails */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                    <AnimatePresence>
+                      {uploadQueue.map(item => (
+                        <motion.div
+                          key={item.id}
+                          initial={{ opacity: 0, scale: 0.85 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.85 }}
+                          className="relative group"
+                        >
+                          {/* Thumbnail */}
+                          {item.previewUrl ? (
+                            item.type === 'image'
+                              ? <img src={item.previewUrl} className="h-20 w-full object-cover rounded" alt="" />
+                              : <video src={item.previewUrl} className="h-20 w-full object-cover rounded" muted />
+                          ) : (
+                            <div className="h-20 w-full rounded bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                              {item.type}
+                            </div>
+                          )}
+
+                          {/* Status overlay */}
+                          <div className={`absolute inset-0 rounded flex items-center justify-center transition-opacity ${
+                            item.status === 'uploading' ? 'bg-black/30' :
+                            item.status === 'done' ? 'bg-green-500/20' :
+                            item.status === 'error' ? 'bg-red-500/20' : 'bg-transparent'
+                          }`}>
+                            {item.status === 'uploading' && <Loader2 size={18} className="text-white animate-spin" />}
+                            {item.status === 'done' && <CheckCircle size={18} className="text-green-600" />}
+                            {item.status === 'error' && (
+                              <span title={item.errorMsg}>
+                                <AlertCircle size={18} className="text-red-500" />
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Remove button — only when not uploading */}
+                          {item.status !== 'uploading' && (
+                            <button
+                              onClick={() => removeFromQueue(item.id)}
+                              className="absolute -top-1.5 -right-1.5 bg-gray-800 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition"
+                            >
+                              <X size={10} />
+                            </button>
+                          )}
+
+                          {/* File name */}
+                          <p className="text-[10px] text-gray-400 mt-1 truncate">{item.file.name}</p>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex gap-3 flex-wrap pt-1">
+                    {pendingCount > 0 && (
+                      <button
+                        onClick={uploadAll}
+                        disabled={isUploadingAll}
+                        className="px-4 py-2 bg-black text-white rounded text-sm disabled:opacity-50 flex items-center gap-2"
+                      >
+                        {isUploadingAll
+                          ? <><Loader2 size={14} className="animate-spin" /> Uploading…</>
+                          : `Upload ${pendingCount} file${pendingCount !== 1 ? 's' : ''}`}
+                      </button>
+                    )}
+                    {doneCount > 0 && !isUploadingAll && (
+                      <button
+                        onClick={clearDoneFromQueue}
+                        className="px-4 py-2 border rounded text-sm text-gray-500"
+                      >
+                        Clear uploaded
+                      </button>
+                    )}
+                    {!isUploadingAll && (
+                      <button
+                        onClick={() => setUploadQueue([])}
+                        className="px-4 py-2 border rounded text-sm text-gray-500"
+                      >
+                        Clear all
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
             </div>
 
+            {/* Gallery grid */}
             {galleryImages.length === 0
               ? <p className="text-gray-400 text-sm">No portfolio items yet.</p>
               : (
@@ -476,7 +614,6 @@ const AdminDashboard = () => {
                   <div key={post.id} className="border p-4 mb-3 rounded-xl">
                     <div className="flex justify-between items-start gap-4">
                       <div className="flex gap-3 items-start">
-                        {/* Thumbnail — shows even if mediaType wasn't saved */}
                         {mediaType === 'image' && (
                           <img
                             src={resolveMediaUrl(post.mediaUrl!)}
@@ -523,10 +660,8 @@ const AdminDashboard = () => {
               <p className="text-gray-400 text-sm">No bookings yet.</p>
             ) : (
               <div className="space-y-4">
-                {/* Newest first — sorted in fetchBookings() */}
                 {bookings.map((b, index) => (
                   <div key={b.id} className="bg-card p-4 rounded-xl shadow border">
-                    {/* Most recent badge */}
                     {index === 0 && (
                       <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-2"
                         style={{ background: 'hsl(350,40%,95%)', color: 'hsl(350,40%,48%)' }}>
