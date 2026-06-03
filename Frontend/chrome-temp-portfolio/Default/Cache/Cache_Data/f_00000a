@@ -1,0 +1,765 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/Navbar.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"];const useState = __vite__cjsImport1_react["useState"]; const useEffect = __vite__cjsImport1_react["useEffect"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { Link, useLocation } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { Menu, X, ChevronDown, Phone, ChevronRight, Instagram } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { motion, AnimatePresence } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+// ─── IMPORTANT ───────────────────────────────────────────────────────────────
+// Save your logo image to: src/assets/logo.png
+// Then this import will work automatically.
+// If your file has a different name (e.g. logo.jpg), change it below.
+let logoImg = null;
+try {
+    // @ts-ignore
+    logoImg = new URL("/src/assets/logo.png", '' + import.meta.url).href;
+} catch  {
+    logoImg = null;
+}
+// ─────────────────────────────────────────────────────────────────────────────
+const WHATSAPP_PRIMARY = '919148768958';
+const WHATSAPP_SECONDARY = '919731102448';
+const INSTAGRAM_URL = 'https://www.instagram.com/beautyandthebrush2026';
+const WHATSAPP_MESSAGE = 'Hello%20I%20want%20to%20inquire%20about%20your%20services';
+const serviceCategories = [
+    {
+        label: 'Salon Services',
+        path: '/services/salon',
+        description: 'Skin & hair care treatments'
+    },
+    {
+        label: 'Makeup & Hair (MUH)',
+        path: '/services/makeup-hair',
+        description: 'Bridal & party makeup'
+    },
+    {
+        label: 'Styling',
+        path: '/services/styling',
+        description: 'Saree draping & general styling'
+    },
+    {
+        label: 'Hair Treatments',
+        path: '/services/hair-treatments',
+        description: 'Keratin, spa & more'
+    }
+];
+const navLinks = [
+    {
+        label: 'Home',
+        path: '/'
+    },
+    {
+        label: 'About',
+        path: '/about'
+    },
+    {
+        label: 'Our Services',
+        path: '/services',
+        children: serviceCategories
+    },
+    {
+        label: 'Portfolio',
+        path: '/portfolio'
+    },
+    {
+        label: 'Blog',
+        path: '/blog'
+    },
+    {
+        label: 'Contact',
+        path: '/contact'
+    }
+];
+const Navbar = ()=>{
+    _s();
+    const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [servicesOpen, setServicesOpen] = useState(false);
+    const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+    const [hoverTimeout, setHoverTimeout] = useState(null);
+    const [logoError, setLogoError] = useState(false);
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+    useEffect(()=>{
+        const handler = ()=>setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handler);
+        return ()=>window.removeEventListener('scroll', handler);
+    }, []);
+    useEffect(()=>{
+        setIsOpen(false);
+        setServicesOpen(false);
+        setMobileServicesOpen(false);
+    }, [
+        location
+    ]);
+    const isTransparent = isHomePage && !scrolled;
+    const navBg = isTransparent ? 'bg-black/20 backdrop-blur-sm border-b border-transparent' : 'bg-white/98 backdrop-blur-xl border-b border-[hsl(35,30%,88%)]';
+    const navShadow = isTransparent ? '' : 'shadow-[0_2px_24px_rgba(180,140,100,0.13)]';
+    const linkBase = isTransparent ? 'text-white hover:text-white/75 drop-shadow-sm' : 'text-[hsl(20,15%,22%)] hover:text-[hsl(350,40%,52%)]';
+    const linkActive = isTransparent ? 'text-white font-semibold drop-shadow-sm' : 'text-[hsl(350,40%,52%)] font-semibold';
+    const toggleColor = isTransparent ? 'text-white' : 'text-[hsl(20,15%,22%)]';
+    const showLogo = logoImg && !logoError;
+    // ── Ampersand color: gold on transparent, gradient on white bg ──
+    const ampersandStyle = isTransparent ? {
+        color: '#f5d08a'
+    } : {
+        background: 'linear-gradient(135deg, hsl(350,55%,58%), hsl(30,60%,55%))',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        display: 'inline-block'
+    };
+    return /*#__PURE__*/ _jsxDEV("nav", {
+        className: `fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${navBg} ${navShadow}`,
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "max-w-7xl mx-auto px-4 md:px-8",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "flex items-center justify-between h-16 md:h-20",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(Link, {
+                            to: "/",
+                            className: "flex items-center gap-2.5 group flex-shrink-0",
+                            children: [
+                                showLogo && /*#__PURE__*/ _jsxDEV("img", {
+                                    src: logoImg,
+                                    alt: "",
+                                    "aria-hidden": "true",
+                                    onError: ()=>setLogoError(true),
+                                    className: "h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 flex-shrink-0"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 99,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("span", {
+                                    className: `font-heading text-lg md:text-xl font-bold tracking-wide transition-colors duration-300 leading-tight ${isTransparent ? 'text-white' : 'text-[hsl(20,15%,18%)]'}`,
+                                    children: [
+                                        "Beauty",
+                                        ' ',
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            style: ampersandStyle,
+                                            children: "&"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 113,
+                                            columnNumber: 15
+                                        }, this),
+                                        ' ',
+                                        "the Brush"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 107,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                            lineNumber: 97,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "hidden lg:flex items-center gap-6",
+                            children: [
+                                navLinks.map((link)=>/*#__PURE__*/ _jsxDEV("div", {
+                                        className: "relative",
+                                        onMouseEnter: ()=>{
+                                            if (hoverTimeout) clearTimeout(hoverTimeout);
+                                            if (link.children) setServicesOpen(true);
+                                        },
+                                        onMouseLeave: ()=>{
+                                            const t = setTimeout(()=>setServicesOpen(false), 200);
+                                            setHoverTimeout(t);
+                                        },
+                                        children: [
+                                            link.children ? /*#__PURE__*/ _jsxDEV("button", {
+                                                className: `flex items-center gap-1.5 text-sm font-body font-medium tracking-wide transition-colors duration-200 ${linkBase}`,
+                                                children: [
+                                                    link.label,
+                                                    /*#__PURE__*/ _jsxDEV(ChevronDown, {
+                                                        className: `w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                        lineNumber: 136,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                lineNumber: 134,
+                                                columnNumber: 19
+                                            }, this) : /*#__PURE__*/ _jsxDEV(Link, {
+                                                to: link.path,
+                                                className: `text-sm font-body font-medium tracking-wide transition-colors duration-200 ${location.pathname === link.path ? linkActive : linkBase}`,
+                                                children: link.label
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                lineNumber: 139,
+                                                columnNumber: 19
+                                            }, this),
+                                            link.children && /*#__PURE__*/ _jsxDEV(AnimatePresence, {
+                                                children: servicesOpen && /*#__PURE__*/ _jsxDEV(motion.div, {
+                                                    initial: {
+                                                        opacity: 0,
+                                                        y: 10,
+                                                        scale: 0.97
+                                                    },
+                                                    animate: {
+                                                        opacity: 1,
+                                                        y: 0,
+                                                        scale: 1
+                                                    },
+                                                    exit: {
+                                                        opacity: 0,
+                                                        y: 10,
+                                                        scale: 0.97
+                                                    },
+                                                    transition: {
+                                                        duration: 0.22,
+                                                        ease: 'easeOut'
+                                                    },
+                                                    className: "absolute top-full left-1/2 -translate-x-1/2 mt-4 w-80 rounded-2xl z-50 overflow-hidden",
+                                                    style: {
+                                                        background: 'hsl(0,0%,100%)',
+                                                        border: '1px solid hsl(35,35%,88%)',
+                                                        boxShadow: '0 8px 40px rgba(180,130,90,0.13), 0 2px 8px rgba(0,0,0,0.06)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "h-[2px] w-full",
+                                                            style: {
+                                                                background: 'linear-gradient(90deg, hsl(350,45%,62%), hsl(35,55%,58%), hsl(350,45%,62%))'
+                                                            }
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 165,
+                                                            columnNumber: 25
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "p-2",
+                                                            children: link.children.map((child)=>/*#__PURE__*/ _jsxDEV(Link, {
+                                                                    to: child.path,
+                                                                    className: "flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 group/item",
+                                                                    onMouseEnter: (e)=>e.currentTarget.style.background = 'hsl(35,40%,97%)',
+                                                                    onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
+                                                                    children: [
+                                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                                            children: [
+                                                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                                                    className: "font-medium font-heading text-sm",
+                                                                                    style: {
+                                                                                        color: 'hsl(20,15%,22%)'
+                                                                                    },
+                                                                                    children: child.label
+                                                                                }, void 0, false, {
+                                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                                    lineNumber: 176,
+                                                                                    columnNumber: 33
+                                                                                }, this),
+                                                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                                                    className: "text-xs mt-0.5 font-body",
+                                                                                    style: {
+                                                                                        color: 'hsl(20,10%,55%)'
+                                                                                    },
+                                                                                    children: child.description
+                                                                                }, void 0, false, {
+                                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                                    lineNumber: 177,
+                                                                                    columnNumber: 33
+                                                                                }, this)
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                            lineNumber: 175,
+                                                                            columnNumber: 31
+                                                                        }, this),
+                                                                        /*#__PURE__*/ _jsxDEV(ChevronRight, {
+                                                                            className: "w-4 h-4 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200",
+                                                                            style: {
+                                                                                color: 'hsl(350,40%,58%)'
+                                                                            }
+                                                                        }, void 0, false, {
+                                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                            lineNumber: 179,
+                                                                            columnNumber: 31
+                                                                        }, this)
+                                                                    ]
+                                                                }, child.path, true, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                    lineNumber: 168,
+                                                                    columnNumber: 29
+                                                                }, this))
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 166,
+                                                            columnNumber: 25
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 153,
+                                                    columnNumber: 23
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                lineNumber: 151,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, link.label, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                        lineNumber: 121,
+                                        columnNumber: 15
+                                    }, this)),
+                                /*#__PURE__*/ _jsxDEV("a", {
+                                    href: INSTAGRAM_URL,
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    title: "@beautyandthebrush2026",
+                                    className: `transition-colors duration-200 ${isTransparent ? 'text-white hover:text-pink-300' : 'text-[hsl(20,15%,35%)] hover:text-pink-500'}`,
+                                    children: /*#__PURE__*/ _jsxDEV(Instagram, {
+                                        className: "w-5 h-5"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                        lineNumber: 201,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 194,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "flex items-center gap-2",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV(Link, {
+                                            to: "/booking",
+                                            className: "px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300",
+                                            style: {
+                                                background: 'linear-gradient(135deg, hsl(350,45%,58%), hsl(350,50%,48%))',
+                                                color: 'white',
+                                                boxShadow: '0 4px 14px rgba(180,70,80,0.25)'
+                                            },
+                                            children: "Book Now"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 205,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("a", {
+                                            href: `https://wa.me/${WHATSAPP_PRIMARY}?text=${WHATSAPP_MESSAGE}`,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "px-4 py-2 text-sm font-semibold rounded-full flex items-center gap-1.5 transition-all duration-300",
+                                            style: {
+                                                background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+                                                color: 'white',
+                                                boxShadow: '0 4px 14px rgba(34,197,94,0.22)'
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Phone, {
+                                                    className: "w-3.5 h-3.5"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 227,
+                                                    columnNumber: 17
+                                                }, this),
+                                                "WhatsApp"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 216,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 204,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                            lineNumber: 119,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("button", {
+                            onClick: ()=>setIsOpen(!isOpen),
+                            className: `lg:hidden p-2 transition-colors ${toggleColor}`,
+                            children: isOpen ? /*#__PURE__*/ _jsxDEV(X, {
+                                className: "w-6 h-6"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                lineNumber: 235,
+                                columnNumber: 23
+                            }, this) : /*#__PURE__*/ _jsxDEV(Menu, {
+                                className: "w-6 h-6"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                lineNumber: 235,
+                                columnNumber: 51
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                            lineNumber: 234,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                    lineNumber: 94,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                lineNumber: 93,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV(AnimatePresence, {
+                children: isOpen && /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: -8
+                    },
+                    animate: {
+                        opacity: 1,
+                        y: 0
+                    },
+                    exit: {
+                        opacity: 0,
+                        y: -8
+                    },
+                    transition: {
+                        duration: 0.2
+                    },
+                    className: "absolute top-full left-4 right-4 mt-2 rounded-2xl z-50 overflow-hidden",
+                    style: {
+                        background: 'hsl(0,0%,100%)',
+                        border: '1px solid hsl(35,35%,88%)',
+                        boxShadow: '0 8px 40px rgba(180,130,90,0.14)'
+                    },
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "h-[2px] w-full",
+                            style: {
+                                background: 'linear-gradient(90deg, hsl(350,45%,62%), hsl(35,55%,58%), hsl(350,45%,62%))'
+                            }
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                            lineNumber: 255,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "px-3 py-3 space-y-0.5",
+                            children: [
+                                navLinks.map((link)=>/*#__PURE__*/ _jsxDEV("div", {
+                                        children: link.children ? /*#__PURE__*/ _jsxDEV(_Fragment, {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("button", {
+                                                    onClick: ()=>setMobileServicesOpen(!mobileServicesOpen),
+                                                    className: "w-full flex items-center justify-between px-4 py-3 font-body rounded-xl text-sm font-medium",
+                                                    style: {
+                                                        color: 'hsl(20,15%,25%)'
+                                                    },
+                                                    children: [
+                                                        link.label,
+                                                        /*#__PURE__*/ _jsxDEV(ChevronDown, {
+                                                            className: `w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`,
+                                                            style: {
+                                                                color: 'hsl(350,40%,58%)'
+                                                            }
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 267,
+                                                            columnNumber: 25
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 261,
+                                                    columnNumber: 23
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV(AnimatePresence, {
+                                                    children: mobileServicesOpen && /*#__PURE__*/ _jsxDEV(motion.div, {
+                                                        initial: {
+                                                            height: 0,
+                                                            opacity: 0
+                                                        },
+                                                        animate: {
+                                                            height: 'auto',
+                                                            opacity: 1
+                                                        },
+                                                        exit: {
+                                                            height: 0,
+                                                            opacity: 0
+                                                        },
+                                                        transition: {
+                                                            duration: 0.2
+                                                        },
+                                                        className: "overflow-hidden pl-2",
+                                                        children: link.children.map((child)=>/*#__PURE__*/ _jsxDEV(Link, {
+                                                                to: child.path,
+                                                                className: "flex flex-col px-4 py-2.5 rounded-xl transition-colors",
+                                                                onMouseEnter: (e)=>e.currentTarget.style.background = 'hsl(35,40%,97%)',
+                                                                onMouseLeave: (e)=>e.currentTarget.style.background = 'transparent',
+                                                                children: [
+                                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                                        className: "block font-medium text-sm font-body",
+                                                                        style: {
+                                                                            color: 'hsl(20,15%,22%)'
+                                                                        },
+                                                                        children: child.label
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                        lineNumber: 286,
+                                                                        columnNumber: 33
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                                        className: "block text-xs font-body",
+                                                                        style: {
+                                                                            color: 'hsl(20,10%,55%)'
+                                                                        },
+                                                                        children: child.description
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                        lineNumber: 287,
+                                                                        columnNumber: 33
+                                                                    }, this)
+                                                                ]
+                                                            }, child.path, true, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                                lineNumber: 279,
+                                                                columnNumber: 31
+                                                            }, this))
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                        lineNumber: 271,
+                                                        columnNumber: 27
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 269,
+                                                    columnNumber: 23
+                                                }, this)
+                                            ]
+                                        }, void 0, true) : /*#__PURE__*/ _jsxDEV(Link, {
+                                            to: link.path,
+                                            className: "block px-4 py-3 font-body rounded-xl text-sm font-medium transition-colors",
+                                            style: {
+                                                color: location.pathname === link.path ? 'hsl(350,45%,52%)' : 'hsl(20,15%,25%)',
+                                                background: location.pathname === link.path ? 'hsl(350,40%,97%)' : 'transparent',
+                                                fontWeight: location.pathname === link.path ? 600 : 400
+                                            },
+                                            children: link.label
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 295,
+                                            columnNumber: 21
+                                        }, this)
+                                    }, link.label, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                        lineNumber: 258,
+                                        columnNumber: 17
+                                    }, this)),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "px-4 py-3 border-t mt-1",
+                                    style: {
+                                        borderColor: 'hsl(35,30%,90%)'
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            className: "text-xs font-body mb-2",
+                                            style: {
+                                                color: 'hsl(20,10%,55%)'
+                                            },
+                                            children: "Get in touch"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 312,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "space-y-1.5",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("a", {
+                                                    href: `https://wa.me/${WHATSAPP_PRIMARY}?text=${WHATSAPP_MESSAGE}`,
+                                                    target: "_blank",
+                                                    rel: "noopener noreferrer",
+                                                    className: "flex items-center gap-2 text-sm font-body",
+                                                    style: {
+                                                        color: 'hsl(20,15%,25%)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV(Phone, {
+                                                            className: "w-3.5 h-3.5 text-green-500"
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 316,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        " +91 91487 68958"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 314,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("a", {
+                                                    href: `https://wa.me/${WHATSAPP_SECONDARY}?text=${WHATSAPP_MESSAGE}`,
+                                                    target: "_blank",
+                                                    rel: "noopener noreferrer",
+                                                    className: "flex items-center gap-2 text-sm font-body",
+                                                    style: {
+                                                        color: 'hsl(20,15%,25%)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV(Phone, {
+                                                            className: "w-3.5 h-3.5 text-green-500"
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 320,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        " +91 97311 02448"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 318,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("a", {
+                                                    href: INSTAGRAM_URL,
+                                                    target: "_blank",
+                                                    rel: "noopener noreferrer",
+                                                    className: "flex items-center gap-2 text-sm font-body",
+                                                    style: {
+                                                        color: 'hsl(20,15%,25%)'
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV(Instagram, {
+                                                            className: "w-3.5 h-3.5 text-pink-500"
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                            lineNumber: 324,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        " @beautyandthebrush2026"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 322,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 313,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 311,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "pt-2 pb-1 space-y-2 px-2",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV(Link, {
+                                            to: "/booking",
+                                            className: "block w-full text-center px-5 py-2.5 text-sm font-semibold rounded-full text-white",
+                                            style: {
+                                                background: 'linear-gradient(135deg, hsl(350,45%,58%), hsl(350,50%,48%))'
+                                            },
+                                            children: "Book Appointment"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 330,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("a", {
+                                            href: `https://wa.me/${WHATSAPP_PRIMARY}?text=${WHATSAPP_MESSAGE}`,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "w-full text-center px-5 py-2.5 text-sm font-semibold text-white rounded-full flex items-center justify-center gap-2",
+                                            style: {
+                                                background: 'linear-gradient(135deg, #22c55e, #16a34a)'
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Phone, {
+                                                    className: "w-3.5 h-3.5"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                                    lineNumber: 344,
+                                                    columnNumber: 19
+                                                }, this),
+                                                " WhatsApp Us"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                            lineNumber: 337,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                                    lineNumber: 329,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                            lineNumber: 256,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                    lineNumber: 243,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+                lineNumber: 241,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx",
+        lineNumber: 92,
+        columnNumber: 5
+    }, this);
+};
+_s(Navbar, "U7GUBdTujJOz/aUEX9IM1wDe15E=", false, function() {
+    return [
+        useLocation
+    ];
+});
+_c = Navbar;
+export default Navbar;
+var _c;
+$RefreshReg$(_c, "Navbar");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Navbar.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIk5hdmJhci50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlU3RhdGUsIHVzZUVmZmVjdCB9IGZyb20gJ3JlYWN0JztcclxuaW1wb3J0IHsgTGluaywgdXNlTG9jYXRpb24gfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcclxuaW1wb3J0IHsgTWVudSwgWCwgQ2hldnJvbkRvd24sIFBob25lLCBDaGV2cm9uUmlnaHQsIEluc3RhZ3JhbSB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XHJcbmltcG9ydCB7IG1vdGlvbiwgQW5pbWF0ZVByZXNlbmNlIH0gZnJvbSAnZnJhbWVyLW1vdGlvbic7XHJcblxyXG4vLyDilIDilIDilIAgSU1QT1JUQU5UIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4vLyBTYXZlIHlvdXIgbG9nbyBpbWFnZSB0bzogc3JjL2Fzc2V0cy9sb2dvLnBuZ1xyXG4vLyBUaGVuIHRoaXMgaW1wb3J0IHdpbGwgd29yayBhdXRvbWF0aWNhbGx5LlxyXG4vLyBJZiB5b3VyIGZpbGUgaGFzIGEgZGlmZmVyZW50IG5hbWUgKGUuZy4gbG9nby5qcGcpLCBjaGFuZ2UgaXQgYmVsb3cuXHJcbmxldCBsb2dvSW1nOiBzdHJpbmcgfCBudWxsID0gbnVsbDtcclxudHJ5IHtcclxuICAvLyBAdHMtaWdub3JlXHJcbiAgbG9nb0ltZyA9IG5ldyBVUkwoJy4uL2Fzc2V0cy9sb2dvLnBuZycsIGltcG9ydC5tZXRhLnVybCkuaHJlZjtcclxufSBjYXRjaCB7XHJcbiAgbG9nb0ltZyA9IG51bGw7XHJcbn1cclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcblxyXG5jb25zdCBXSEFUU0FQUF9QUklNQVJZID0gJzkxOTE0ODc2ODk1OCc7XHJcbmNvbnN0IFdIQVRTQVBQX1NFQ09OREFSWSA9ICc5MTk3MzExMDI0NDgnO1xyXG5jb25zdCBJTlNUQUdSQU1fVVJMID0gJ2h0dHBzOi8vd3d3Lmluc3RhZ3JhbS5jb20vYmVhdXR5YW5kdGhlYnJ1c2gyMDI2JztcclxuY29uc3QgV0hBVFNBUFBfTUVTU0FHRSA9ICdIZWxsbyUyMEklMjB3YW50JTIwdG8lMjBpbnF1aXJlJTIwYWJvdXQlMjB5b3VyJTIwc2VydmljZXMnO1xyXG5cclxuY29uc3Qgc2VydmljZUNhdGVnb3JpZXMgPSBbXHJcbiAgeyBsYWJlbDogJ1NhbG9uIFNlcnZpY2VzJywgcGF0aDogJy9zZXJ2aWNlcy9zYWxvbicsIGRlc2NyaXB0aW9uOiAnU2tpbiAmIGhhaXIgY2FyZSB0cmVhdG1lbnRzJyB9LFxyXG4gIHsgbGFiZWw6ICdNYWtldXAgJiBIYWlyIChNVUgpJywgcGF0aDogJy9zZXJ2aWNlcy9tYWtldXAtaGFpcicsIGRlc2NyaXB0aW9uOiAnQnJpZGFsICYgcGFydHkgbWFrZXVwJyB9LFxyXG4gIHsgbGFiZWw6ICdTdHlsaW5nJywgcGF0aDogJy9zZXJ2aWNlcy9zdHlsaW5nJywgZGVzY3JpcHRpb246ICdTYXJlZSBkcmFwaW5nICYgZ2VuZXJhbCBzdHlsaW5nJyB9LFxyXG4gIHsgbGFiZWw6ICdIYWlyIFRyZWF0bWVudHMnLCBwYXRoOiAnL3NlcnZpY2VzL2hhaXItdHJlYXRtZW50cycsIGRlc2NyaXB0aW9uOiAnS2VyYXRpbiwgc3BhICYgbW9yZScgfSxcclxuXTtcclxuXHJcbmNvbnN0IG5hdkxpbmtzID0gW1xyXG4gIHsgbGFiZWw6ICdIb21lJywgcGF0aDogJy8nIH0sXHJcbiAgeyBsYWJlbDogJ0Fib3V0JywgcGF0aDogJy9hYm91dCcgfSxcclxuICB7IGxhYmVsOiAnT3VyIFNlcnZpY2VzJywgcGF0aDogJy9zZXJ2aWNlcycsIGNoaWxkcmVuOiBzZXJ2aWNlQ2F0ZWdvcmllcyB9LFxyXG4gIHsgbGFiZWw6ICdQb3J0Zm9saW8nLCBwYXRoOiAnL3BvcnRmb2xpbycgfSxcclxuICB7IGxhYmVsOiAnQmxvZycsIHBhdGg6ICcvYmxvZycgfSxcclxuICB7IGxhYmVsOiAnQ29udGFjdCcsIHBhdGg6ICcvY29udGFjdCcgfSxcclxuXTtcclxuXHJcbmNvbnN0IE5hdmJhciA9ICgpID0+IHtcclxuICBjb25zdCBbaXNPcGVuLCBzZXRJc09wZW5dID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFtzY3JvbGxlZCwgc2V0U2Nyb2xsZWRdID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFtzZXJ2aWNlc09wZW4sIHNldFNlcnZpY2VzT3Blbl0gPSB1c2VTdGF0ZShmYWxzZSk7XHJcbiAgY29uc3QgW21vYmlsZVNlcnZpY2VzT3Blbiwgc2V0TW9iaWxlU2VydmljZXNPcGVuXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuICBjb25zdCBbaG92ZXJUaW1lb3V0LCBzZXRIb3ZlclRpbWVvdXRdID0gdXNlU3RhdGU8Tm9kZUpTLlRpbWVvdXQgfCBudWxsPihudWxsKTtcclxuICBjb25zdCBbbG9nb0Vycm9yLCBzZXRMb2dvRXJyb3JdID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IGxvY2F0aW9uID0gdXNlTG9jYXRpb24oKTtcclxuXHJcbiAgY29uc3QgaXNIb21lUGFnZSA9IGxvY2F0aW9uLnBhdGhuYW1lID09PSAnLyc7XHJcblxyXG4gIHVzZUVmZmVjdCgoKSA9PiB7XHJcbiAgICBjb25zdCBoYW5kbGVyID0gKCkgPT4gc2V0U2Nyb2xsZWQod2luZG93LnNjcm9sbFkgPiAyMCk7XHJcbiAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignc2Nyb2xsJywgaGFuZGxlcik7XHJcbiAgICByZXR1cm4gKCkgPT4gd2luZG93LnJlbW92ZUV2ZW50TGlzdGVuZXIoJ3Njcm9sbCcsIGhhbmRsZXIpO1xyXG4gIH0sIFtdKTtcclxuXHJcbiAgdXNlRWZmZWN0KCgpID0+IHtcclxuICAgIHNldElzT3BlbihmYWxzZSk7XHJcbiAgICBzZXRTZXJ2aWNlc09wZW4oZmFsc2UpO1xyXG4gICAgc2V0TW9iaWxlU2VydmljZXNPcGVuKGZhbHNlKTtcclxuICB9LCBbbG9jYXRpb25dKTtcclxuXHJcbiAgY29uc3QgaXNUcmFuc3BhcmVudCA9IGlzSG9tZVBhZ2UgJiYgIXNjcm9sbGVkO1xyXG5cclxuICBjb25zdCBuYXZCZyA9IGlzVHJhbnNwYXJlbnRcclxuICAgID8gJ2JnLWJsYWNrLzIwIGJhY2tkcm9wLWJsdXItc20gYm9yZGVyLWIgYm9yZGVyLXRyYW5zcGFyZW50J1xyXG4gICAgOiAnYmctd2hpdGUvOTggYmFja2Ryb3AtYmx1ci14bCBib3JkZXItYiBib3JkZXItW2hzbCgzNSwzMCUsODglKV0nO1xyXG5cclxuICBjb25zdCBuYXZTaGFkb3cgPSBpc1RyYW5zcGFyZW50ID8gJycgOiAnc2hhZG93LVswXzJweF8yNHB4X3JnYmEoMTgwLDE0MCwxMDAsMC4xMyldJztcclxuICBjb25zdCBsaW5rQmFzZSA9IGlzVHJhbnNwYXJlbnRcclxuICAgID8gJ3RleHQtd2hpdGUgaG92ZXI6dGV4dC13aGl0ZS83NSBkcm9wLXNoYWRvdy1zbSdcclxuICAgIDogJ3RleHQtW2hzbCgyMCwxNSUsMjIlKV0gaG92ZXI6dGV4dC1baHNsKDM1MCw0MCUsNTIlKV0nO1xyXG4gIGNvbnN0IGxpbmtBY3RpdmUgPSBpc1RyYW5zcGFyZW50XHJcbiAgICA/ICd0ZXh0LXdoaXRlIGZvbnQtc2VtaWJvbGQgZHJvcC1zaGFkb3ctc20nXHJcbiAgICA6ICd0ZXh0LVtoc2woMzUwLDQwJSw1MiUpXSBmb250LXNlbWlib2xkJztcclxuICBjb25zdCB0b2dnbGVDb2xvciA9IGlzVHJhbnNwYXJlbnQgPyAndGV4dC13aGl0ZScgOiAndGV4dC1baHNsKDIwLDE1JSwyMiUpXSc7XHJcblxyXG4gIGNvbnN0IHNob3dMb2dvID0gbG9nb0ltZyAmJiAhbG9nb0Vycm9yO1xyXG5cclxuICAvLyDilIDilIAgQW1wZXJzYW5kIGNvbG9yOiBnb2xkIG9uIHRyYW5zcGFyZW50LCBncmFkaWVudCBvbiB3aGl0ZSBiZyDilIDilIBcclxuICBjb25zdCBhbXBlcnNhbmRTdHlsZTogUmVhY3QuQ1NTUHJvcGVydGllcyA9IGlzVHJhbnNwYXJlbnRcclxuICAgID8geyBjb2xvcjogJyNmNWQwOGEnIH1cclxuICAgIDoge1xyXG4gICAgICAgIGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBoc2woMzUwLDU1JSw1OCUpLCBoc2woMzAsNjAlLDU1JSkpJyxcclxuICAgICAgICBXZWJraXRCYWNrZ3JvdW5kQ2xpcDogJ3RleHQnLFxyXG4gICAgICAgIFdlYmtpdFRleHRGaWxsQ29sb3I6ICd0cmFuc3BhcmVudCcsXHJcbiAgICAgICAgYmFja2dyb3VuZENsaXA6ICd0ZXh0JyxcclxuICAgICAgICBkaXNwbGF5OiAnaW5saW5lLWJsb2NrJyxcclxuICAgICAgfTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxuYXYgY2xhc3NOYW1lPXtgZml4ZWQgdG9wLTAgbGVmdC0wIHJpZ2h0LTAgei01MCB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi00MDAgJHtuYXZCZ30gJHtuYXZTaGFkb3d9YH0+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG8gcHgtNCBtZDpweC04XCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gaC0xNiBtZDpoLTIwXCI+XHJcblxyXG4gICAgICAgICAgey8qIOKUgOKUgCBMT0dPOiBpbWFnZSArIHRleHQg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovfVxyXG4gICAgICAgICAgPExpbmsgdG89XCIvXCIgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIuNSBncm91cCBmbGV4LXNocmluay0wXCI+XHJcbiAgICAgICAgICAgIHtzaG93TG9nbyAmJiAoXHJcbiAgICAgICAgICAgICAgPGltZ1xyXG4gICAgICAgICAgICAgICAgc3JjPXtsb2dvSW1nIX1cclxuICAgICAgICAgICAgICAgIGFsdD1cIlwiXHJcbiAgICAgICAgICAgICAgICBhcmlhLWhpZGRlbj1cInRydWVcIlxyXG4gICAgICAgICAgICAgICAgb25FcnJvcj17KCkgPT4gc2V0TG9nb0Vycm9yKHRydWUpfVxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaC0xMCBtZDpoLTEyIHctYXV0byBvYmplY3QtY29udGFpbiB0cmFuc2l0aW9uLXRyYW5zZm9ybSBkdXJhdGlvbi0zMDAgZ3JvdXAtaG92ZXI6c2NhbGUtMTA1IGZsZXgtc2hyaW5rLTBcIlxyXG4gICAgICAgICAgICAgIC8+XHJcbiAgICAgICAgICAgICl9XHJcbiAgICAgICAgICAgIDxzcGFuXHJcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPXtgZm9udC1oZWFkaW5nIHRleHQtbGcgbWQ6dGV4dC14bCBmb250LWJvbGQgdHJhY2tpbmctd2lkZSB0cmFuc2l0aW9uLWNvbG9ycyBkdXJhdGlvbi0zMDAgbGVhZGluZy10aWdodCAke1xyXG4gICAgICAgICAgICAgICAgaXNUcmFuc3BhcmVudCA/ICd0ZXh0LXdoaXRlJyA6ICd0ZXh0LVtoc2woMjAsMTUlLDE4JSldJ1xyXG4gICAgICAgICAgICAgIH1gfVxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgQmVhdXR5eycgJ31cclxuICAgICAgICAgICAgICA8c3BhbiBzdHlsZT17YW1wZXJzYW5kU3R5bGV9PiZhbXA7PC9zcGFuPlxyXG4gICAgICAgICAgICAgIHsnICd9dGhlIEJydXNoXHJcbiAgICAgICAgICAgIDwvc3Bhbj5cclxuICAgICAgICAgIDwvTGluaz5cclxuXHJcbiAgICAgICAgICB7Lyog4pSA4pSAIERFU0tUT1AgTkFWIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCAqL31cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaGlkZGVuIGxnOmZsZXggaXRlbXMtY2VudGVyIGdhcC02XCI+XHJcbiAgICAgICAgICAgIHtuYXZMaW5rcy5tYXAoKGxpbmspID0+IChcclxuICAgICAgICAgICAgICA8ZGl2XHJcbiAgICAgICAgICAgICAgICBrZXk9e2xpbmsubGFiZWx9XHJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJyZWxhdGl2ZVwiXHJcbiAgICAgICAgICAgICAgICBvbk1vdXNlRW50ZXI9eygpID0+IHtcclxuICAgICAgICAgICAgICAgICAgaWYgKGhvdmVyVGltZW91dCkgY2xlYXJUaW1lb3V0KGhvdmVyVGltZW91dCk7XHJcbiAgICAgICAgICAgICAgICAgIGlmIChsaW5rLmNoaWxkcmVuKSBzZXRTZXJ2aWNlc09wZW4odHJ1ZSk7XHJcbiAgICAgICAgICAgICAgICB9fVxyXG4gICAgICAgICAgICAgICAgb25Nb3VzZUxlYXZlPXsoKSA9PiB7XHJcbiAgICAgICAgICAgICAgICAgIGNvbnN0IHQgPSBzZXRUaW1lb3V0KCgpID0+IHNldFNlcnZpY2VzT3BlbihmYWxzZSksIDIwMCk7XHJcbiAgICAgICAgICAgICAgICAgIHNldEhvdmVyVGltZW91dCh0KTtcclxuICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAge2xpbmsuY2hpbGRyZW4gPyAoXHJcbiAgICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3NOYW1lPXtgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTEuNSB0ZXh0LXNtIGZvbnQtYm9keSBmb250LW1lZGl1bSB0cmFja2luZy13aWRlIHRyYW5zaXRpb24tY29sb3JzIGR1cmF0aW9uLTIwMCAke2xpbmtCYXNlfWB9PlxyXG4gICAgICAgICAgICAgICAgICAgIHtsaW5rLmxhYmVsfVxyXG4gICAgICAgICAgICAgICAgICAgIDxDaGV2cm9uRG93biBjbGFzc05hbWU9e2B3LTMuNSBoLTMuNSB0cmFuc2l0aW9uLXRyYW5zZm9ybSBkdXJhdGlvbi0zMDAgJHtzZXJ2aWNlc09wZW4gPyAncm90YXRlLTE4MCcgOiAnJ31gfSAvPlxyXG4gICAgICAgICAgICAgICAgICA8L2J1dHRvbj5cclxuICAgICAgICAgICAgICAgICkgOiAoXHJcbiAgICAgICAgICAgICAgICAgIDxMaW5rXHJcbiAgICAgICAgICAgICAgICAgICAgdG89e2xpbmsucGF0aH1cclxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9e2B0ZXh0LXNtIGZvbnQtYm9keSBmb250LW1lZGl1bSB0cmFja2luZy13aWRlIHRyYW5zaXRpb24tY29sb3JzIGR1cmF0aW9uLTIwMCAke1xyXG4gICAgICAgICAgICAgICAgICAgICAgbG9jYXRpb24ucGF0aG5hbWUgPT09IGxpbmsucGF0aCA/IGxpbmtBY3RpdmUgOiBsaW5rQmFzZVxyXG4gICAgICAgICAgICAgICAgICAgIH1gfVxyXG4gICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAge2xpbmsubGFiZWx9XHJcbiAgICAgICAgICAgICAgICAgIDwvTGluaz5cclxuICAgICAgICAgICAgICAgICl9XHJcblxyXG4gICAgICAgICAgICAgICAgey8qIEx1eHVyeSBXaGl0ZSBEcm9wZG93biAqL31cclxuICAgICAgICAgICAgICAgIHtsaW5rLmNoaWxkcmVuICYmIChcclxuICAgICAgICAgICAgICAgICAgPEFuaW1hdGVQcmVzZW5jZT5cclxuICAgICAgICAgICAgICAgICAgICB7c2VydmljZXNPcGVuICYmIChcclxuICAgICAgICAgICAgICAgICAgICAgIDxtb3Rpb24uZGl2XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMTAsIHNjYWxlOiAwLjk3IH19XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCwgc2NhbGU6IDEgfX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgZXhpdD17eyBvcGFjaXR5OiAwLCB5OiAxMCwgc2NhbGU6IDAuOTcgfX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC4yMiwgZWFzZTogJ2Vhc2VPdXQnIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC1mdWxsIGxlZnQtMS8yIC10cmFuc2xhdGUteC0xLzIgbXQtNCB3LTgwIHJvdW5kZWQtMnhsIHotNTAgb3ZlcmZsb3ctaGlkZGVuXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3tcclxuICAgICAgICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiAnaHNsKDAsMCUsMTAwJSknLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGJvcmRlcjogJzFweCBzb2xpZCBoc2woMzUsMzUlLDg4JSknLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGJveFNoYWRvdzogJzAgOHB4IDQwcHggcmdiYSgxODAsMTMwLDkwLDAuMTMpLCAwIDJweCA4cHggcmdiYSgwLDAsMCwwLjA2KScsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC1bMnB4XSB3LWZ1bGxcIiBzdHlsZT17eyBiYWNrZ3JvdW5kOiAnbGluZWFyLWdyYWRpZW50KDkwZGVnLCBoc2woMzUwLDQ1JSw2MiUpLCBoc2woMzUsNTUlLDU4JSksIGhzbCgzNTAsNDUlLDYyJSkpJyB9fSAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtMlwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHtsaW5rLmNoaWxkcmVuLm1hcCgoY2hpbGQpID0+IChcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxMaW5rXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGtleT17Y2hpbGQucGF0aH1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdG89e2NoaWxkLnBhdGh9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiBweC00IHB5LTMuNSByb3VuZGVkLXhsIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTIwMCBncm91cC9pdGVtXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb25Nb3VzZUVudGVyPXtlID0+ICgoZS5jdXJyZW50VGFyZ2V0IGFzIEhUTUxFbGVtZW50KS5zdHlsZS5iYWNrZ3JvdW5kID0gJ2hzbCgzNSw0MCUsOTclKScpfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvbk1vdXNlTGVhdmU9e2UgPT4gKChlLmN1cnJlbnRUYXJnZXQgYXMgSFRNTEVsZW1lbnQpLnN0eWxlLmJhY2tncm91bmQgPSAndHJhbnNwYXJlbnQnKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LW1lZGl1bSBmb250LWhlYWRpbmcgdGV4dC1zbVwiIHN0eWxlPXt7IGNvbG9yOiAnaHNsKDIwLDE1JSwyMiUpJyB9fT57Y2hpbGQubGFiZWx9PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQteHMgbXQtMC41IGZvbnQtYm9keVwiIHN0eWxlPXt7IGNvbG9yOiAnaHNsKDIwLDEwJSw1NSUpJyB9fT57Y2hpbGQuZGVzY3JpcHRpb259PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPENoZXZyb25SaWdodFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctNCBoLTQgb3BhY2l0eS0wIC10cmFuc2xhdGUteC0xIGdyb3VwLWhvdmVyL2l0ZW06b3BhY2l0eS0xMDAgZ3JvdXAtaG92ZXIvaXRlbTp0cmFuc2xhdGUteC0wIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTIwMFwiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgY29sb3I6ICdoc2woMzUwLDQwJSw1OCUpJyB9fVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICkpfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgICA8L0FuaW1hdGVQcmVzZW5jZT5cclxuICAgICAgICAgICAgICAgICl9XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICkpfVxyXG5cclxuICAgICAgICAgICAgey8qIEluc3RhZ3JhbSBpY29uICovfVxyXG4gICAgICAgICAgICA8YVxyXG4gICAgICAgICAgICAgIGhyZWY9e0lOU1RBR1JBTV9VUkx9XHJcbiAgICAgICAgICAgICAgdGFyZ2V0PVwiX2JsYW5rXCJcclxuICAgICAgICAgICAgICByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgICB0aXRsZT1cIkBiZWF1dHlhbmR0aGVicnVzaDIwMjZcIlxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT17YHRyYW5zaXRpb24tY29sb3JzIGR1cmF0aW9uLTIwMCAke2lzVHJhbnNwYXJlbnQgPyAndGV4dC13aGl0ZSBob3Zlcjp0ZXh0LXBpbmstMzAwJyA6ICd0ZXh0LVtoc2woMjAsMTUlLDM1JSldIGhvdmVyOnRleHQtcGluay01MDAnfWB9XHJcbiAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICA8SW5zdGFncmFtIGNsYXNzTmFtZT1cInctNSBoLTVcIiAvPlxyXG4gICAgICAgICAgICA8L2E+XHJcblxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGdhcC0yXCI+XHJcbiAgICAgICAgICAgICAgPExpbmtcclxuICAgICAgICAgICAgICAgIHRvPVwiL2Jvb2tpbmdcIlxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicHgtNSBweS0yIHRleHQtc20gZm9udC1zZW1pYm9sZCByb3VuZGVkLWZ1bGwgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwXCJcclxuICAgICAgICAgICAgICAgIHN0eWxlPXt7XHJcbiAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBoc2woMzUwLDQ1JSw1OCUpLCBoc2woMzUwLDUwJSw0OCUpKScsXHJcbiAgICAgICAgICAgICAgICAgIGNvbG9yOiAnd2hpdGUnLFxyXG4gICAgICAgICAgICAgICAgICBib3hTaGFkb3c6ICcwIDRweCAxNHB4IHJnYmEoMTgwLDcwLDgwLDAuMjUpJyxcclxuICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgQm9vayBOb3dcclxuICAgICAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICAgICAgPGFcclxuICAgICAgICAgICAgICAgIGhyZWY9e2BodHRwczovL3dhLm1lLyR7V0hBVFNBUFBfUFJJTUFSWX0/dGV4dD0ke1dIQVRTQVBQX01FU1NBR0V9YH1cclxuICAgICAgICAgICAgICAgIHRhcmdldD1cIl9ibGFua1wiXHJcbiAgICAgICAgICAgICAgICByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInB4LTQgcHktMiB0ZXh0LXNtIGZvbnQtc2VtaWJvbGQgcm91bmRlZC1mdWxsIGZsZXggaXRlbXMtY2VudGVyIGdhcC0xLjUgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwXCJcclxuICAgICAgICAgICAgICAgIHN0eWxlPXt7XHJcbiAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjMjJjNTVlLCAjMTZhMzRhKScsXHJcbiAgICAgICAgICAgICAgICAgIGNvbG9yOiAnd2hpdGUnLFxyXG4gICAgICAgICAgICAgICAgICBib3hTaGFkb3c6ICcwIDRweCAxNHB4IHJnYmEoMzQsMTk3LDk0LDAuMjIpJyxcclxuICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgPFBob25lIGNsYXNzTmFtZT1cInctMy41IGgtMy41XCIgLz5cclxuICAgICAgICAgICAgICAgIFdoYXRzQXBwXHJcbiAgICAgICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIHsvKiBNb2JpbGUgVG9nZ2xlICovfVxyXG4gICAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXsoKSA9PiBzZXRJc09wZW4oIWlzT3Blbil9IGNsYXNzTmFtZT17YGxnOmhpZGRlbiBwLTIgdHJhbnNpdGlvbi1jb2xvcnMgJHt0b2dnbGVDb2xvcn1gfT5cclxuICAgICAgICAgICAge2lzT3BlbiA/IDxYIGNsYXNzTmFtZT1cInctNiBoLTZcIiAvPiA6IDxNZW51IGNsYXNzTmFtZT1cInctNiBoLTZcIiAvPn1cclxuICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuXHJcbiAgICAgIHsvKiDilIDilIAgTU9CSUxFIE1FTlUg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovfVxyXG4gICAgICA8QW5pbWF0ZVByZXNlbmNlPlxyXG4gICAgICAgIHtpc09wZW4gJiYgKFxyXG4gICAgICAgICAgPG1vdGlvbi5kaXZcclxuICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAtOCB9fVxyXG4gICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHk6IDAgfX1cclxuICAgICAgICAgICAgZXhpdD17eyBvcGFjaXR5OiAwLCB5OiAtOCB9fVxyXG4gICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjIgfX1cclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLWZ1bGwgbGVmdC00IHJpZ2h0LTQgbXQtMiByb3VuZGVkLTJ4bCB6LTUwIG92ZXJmbG93LWhpZGRlblwiXHJcbiAgICAgICAgICAgIHN0eWxlPXt7XHJcbiAgICAgICAgICAgICAgYmFja2dyb3VuZDogJ2hzbCgwLDAlLDEwMCUpJyxcclxuICAgICAgICAgICAgICBib3JkZXI6ICcxcHggc29saWQgaHNsKDM1LDM1JSw4OCUpJyxcclxuICAgICAgICAgICAgICBib3hTaGFkb3c6ICcwIDhweCA0MHB4IHJnYmEoMTgwLDEzMCw5MCwwLjE0KScsXHJcbiAgICAgICAgICAgIH19XHJcbiAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC1bMnB4XSB3LWZ1bGxcIiBzdHlsZT17eyBiYWNrZ3JvdW5kOiAnbGluZWFyLWdyYWRpZW50KDkwZGVnLCBoc2woMzUwLDQ1JSw2MiUpLCBoc2woMzUsNTUlLDU4JSksIGhzbCgzNTAsNDUlLDYyJSkpJyB9fSAvPlxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInB4LTMgcHktMyBzcGFjZS15LTAuNVwiPlxyXG4gICAgICAgICAgICAgIHtuYXZMaW5rcy5tYXAoKGxpbmspID0+IChcclxuICAgICAgICAgICAgICAgIDxkaXYga2V5PXtsaW5rLmxhYmVsfT5cclxuICAgICAgICAgICAgICAgICAge2xpbmsuY2hpbGRyZW4gPyAoXHJcbiAgICAgICAgICAgICAgICAgICAgPD5cclxuICAgICAgICAgICAgICAgICAgICAgIDxidXR0b25cclxuICAgICAgICAgICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2V0TW9iaWxlU2VydmljZXNPcGVuKCFtb2JpbGVTZXJ2aWNlc09wZW4pfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIHB4LTQgcHktMyBmb250LWJvZHkgcm91bmRlZC14bCB0ZXh0LXNtIGZvbnQtbWVkaXVtXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgY29sb3I6ICdoc2woMjAsMTUlLDI1JSknIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHtsaW5rLmxhYmVsfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8Q2hldnJvbkRvd24gY2xhc3NOYW1lPXtgdy00IGgtNCB0cmFuc2l0aW9uLXRyYW5zZm9ybSAke21vYmlsZVNlcnZpY2VzT3BlbiA/ICdyb3RhdGUtMTgwJyA6ICcnfWB9IHN0eWxlPXt7IGNvbG9yOiAnaHNsKDM1MCw0MCUsNTglKScgfX0gLz5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPEFuaW1hdGVQcmVzZW5jZT5cclxuICAgICAgICAgICAgICAgICAgICAgICAge21vYmlsZVNlcnZpY2VzT3BlbiAmJiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPG1vdGlvbi5kaXZcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGluaXRpYWw9e3sgaGVpZ2h0OiAwLCBvcGFjaXR5OiAwIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhbmltYXRlPXt7IGhlaWdodDogJ2F1dG8nLCBvcGFjaXR5OiAxIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBleGl0PXt7IGhlaWdodDogMCwgb3BhY2l0eTogMCB9fVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC4yIH19XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJvdmVyZmxvdy1oaWRkZW4gcGwtMlwiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAge2xpbmsuY2hpbGRyZW4ubWFwKChjaGlsZCkgPT4gKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8TGlua1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGtleT17Y2hpbGQucGF0aH1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0bz17Y2hpbGQucGF0aH1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIHB4LTQgcHktMi41IHJvdW5kZWQteGwgdHJhbnNpdGlvbi1jb2xvcnNcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9uTW91c2VFbnRlcj17ZSA9PiAoKGUuY3VycmVudFRhcmdldCBhcyBIVE1MRWxlbWVudCkuc3R5bGUuYmFja2dyb3VuZCA9ICdoc2woMzUsNDAlLDk3JSknKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvbk1vdXNlTGVhdmU9e2UgPT4gKChlLmN1cnJlbnRUYXJnZXQgYXMgSFRNTEVsZW1lbnQpLnN0eWxlLmJhY2tncm91bmQgPSAndHJhbnNwYXJlbnQnKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImJsb2NrIGZvbnQtbWVkaXVtIHRleHQtc20gZm9udC1ib2R5XCIgc3R5bGU9e3sgY29sb3I6ICdoc2woMjAsMTUlLDIyJSknIH19PntjaGlsZC5sYWJlbH08L3NwYW4+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiYmxvY2sgdGV4dC14cyBmb250LWJvZHlcIiBzdHlsZT17eyBjb2xvcjogJ2hzbCgyMCwxMCUsNTUlKScgfX0+e2NoaWxkLmRlc2NyaXB0aW9ufTwvc3Bhbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKSl9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9BbmltYXRlUHJlc2VuY2U+XHJcbiAgICAgICAgICAgICAgICAgICAgPC8+XHJcbiAgICAgICAgICAgICAgICAgICkgOiAoXHJcbiAgICAgICAgICAgICAgICAgICAgPExpbmtcclxuICAgICAgICAgICAgICAgICAgICAgIHRvPXtsaW5rLnBhdGh9XHJcbiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJibG9jayBweC00IHB5LTMgZm9udC1ib2R5IHJvdW5kZWQteGwgdGV4dC1zbSBmb250LW1lZGl1bSB0cmFuc2l0aW9uLWNvbG9yc1wiXHJcbiAgICAgICAgICAgICAgICAgICAgICBzdHlsZT17e1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBjb2xvcjogbG9jYXRpb24ucGF0aG5hbWUgPT09IGxpbmsucGF0aCA/ICdoc2woMzUwLDQ1JSw1MiUpJyA6ICdoc2woMjAsMTUlLDI1JSknLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiBsb2NhdGlvbi5wYXRobmFtZSA9PT0gbGluay5wYXRoID8gJ2hzbCgzNTAsNDAlLDk3JSknIDogJ3RyYW5zcGFyZW50JyxcclxuICAgICAgICAgICAgICAgICAgICAgICAgZm9udFdlaWdodDogbG9jYXRpb24ucGF0aG5hbWUgPT09IGxpbmsucGF0aCA/IDYwMCA6IDQwMCxcclxuICAgICAgICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICAgICAge2xpbmsubGFiZWx9XHJcbiAgICAgICAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgKSl9XHJcblxyXG4gICAgICAgICAgICAgIHsvKiBNb2JpbGUgY29udGFjdCBpbmZvICovfVxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicHgtNCBweS0zIGJvcmRlci10IG10LTFcIiBzdHlsZT17eyBib3JkZXJDb2xvcjogJ2hzbCgzNSwzMCUsOTAlKScgfX0+XHJcbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIGZvbnQtYm9keSBtYi0yXCIgc3R5bGU9e3sgY29sb3I6ICdoc2woMjAsMTAlLDU1JSknIH19PkdldCBpbiB0b3VjaDwvcD5cclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0xLjVcIj5cclxuICAgICAgICAgICAgICAgICAgPGEgaHJlZj17YGh0dHBzOi8vd2EubWUvJHtXSEFUU0FQUF9QUklNQVJZfT90ZXh0PSR7V0hBVFNBUFBfTUVTU0FHRX1gfSB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LXNtIGZvbnQtYm9keVwiIHN0eWxlPXt7IGNvbG9yOiAnaHNsKDIwLDE1JSwyNSUpJyB9fT5cclxuICAgICAgICAgICAgICAgICAgICA8UGhvbmUgY2xhc3NOYW1lPVwidy0zLjUgaC0zLjUgdGV4dC1ncmVlbi01MDBcIiAvPiArOTEgOTE0ODcgNjg5NThcclxuICAgICAgICAgICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgICAgICAgICA8YSBocmVmPXtgaHR0cHM6Ly93YS5tZS8ke1dIQVRTQVBQX1NFQ09OREFSWX0/dGV4dD0ke1dIQVRTQVBQX01FU1NBR0V9YH0gdGFyZ2V0PVwiX2JsYW5rXCIgcmVsPVwibm9vcGVuZXIgbm9yZWZlcnJlclwiXHJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgdGV4dC1zbSBmb250LWJvZHlcIiBzdHlsZT17eyBjb2xvcjogJ2hzbCgyMCwxNSUsMjUlKScgfX0+XHJcbiAgICAgICAgICAgICAgICAgICAgPFBob25lIGNsYXNzTmFtZT1cInctMy41IGgtMy41IHRleHQtZ3JlZW4tNTAwXCIgLz4gKzkxIDk3MzExIDAyNDQ4XHJcbiAgICAgICAgICAgICAgICAgIDwvYT5cclxuICAgICAgICAgICAgICAgICAgPGEgaHJlZj17SU5TVEFHUkFNX1VSTH0gdGFyZ2V0PVwiX2JsYW5rXCIgcmVsPVwibm9vcGVuZXIgbm9yZWZlcnJlclwiXHJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgdGV4dC1zbSBmb250LWJvZHlcIiBzdHlsZT17eyBjb2xvcjogJ2hzbCgyMCwxNSUsMjUlKScgfX0+XHJcbiAgICAgICAgICAgICAgICAgICAgPEluc3RhZ3JhbSBjbGFzc05hbWU9XCJ3LTMuNSBoLTMuNSB0ZXh0LXBpbmstNTAwXCIgLz4gQGJlYXV0eWFuZHRoZWJydXNoMjAyNlxyXG4gICAgICAgICAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwdC0yIHBiLTEgc3BhY2UteS0yIHB4LTJcIj5cclxuICAgICAgICAgICAgICAgIDxMaW5rXHJcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2Jvb2tpbmdcIlxyXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJibG9jayB3LWZ1bGwgdGV4dC1jZW50ZXIgcHgtNSBweS0yLjUgdGV4dC1zbSBmb250LXNlbWlib2xkIHJvdW5kZWQtZnVsbCB0ZXh0LXdoaXRlXCJcclxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCgxMzVkZWcsIGhzbCgzNTAsNDUlLDU4JSksIGhzbCgzNTAsNTAlLDQ4JSkpJyB9fVxyXG4gICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICBCb29rIEFwcG9pbnRtZW50XHJcbiAgICAgICAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICAgICAgICA8YVxyXG4gICAgICAgICAgICAgICAgICBocmVmPXtgaHR0cHM6Ly93YS5tZS8ke1dIQVRTQVBQX1BSSU1BUll9P3RleHQ9JHtXSEFUU0FQUF9NRVNTQUdFfWB9XHJcbiAgICAgICAgICAgICAgICAgIHRhcmdldD1cIl9ibGFua1wiXHJcbiAgICAgICAgICAgICAgICAgIHJlbD1cIm5vb3BlbmVyIG5vcmVmZXJyZXJcIlxyXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgdGV4dC1jZW50ZXIgcHgtNSBweS0yLjUgdGV4dC1zbSBmb250LXNlbWlib2xkIHRleHQtd2hpdGUgcm91bmRlZC1mdWxsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC0yXCJcclxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCgxMzVkZWcsICMyMmM1NWUsICMxNmEzNGEpJyB9fVxyXG4gICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICA8UGhvbmUgY2xhc3NOYW1lPVwidy0zLjUgaC0zLjVcIiAvPiBXaGF0c0FwcCBVc1xyXG4gICAgICAgICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICApfVxyXG4gICAgICA8L0FuaW1hdGVQcmVzZW5jZT5cclxuICAgIDwvbmF2PlxyXG4gICk7XHJcbn07XHJcbmV4cG9ydCBkZWZhdWx0IE5hdmJhcjsiXSwibmFtZXMiOlsidXNlU3RhdGUiLCJ1c2VFZmZlY3QiLCJMaW5rIiwidXNlTG9jYXRpb24iLCJNZW51IiwiWCIsIkNoZXZyb25Eb3duIiwiUGhvbmUiLCJDaGV2cm9uUmlnaHQiLCJJbnN0YWdyYW0iLCJtb3Rpb24iLCJBbmltYXRlUHJlc2VuY2UiLCJsb2dvSW1nIiwiVVJMIiwidXJsIiwiaHJlZiIsIldIQVRTQVBQX1BSSU1BUlkiLCJXSEFUU0FQUF9TRUNPTkRBUlkiLCJJTlNUQUdSQU1fVVJMIiwiV0hBVFNBUFBfTUVTU0FHRSIsInNlcnZpY2VDYXRlZ29yaWVzIiwibGFiZWwiLCJwYXRoIiwiZGVzY3JpcHRpb24iLCJuYXZMaW5rcyIsImNoaWxkcmVuIiwiTmF2YmFyIiwiaXNPcGVuIiwic2V0SXNPcGVuIiwic2Nyb2xsZWQiLCJzZXRTY3JvbGxlZCIsInNlcnZpY2VzT3BlbiIsInNldFNlcnZpY2VzT3BlbiIsIm1vYmlsZVNlcnZpY2VzT3BlbiIsInNldE1vYmlsZVNlcnZpY2VzT3BlbiIsImhvdmVyVGltZW91dCIsInNldEhvdmVyVGltZW91dCIsImxvZ29FcnJvciIsInNldExvZ29FcnJvciIsImxvY2F0aW9uIiwiaXNIb21lUGFnZSIsInBhdGhuYW1lIiwiaGFuZGxlciIsIndpbmRvdyIsInNjcm9sbFkiLCJhZGRFdmVudExpc3RlbmVyIiwicmVtb3ZlRXZlbnRMaXN0ZW5lciIsImlzVHJhbnNwYXJlbnQiLCJuYXZCZyIsIm5hdlNoYWRvdyIsImxpbmtCYXNlIiwibGlua0FjdGl2ZSIsInRvZ2dsZUNvbG9yIiwic2hvd0xvZ28iLCJhbXBlcnNhbmRTdHlsZSIsImNvbG9yIiwiYmFja2dyb3VuZCIsIldlYmtpdEJhY2tncm91bmRDbGlwIiwiV2Via2l0VGV4dEZpbGxDb2xvciIsImJhY2tncm91bmRDbGlwIiwiZGlzcGxheSIsIm5hdiIsImNsYXNzTmFtZSIsImRpdiIsInRvIiwiaW1nIiwic3JjIiwiYWx0IiwiYXJpYS1oaWRkZW4iLCJvbkVycm9yIiwic3BhbiIsInN0eWxlIiwibWFwIiwibGluayIsIm9uTW91c2VFbnRlciIsImNsZWFyVGltZW91dCIsIm9uTW91c2VMZWF2ZSIsInQiLCJzZXRUaW1lb3V0IiwiYnV0dG9uIiwiaW5pdGlhbCIsIm9wYWNpdHkiLCJ5Iiwic2NhbGUiLCJhbmltYXRlIiwiZXhpdCIsInRyYW5zaXRpb24iLCJkdXJhdGlvbiIsImVhc2UiLCJib3JkZXIiLCJib3hTaGFkb3ciLCJjaGlsZCIsImUiLCJjdXJyZW50VGFyZ2V0IiwicCIsImEiLCJ0YXJnZXQiLCJyZWwiLCJ0aXRsZSIsIm9uQ2xpY2siLCJoZWlnaHQiLCJmb250V2VpZ2h0IiwiYm9yZGVyQ29sb3IiXSwibWFwcGluZ3MiOiI7O0FBQUEsU0FBU0EsUUFBUSxFQUFFQyxTQUFTLFFBQVEsUUFBUTtBQUM1QyxTQUFTQyxJQUFJLEVBQUVDLFdBQVcsUUFBUSxt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

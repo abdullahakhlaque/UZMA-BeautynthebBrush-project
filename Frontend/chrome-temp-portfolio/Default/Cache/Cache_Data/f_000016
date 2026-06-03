@@ -1,0 +1,860 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Contact.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];const useState = __vite__cjsImport1_react["useState"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { MapPin, Phone, Mail, Send, Instagram } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import makeupTools from "/src/assets/makeup-tools.jpg?import";
+import { apiUrl } from "/src/lib/api.ts";
+const Contact = ()=>{
+    _s();
+    const [form, setForm] = useState({
+        name: '',
+        phone: '',
+        message: '',
+        service: '',
+        date: '',
+        timeSlot: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+    const WHATSAPP_NUMBER = "919148768958";
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        if (!form.service || !form.date || !form.timeSlot) {
+            alert("Please fill all booking details");
+            return;
+        }
+        try {
+            const res = await fetch(apiUrl('/api/book'), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: form.name,
+                    phone: form.phone,
+                    service: form.service,
+                    date: new Date(form.date).toISOString(),
+                    timeSlot: form.timeSlot
+                })
+            });
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            alert("Booking Confirmed ✅");
+            setSubmitted(true);
+            setTimeout(()=>setSubmitted(false), 3000);
+            const bookingMessage = `Hi, I booked an appointment:\nName: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\nDate: ${form.date}\nTime: ${form.timeSlot}`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bookingMessage)}`, "_blank");
+            setForm({
+                name: '',
+                phone: '',
+                message: '',
+                service: '',
+                date: '',
+                timeSlot: ''
+            });
+        } catch (err) {
+            console.error(err);
+            alert("Error connecting to server ❌");
+        }
+    };
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20 min-h-screen relative overflow-hidden",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed inset-0 -z-10",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("img", {
+                        src: makeupTools,
+                        alt: "",
+                        className: "w-full h-full object-cover"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 63,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "absolute inset-0 bg-[hsl(30,20%,97%)]/90"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 64,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                lineNumber: 62,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "relative h-48 md:h-56 flex items-center justify-center overflow-hidden",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("img", {
+                        src: makeupTools,
+                        alt: "",
+                        className: "absolute inset-0 w-full h-full object-cover"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 69,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "absolute inset-0 bg-black/55"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "relative z-10 text-center px-4",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-accent text-white/70 tracking-[0.2em] uppercase text-sm mb-2",
+                                children: "Get In Touch"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                lineNumber: 72,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("h1", {
+                                className: "font-heading text-4xl md:text-5xl font-semibold text-white",
+                                children: "Contact Us"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                lineNumber: 73,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-body text-white/70 mt-3",
+                                children: "We'd love to hear from you."
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                lineNumber: 74,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 71,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                lineNumber: 68,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "section-padding",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-6xl mx-auto",
+                    children: /*#__PURE__*/ _jsxDEV("div", {
+                        className: "grid grid-cols-1 lg:grid-cols-2 gap-12",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV(motion.div, {
+                                initial: {
+                                    opacity: 0,
+                                    x: -40
+                                },
+                                animate: {
+                                    opacity: 1,
+                                    x: 0
+                                },
+                                transition: {
+                                    duration: 0.8
+                                },
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "rounded-2xl p-8 md:p-10",
+                                        style: {
+                                            background: 'hsl(var(--card) / 0.9)',
+                                            boxShadow: 'var(--shadow-card)'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-2xl font-semibold mb-6",
+                                                children: "Book an Appointment"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                lineNumber: 85,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("form", {
+                                                onSubmit: handleSubmit,
+                                                className: "space-y-4",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Your Name"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 89,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("input", {
+                                                                type: "text",
+                                                                value: form.name,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        name: e.target.value
+                                                                    }),
+                                                                required: true,
+                                                                placeholder: "Enter your name",
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 90,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 88,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Phone Number"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 95,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("input", {
+                                                                type: "tel",
+                                                                value: form.phone,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        phone: e.target.value
+                                                                    }),
+                                                                required: true,
+                                                                placeholder: "+91 XXXXX XXXXX",
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 96,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 94,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Service"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 101,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("select", {
+                                                                value: form.service,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        service: e.target.value
+                                                                    }),
+                                                                required: true,
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all",
+                                                                children: [
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        value: "",
+                                                                        children: "Select Service"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 104,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("optgroup", {
+                                                                        label: "Makeup & Hair",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Bridal Makeup"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 106,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Party Makeup"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 107,
+                                                                                columnNumber: 25
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 105,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("optgroup", {
+                                                                        label: "Styling",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Saree Draping"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 110,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "General Styling"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 111,
+                                                                                columnNumber: 25
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 109,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("optgroup", {
+                                                                        label: "Hair Treatments",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Keratin Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 114,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Cysteine Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 115,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hair Botox"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 116,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hair Spa"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 117,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Deep Conditioning"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 118,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hot Oil Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 119,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Olaplex Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 120,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Scalp Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 121,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Detox Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 122,
+                                                                                columnNumber: 25
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 113,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("optgroup", {
+                                                                        label: "Salon — Skin",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Facial"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 125,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Deep Cleansing"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 126,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Acne Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 127,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Skin Brightening"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 128,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hair Removal"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 129,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Body Treatment"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 130,
+                                                                                columnNumber: 25
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 124,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("optgroup", {
+                                                                        label: "Salon — Hair",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Haircut & Styling"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 133,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hair Coloring"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 134,
+                                                                                columnNumber: 25
+                                                                            }, this),
+                                                                            /*#__PURE__*/ _jsxDEV("option", {
+                                                                                children: "Hair Extensions"
+                                                                            }, void 0, false, {
+                                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                                lineNumber: 135,
+                                                                                columnNumber: 25
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 132,
+                                                                        columnNumber: 23
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 102,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 100,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Date"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 141,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("input", {
+                                                                type: "date",
+                                                                value: form.date,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        date: e.target.value
+                                                                    }),
+                                                                required: true,
+                                                                min: new Date().toISOString().split('T')[0],
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 142,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 140,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Time Slot"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 148,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("select", {
+                                                                value: form.timeSlot,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        timeSlot: e.target.value
+                                                                    }),
+                                                                required: true,
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all",
+                                                                children: [
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        value: "",
+                                                                        children: "Select Time"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 151,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "10:00 AM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 152,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "11:00 AM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 153,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "12:00 PM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 154,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "2:00 PM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 155,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "3:00 PM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 156,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ _jsxDEV("option", {
+                                                                        children: "4:00 PM"
+                                                                    }, void 0, false, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                        lineNumber: 157,
+                                                                        columnNumber: 23
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 149,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 147,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("label", {
+                                                                className: "block font-body text-sm font-medium mb-2",
+                                                                children: "Message (optional)"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 162,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("textarea", {
+                                                                value: form.message,
+                                                                onChange: (e)=>setForm({
+                                                                        ...form,
+                                                                        message: e.target.value
+                                                                    }),
+                                                                rows: 3,
+                                                                placeholder: "Any special requests...",
+                                                                className: "w-full px-4 py-3 rounded-xl border border-border bg-background font-body text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all resize-none"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 163,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 161,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV(motion.button, {
+                                                        type: "submit",
+                                                        whileHover: {
+                                                            scale: 1.02
+                                                        },
+                                                        whileTap: {
+                                                            scale: 0.98
+                                                        },
+                                                        className: "w-full px-8 py-4 font-medium border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 luxury-glow flex items-center justify-center gap-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV(Send, {
+                                                                className: "w-4 h-4"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 169,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            submitted ? 'Booking Confirmed ✅' : 'Book Appointment'
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                        lineNumber: 167,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                lineNumber: 86,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                        lineNumber: 84,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "mt-6 text-center",
+                                        children: /*#__PURE__*/ _jsxDEV("a", {
+                                            href: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20I%20want%20to%20book%20a%20service`,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "inline-block px-6 py-3 bg-green-500 text-white rounded-full font-medium hover:opacity-90 transition-opacity",
+                                            children: "Chat on WhatsApp 💬"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                            lineNumber: 177,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                        lineNumber: 176,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                lineNumber: 83,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV(motion.div, {
+                                initial: {
+                                    opacity: 0,
+                                    x: 40
+                                },
+                                animate: {
+                                    opacity: 1,
+                                    x: 0
+                                },
+                                transition: {
+                                    duration: 0.8,
+                                    delay: 0.1
+                                },
+                                className: "space-y-6",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "rounded-2xl overflow-hidden h-72",
+                                        style: {
+                                            boxShadow: 'var(--shadow-card)'
+                                        },
+                                        children: /*#__PURE__*/ _jsxDEV("iframe", {
+                                            src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.0!2d77.5750!3d13.0250!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f15!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAxJzMwLjAiTiA3N8KwMzQnMzAuMCJF!5e0!3m2!1sen!2sin!4v1679900000000!5m2!1sen!2sin&z=15",
+                                            width: "100%",
+                                            height: "100%",
+                                            style: {
+                                                border: 0
+                                            },
+                                            allowFullScreen: true,
+                                            loading: "lazy",
+                                            referrerPolicy: "no-referrer-when-downgrade",
+                                            title: "Beauty And The Brush Location"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                            lineNumber: 190,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                        lineNumber: 189,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "rounded-2xl p-6 space-y-4",
+                                        style: {
+                                            background: 'hsl(var(--card) / 0.9)',
+                                            boxShadow: 'var(--shadow-card)'
+                                        },
+                                        children: [
+                                            {
+                                                icon: MapPin,
+                                                text: '#173/2, 2nd Cross Road, Emerald Layout, Shakti Nagar, Bangalore 560077',
+                                                href: 'https://www.google.com/maps/search/173+2nd+Cross+Road+Emerald+Layout+Shakti+Nagar+Bangalore+560077'
+                                            },
+                                            {
+                                                icon: Phone,
+                                                text: '+91 91487 68958',
+                                                href: `https://wa.me/${WHATSAPP_NUMBER}`
+                                            },
+                                            {
+                                                icon: Mail,
+                                                text: 'shaziatheshaikh@gmail.com',
+                                                href: 'mailto:shaziatheshaikh@gmail.com'
+                                            },
+                                            {
+                                                icon: Instagram,
+                                                text: '@artisteshaikh',
+                                                href: 'https://www.instagram.com/artisteshaikh/'
+                                            }
+                                        ].map(({ icon: Icon, text, href })=>/*#__PURE__*/ _jsxDEV("a", {
+                                                href: href,
+                                                target: "_blank",
+                                                rel: "noopener noreferrer",
+                                                children: /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "flex items-center gap-3 group py-1",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "w-10 h-10 rounded-full bg-accent flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors",
+                                                            children: /*#__PURE__*/ _jsxDEV(Icon, {
+                                                                className: "w-4 h-4 text-primary"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                                lineNumber: 211,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                            lineNumber: 210,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("span", {
+                                                            className: "font-body text-sm text-muted-foreground group-hover:text-foreground transition-colors",
+                                                            children: text
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                            lineNumber: 213,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                    lineNumber: 209,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, text, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                                lineNumber: 208,
+                                                columnNumber: 19
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                        lineNumber: 201,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                                lineNumber: 186,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                        lineNumber: 80,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                    lineNumber: 79,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+                lineNumber: 78,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx",
+        lineNumber: 59,
+        columnNumber: 5
+    }, this);
+};
+_s(Contact, "T09dZVwfgGAg5hZBDWiyONHC504=");
+_c = Contact;
+export default Contact;
+var _c;
+$RefreshReg$(_c, "Contact");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Contact.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNvbnRhY3QudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgbW90aW9uIH0gZnJvbSAnZnJhbWVyLW1vdGlvbic7XG5pbXBvcnQgeyBNYXBQaW4sIFBob25lLCBNYWlsLCBTZW5kLCBJbnN0YWdyYW0gfSBmcm9tICdsdWNpZGUtcmVhY3QnO1xuaW1wb3J0IG1ha2V1cFRvb2xzIGZyb20gJ0AvYXNzZXRzL21ha2V1cC10b29scy5qcGcnO1xuaW1wb3J0IHsgYXBpVXJsIH0gZnJvbSAnQC9saWIvYXBpJztcblxyXG5jb25zdCBDb250YWN0ID0gKCkgPT4ge1xyXG4gIGNvbnN0IFtmb3JtLCBzZXRGb3JtXSA9IHVzZVN0YXRlKHtcclxuICAgIG5hbWU6ICcnLFxyXG4gICAgcGhvbmU6ICcnLFxyXG4gICAgbWVzc2FnZTogJycsXHJcbiAgICBzZXJ2aWNlOiAnJyxcclxuICAgIGRhdGU6ICcnLFxyXG4gICAgdGltZVNsb3Q6ICcnXHJcbiAgfSk7XHJcbiAgY29uc3QgW3N1Ym1pdHRlZCwgc2V0U3VibWl0dGVkXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuXHJcbiAgY29uc3QgV0hBVFNBUFBfTlVNQkVSID0gXCI5MTkxNDg3Njg5NThcIjtcclxuXHJcbiAgY29uc3QgaGFuZGxlU3VibWl0ID0gYXN5bmMgKGU6IFJlYWN0LkZvcm1FdmVudCkgPT4ge1xyXG4gICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG5cclxuICAgIGlmICghZm9ybS5zZXJ2aWNlIHx8ICFmb3JtLmRhdGUgfHwgIWZvcm0udGltZVNsb3QpIHtcclxuICAgICAgYWxlcnQoXCJQbGVhc2UgZmlsbCBhbGwgYm9va2luZyBkZXRhaWxzXCIpO1xyXG4gICAgICByZXR1cm47XHJcbiAgICB9XG5cbiAgICB0cnkge1xuICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goYXBpVXJsKCcvYXBpL2Jvb2snKSwge1xuICAgICAgICBtZXRob2Q6IFwiUE9TVFwiLFxuICAgICAgICBoZWFkZXJzOiB7IFwiQ29udGVudC1UeXBlXCI6IFwiYXBwbGljYXRpb24vanNvblwiIH0sXG4gICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHtcbiAgICAgICAgICBuYW1lOiBmb3JtLm5hbWUsXHJcbiAgICAgICAgICBwaG9uZTogZm9ybS5waG9uZSxcclxuICAgICAgICAgIHNlcnZpY2U6IGZvcm0uc2VydmljZSxcclxuICAgICAgICAgIGRhdGU6IG5ldyBEYXRlKGZvcm0uZGF0ZSkudG9JU09TdHJpbmcoKSxcclxuICAgICAgICAgIHRpbWVTbG90OiBmb3JtLnRpbWVTbG90LFxyXG4gICAgICAgIH0pLFxyXG4gICAgICB9KTtcclxuXHJcbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbigpO1xyXG4gICAgICBpZiAoZGF0YS5lcnJvcikgeyBhbGVydChkYXRhLmVycm9yKTsgcmV0dXJuOyB9XHJcblxyXG4gICAgICBhbGVydChcIkJvb2tpbmcgQ29uZmlybWVkIOKchVwiKTtcclxuICAgICAgc2V0U3VibWl0dGVkKHRydWUpO1xyXG4gICAgICBzZXRUaW1lb3V0KCgpID0+IHNldFN1Ym1pdHRlZChmYWxzZSksIDMwMDApO1xyXG5cclxuICAgICAgY29uc3QgYm9va2luZ01lc3NhZ2UgPSBgSGksIEkgYm9va2VkIGFuIGFwcG9pbnRtZW50Olxcbk5hbWU6ICR7Zm9ybS5uYW1lfVxcblBob25lOiAke2Zvcm0ucGhvbmV9XFxuU2VydmljZTogJHtmb3JtLnNlcnZpY2V9XFxuRGF0ZTogJHtmb3JtLmRhdGV9XFxuVGltZTogJHtmb3JtLnRpbWVTbG90fWA7XHJcbiAgICAgIHdpbmRvdy5vcGVuKGBodHRwczovL3dhLm1lLyR7V0hBVFNBUFBfTlVNQkVSfT90ZXh0PSR7ZW5jb2RlVVJJQ29tcG9uZW50KGJvb2tpbmdNZXNzYWdlKX1gLCBcIl9ibGFua1wiKTtcclxuXHJcbiAgICAgIHNldEZvcm0oeyBuYW1lOiAnJywgcGhvbmU6ICcnLCBtZXNzYWdlOiAnJywgc2VydmljZTogJycsIGRhdGU6ICcnLCB0aW1lU2xvdDogJycgfSk7XHJcbiAgICB9IGNhdGNoIChlcnIpIHtcclxuICAgICAgY29uc29sZS5lcnJvcihlcnIpO1xyXG4gICAgICBhbGVydChcIkVycm9yIGNvbm5lY3RpbmcgdG8gc2VydmVyIOKdjFwiKTtcclxuICAgIH1cclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJwdC0yMCBtaW4taC1zY3JlZW4gcmVsYXRpdmUgb3ZlcmZsb3ctaGlkZGVuXCI+XHJcblxyXG4gICAgICB7Lyog4pyFIEJBQ0tHUk9VTkQgSU1BR0UgKi99XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZml4ZWQgaW5zZXQtMCAtei0xMFwiPlxyXG4gICAgICAgIDxpbWcgc3JjPXttYWtldXBUb29sc30gYWx0PVwiXCIgY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIiAvPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBiZy1baHNsKDMwLDIwJSw5NyUpXS85MFwiIC8+XHJcbiAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgey8qIEhFUk8gQkFOTkVSICovfVxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIGgtNDggbWQ6aC01NiBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBvdmVyZmxvdy1oaWRkZW5cIj5cclxuICAgICAgICA8aW1nIHNyYz17bWFrZXVwVG9vbHN9IGFsdD1cIlwiIGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgdy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIiAvPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBiZy1ibGFjay81NVwiIC8+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSB6LTEwIHRleHQtY2VudGVyIHB4LTRcIj5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtd2hpdGUvNzAgdHJhY2tpbmctWzAuMmVtXSB1cHBlcmNhc2UgdGV4dC1zbSBtYi0yXCI+R2V0IEluIFRvdWNoPC9wPlxyXG4gICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LXNlbWlib2xkIHRleHQtd2hpdGVcIj5Db250YWN0IFVzPC9oMT5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXdoaXRlLzcwIG10LTNcIj5XZSdkIGxvdmUgdG8gaGVhciBmcm9tIHlvdS48L3A+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy02eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIGxnOmdyaWQtY29scy0yIGdhcC0xMlwiPlxyXG5cclxuICAgICAgICAgICAgey8qIEZPUk0gKi99XHJcbiAgICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeDogLTQwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeDogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX0+XHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkLTJ4bCBwLTggbWQ6cC0xMFwiIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdoc2wodmFyKC0tY2FyZCkgLyAwLjkpJywgYm94U2hhZG93OiAndmFyKC0tc2hhZG93LWNhcmQpJyB9fT5cclxuICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgZm9udC1zZW1pYm9sZCBtYi02XCI+Qm9vayBhbiBBcHBvaW50bWVudDwvaDI+XHJcbiAgICAgICAgICAgICAgICA8Zm9ybSBvblN1Ym1pdD17aGFuZGxlU3VibWl0fSBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIDxkaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cImJsb2NrIGZvbnQtYm9keSB0ZXh0LXNtIGZvbnQtbWVkaXVtIG1iLTJcIj5Zb3VyIE5hbWU8L2xhYmVsPlxyXG4gICAgICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPVwidGV4dFwiIHZhbHVlPXtmb3JtLm5hbWV9IG9uQ2hhbmdlPXtlID0+IHNldEZvcm0oeyAuLi5mb3JtLCBuYW1lOiBlLnRhcmdldC52YWx1ZSB9KX0gcmVxdWlyZWQgcGxhY2Vob2xkZXI9XCJFbnRlciB5b3VyIG5hbWVcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHB4LTQgcHktMyByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItYm9yZGVyIGJnLWJhY2tncm91bmQgZm9udC1ib2R5IHRleHQtZm9yZWdyb3VuZCBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzMwIGZvY3VzOmJvcmRlci1wcmltYXJ5IG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbFwiIC8+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwiYmxvY2sgZm9udC1ib2R5IHRleHQtc20gZm9udC1tZWRpdW0gbWItMlwiPlBob25lIE51bWJlcjwvbGFiZWw+XHJcbiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9XCJ0ZWxcIiB2YWx1ZT17Zm9ybS5waG9uZX0gb25DaGFuZ2U9e2UgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIHBob25lOiBlLnRhcmdldC52YWx1ZSB9KX0gcmVxdWlyZWQgcGxhY2Vob2xkZXI9XCIrOTEgWFhYWFggWFhYWFhcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHB4LTQgcHktMyByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItYm9yZGVyIGJnLWJhY2tncm91bmQgZm9udC1ib2R5IHRleHQtZm9yZWdyb3VuZCBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzMwIGZvY3VzOmJvcmRlci1wcmltYXJ5IG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbFwiIC8+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwiYmxvY2sgZm9udC1ib2R5IHRleHQtc20gZm9udC1tZWRpdW0gbWItMlwiPlNlcnZpY2U8L2xhYmVsPlxyXG4gICAgICAgICAgICAgICAgICAgIDxzZWxlY3QgdmFsdWU9e2Zvcm0uc2VydmljZX0gb25DaGFuZ2U9e2UgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIHNlcnZpY2U6IGUudGFyZ2V0LnZhbHVlIH0pfSByZXF1aXJlZFxyXG4gICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHB4LTQgcHktMyByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItYm9yZGVyIGJnLWJhY2tncm91bmQgZm9udC1ib2R5IHRleHQtZm9yZWdyb3VuZCBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzMwIGZvY3VzOmJvcmRlci1wcmltYXJ5IG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbFwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cIlwiPlNlbGVjdCBTZXJ2aWNlPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJNYWtldXAgJiBIYWlyXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+QnJpZGFsIE1ha2V1cDwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPlBhcnR5IE1ha2V1cDwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9vcHRncm91cD5cclxuICAgICAgICAgICAgICAgICAgICAgIDxvcHRncm91cCBsYWJlbD1cIlN0eWxpbmdcIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5TYXJlZSBEcmFwaW5nPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+R2VuZXJhbCBTdHlsaW5nPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8L29wdGdyb3VwPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPG9wdGdyb3VwIGxhYmVsPVwiSGFpciBUcmVhdG1lbnRzXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+S2VyYXRpbiBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5DeXN0ZWluZSBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5IYWlyIEJvdG94PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+SGFpciBTcGE8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5EZWVwIENvbmRpdGlvbmluZzwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPkhvdCBPaWwgVHJlYXRtZW50PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+T2xhcGxleCBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5TY2FscCBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5EZXRveCBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJTYWxvbiDigJQgU2tpblwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPkZhY2lhbDwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPkRlZXAgQ2xlYW5zaW5nPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+QWNuZSBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj5Ta2luIEJyaWdodGVuaW5nPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+SGFpciBSZW1vdmFsPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+Qm9keSBUcmVhdG1lbnQ8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJTYWxvbiDigJQgSGFpclwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPkhhaXJjdXQgJiBTdHlsaW5nPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+SGFpciBDb2xvcmluZzwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPkhhaXIgRXh0ZW5zaW9uczwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9vcHRncm91cD5cclxuICAgICAgICAgICAgICAgICAgICA8L3NlbGVjdD5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJibG9jayBmb250LWJvZHkgdGV4dC1zbSBmb250LW1lZGl1bSBtYi0yXCI+RGF0ZTwvbGFiZWw+XHJcbiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9XCJkYXRlXCIgdmFsdWU9e2Zvcm0uZGF0ZX0gb25DaGFuZ2U9e2UgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIGRhdGU6IGUudGFyZ2V0LnZhbHVlIH0pfSByZXF1aXJlZFxyXG4gICAgICAgICAgICAgICAgICAgICAgbWluPXtuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCkuc3BsaXQoJ1QnKVswXX1cclxuICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBweC00IHB5LTMgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLWJvcmRlciBiZy1iYWNrZ3JvdW5kIGZvbnQtYm9keSB0ZXh0LWZvcmVncm91bmQgZm9jdXM6cmluZy0yIGZvY3VzOnJpbmctcHJpbWFyeS8zMCBmb2N1czpib3JkZXItcHJpbWFyeSBvdXRsaW5lLW5vbmUgdHJhbnNpdGlvbi1hbGxcIiAvPlxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIDxkaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cImJsb2NrIGZvbnQtYm9keSB0ZXh0LXNtIGZvbnQtbWVkaXVtIG1iLTJcIj5UaW1lIFNsb3Q8L2xhYmVsPlxyXG4gICAgICAgICAgICAgICAgICAgIDxzZWxlY3QgdmFsdWU9e2Zvcm0udGltZVNsb3R9IG9uQ2hhbmdlPXtlID0+IHNldEZvcm0oeyAuLi5mb3JtLCB0aW1lU2xvdDogZS50YXJnZXQudmFsdWUgfSl9IHJlcXVpcmVkXHJcbiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgcHgtNCBweS0zIHJvdW5kZWQteGwgYm9yZGVyIGJvcmRlci1ib3JkZXIgYmctYmFja2dyb3VuZCBmb250LWJvZHkgdGV4dC1mb3JlZ3JvdW5kIGZvY3VzOnJpbmctMiBmb2N1czpyaW5nLXByaW1hcnkvMzAgZm9jdXM6Ym9yZGVyLXByaW1hcnkgb3V0bGluZS1ub25lIHRyYW5zaXRpb24tYWxsXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPVwiXCI+U2VsZWN0IFRpbWU8L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+MTA6MDAgQU08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+MTE6MDAgQU08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+MTI6MDAgUE08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24+MjowMCBQTTwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbj4zOjAwIFBNPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uPjQ6MDAgUE08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgICA8L3NlbGVjdD5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJibG9jayBmb250LWJvZHkgdGV4dC1zbSBmb250LW1lZGl1bSBtYi0yXCI+TWVzc2FnZSAob3B0aW9uYWwpPC9sYWJlbD5cclxuICAgICAgICAgICAgICAgICAgICA8dGV4dGFyZWEgdmFsdWU9e2Zvcm0ubWVzc2FnZX0gb25DaGFuZ2U9e2UgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIG1lc3NhZ2U6IGUudGFyZ2V0LnZhbHVlIH0pfSByb3dzPXszfSBwbGFjZWhvbGRlcj1cIkFueSBzcGVjaWFsIHJlcXVlc3RzLi4uXCJcclxuICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBweC00IHB5LTMgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLWJvcmRlciBiZy1iYWNrZ3JvdW5kIGZvbnQtYm9keSB0ZXh0LWZvcmVncm91bmQgZm9jdXM6cmluZy0yIGZvY3VzOnJpbmctcHJpbWFyeS8zMCBmb2N1czpib3JkZXItcHJpbWFyeSBvdXRsaW5lLW5vbmUgdHJhbnNpdGlvbi1hbGwgcmVzaXplLW5vbmVcIiAvPlxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIDxtb3Rpb24uYnV0dG9uIHR5cGU9XCJzdWJtaXRcIiB3aGlsZUhvdmVyPXt7IHNjYWxlOiAxLjAyIH19IHdoaWxlVGFwPXt7IHNjYWxlOiAwLjk4IH19XHJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHB4LTggcHktNCBmb250LW1lZGl1bSBib3JkZXItMiBib3JkZXItcHJpbWFyeSB0ZXh0LXByaW1hcnkgcm91bmRlZC1mdWxsIGhvdmVyOmJnLXByaW1hcnkgaG92ZXI6dGV4dC1wcmltYXJ5LWZvcmVncm91bmQgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGx1eHVyeS1nbG93IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC0yXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgPFNlbmQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+XHJcbiAgICAgICAgICAgICAgICAgICAge3N1Ym1pdHRlZCA/ICdCb29raW5nIENvbmZpcm1lZCDinIUnIDogJ0Jvb2sgQXBwb2ludG1lbnQnfVxyXG4gICAgICAgICAgICAgICAgICA8L21vdGlvbi5idXR0b24+XHJcbiAgICAgICAgICAgICAgICA8L2Zvcm0+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICAgIHsvKiBXaGF0c0FwcCBCdXR0b24gKi99XHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC02IHRleHQtY2VudGVyXCI+XHJcbiAgICAgICAgICAgICAgICA8YSBocmVmPXtgaHR0cHM6Ly93YS5tZS8ke1dIQVRTQVBQX05VTUJFUn0/dGV4dD1IaSUyMEklMjB3YW50JTIwdG8lMjBib29rJTIwYSUyMHNlcnZpY2VgfVxyXG4gICAgICAgICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaW5saW5lLWJsb2NrIHB4LTYgcHktMyBiZy1ncmVlbi01MDAgdGV4dC13aGl0ZSByb3VuZGVkLWZ1bGwgZm9udC1tZWRpdW0gaG92ZXI6b3BhY2l0eS05MCB0cmFuc2l0aW9uLW9wYWNpdHlcIj5cclxuICAgICAgICAgICAgICAgICAgQ2hhdCBvbiBXaGF0c0FwcCDwn5KsXHJcbiAgICAgICAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuXHJcbiAgICAgICAgICAgIHsvKiBNQVAgKyBDT05UQUNUIERFVEFJTFMgKi99XHJcbiAgICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeDogNDAgfX0gYW5pbWF0ZT17eyBvcGFjaXR5OiAxLCB4OiAwIH19IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCwgZGVsYXk6IDAuMSB9fSBjbGFzc05hbWU9XCJzcGFjZS15LTZcIj5cclxuXHJcbiAgICAgICAgICAgICAgey8qIE1hcCAqL31cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJvdW5kZWQtMnhsIG92ZXJmbG93LWhpZGRlbiBoLTcyXCIgc3R5bGU9e3sgYm94U2hhZG93OiAndmFyKC0tc2hhZG93LWNhcmQpJyB9fT5cclxuICAgICAgICAgICAgICAgIDxpZnJhbWVcclxuICAgICAgICAgICAgICAgICAgc3JjPVwiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL2VtYmVkP3BiPSExbTE4ITFtMTIhMW0zITFkMzg4Ni4wITJkNzcuNTc1MCEzZDEzLjAyNTAhMm0zITFmMCEyZjAhM2YwITNtMiExaTEwMjQhMmk3NjghNGYxNSEzbTMhMW0yITFzMHgwJTNBMHgwITJ6TVRQQ3NEQXhKek13TGpBaVRpQTNOOEt3TXpRbk16QXVNQ0pGITVlMCEzbTIhMXNlbiEyc2luITR2MTY3OTkwMDAwMDAwMCE1bTIhMXNlbiEyc2luJno9MTVcIlxyXG4gICAgICAgICAgICAgICAgICB3aWR0aD1cIjEwMCVcIiBoZWlnaHQ9XCIxMDAlXCJcclxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYm9yZGVyOiAwIH19XHJcbiAgICAgICAgICAgICAgICAgIGFsbG93RnVsbFNjcmVlbiBsb2FkaW5nPVwibGF6eVwiXHJcbiAgICAgICAgICAgICAgICAgIHJlZmVycmVyUG9saWN5PVwibm8tcmVmZXJyZXItd2hlbi1kb3duZ3JhZGVcIlxyXG4gICAgICAgICAgICAgICAgICB0aXRsZT1cIkJlYXV0eSBBbmQgVGhlIEJydXNoIExvY2F0aW9uXCJcclxuICAgICAgICAgICAgICAgIC8+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICAgIHsvKiBDb250YWN0IEluZm8gKi99XHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkLTJ4bCBwLTYgc3BhY2UteS00XCIgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2hzbCh2YXIoLS1jYXJkKSAvIDAuOSknLCBib3hTaGFkb3c6ICd2YXIoLS1zaGFkb3ctY2FyZCknIH19PlxyXG4gICAgICAgICAgICAgICAge1tcclxuICAgICAgICAgICAgICAgICAgeyBpY29uOiBNYXBQaW4sIHRleHQ6ICcjMTczLzIsIDJuZCBDcm9zcyBSb2FkLCBFbWVyYWxkIExheW91dCwgU2hha3RpIE5hZ2FyLCBCYW5nYWxvcmUgNTYwMDc3JywgaHJlZjogJ2h0dHBzOi8vd3d3Lmdvb2dsZS5jb20vbWFwcy9zZWFyY2gvMTczKzJuZCtDcm9zcytSb2FkK0VtZXJhbGQrTGF5b3V0K1NoYWt0aStOYWdhcitCYW5nYWxvcmUrNTYwMDc3JyB9LFxyXG4gICAgICAgICAgICAgICAgICB7IGljb246IFBob25lLCB0ZXh0OiAnKzkxIDkxNDg3IDY4OTU4JywgaHJlZjogYGh0dHBzOi8vd2EubWUvJHtXSEFUU0FQUF9OVU1CRVJ9YCB9LFxyXG4gICAgICAgICAgICAgICAgICB7IGljb246IE1haWwsIHRleHQ6ICdzaGF6aWF0aGVzaGFpa2hAZ21haWwuY29tJywgaHJlZjogJ21haWx0bzpzaGF6aWF0aGVzaGFpa2hAZ21haWwuY29tJyB9LFxyXG4gICAgICAgICAgICAgICAgICB7IGljb246IEluc3RhZ3JhbSwgdGV4dDogJ0BhcnRpc3Rlc2hhaWtoJywgaHJlZjogJ2h0dHBzOi8vd3d3Lmluc3RhZ3JhbS5jb20vYXJ0aXN0ZXNoYWlraC8nIH0sXHJcbiAgICAgICAgICAgICAgICBdLm1hcCgoeyBpY29uOiBJY29uLCB0ZXh0LCBocmVmIH0pID0+IChcclxuICAgICAgICAgICAgICAgICAgPGEga2V5PXt0ZXh0fSBocmVmPXtocmVmfSB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyBncm91cCBweS0xXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMTAgaC0xMCByb3VuZGVkLWZ1bGwgYmctYWNjZW50IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHNocmluay0wIGdyb3VwLWhvdmVyOmJnLXByaW1hcnkvMTAgdHJhbnNpdGlvbi1jb2xvcnNcIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPEljb24gY2xhc3NOYW1lPVwidy00IGgtNCB0ZXh0LXByaW1hcnlcIiAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1zbSB0ZXh0LW11dGVkLWZvcmVncm91bmQgZ3JvdXAtaG92ZXI6dGV4dC1mb3JlZ3JvdW5kIHRyYW5zaXRpb24tY29sb3JzXCI+e3RleHR9PC9zcGFuPlxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICAgICAgICApKX1cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L3NlY3Rpb24+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgQ29udGFjdDtcbiJdLCJuYW1lcyI6WyJ1c2VTdGF0ZSIsIm1vdGlvbiIsIk1hcFBpbiIsIlBob25lIiwiTWFpbCIsIlNlbmQiLCJJbnN0YWdyYW0iLCJtYWtldXBUb29scyIsImFwaVVybCIsIkNvbnRhY3QiLCJmb3JtIiwic2V0Rm9ybSIsIm5hbWUiLCJwaG9uZSIsIm1lc3NhZ2UiLCJzZXJ2aWNlIiwiZGF0ZSIsInRpbWVTbG90Iiwic3VibWl0dGVkIiwic2V0U3VibWl0dGVkIiwiV0hBVFNBUFBfTlVNQkVSIiwiaGFuZGxlU3VibWl0IiwiZSIsInByZXZlbnREZWZhdWx0IiwiYWxlcnQiLCJyZXMiLCJmZXRjaCIsIm1ldGhvZCIsImhlYWRlcnMiLCJib2R5IiwiSlNPTiIsInN0cmluZ2lmeSIsIkRhdGUiLCJ0b0lTT1N0cmluZyIsImRhdGEiLCJqc29uIiwiZXJyb3IiLCJzZXRUaW1lb3V0IiwiYm9va2luZ01lc3NhZ2UiLCJ3aW5kb3ciLCJvcGVuIiwiZW5jb2RlVVJJQ29tcG9uZW50IiwiZXJyIiwiY29uc29sZSIsImRpdiIsImNsYXNzTmFtZSIsImltZyIsInNyYyIsImFsdCIsInAiLCJoMSIsInNlY3Rpb24iLCJpbml0aWFsIiwib3BhY2l0eSIsIngiLCJhbmltYXRlIiwidHJhbnNpdGlvbiIsImR1cmF0aW9uIiwic3R5bGUiLCJiYWNrZ3JvdW5kIiwiYm94U2hhZG93IiwiaDIiLCJvblN1Ym1pdCIsImxhYmVsIiwiaW5wdXQiLCJ0eXBlIiwidmFsdWUiLCJvbkNoYW5nZSIsInRhcmdldCIsInJlcXVpcmVkIiwicGxhY2Vob2xkZXIiLCJzZWxlY3QiLCJvcHRpb24iLCJvcHRncm91cCIsIm1pbiIsInNwbGl0IiwidGV4dGFyZWEiLCJyb3dzIiwiYnV0dG9uIiwid2hpbGVIb3ZlciIsInNjYWxlIiwid2hpbGVUYXAiLCJhIiwiaHJlZiIsInJlbCIsImRlbGF5IiwiaWZyYW1lIiwid2lkdGgiLCJoZWlnaHQiLCJib3JkZXIiLCJhbGxvd0Z1bGxTY3JlZW4iLCJsb2FkaW5nIiwicmVmZXJyZXJQb2xpY3kiLCJ0aXRsZSIsImljb24iLCJ0ZXh0IiwibWFwIiwiSWNvbiIsInNwYW4iXSwibWFwcGluZ3MiOiI7O0FBQUEsU0FBU0EsUUFBUSxRQUFRLFFBQVE7QUFDakMsU0FBU0MsTUFBTSxRQUFRLGdCQUFnQjtBQUN2QyxTQUFTQyxNQUFNLEVBQUVDLEtBQUssRUFBRUMsSUFBSSxFQUFFQyxJQUFJLEVBQUVDLFNBQVMsUUFBUSxlQUFlO0FBQ3BFLE9BQU9DLGlCQUFpQiw0QkFBNEI7QUFDcEQsU0FBU0MsTUFBTSxRQUFRLFlBQVk7QUFFbkMsTUFBTUMsVUFBVTs7SUFDZCxNQUFNLENBQUNDLE1BQU1DLFFBQVEsR0FBR1gsU0FBUztRQUMvQlksTUFBTTtRQUNOQyxPQUFPO1FBQ1BDLFNBQVM7UUFDVEMsU0FBUztRQUNUQyxNQUFNO1FBQ05DLFVBQVU7SUFDWjtJQUNBLE1BQU0sQ0FBQ0MsV0FBV0MsYUFBYSxHQUFHbkIsU0FBUztJQUUzQyxNQUFNb0Isa0JBQWtCO0lBRXhCLE1BQU1DLGVBQWUsT0FBT0M7UUFDMUJBLEVBQUVDLGNBQWM7UUFFaEIsSUFBSSxDQUFDYixLQUFLSyxPQUFPLElBQUksQ0FBQ0wsS0FBS00sSUFBSSxJQUFJLENBQUNOLEtBQUtPLFFBQVEsRUFBRTtZQUNqRE8sTUFBTTtZQUNOO1FBQ0Y7UUFFQSxJQUFJ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

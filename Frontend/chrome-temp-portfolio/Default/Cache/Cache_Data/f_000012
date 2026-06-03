@@ -1,0 +1,268 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/services/Styling.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { useInView } from "/src/hooks/useAnimations.ts";
+import sareeDraping from "/src/assets/saree-draping.jpg?import";
+import hairStyling from "/src/assets/hair-styling.jpg?import";
+const stylingServices = [
+    {
+        title: 'Saree Draping',
+        description: 'Expert saree draping in multiple styles, including Nivi, Bengali, Gujarati, Maharashtrian, and contemporary fusion drapes. Secured with precision for comfort and elegance.',
+        price: 'Rs. 1,000',
+        image: sareeDraping,
+        styles: [
+            'Nivi Style',
+            'Bengali Style',
+            'Gujarati Style',
+            'Maharashtrian Style',
+            'Lehenga Saree',
+            'Contemporary Drape'
+        ]
+    },
+    {
+        title: 'General Styling',
+        description: 'Complete outfit styling and consultation for any occasion. We help you put together the perfect look from accessories to overall presentation.',
+        price: 'Rs. 1,500',
+        image: hairStyling,
+        styles: [
+            'Outfit Consultation',
+            'Accessory Pairing',
+            'Hair Styling Advice',
+            'Occasion-Based Styling',
+            'Finishing Touch Guidance'
+        ]
+    }
+];
+const Styling = ()=>{
+    _s();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20 min-h-screen relative overflow-hidden",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                lineNumber: 29,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed top-1/3 right-1/4 -z-10 w-[400px] h-[400px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.1] blur-[120px]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                lineNumber: 30,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                ref: ref,
+                className: "section-padding",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-6xl mx-auto",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: {
+                                opacity: 1,
+                                y: 0
+                            },
+                            transition: {
+                                duration: 0.8
+                            },
+                            className: "text-center mb-16",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                    children: "Styling"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                    lineNumber: 35,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("h1", {
+                                    className: "font-heading text-4xl md:text-5xl font-semibold",
+                                    children: "Styling Services"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                    lineNumber: 36,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-body text-muted-foreground mt-4 max-w-xl mx-auto",
+                                    children: "Expert draping and styling to complete your look."
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                    lineNumber: 37,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                            lineNumber: 34,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-8",
+                            children: stylingServices.map((service, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                                    initial: {
+                                        opacity: 0,
+                                        y: 40
+                                    },
+                                    animate: isInView ? {
+                                        opacity: 1,
+                                        y: 0
+                                    } : {},
+                                    transition: {
+                                        duration: 0.7,
+                                        delay: i * 0.15
+                                    },
+                                    className: "bg-card/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-500",
+                                    children: [
+                                        service.image && /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "h-60 overflow-hidden",
+                                            children: /*#__PURE__*/ _jsxDEV("img", {
+                                                src: service.image,
+                                                alt: service.title,
+                                                className: "w-full h-full object-cover",
+                                                loading: "lazy"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                lineNumber: 51,
+                                                columnNumber: 21
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                            lineNumber: 50,
+                                            columnNumber: 19
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "p-8",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "flex items-center justify-between mb-4",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV("h2", {
+                                                            className: "font-heading text-xl font-semibold",
+                                                            children: service.title
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                            lineNumber: 56,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("span", {
+                                                            className: "font-heading text-xl text-primary font-bold",
+                                                            children: service.price
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                            lineNumber: 57,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                    lineNumber: 55,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                    className: "font-body text-muted-foreground text-sm leading-relaxed mb-6",
+                                                    children: service.description
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                    lineNumber: 59,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "flex flex-wrap gap-2 mb-6",
+                                                    children: service.styles.map((style)=>/*#__PURE__*/ _jsxDEV("span", {
+                                                            className: "px-3 py-1.5 text-xs font-body bg-accent/50 text-foreground/70 rounded-full",
+                                                            children: style
+                                                        }, style, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                            lineNumber: 62,
+                                                            columnNumber: 23
+                                                        }, this))
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                    lineNumber: 60,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV(Link, {
+                                                    to: "/booking",
+                                                    className: "inline-flex px-6 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300 luxury-glow",
+                                                    children: "Book Now"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                                    lineNumber: 65,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                            lineNumber: 54,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, service.title, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                                    lineNumber: 42,
+                                    columnNumber: 15
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                            lineNumber: 40,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                    lineNumber: 33,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+                lineNumber: 32,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx",
+        lineNumber: 28,
+        columnNumber: 5
+    }, this);
+};
+_s(Styling, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c = Styling;
+export default Styling;
+var _c;
+$RefreshReg$(_c, "Styling");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/Styling.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlN0eWxpbmcudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ2ZyYW1lci1tb3Rpb24nO1xuaW1wb3J0IHsgTGluayB9IGZyb20gJ3JlYWN0LXJvdXRlci1kb20nO1xuaW1wb3J0IHsgdXNlSW5WaWV3IH0gZnJvbSAnQC9ob29rcy91c2VBbmltYXRpb25zJztcbmltcG9ydCBzYXJlZURyYXBpbmcgZnJvbSAnQC9hc3NldHMvc2FyZWUtZHJhcGluZy5qcGcnO1xuaW1wb3J0IGhhaXJTdHlsaW5nIGZyb20gJ0AvYXNzZXRzL2hhaXItc3R5bGluZy5qcGcnO1xuXG5jb25zdCBzdHlsaW5nU2VydmljZXMgPSBbXG4gIHtcbiAgICB0aXRsZTogJ1NhcmVlIERyYXBpbmcnLFxuICAgIGRlc2NyaXB0aW9uOiAnRXhwZXJ0IHNhcmVlIGRyYXBpbmcgaW4gbXVsdGlwbGUgc3R5bGVzLCBpbmNsdWRpbmcgTml2aSwgQmVuZ2FsaSwgR3VqYXJhdGksIE1haGFyYXNodHJpYW4sIGFuZCBjb250ZW1wb3JhcnkgZnVzaW9uIGRyYXBlcy4gU2VjdXJlZCB3aXRoIHByZWNpc2lvbiBmb3IgY29tZm9ydCBhbmQgZWxlZ2FuY2UuJyxcbiAgICBwcmljZTogJ1JzLiAxLDAwMCcsXG4gICAgaW1hZ2U6IHNhcmVlRHJhcGluZyxcbiAgICBzdHlsZXM6IFsnTml2aSBTdHlsZScsICdCZW5nYWxpIFN0eWxlJywgJ0d1amFyYXRpIFN0eWxlJywgJ01haGFyYXNodHJpYW4gU3R5bGUnLCAnTGVoZW5nYSBTYXJlZScsICdDb250ZW1wb3JhcnkgRHJhcGUnXSxcbiAgfSxcbiAge1xuICAgIHRpdGxlOiAnR2VuZXJhbCBTdHlsaW5nJyxcbiAgICBkZXNjcmlwdGlvbjogJ0NvbXBsZXRlIG91dGZpdCBzdHlsaW5nIGFuZCBjb25zdWx0YXRpb24gZm9yIGFueSBvY2Nhc2lvbi4gV2UgaGVscCB5b3UgcHV0IHRvZ2V0aGVyIHRoZSBwZXJmZWN0IGxvb2sgZnJvbSBhY2Nlc3NvcmllcyB0byBvdmVyYWxsIHByZXNlbnRhdGlvbi4nLFxuICAgIHByaWNlOiAnUnMuIDEsNTAwJyxcbiAgICBpbWFnZTogaGFpclN0eWxpbmcsXG4gICAgc3R5bGVzOiBbJ091dGZpdCBDb25zdWx0YXRpb24nLCAnQWNjZXNzb3J5IFBhaXJpbmcnLCAnSGFpciBTdHlsaW5nIEFkdmljZScsICdPY2Nhc2lvbi1CYXNlZCBTdHlsaW5nJywgJ0ZpbmlzaGluZyBUb3VjaCBHdWlkYW5jZSddLFxuICB9LFxuXTtcblxuY29uc3QgU3R5bGluZyA9ICgpID0+IHtcbiAgY29uc3QgeyByZWYsIGlzSW5WaWV3IH0gPSB1c2VJblZpZXcoKTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwicHQtMjAgbWluLWgtc2NyZWVuIHJlbGF0aXZlIG92ZXJmbG93LWhpZGRlblwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJmaXhlZCBpbnNldC0wIC16LTEwIGJnLWdyYWRpZW50LXRvLWIgZnJvbS1baHNsKDMwLDIwJSw5NyUpXSB2aWEtW2hzbCgzNTAsMzAlLDk2JSldIHRvLVtoc2woMCwwJSwxMDAlKV1cIiAvPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJmaXhlZCB0b3AtMS8zIHJpZ2h0LTEvNCAtei0xMCB3LVs0MDBweF0gaC1bNDAwcHhdIHJvdW5kZWQtZnVsbCBiZy1baHNsKDM1MCwzMCUsODUlKV0gb3BhY2l0eS1bMC4xXSBibHVyLVsxMjBweF1cIiAvPlxuXG4gICAgICA8c2VjdGlvbiByZWY9e3JlZn0gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctNnhsIG14LWF1dG9cIj5cbiAgICAgICAgICA8bW90aW9uLmRpdiBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDMwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX0gY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbWItMTZcIj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5TdHlsaW5nPC9wPlxuICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LXNlbWlib2xkXCI+U3R5bGluZyBTZXJ2aWNlczwvaDE+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIG10LTQgbWF4LXcteGwgbXgtYXV0b1wiPkV4cGVydCBkcmFwaW5nIGFuZCBzdHlsaW5nIHRvIGNvbXBsZXRlIHlvdXIgbG9vay48L3A+XG4gICAgICAgICAgPC9tb3Rpb24uZGl2PlxuXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIG1kOmdyaWQtY29scy0yIGdhcC04XCI+XG4gICAgICAgICAgICB7c3R5bGluZ1NlcnZpY2VzLm1hcCgoc2VydmljZSwgaSkgPT4gKFxuICAgICAgICAgICAgICA8bW90aW9uLmRpdlxuICAgICAgICAgICAgICAgIGtleT17c2VydmljZS50aXRsZX1cbiAgICAgICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDQwIH19XG4gICAgICAgICAgICAgICAgYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fVxuICAgICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNywgZGVsYXk6IGkgKiAwLjE1IH19XG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYmctY2FyZC84MCBiYWNrZHJvcC1ibHVyLXNtIHJvdW5kZWQtMnhsIG92ZXJmbG93LWhpZGRlbiBib3JkZXIgYm9yZGVyLWJvcmRlci81MCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNTAwXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIHtzZXJ2aWNlLmltYWdlICYmIChcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC02MCBvdmVyZmxvdy1oaWRkZW5cIj5cbiAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9e3NlcnZpY2UuaW1hZ2V9IGFsdD17c2VydmljZS50aXRsZX0gY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIiBsb2FkaW5nPVwibGF6eVwiIC8+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICApfVxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC04XCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiBtYi00XCI+XG4gICAgICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC14bCBmb250LXNlbWlib2xkXCI+e3NlcnZpY2UudGl0bGV9PC9oMj5cbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQteGwgdGV4dC1wcmltYXJ5IGZvbnQtYm9sZFwiPntzZXJ2aWNlLnByaWNlfTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCB0ZXh0LXNtIGxlYWRpbmctcmVsYXhlZCBtYi02XCI+e3NlcnZpY2UuZGVzY3JpcHRpb259PC9wPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtd3JhcCBnYXAtMiBtYi02XCI+XG4gICAgICAgICAgICAgICAgICAgIHtzZXJ2aWNlLnN0eWxlcy5tYXAoKHN0eWxlKSA9PiAoXG4gICAgICAgICAgICAgICAgICAgICAgPHNwYW4ga2V5PXtzdHlsZX0gY2xhc3NOYW1lPVwicHgtMyBweS0xLjUgdGV4dC14cyBmb250LWJvZHkgYmctYWNjZW50LzUwIHRleHQtZm9yZWdyb3VuZC83MCByb3VuZGVkLWZ1bGxcIj57c3R5bGV9PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgICApKX1cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPExpbmsgdG89XCIvYm9va2luZ1wiIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IHB4LTYgcHktMyB0ZXh0LXNtIGZvbnQtbWVkaXVtIGJnLXByaW1hcnkgdGV4dC1wcmltYXJ5LWZvcmVncm91bmQgcm91bmRlZC1mdWxsIGhvdmVyOmJnLXByaW1hcnkvOTAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGx1eHVyeS1nbG93XCI+XG4gICAgICAgICAgICAgICAgICAgIEJvb2sgTm93XG4gICAgICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cbiAgICAgICAgICAgICkpfVxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvc2VjdGlvbj5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IFN0eWxpbmc7XG4iXSwibmFtZXMiOlsibW90aW9uIiwiTGluayIsInVzZUluVmlldyIsInNhcmVlRHJhcGluZyIsImhhaXJTdHlsaW5nIiwic3R5bGluZ1NlcnZpY2VzIiwidGl0bGUiLCJkZXNjcmlwdGlvbiIsInByaWNlIiwiaW1hZ2UiLCJzdHlsZXMiLCJTdHlsaW5nIiwicmVmIiwiaXNJblZpZXciLCJkaXYiLCJjbGFzc05hbWUiLCJzZWN0aW9uIiwiaW5pdGlhbCIsIm9wYWNpdHkiLCJ5IiwiYW5pbWF0ZSIsInRyYW5zaXRpb24iLCJkdXJhdGlvbiIsInAiLCJoMSIsIm1hcCIsInNlcnZpY2UiLCJpIiwiZGVsYXki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

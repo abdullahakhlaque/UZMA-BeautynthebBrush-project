@@ -1,0 +1,428 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/About.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$(), _s1 = $RefreshSig$();
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { useInView, useAnimatedCounter } from "/src/hooks/useAnimations.ts";
+import aboutImg from "/src/assets/about-artist.png?import";
+import makeupTools from "/src/assets/makeup-tools.jpg?import";
+const CounterItem = ({ end, suffix, label })=>{
+    _s();
+    const { ref, isInView } = useInView();
+    const count = useAnimatedCounter(end, 2500, isInView);
+    return /*#__PURE__*/ _jsxDEV("div", {
+        ref: ref,
+        className: "text-center",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "font-heading text-4xl md:text-5xl font-bold text-primary",
+                children: [
+                    count.toLocaleString(),
+                    suffix
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                lineNumber: 11,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("p", {
+                className: "font-body text-muted-foreground mt-2 text-sm tracking-wide uppercase",
+                children: label
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                lineNumber: 12,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+        lineNumber: 10,
+        columnNumber: 5
+    }, this);
+};
+_s(CounterItem, "Nvi0yl56Ow+fsn/eGpW4XmkLswg=", false, function() {
+    return [
+        useInView,
+        useAnimatedCounter
+    ];
+});
+_c = CounterItem;
+const About = ()=>{
+    _s1();
+    const { ref, isInView } = useInView();
+    const { ref: ref2, isInView: isInView2 } = useInView();
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20",
+        children: [
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "section-padding bg-cream",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-6xl mx-auto",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: {
+                                opacity: 1,
+                                y: 0
+                            },
+                            transition: {
+                                duration: 0.8
+                            },
+                            className: "text-center mb-16",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                    children: "About"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 27,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("h1", {
+                                    className: "font-heading text-4xl md:text-5xl font-semibold",
+                                    children: "About Beauty And The Brush"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 28,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 26,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(motion.div, {
+                                    initial: {
+                                        opacity: 0,
+                                        x: -40
+                                    },
+                                    animate: {
+                                        opacity: 1,
+                                        x: 0
+                                    },
+                                    transition: {
+                                        duration: 0.8,
+                                        delay: 0.2
+                                    },
+                                    children: /*#__PURE__*/ _jsxDEV("img", {
+                                        src: aboutImg,
+                                        alt: "Beauty And The Brush - Professional Makeup Artist",
+                                        className: "rounded-2xl luxury-shadow-card w-full"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                        lineNumber: 33,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 32,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV(motion.div, {
+                                    initial: {
+                                        opacity: 0,
+                                        x: 40
+                                    },
+                                    animate: {
+                                        opacity: 1,
+                                        x: 0
+                                    },
+                                    transition: {
+                                        duration: 0.8,
+                                        delay: 0.3
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("h2", {
+                                            className: "font-heading text-2xl md:text-3xl font-semibold mb-6",
+                                            children: [
+                                                "A Passion for ",
+                                                /*#__PURE__*/ _jsxDEV("span", {
+                                                    className: "luxury-text-gradient",
+                                                    children: "Perfection"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                                    lineNumber: 36,
+                                                    columnNumber: 98
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                            lineNumber: 36,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "space-y-4 font-body text-muted-foreground leading-relaxed",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                    children: "With over two decades of experience in the beauty industry, Beauty And The Brush has established itself as one of Bangalore's most sought-after makeup studios. Based in Yelahanka, the studio has become a haven for brides and beauty enthusiasts alike."
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                                    lineNumber: 38,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                    children: "Our philosophy is simple: every woman is beautiful, and our role is to enhance that natural beauty. We combine traditional techniques with contemporary trends, using only the finest international products to create looks that are both timeless and modern."
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                                    lineNumber: 39,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                    children: "Having worked with over 30,000 clients, including some of the city's most prominent families, we bring an unparalleled level of expertise, attention to detail, and personal care to every appointment."
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                                    lineNumber: 40,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                            lineNumber: 37,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 35,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 31,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                    lineNumber: 25,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                lineNumber: 24,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "section-padding",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(CounterItem, {
+                            end: 20,
+                            suffix: "+",
+                            label: "Years Experience"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 50,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(CounterItem, {
+                            end: 30000,
+                            suffix: "+",
+                            label: "Happy Clients"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 51,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(CounterItem, {
+                            end: 1000,
+                            suffix: "+",
+                            label: "Bridal Looks"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 52,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(CounterItem, {
+                            end: 500,
+                            suffix: "+",
+                            label: "Party Makeovers"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 53,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                    lineNumber: 49,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                lineNumber: 48,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                ref: ref,
+                className: "section-padding bg-cream",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                x: -40
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                x: 0
+                            } : {},
+                            transition: {
+                                duration: 0.8
+                            },
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                    children: "Our Kit"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 61,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("h2", {
+                                    className: "font-heading text-2xl md:text-3xl font-semibold mb-6",
+                                    children: "Premium Products & Tools"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 62,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "space-y-4 font-body text-muted-foreground leading-relaxed",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: "We use only the best international brands including MAC, Bobbi Brown, Charlotte Tilbury, Huda Beauty, and many more. Our professional airbrush system ensures flawless, long-lasting coverage."
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                            lineNumber: 64,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: "Every tool in our kit is sanitized and maintained to the highest standards. We believe that great artistry starts with great tools."
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                            lineNumber: 65,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 63,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "flex flex-wrap gap-3 mt-6",
+                                    children: [
+                                        'MAC',
+                                        'Bobbi Brown',
+                                        'Charlotte Tilbury',
+                                        'Huda Beauty',
+                                        'Urban Decay',
+                                        'NARS'
+                                    ].map((brand)=>/*#__PURE__*/ _jsxDEV("span", {
+                                            className: "px-4 py-2 text-xs font-body tracking-wide bg-card border border-border rounded-full text-muted-foreground",
+                                            children: brand
+                                        }, brand, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                            lineNumber: 69,
+                                            columnNumber: 17
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                    lineNumber: 67,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 60,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                x: 40
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                x: 0
+                            } : {},
+                            transition: {
+                                duration: 0.8,
+                                delay: 0.2
+                            },
+                            children: /*#__PURE__*/ _jsxDEV("img", {
+                                src: makeupTools,
+                                alt: "Premium makeup tools",
+                                className: "rounded-2xl luxury-shadow-card w-full"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                                lineNumber: 74,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                            lineNumber: 73,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                    lineNumber: 59,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx",
+        lineNumber: 22,
+        columnNumber: 5
+    }, this);
+};
+_s1(About, "F4FeqaOBU/s8J06QGEyDjs2Q0og=", false, function() {
+    return [
+        useInView,
+        useInView
+    ];
+});
+_c1 = About;
+export default About;
+var _c, _c1;
+$RefreshReg$(_c, "CounterItem");
+$RefreshReg$(_c1, "About");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/About.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkFib3V0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBtb3Rpb24gfSBmcm9tICdmcmFtZXItbW90aW9uJztcclxuaW1wb3J0IHsgdXNlSW5WaWV3LCB1c2VBbmltYXRlZENvdW50ZXIgfSBmcm9tICdAL2hvb2tzL3VzZUFuaW1hdGlvbnMnO1xyXG5pbXBvcnQgYWJvdXRJbWcgZnJvbSAnQC9hc3NldHMvYWJvdXQtYXJ0aXN0LnBuZyc7XHJcbmltcG9ydCBtYWtldXBUb29scyBmcm9tICdAL2Fzc2V0cy9tYWtldXAtdG9vbHMuanBnJztcclxuXHJcbmNvbnN0IENvdW50ZXJJdGVtID0gKHsgZW5kLCBzdWZmaXgsIGxhYmVsIH06IHsgZW5kOiBudW1iZXI7IHN1ZmZpeDogc3RyaW5nOyBsYWJlbDogc3RyaW5nIH0pID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIGNvbnN0IGNvdW50ID0gdXNlQW5pbWF0ZWRDb3VudGVyKGVuZCwgMjUwMCwgaXNJblZpZXcpO1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IHJlZj17cmVmfSBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LWJvbGQgdGV4dC1wcmltYXJ5XCI+e2NvdW50LnRvTG9jYWxlU3RyaW5nKCl9e3N1ZmZpeH08L2Rpdj5cclxuICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBtdC0yIHRleHQtc20gdHJhY2tpbmctd2lkZSB1cHBlcmNhc2VcIj57bGFiZWx9PC9wPlxyXG4gICAgPC9kaXY+XHJcbiAgKTtcclxufTtcclxuXHJcbmNvbnN0IEFib3V0ID0gKCkgPT4ge1xyXG4gIGNvbnN0IHsgcmVmLCBpc0luVmlldyB9ID0gdXNlSW5WaWV3KCk7XHJcbiAgY29uc3QgeyByZWY6IHJlZjIsIGlzSW5WaWV3OiBpc0luVmlldzIgfSA9IHVzZUluVmlldygpO1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJwdC0yMFwiPlxyXG4gICAgICB7LyogSGVybyAqL31cclxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nIGJnLWNyZWFtXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy02eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHk6IDAgfX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44IH19IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XHJcbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5BYm91dDwvcD5cclxuICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LXNlbWlib2xkXCI+QWJvdXQgQmVhdXR5IEFuZCBUaGUgQnJ1c2g8L2gxPlxyXG4gICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG5cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBsZzpncmlkLWNvbHMtMiBnYXAtMTIgaXRlbXMtY2VudGVyXCI+XHJcbiAgICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeDogLTQwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeDogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjgsIGRlbGF5OiAwLjIgfX0+XHJcbiAgICAgICAgICAgICAgPGltZyBzcmM9e2Fib3V0SW1nfSBhbHQ9XCJCZWF1dHkgQW5kIFRoZSBCcnVzaCAtIFByb2Zlc3Npb25hbCBNYWtldXAgQXJ0aXN0XCIgY2xhc3NOYW1lPVwicm91bmRlZC0yeGwgbHV4dXJ5LXNoYWRvdy1jYXJkIHctZnVsbFwiIC8+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB4OiA0MCB9fSBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHg6IDAgfX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44LCBkZWxheTogMC4zIH19PlxyXG4gICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgbWQ6dGV4dC0zeGwgZm9udC1zZW1pYm9sZCBtYi02XCI+QSBQYXNzaW9uIGZvciA8c3BhbiBjbGFzc05hbWU9XCJsdXh1cnktdGV4dC1ncmFkaWVudFwiPlBlcmZlY3Rpb248L3NwYW4+PC9oMj5cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNCBmb250LWJvZHkgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIGxlYWRpbmctcmVsYXhlZFwiPlxyXG4gICAgICAgICAgICAgICAgPHA+V2l0aCBvdmVyIHR3byBkZWNhZGVzIG9mIGV4cGVyaWVuY2UgaW4gdGhlIGJlYXV0eSBpbmR1c3RyeSwgQmVhdXR5IEFuZCBUaGUgQnJ1c2ggaGFzIGVzdGFibGlzaGVkIGl0c2VsZiBhcyBvbmUgb2YgQmFuZ2Fsb3JlJ3MgbW9zdCBzb3VnaHQtYWZ0ZXIgbWFrZXVwIHN0dWRpb3MuIEJhc2VkIGluIFllbGFoYW5rYSwgdGhlIHN0dWRpbyBoYXMgYmVjb21lIGEgaGF2ZW4gZm9yIGJyaWRlcyBhbmQgYmVhdXR5IGVudGh1c2lhc3RzIGFsaWtlLjwvcD5cclxuICAgICAgICAgICAgICAgIDxwPk91ciBwaGlsb3NvcGh5IGlzIHNpbXBsZTogZXZlcnkgd29tYW4gaXMgYmVhdXRpZnVsLCBhbmQgb3VyIHJvbGUgaXMgdG8gZW5oYW5jZSB0aGF0IG5hdHVyYWwgYmVhdXR5LiBXZSBjb21iaW5lIHRyYWRpdGlvbmFsIHRlY2huaXF1ZXMgd2l0aCBjb250ZW1wb3JhcnkgdHJlbmRzLCB1c2luZyBvbmx5IHRoZSBmaW5lc3QgaW50ZXJuYXRpb25hbCBwcm9kdWN0cyB0byBjcmVhdGUgbG9va3MgdGhhdCBhcmUgYm90aCB0aW1lbGVzcyBhbmQgbW9kZXJuLjwvcD5cclxuICAgICAgICAgICAgICAgIDxwPkhhdmluZyB3b3JrZWQgd2l0aCBvdmVyIDMwLDAwMCBjbGllbnRzLCBpbmNsdWRpbmcgc29tZSBvZiB0aGUgY2l0eSdzIG1vc3QgcHJvbWluZW50IGZhbWlsaWVzLCB3ZSBicmluZyBhbiB1bnBhcmFsbGVsZWQgbGV2ZWwgb2YgZXhwZXJ0aXNlLCBhdHRlbnRpb24gdG8gZGV0YWlsLCBhbmQgcGVyc29uYWwgY2FyZSB0byBldmVyeSBhcHBvaW50bWVudC48L3A+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L3NlY3Rpb24+XHJcblxyXG4gICAgICB7LyogQ291bnRlcnMgKi99XHJcbiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNlY3Rpb24tcGFkZGluZ1wiPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctNHhsIG14LWF1dG8gZ3JpZCBncmlkLWNvbHMtMiBtZDpncmlkLWNvbHMtNCBnYXAtOFwiPlxyXG4gICAgICAgICAgPENvdW50ZXJJdGVtIGVuZD17MjB9IHN1ZmZpeD1cIitcIiBsYWJlbD1cIlllYXJzIEV4cGVyaWVuY2VcIiAvPlxyXG4gICAgICAgICAgPENvdW50ZXJJdGVtIGVuZD17MzAwMDB9IHN1ZmZpeD1cIitcIiBsYWJlbD1cIkhhcHB5IENsaWVudHNcIiAvPlxyXG4gICAgICAgICAgPENvdW50ZXJJdGVtIGVuZD17MTAwMH0gc3VmZml4PVwiK1wiIGxhYmVsPVwiQnJpZGFsIExvb2tzXCIgLz5cclxuICAgICAgICAgIDxDb3VudGVySXRlbSBlbmQ9ezUwMH0gc3VmZml4PVwiK1wiIGxhYmVsPVwiUGFydHkgTWFrZW92ZXJzXCIgLz5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9zZWN0aW9uPlxyXG5cclxuICAgICAgey8qIFRvb2xzIHNlY3Rpb24gKi99XHJcbiAgICAgIDxzZWN0aW9uIHJlZj17cmVmfSBjbGFzc05hbWU9XCJzZWN0aW9uLXBhZGRpbmcgYmctY3JlYW1cIj5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTZ4bCBteC1hdXRvIGdyaWQgZ3JpZC1jb2xzLTEgbGc6Z3JpZC1jb2xzLTIgZ2FwLTEyIGl0ZW1zLWNlbnRlclwiPlxyXG4gICAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB4OiAtNDAgfX0gYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHg6IDAgfSA6IHt9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX0+XHJcbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5PdXIgS2l0PC9wPlxyXG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtMnhsIG1kOnRleHQtM3hsIGZvbnQtc2VtaWJvbGQgbWItNlwiPlByZW1pdW0gUHJvZHVjdHMgJiBUb29sczwvaDI+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS00IGZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgbGVhZGluZy1yZWxheGVkXCI+XHJcbiAgICAgICAgICAgICAgPHA+V2UgdXNlIG9ubHkgdGhlIGJlc3QgaW50ZXJuYXRpb25hbCBicmFuZHMgaW5jbHVkaW5nIE1BQywgQm9iYmkgQnJvd24sIENoYXJsb3R0ZSBUaWxidXJ5LCBIdWRhIEJlYXV0eSwgYW5kIG1hbnkgbW9yZS4gT3VyIHByb2Zlc3Npb25hbCBhaXJicnVzaCBzeXN0ZW0gZW5zdXJlcyBmbGF3bGVzcywgbG9uZy1sYXN0aW5nIGNvdmVyYWdlLjwvcD5cclxuICAgICAgICAgICAgICA8cD5FdmVyeSB0b29sIGluIG91ciBraXQgaXMgc2FuaXRpemVkIGFuZCBtYWludGFpbmVkIHRvIHRoZSBoaWdoZXN0IHN0YW5kYXJkcy4gV2UgYmVsaWV2ZSB0aGF0IGdyZWF0IGFydGlzdHJ5IHN0YXJ0cyB3aXRoIGdyZWF0IHRvb2xzLjwvcD5cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBmbGV4LXdyYXAgZ2FwLTMgbXQtNlwiPlxyXG4gICAgICAgICAgICAgIHtbJ01BQycsICdCb2JiaSBCcm93bicsICdDaGFybG90dGUgVGlsYnVyeScsICdIdWRhIEJlYXV0eScsICdVcmJhbiBEZWNheScsICdOQVJTJ10ubWFwKChicmFuZCkgPT4gKFxyXG4gICAgICAgICAgICAgICAgPHNwYW4ga2V5PXticmFuZH0gY2xhc3NOYW1lPVwicHgtNCBweS0yIHRleHQteHMgZm9udC1ib2R5IHRyYWNraW5nLXdpZGUgYmctY2FyZCBib3JkZXIgYm9yZGVyLWJvcmRlciByb3VuZGVkLWZ1bGwgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+e2JyYW5kfTwvc3Bhbj5cclxuICAgICAgICAgICAgICApKX1cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgICA8bW90aW9uLmRpdiBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHg6IDQwIH19IGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB4OiAwIH0gOiB7fX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44LCBkZWxheTogMC4yIH19PlxyXG4gICAgICAgICAgICA8aW1nIHNyYz17bWFrZXVwVG9vbHN9IGFsdD1cIlByZW1pdW0gbWFrZXVwIHRvb2xzXCIgY2xhc3NOYW1lPVwicm91bmRlZC0yeGwgbHV4dXJ5LXNoYWRvdy1jYXJkIHctZnVsbFwiIC8+XHJcbiAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvc2VjdGlvbj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn07XHJcblxyXG5leHBvcnQgZGVmYXVsdCBBYm91dDtcclxuIl0sIm5hbWVzIjpbIm1vdGlvbiIsInVzZUluVmlldyIsInVzZUFuaW1hdGVkQ291bnRlciIsImFib3V0SW1nIiwibWFrZXVwVG9vbHMiLCJDb3VudGVySXRlbSIsImVuZCIsInN1ZmZpeCIsImxhYmVsIiwicmVmIiwiaXNJblZpZXciLCJjb3VudCIsImRpdiIsImNsYXNzTmFtZSIsInRvTG9jYWxlU3RyaW5nIiwicCIsIkFib3V0IiwicmVmMiIsImlzSW5WaWV3MiIsInNlY3Rpb24iLCJpbml0aWFsIiwib3BhY2l0eSIsInkiLCJhbmltYXRlIiwidHJhbnNpdGlvbiIsImR1cmF0aW9uIiwiaDEiLCJ4IiwiZGVsYXkiLCJpbWciLCJzcmMiLCJhbHQiLCJoMiIsInNwYW4iLCJtYXAiLCJicmFuZCJdLCJtYXBwaW5ncyI6Ijs7QUFBQSxTQUFTQSxNQUFNLFFBQVEsZ0JBQWdCO0FBQ3ZDLFNBQVNDLFNBQVMsRUFBRUMsa0JBQWtCLFFBQVEsd0JBQXdCO0FBQ3RFLE9BQU9DLGNBQWMsNEJBQTRCO0FBQ2pELE9BQU9DLGlCQUFpQiw0QkFBNEI7QUFFcEQsTUFBTUMsY0FBYyxDQUFDLEVBQUVDLEdBQUcsRUFBRUMsTUFBTSxFQUFFQyxLQUFLLEVBQWtEOztJQUN6RixNQUFNLEVBQUVDLEdBQUcsRUFBRUMsUUFBUSxFQUFFLEdBQUdUO0lBQzFCLE1BQU1VLFFBQVFULG1CQUFtQkksS0FBSyxNQUFNSTtJQUM1QyxxQkFDRSxRQUFDRTtRQUFJSCxLQUFLQTtRQUFLSSxXQUFVOzswQkFDdkIsUUFBQ0Q7Z0JBQUlDLFdBQVU7O29CQUE0REYsTUFBTUcsY0FBYztv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

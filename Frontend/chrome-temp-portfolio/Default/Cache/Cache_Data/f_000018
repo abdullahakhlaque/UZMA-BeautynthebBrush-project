@@ -1,0 +1,1034 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/admin/AdminDashboard.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];const useState = __vite__cjsImport1_react["useState"]; const useEffect = __vite__cjsImport1_react["useEffect"]; const useRef = __vite__cjsImport1_react["useRef"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { Image, FileText, LogOut, Trash2, Plus, Edit, Eye, X, Video } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { apiUrl, resolveMediaUrl } from "/src/lib/api.ts";
+import AdminLogin from "/src/pages/admin/AdminLogin.tsx";
+// Sniff media type from URL/base64 when mediaType field isn't set
+const sniffMediaType = (mediaUrl, mediaType)=>{
+    if (!mediaUrl) return null;
+    if (mediaType === 'video') return 'video';
+    if (mediaType === 'image') return 'image';
+    if (mediaUrl.startsWith('data:video')) return 'video';
+    if (mediaUrl.startsWith('data:image')) return 'image';
+    if (/\.(mp4|webm|ogg|mov)(\?|$)/i.test(mediaUrl)) return 'video';
+    return 'image'; // default
+};
+const AdminDashboard = ()=>{
+    _s();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [activeTab, setActiveTab] = useState('gallery');
+    // ── Gallery ──────────────────────────────────────────────
+    const [galleryImages, setGalleryImages] = useState([]);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [uploadType, setUploadType] = useState('image');
+    const [uploading, setUploading] = useState(false);
+    // ── Blog ─────────────────────────────────────────────────
+    const [blogPostList, setBlogPostList] = useState([]);
+    const [showBlogForm, setShowBlogForm] = useState(false);
+    const [editingPost, setEditingPost] = useState(null);
+    const [blogTitle, setBlogTitle] = useState('');
+    const [blogContent, setBlogContent] = useState('');
+    const [blogMedia, setBlogMedia] = useState(null);
+    const [blogSaving, setBlogSaving] = useState(false);
+    const blogMediaRef = useRef(null);
+    // ── Bookings ─────────────────────────────────────────────
+    const [bookings, setBookings] = useState([]);
+    // ── Fetch on mount ────────────────────────────────────────
+    useEffect(()=>{
+        fetchPortfolio();
+        fetchBlogs();
+        fetchBookings();
+    }, []);
+    const fetchPortfolio = ()=>{
+        fetch(apiUrl('/api/portfolio')).then((res)=>res.json()).then((data)=>{
+            const mapped = data.map((item)=>({
+                    id: item.id,
+                    url: item.url,
+                    type: item.type,
+                    date: item.createdAt?.split('T')[0] || ''
+                }));
+            setGalleryImages(mapped);
+        }).catch((err)=>console.error('Portfolio fetch error:', err));
+    };
+    const fetchBlogs = ()=>{
+        fetch(apiUrl('/api/blog')).then((res)=>res.json()).then((data)=>setBlogPostList(Array.isArray(data) ? data : [])).catch((err)=>console.error('Blog fetch error:', err));
+    };
+    const fetchBookings = ()=>{
+        fetch(apiUrl('/api/bookings')).then((res)=>res.json()).then((data)=>{
+            if (!Array.isArray(data)) {
+                setBookings([]);
+                return;
+            }
+            // Sort newest first — by createdAt if available, else by date field
+            const sorted = [
+                ...data
+            ].sort((a, b)=>{
+                const aTime = new Date(a.createdAt || a.date || 0).getTime();
+                const bTime = new Date(b.createdAt || b.date || 0).getTime();
+                return bTime - aTime; // descending = newest first
+            });
+            setBookings(sorted);
+        }).catch((err)=>console.error('Bookings fetch error:', err));
+    };
+    if (!isLoggedIn) {
+        return /*#__PURE__*/ _jsxDEV(AdminLogin, {
+            onLogin: ()=>setIsLoggedIn(true)
+        }, void 0, false, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+            lineNumber: 119,
+            columnNumber: 12
+        }, this);
+    }
+    // ── Gallery handlers ──────────────────────────────────────
+    const handleImageUpload = (e)=>{
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const fileType = file.type.startsWith('video') ? 'video' : 'image';
+        setUploadType(fileType);
+        const reader = new FileReader();
+        reader.onloadend = ()=>setPreviewImage(reader.result);
+        reader.readAsDataURL(file);
+    };
+    const confirmUpload = async ()=>{
+        if (!previewImage) return;
+        setUploading(true);
+        try {
+            const res = await fetch(apiUrl('/api/portfolio'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    url: previewImage,
+                    type: uploadType
+                })
+            });
+            const data = await res.json();
+            if (data.error) {
+                alert('Upload failed: ' + data.error);
+                return;
+            }
+            setGalleryImages((prev)=>[
+                    {
+                        id: data.id,
+                        url: data.url,
+                        type: data.type,
+                        date: data.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0]
+                    },
+                    ...prev
+                ]);
+            setPreviewImage(null);
+            alert('Uploaded successfully ✅');
+        } catch (err) {
+            console.error(err);
+            alert('Upload failed — is the server running?');
+        } finally{
+            setUploading(false);
+        }
+    };
+    const deleteImage = async (id)=>{
+        if (!confirm('Delete this item?')) return;
+        try {
+            await fetch(apiUrl(`/api/portfolio/${id}`), {
+                method: 'DELETE'
+            });
+            setGalleryImages((prev)=>prev.filter((img)=>img.id !== id));
+        } catch (err) {
+            console.error(err);
+            alert('Delete failed');
+        }
+    };
+    // ── Blog media handler ────────────────────────────────────
+    const handleBlogMediaUpload = (e)=>{
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const type = file.type.startsWith('video') ? 'video' : 'image';
+        const reader = new FileReader();
+        reader.onloadend = ()=>setBlogMedia({
+                url: reader.result,
+                type
+            });
+        reader.readAsDataURL(file);
+    };
+    const resetBlogForm = ()=>{
+        setBlogTitle('');
+        setBlogContent('');
+        setBlogMedia(null);
+        setEditingPost(null);
+        setShowBlogForm(false);
+        if (blogMediaRef.current) blogMediaRef.current.value = '';
+    };
+    // ── Blog save (create + update) ───────────────────────────
+    const saveBlogPost = async ()=>{
+        if (!blogTitle.trim() || !blogContent.trim()) {
+            alert('Title and content are required.');
+            return;
+        }
+        setBlogSaving(true);
+        const payload = {
+            title: blogTitle.trim(),
+            content: blogContent.trim(),
+            mediaUrl: blogMedia?.url ?? null,
+            mediaType: blogMedia?.type ?? null
+        };
+        try {
+            const url = editingPost ? apiUrl(`/api/blog/${editingPost.id}`) : apiUrl('/api/blog');
+            const method = editingPost ? 'PUT' : 'POST';
+            const res = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                const text = await res.text();
+                console.error('Server error:', text);
+                alert(`Server error ${res.status} — check your backend has the Blog model and /api/blog routes.`);
+                return;
+            }
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            fetchBlogs();
+            resetBlogForm();
+        } catch (err) {
+            console.error(err);
+            alert('Could not reach server. Make sure the backend is running and has Blog routes.');
+        } finally{
+            setBlogSaving(false);
+        }
+    };
+    const editPost = (post)=>{
+        setEditingPost(post);
+        setBlogTitle(post.title);
+        setBlogContent(post.content);
+        if (post.mediaUrl) {
+            const type = sniffMediaType(post.mediaUrl, post.mediaType);
+            setBlogMedia(type ? {
+                url: post.mediaUrl,
+                type
+            } : null);
+        } else {
+            setBlogMedia(null);
+        }
+        setShowBlogForm(true);
+    };
+    const deletePost = async (id)=>{
+        if (!confirm('Delete this blog post?')) return;
+        try {
+            const res = await fetch(apiUrl(`/api/blog/${id}`), {
+                method: 'DELETE'
+            });
+            if (!res.ok) {
+                alert('Delete failed');
+                return;
+            }
+            setBlogPostList((prev)=>prev.filter((post)=>post.id !== id));
+        } catch (err) {
+            console.error(err);
+            alert('Delete failed');
+        }
+    };
+    // ── Render ────────────────────────────────────────────────
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "min-h-screen bg-cream",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "bg-card border-b border-border sticky top-0 z-40",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-6xl mx-auto px-4 py-4 flex items-center justify-between",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("h1", {
+                            className: "font-heading text-xl font-semibold",
+                            children: "Admin Dashboard"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                            lineNumber: 269,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("button", {
+                            onClick: ()=>setIsLoggedIn(false),
+                            className: "flex items-center gap-2 text-sm",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(LogOut, {
+                                    className: "w-4 h-4"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                    lineNumber: 271,
+                                    columnNumber: 13
+                                }, this),
+                                " Logout"
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                            lineNumber: 270,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                    lineNumber: 268,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                lineNumber: 267,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "max-w-6xl mx-auto px-4 py-8",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "flex gap-4 mb-8",
+                        children: [
+                            {
+                                key: 'gallery',
+                                icon: Image,
+                                label: 'Portfolio'
+                            },
+                            {
+                                key: 'blog',
+                                icon: FileText,
+                                label: 'Blog'
+                            },
+                            {
+                                key: 'bookings',
+                                icon: Eye,
+                                label: 'Bookings'
+                            }
+                        ].map((tab)=>/*#__PURE__*/ _jsxDEV("button", {
+                                onClick: ()=>setActiveTab(tab.key),
+                                className: `flex items-center gap-2 px-5 py-2 rounded-full text-sm transition ${activeTab === tab.key ? 'bg-black text-white' : 'border'}`,
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV(tab.icon, {
+                                        className: "w-4 h-4"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 292,
+                                        columnNumber: 15
+                                    }, this),
+                                    tab.label
+                                ]
+                            }, tab.key, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 285,
+                                columnNumber: 13
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                        lineNumber: 279,
+                        columnNumber: 9
+                    }, this),
+                    activeTab === 'gallery' && /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1
+                        },
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "mb-6 p-4 border-2 border-dashed rounded-xl",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("p", {
+                                        className: "text-sm text-gray-500 mb-3",
+                                        children: "Upload image or video to Portfolio"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 302,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("input", {
+                                        type: "file",
+                                        accept: "image/*,video/*",
+                                        onChange: handleImageUpload,
+                                        className: "mb-3"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 303,
+                                        columnNumber: 15
+                                    }, this),
+                                    previewImage && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "mt-4",
+                                        children: [
+                                            uploadType === 'image' ? /*#__PURE__*/ _jsxDEV("img", {
+                                                src: resolveMediaUrl(previewImage),
+                                                className: "h-40 rounded object-cover",
+                                                alt: "Preview"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 307,
+                                                columnNumber: 23
+                                            }, this) : /*#__PURE__*/ _jsxDEV("video", {
+                                                src: resolveMediaUrl(previewImage),
+                                                className: "h-40 rounded",
+                                                controls: true
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 308,
+                                                columnNumber: 23
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "mt-3 flex gap-3",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: confirmUpload,
+                                                        disabled: uploading,
+                                                        className: "px-4 py-2 bg-black text-white rounded disabled:opacity-50",
+                                                        children: uploading ? 'Uploading...' : 'Save to Portfolio'
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 310,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>setPreviewImage(null),
+                                                        className: "px-4 py-2 border rounded",
+                                                        children: "Cancel"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 314,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 309,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 305,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 301,
+                                columnNumber: 13
+                            }, this),
+                            galleryImages.length === 0 ? /*#__PURE__*/ _jsxDEV("p", {
+                                className: "text-gray-400 text-sm",
+                                children: "No portfolio items yet."
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 323,
+                                columnNumber: 17
+                            }, this) : /*#__PURE__*/ _jsxDEV("div", {
+                                className: "grid grid-cols-2 md:grid-cols-3 gap-4",
+                                children: galleryImages.map((img)=>/*#__PURE__*/ _jsxDEV("div", {
+                                        className: "relative group",
+                                        children: [
+                                            img.type === 'video' ? /*#__PURE__*/ _jsxDEV("video", {
+                                                src: resolveMediaUrl(img.url),
+                                                className: "h-40 w-full object-cover rounded",
+                                                muted: true
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 329,
+                                                columnNumber: 27
+                                            }, this) : /*#__PURE__*/ _jsxDEV("img", {
+                                                src: resolveMediaUrl(img.url),
+                                                className: "h-40 w-full object-cover rounded",
+                                                alt: "Portfolio item"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 330,
+                                                columnNumber: 27
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                onClick: ()=>deleteImage(img.id),
+                                                className: "absolute top-2 right-2 bg-red-500 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition",
+                                                children: /*#__PURE__*/ _jsxDEV(Trash2, {
+                                                    size: 14
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 333,
+                                                    columnNumber: 25
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 331,
+                                                columnNumber: 23
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "text-xs text-gray-400 mt-1",
+                                                children: [
+                                                    img.type,
+                                                    " · ",
+                                                    img.date
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 335,
+                                                columnNumber: 23
+                                            }, this)
+                                        ]
+                                    }, img.id, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 327,
+                                        columnNumber: 21
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 325,
+                                columnNumber: 17
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                        lineNumber: 300,
+                        columnNumber: 11
+                    }, this),
+                    activeTab === 'blog' && /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1
+                        },
+                        children: [
+                            showBlogForm ? /*#__PURE__*/ _jsxDEV("div", {
+                                className: "mb-6 p-5 border rounded-xl space-y-4",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "flex items-center justify-between",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h3", {
+                                                className: "font-semibold",
+                                                children: editingPost ? 'Edit Post' : 'New Post'
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 350,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                onClick: resetBlogForm,
+                                                children: /*#__PURE__*/ _jsxDEV(X, {
+                                                    size: 16
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 351,
+                                                    columnNumber: 51
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 351,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 349,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("input", {
+                                        type: "text",
+                                        placeholder: "Post title",
+                                        value: blogTitle,
+                                        onChange: (e)=>setBlogTitle(e.target.value),
+                                        className: "w-full border p-2 rounded text-sm"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 354,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("textarea", {
+                                        placeholder: "Write your post content here...",
+                                        value: blogContent,
+                                        onChange: (e)=>setBlogContent(e.target.value),
+                                        rows: 6,
+                                        className: "w-full border p-2 rounded text-sm"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 362,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "border-2 border-dashed rounded-xl p-4",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "text-xs text-gray-500 mb-2 flex items-center gap-1",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV(Image, {
+                                                        size: 13
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 373,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    " ",
+                                                    /*#__PURE__*/ _jsxDEV(Video, {
+                                                        size: 13
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 373,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    " Attach image or video to this post (optional)"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 372,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("input", {
+                                                ref: blogMediaRef,
+                                                type: "file",
+                                                accept: "image/*,video/*",
+                                                onChange: handleBlogMediaUpload,
+                                                className: "text-sm"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 375,
+                                                columnNumber: 19
+                                            }, this),
+                                            blogMedia && /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "mt-3 relative inline-block",
+                                                children: [
+                                                    blogMedia.type === 'image' ? /*#__PURE__*/ _jsxDEV("img", {
+                                                        src: resolveMediaUrl(blogMedia.url),
+                                                        className: "h-36 rounded object-cover",
+                                                        alt: "Blog media"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 386,
+                                                        columnNumber: 27
+                                                    }, this) : /*#__PURE__*/ _jsxDEV("video", {
+                                                        src: resolveMediaUrl(blogMedia.url),
+                                                        className: "h-36 rounded",
+                                                        controls: true
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 387,
+                                                        columnNumber: 27
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>{
+                                                            setBlogMedia(null);
+                                                            if (blogMediaRef.current) blogMediaRef.current.value = '';
+                                                        },
+                                                        className: "absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5",
+                                                        children: /*#__PURE__*/ _jsxDEV(X, {
+                                                            size: 12
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                            lineNumber: 392,
+                                                            columnNumber: 25
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 388,
+                                                        columnNumber: 23
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 384,
+                                                columnNumber: 21
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 371,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "flex gap-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                onClick: saveBlogPost,
+                                                disabled: blogSaving,
+                                                className: "bg-black text-white px-5 py-2 rounded disabled:opacity-50 text-sm",
+                                                children: blogSaving ? 'Saving...' : editingPost ? 'Update Post' : 'Publish Post'
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 399,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                onClick: resetBlogForm,
+                                                className: "border px-4 py-2 rounded text-sm",
+                                                children: "Cancel"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 406,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 398,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 348,
+                                columnNumber: 15
+                            }, this) : /*#__PURE__*/ _jsxDEV("button", {
+                                onClick: ()=>setShowBlogForm(true),
+                                className: "mb-6 flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV(Plus, {
+                                        size: 14
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 416,
+                                        columnNumber: 17
+                                    }, this),
+                                    " New Post"
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 412,
+                                columnNumber: 15
+                            }, this),
+                            blogPostList.length === 0 ? /*#__PURE__*/ _jsxDEV("p", {
+                                className: "text-gray-400 text-sm",
+                                children: "No blog posts yet."
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                lineNumber: 421,
+                                columnNumber: 15
+                            }, this) : blogPostList.map((post)=>{
+                                const mediaType = sniffMediaType(post.mediaUrl, post.mediaType);
+                                const postDate = post.createdAt || post.date;
+                                return /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "border p-4 mb-3 rounded-xl",
+                                    children: /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "flex justify-between items-start gap-4",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "flex gap-3 items-start",
+                                                children: [
+                                                    mediaType === 'image' && /*#__PURE__*/ _jsxDEV("img", {
+                                                        src: resolveMediaUrl(post.mediaUrl),
+                                                        className: "w-16 h-16 object-cover rounded flex-shrink-0",
+                                                        alt: ""
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 432,
+                                                        columnNumber: 27
+                                                    }, this),
+                                                    mediaType === 'video' && /*#__PURE__*/ _jsxDEV("video", {
+                                                        src: resolveMediaUrl(post.mediaUrl),
+                                                        className: "w-16 h-16 object-cover rounded flex-shrink-0",
+                                                        muted: true
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 439,
+                                                        columnNumber: 27
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("h3", {
+                                                                className: "font-semibold text-sm",
+                                                                children: post.title
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                                lineNumber: 446,
+                                                                columnNumber: 27
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "text-xs text-gray-500 mt-1 line-clamp-2",
+                                                                children: post.content
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                                lineNumber: 447,
+                                                                columnNumber: 27
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "text-xs text-gray-400 mt-1",
+                                                                children: [
+                                                                    postDate ? new Date(postDate).toLocaleDateString('en-IN', {
+                                                                        day: 'numeric',
+                                                                        month: 'short',
+                                                                        year: 'numeric'
+                                                                    }) : '',
+                                                                    mediaType && /*#__PURE__*/ _jsxDEV("span", {
+                                                                        className: "ml-2 capitalize text-gray-300",
+                                                                        children: [
+                                                                            "· ",
+                                                                            mediaType
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                                        lineNumber: 450,
+                                                                        columnNumber: 43
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                                lineNumber: 448,
+                                                                columnNumber: 27
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 445,
+                                                        columnNumber: 25
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 429,
+                                                columnNumber: 23
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "flex gap-2 shrink-0",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>editPost(post),
+                                                        className: "p-1 text-gray-400 hover:text-black",
+                                                        children: /*#__PURE__*/ _jsxDEV(Edit, {
+                                                            size: 14
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                            lineNumber: 456,
+                                                            columnNumber: 27
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 455,
+                                                        columnNumber: 25
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>deletePost(post.id),
+                                                        className: "p-1 text-gray-400 hover:text-red-500",
+                                                        children: /*#__PURE__*/ _jsxDEV(Trash2, {
+                                                            size: 14
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                            lineNumber: 459,
+                                                            columnNumber: 27
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                        lineNumber: 458,
+                                                        columnNumber: 25
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                lineNumber: 454,
+                                                columnNumber: 23
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                        lineNumber: 428,
+                                        columnNumber: 21
+                                    }, this)
+                                }, post.id, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                    lineNumber: 427,
+                                    columnNumber: 19
+                                }, this);
+                            })
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                        lineNumber: 345,
+                        columnNumber: 11
+                    }, this),
+                    activeTab === 'bookings' && /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1
+                        },
+                        children: bookings.length === 0 ? /*#__PURE__*/ _jsxDEV("p", {
+                            className: "text-gray-400 text-sm",
+                            children: "No bookings yet."
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                            lineNumber: 474,
+                            columnNumber: 15
+                        }, this) : /*#__PURE__*/ _jsxDEV("div", {
+                            className: "space-y-4",
+                            children: bookings.map((b, index)=>/*#__PURE__*/ _jsxDEV("div", {
+                                    className: "bg-card p-4 rounded-xl shadow border",
+                                    children: [
+                                        index === 0 && /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-2",
+                                            style: {
+                                                background: 'hsl(350,40%,95%)',
+                                                color: 'hsl(350,40%,48%)'
+                                            },
+                                            children: "Most Recent"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 482,
+                                            columnNumber: 23
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("b", {
+                                                    children: "Name:"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 487,
+                                                    columnNumber: 24
+                                                }, this),
+                                                " ",
+                                                b.name
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 487,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("b", {
+                                                    children: "Phone:"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 488,
+                                                    columnNumber: 24
+                                                }, this),
+                                                " ",
+                                                b.phone
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 488,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("b", {
+                                                    children: "Service:"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 489,
+                                                    columnNumber: 24
+                                                }, this),
+                                                " ",
+                                                b.service
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 489,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("b", {
+                                                    children: "Date:"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 490,
+                                                    columnNumber: 24
+                                                }, this),
+                                                " ",
+                                                new Date(b.date).toLocaleDateString('en-IN', {
+                                                    day: 'numeric',
+                                                    month: 'short',
+                                                    year: 'numeric'
+                                                })
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 490,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("b", {
+                                                    children: "Time:"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                                    lineNumber: 491,
+                                                    columnNumber: 24
+                                                }, this),
+                                                " ",
+                                                b.timeSlot
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 491,
+                                            columnNumber: 21
+                                        }, this),
+                                        b.createdAt && /*#__PURE__*/ _jsxDEV("p", {
+                                            className: "text-xs text-gray-400 mt-1",
+                                            children: [
+                                                "Booked: ",
+                                                new Date(b.createdAt).toLocaleString('en-IN', {
+                                                    day: 'numeric',
+                                                    month: 'short',
+                                                    hour: '2-digit',
+                                                    minute: '2-digit'
+                                                })
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                            lineNumber: 493,
+                                            columnNumber: 23
+                                        }, this)
+                                    ]
+                                }, b.id, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                                    lineNumber: 479,
+                                    columnNumber: 19
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                            lineNumber: 476,
+                            columnNumber: 15
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                        lineNumber: 472,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+                lineNumber: 276,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx",
+        lineNumber: 264,
+        columnNumber: 5
+    }, this);
+};
+_s(AdminDashboard, "r2bppMU4JZ5VF960y7vGs328ybI=");
+_c = AdminDashboard;
+export default AdminDashboard;
+var _c;
+$RefreshReg$(_c, "AdminDashboard");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/admin/AdminDashboard.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkFkbWluRGFzaGJvYXJkLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB1c2VTdGF0ZSwgdXNlRWZmZWN0LCB1c2VSZWYgfSBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ2ZyYW1lci1tb3Rpb24nO1xyXG5pbXBvcnQgeyBJbWFnZSwgRmlsZVRleHQsIExvZ091dCwgVHJhc2gyLCBQbHVzLCBFZGl0LCBFeWUsIFgsIFZpZGVvIH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcclxuaW1wb3J0IHsgYXBpVXJsLCByZXNvbHZlTWVkaWFVcmwgfSBmcm9tICdAL2xpYi9hcGknO1xyXG5pbXBvcnQgQWRtaW5Mb2dpbiBmcm9tICcuL0FkbWluTG9naW4nO1xyXG5cclxuaW50ZXJmYWNlIEdhbGxlcnlJbWFnZSB7XHJcbiAgaWQ6IHN0cmluZztcclxuICB1cmw6IHN0cmluZztcclxuICB0eXBlOiBzdHJpbmc7XHJcbiAgZGF0ZTogc3RyaW5nO1xyXG59XHJcblxyXG5pbnRlcmZhY2UgQmxvZ01lZGlhIHtcclxuICB1cmw6IHN0cmluZztcclxuICB0eXBlOiAnaW1hZ2UnIHwgJ3ZpZGVvJztcclxufVxyXG5cclxuaW50ZXJmYWNlIEJsb2dQb3N0IHtcclxuICBpZDogc3RyaW5nO1xyXG4gIHRpdGxlOiBzdHJpbmc7XHJcbiAgY29udGVudDogc3RyaW5nO1xyXG4gIGRhdGU6IHN0cmluZztcclxuICBjcmVhdGVkQXQ/OiBzdHJpbmc7XHJcbiAgbWVkaWFVcmw/OiBzdHJpbmc7XHJcbiAgbWVkaWFUeXBlPzogJ2ltYWdlJyB8ICd2aWRlbyc7XHJcbn1cclxuXHJcbmludGVyZmFjZSBCb29raW5nIHtcclxuICBpZDogc3RyaW5nO1xyXG4gIG5hbWU6IHN0cmluZztcclxuICBwaG9uZTogc3RyaW5nO1xyXG4gIHNlcnZpY2U6IHN0cmluZztcclxuICBkYXRlOiBzdHJpbmc7XHJcbiAgdGltZVNsb3Q6IHN0cmluZztcclxuICBjcmVhdGVkQXQ/OiBzdHJpbmc7XHJcbn1cclxuXHJcbi8vIFNuaWZmIG1lZGlhIHR5cGUgZnJvbSBVUkwvYmFzZTY0IHdoZW4gbWVkaWFUeXBlIGZpZWxkIGlzbid0IHNldFxyXG5jb25zdCBzbmlmZk1lZGlhVHlwZSA9IChtZWRpYVVybD86IHN0cmluZywgbWVkaWFUeXBlPzogJ2ltYWdlJyB8ICd2aWRlbycpOiAnaW1hZ2UnIHwgJ3ZpZGVvJyB8IG51bGwgPT4ge1xyXG4gIGlmICghbWVkaWFVcmwpIHJldHVybiBudWxsO1xyXG4gIGlmIChtZWRpYVR5cGUgPT09ICd2aWRlbycpIHJldHVybiAndmlkZW8nO1xyXG4gIGlmIChtZWRpYVR5cGUgPT09ICdpbWFnZScpIHJldHVybiAnaW1hZ2UnO1xyXG4gIGlmIChtZWRpYVVybC5zdGFydHNXaXRoKCdkYXRhOnZpZGVvJykpIHJldHVybiAndmlkZW8nO1xyXG4gIGlmIChtZWRpYVVybC5zdGFydHNXaXRoKCdkYXRhOmltYWdlJykpIHJldHVybiAnaW1hZ2UnO1xyXG4gIGlmICgvXFwuKG1wNHx3ZWJtfG9nZ3xtb3YpKFxcP3wkKS9pLnRlc3QobWVkaWFVcmwpKSByZXR1cm4gJ3ZpZGVvJztcclxuICByZXR1cm4gJ2ltYWdlJzsgLy8gZGVmYXVsdFxyXG59O1xyXG5cclxuY29uc3QgQWRtaW5EYXNoYm9hcmQgPSAoKSA9PiB7XHJcbiAgY29uc3QgW2lzTG9nZ2VkSW4sIHNldElzTG9nZ2VkSW5dID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFthY3RpdmVUYWIsIHNldEFjdGl2ZVRhYl0gPSB1c2VTdGF0ZTwnZ2FsbGVyeScgfCAnYmxvZycgfCAnYm9va2luZ3MnPignZ2FsbGVyeScpO1xyXG5cclxuICAvLyDilIDilIAgR2FsbGVyeSDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuICBjb25zdCBbZ2FsbGVyeUltYWdlcywgc2V0R2FsbGVyeUltYWdlc10gPSB1c2VTdGF0ZTxHYWxsZXJ5SW1hZ2VbXT4oW10pO1xyXG4gIGNvbnN0IFtwcmV2aWV3SW1hZ2UsIHNldFByZXZpZXdJbWFnZV0gPSB1c2VTdGF0ZTxzdHJpbmcgfCBudWxsPihudWxsKTtcclxuICBjb25zdCBbdXBsb2FkVHlwZSwgc2V0VXBsb2FkVHlwZV0gPSB1c2VTdGF0ZTwnaW1hZ2UnIHwgJ3ZpZGVvJz4oJ2ltYWdlJyk7XHJcbiAgY29uc3QgW3VwbG9hZGluZywgc2V0VXBsb2FkaW5nXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuXHJcbiAgLy8g4pSA4pSAIEJsb2cg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbiAgY29uc3QgW2Jsb2dQb3N0TGlzdCwgc2V0QmxvZ1Bvc3RMaXN0XSA9IHVzZVN0YXRlPEJsb2dQb3N0W10+KFtdKTtcclxuICBjb25zdCBbc2hvd0Jsb2dGb3JtLCBzZXRTaG93QmxvZ0Zvcm1dID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFtlZGl0aW5nUG9zdCwgc2V0RWRpdGluZ1Bvc3RdID0gdXNlU3RhdGU8QmxvZ1Bvc3QgfCBudWxsPihudWxsKTtcclxuICBjb25zdCBbYmxvZ1RpdGxlLCBzZXRCbG9nVGl0bGVdID0gdXNlU3RhdGUoJycpO1xyXG4gIGNvbnN0IFtibG9nQ29udGVudCwgc2V0QmxvZ0NvbnRlbnRdID0gdXNlU3RhdGUoJycpO1xyXG4gIGNvbnN0IFtibG9nTWVkaWEsIHNldEJsb2dNZWRpYV0gPSB1c2VTdGF0ZTxCbG9nTWVkaWEgfCBudWxsPihudWxsKTtcclxuICBjb25zdCBbYmxvZ1NhdmluZywgc2V0QmxvZ1NhdmluZ10gPSB1c2VTdGF0ZShmYWxzZSk7XHJcbiAgY29uc3QgYmxvZ01lZGlhUmVmID0gdXNlUmVmPEhUTUxJbnB1dEVsZW1lbnQ+KG51bGwpO1xyXG5cclxuICAvLyDilIDilIAgQm9va2luZ3Mg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbiAgY29uc3QgW2Jvb2tpbmdzLCBzZXRCb29raW5nc10gPSB1c2VTdGF0ZTxCb29raW5nW10+KFtdKTtcclxuXHJcbiAgLy8g4pSA4pSAIEZldGNoIG9uIG1vdW50IOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4gIHVzZUVmZmVjdCgoKSA9PiB7XHJcbiAgICBmZXRjaFBvcnRmb2xpbygpO1xyXG4gICAgZmV0Y2hCbG9ncygpO1xyXG4gICAgZmV0Y2hCb29raW5ncygpO1xyXG4gIH0sIFtdKTtcclxuXHJcbiAgY29uc3QgZmV0Y2hQb3J0Zm9saW8gPSAoKSA9PiB7XHJcbiAgICBmZXRjaChhcGlVcmwoJy9hcGkvcG9ydGZvbGlvJykpXHJcbiAgICAgIC50aGVuKHJlcyA9PiByZXMuanNvbigpKVxyXG4gICAgICAudGhlbihkYXRhID0+IHtcclxuICAgICAgICBjb25zdCBtYXBwZWQgPSBkYXRhLm1hcCgoaXRlbTogYW55KSA9PiAoe1xyXG4gICAgICAgICAgaWQ6IGl0ZW0uaWQsXHJcbiAgICAgICAgICB1cmw6IGl0ZW0udXJsLFxyXG4gICAgICAgICAgdHlwZTogaXRlbS50eXBlLFxyXG4gICAgICAgICAgZGF0ZTogaXRlbS5jcmVhdGVkQXQ/LnNwbGl0KCdUJylbMF0gfHwgJycsXHJcbiAgICAgICAgfSkpO1xyXG4gICAgICAgIHNldEdhbGxlcnlJbWFnZXMobWFwcGVkKTtcclxuICAgICAgfSlcclxuICAgICAgLmNhdGNoKGVyciA9PiBjb25zb2xlLmVycm9yKCdQb3J0Zm9saW8gZmV0Y2ggZXJyb3I6JywgZXJyKSk7XHJcbiAgfTtcclxuXHJcbiAgY29uc3QgZmV0Y2hCbG9ncyA9ICgpID0+IHtcclxuICAgIGZldGNoKGFwaVVybCgnL2FwaS9ibG9nJykpXHJcbiAgICAgIC50aGVuKHJlcyA9PiByZXMuanNvbigpKVxyXG4gICAgICAudGhlbihkYXRhID0+IHNldEJsb2dQb3N0TGlzdChBcnJheS5pc0FycmF5KGRhdGEpID8gZGF0YSA6IFtdKSlcclxuICAgICAgLmNhdGNoKGVyciA9PiBjb25zb2xlLmVycm9yKCdCbG9nIGZldGNoIGVycm9yOicsIGVycikpO1xyXG4gIH07XHJcblxyXG4gIGNvbnN0IGZldGNoQm9va2luZ3MgPSAoKSA9PiB7XHJcbiAgICBmZXRjaChhcGlVcmwoJy9hcGkvYm9va2luZ3MnKSlcclxuICAgICAgLnRoZW4ocmVzID0+IHJlcy5qc29uKCkpXHJcbiAgICAgIC50aGVuKGRhdGEgPT4ge1xyXG4gICAgICAgIGlmICghQXJyYXkuaXNBcnJheShkYXRhKSkgeyBzZXRCb29raW5ncyhbXSk7IHJldHVybjsgfVxyXG4gICAgICAgIC8vIFNvcnQgbmV3ZXN0IGZpcnN0IOKAlCBieSBjcmVhdGVkQXQgaWYgYXZhaWxhYmxlLCBlbHNlIGJ5IGRhdGUgZmllbGRcclxuICAgICAgICBjb25zdCBzb3J0ZWQgPSBbLi4uZGF0YV0uc29ydCgoYSwgYikgPT4ge1xyXG4gICAgICAgICAgY29uc3QgYVRpbWUgPSBuZXcgRGF0ZShhLmNyZWF0ZWRBdCB8fCBhLmRhdGUgfHwgMCkuZ2V0VGltZSgpO1xyXG4gICAgICAgICAgY29uc3QgYlRpbWUgPSBuZXcgRGF0ZShiLmNyZWF0ZWRBdCB8fCBiLmRhdGUgfHwgMCkuZ2V0VGltZSgpO1xyXG4gICAgICAgICAgcmV0dXJuIGJUaW1lIC0gYVRpbWU7IC8vIGRlc2NlbmRpbmcgPSBuZXdlc3QgZmlyc3RcclxuICAgICAgICB9KTtcclxuICAgICAgICBzZXRCb29raW5ncyhzb3J0ZWQpO1xyXG4gICAgICB9KVxyXG4gICAgICAuY2F0Y2goZXJyID0+IGNvbnNvbGUuZXJyb3IoJ0Jvb2tpbmdzIGZldGNoIGVycm9yOicsIGVycikpO1xyXG4gIH07XHJcblxyXG4gIGlmICghaXNMb2dnZWRJbikge1xyXG4gICAgcmV0dXJuIDxBZG1pbkxvZ2luIG9uTG9naW49eygpID0+IHNldElzTG9nZ2VkSW4odHJ1ZSl9IC8+O1xyXG4gIH1cclxuXHJcbiAgLy8g4pSA4pSAIEdhbGxlcnkgaGFuZGxlcnMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbiAgY29uc3QgaGFuZGxlSW1hZ2VVcGxvYWQgPSAoZTogUmVhY3QuQ2hhbmdlRXZlbnQ8SFRNTElucHV0RWxlbWVudD4pID0+IHtcclxuICAgIGNvbnN0IGZpbGUgPSBlLnRhcmdldC5maWxlcz8uWzBdO1xyXG4gICAgaWYgKCFmaWxlKSByZXR1cm47XHJcbiAgICBjb25zdCBmaWxlVHlwZSA9IGZpbGUudHlwZS5zdGFydHNXaXRoKCd2aWRlbycpID8gJ3ZpZGVvJyA6ICdpbWFnZSc7XHJcbiAgICBzZXRVcGxvYWRUeXBlKGZpbGVUeXBlKTtcclxuICAgIGNvbnN0IHJlYWRlciA9IG5ldyBGaWxlUmVhZGVyKCk7XHJcbiAgICByZWFkZXIub25sb2FkZW5kID0gKCkgPT4gc2V0UHJldmlld0ltYWdlKHJlYWRlci5yZXN1bHQgYXMgc3RyaW5nKTtcclxuICAgIHJlYWRlci5yZWFkQXNEYXRhVVJMKGZpbGUpO1xyXG4gIH07XHJcblxyXG4gIGNvbnN0IGNvbmZpcm1VcGxvYWQgPSBhc3luYyAoKSA9PiB7XHJcbiAgICBpZiAoIXByZXZpZXdJbWFnZSkgcmV0dXJuO1xyXG4gICAgc2V0VXBsb2FkaW5nKHRydWUpO1xyXG4gICAgdHJ5IHtcclxuICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goYXBpVXJsKCcvYXBpL3BvcnRmb2xpbycpLCB7XHJcbiAgICAgICAgbWV0aG9kOiAnUE9TVCcsXHJcbiAgICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sXHJcbiAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoeyB1cmw6IHByZXZpZXdJbWFnZSwgdHlwZTogdXBsb2FkVHlwZSB9KSxcclxuICAgICAgfSk7XHJcbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbigpO1xyXG4gICAgICBpZiAoZGF0YS5lcnJvcikgeyBhbGVydCgnVXBsb2FkIGZhaWxlZDogJyArIGRhdGEuZXJyb3IpOyByZXR1cm47IH1cclxuICAgICAgc2V0R2FsbGVyeUltYWdlcyhwcmV2ID0+IFt7XHJcbiAgICAgICAgaWQ6IGRhdGEuaWQsXHJcbiAgICAgICAgdXJsOiBkYXRhLnVybCxcclxuICAgICAgICB0eXBlOiBkYXRhLnR5cGUsXHJcbiAgICAgICAgZGF0ZTogZGF0YS5jcmVhdGVkQXQ/LnNwbGl0KCdUJylbMF0gfHwgbmV3IERhdGUoKS50b0lTT1N0cmluZygpLnNwbGl0KCdUJylbMF0sXHJcbiAgICAgIH0sIC4uLnByZXZdKTtcclxuICAgICAgc2V0UHJldmlld0ltYWdlKG51bGwpO1xyXG4gICAgICBhbGVydCgnVXBsb2FkZWQgc3VjY2Vzc2Z1bGx5IOKchScpO1xyXG4gICAgfSBjYXRjaCAoZXJyKSB7XHJcbiAgICAgIGNvbnNvbGUuZXJyb3IoZXJyKTtcclxuICAgICAgYWxlcnQoJ1VwbG9hZCBmYWlsZWQg4oCUIGlzIHRoZSBzZXJ2ZXIgcnVubmluZz8nKTtcclxuICAgIH0gZmluYWxseSB7XHJcbiAgICAgIHNldFVwbG9hZGluZyhmYWxzZSk7XHJcbiAgICB9XHJcbiAgfTtcclxuXHJcbiAgY29uc3QgZGVsZXRlSW1hZ2UgPSBhc3luYyAoaWQ6IHN0cmluZykgPT4ge1xyXG4gICAgaWYgKCFjb25maXJtKCdEZWxldGUgdGhpcyBpdGVtPycpKSByZXR1cm47XHJcbiAgICB0cnkge1xyXG4gICAgICBhd2FpdCBmZXRjaChhcGlVcmwoYC9hcGkvcG9ydGZvbGlvLyR7aWR9YCksIHsgbWV0aG9kOiAnREVMRVRFJyB9KTtcclxuICAgICAgc2V0R2FsbGVyeUltYWdlcyhwcmV2ID0+IHByZXYuZmlsdGVyKGltZyA9PiBpbWcuaWQgIT09IGlkKSk7XHJcbiAgICB9IGNhdGNoIChlcnIpIHtcclxuICAgICAgY29uc29sZS5lcnJvcihlcnIpO1xyXG4gICAgICBhbGVydCgnRGVsZXRlIGZhaWxlZCcpO1xyXG4gICAgfVxyXG4gIH07XHJcblxyXG4gIC8vIOKUgOKUgCBCbG9nIG1lZGlhIGhhbmRsZXIg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbiAgY29uc3QgaGFuZGxlQmxvZ01lZGlhVXBsb2FkID0gKGU6IFJlYWN0LkNoYW5nZUV2ZW50PEhUTUxJbnB1dEVsZW1lbnQ+KSA9PiB7XHJcbiAgICBjb25zdCBmaWxlID0gZS50YXJnZXQuZmlsZXM/LlswXTtcclxuICAgIGlmICghZmlsZSkgcmV0dXJuO1xyXG4gICAgY29uc3QgdHlwZSA9IGZpbGUudHlwZS5zdGFydHNXaXRoKCd2aWRlbycpID8gJ3ZpZGVvJyA6ICdpbWFnZSc7XHJcbiAgICBjb25zdCByZWFkZXIgPSBuZXcgRmlsZVJlYWRlcigpO1xyXG4gICAgcmVhZGVyLm9ubG9hZGVuZCA9ICgpID0+IHNldEJsb2dNZWRpYSh7IHVybDogcmVhZGVyLnJlc3VsdCBhcyBzdHJpbmcsIHR5cGUgfSk7XHJcbiAgICByZWFkZXIucmVhZEFzRGF0YVVSTChmaWxlKTtcclxuICB9O1xyXG5cclxuICBjb25zdCByZXNldEJsb2dGb3JtID0gKCkgPT4ge1xyXG4gICAgc2V0QmxvZ1RpdGxlKCcnKTtcclxuICAgIHNldEJsb2dDb250ZW50KCcnKTtcclxuICAgIHNldEJsb2dNZWRpYShudWxsKTtcclxuICAgIHNldEVkaXRpbmdQb3N0KG51bGwpO1xyXG4gICAgc2V0U2hvd0Jsb2dGb3JtKGZhbHNlKTtcclxuICAgIGlmIChibG9nTWVkaWFSZWYuY3VycmVudCkgYmxvZ01lZGlhUmVmLmN1cnJlbnQudmFsdWUgPSAnJztcclxuICB9O1xyXG5cclxuICAvLyDilIDilIAgQmxvZyBzYXZlIChjcmVhdGUgKyB1cGRhdGUpIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4gIGNvbnN0IHNhdmVCbG9nUG9zdCA9IGFzeW5jICgpID0+IHtcclxuICAgIGlmICghYmxvZ1RpdGxlLnRyaW0oKSB8fCAhYmxvZ0NvbnRlbnQudHJpbSgpKSB7XHJcbiAgICAgIGFsZXJ0KCdUaXRsZSBhbmQgY29udGVudCBhcmUgcmVxdWlyZWQuJyk7XHJcbiAgICAgIHJldHVybjtcclxuICAgIH1cclxuICAgIHNldEJsb2dTYXZpbmcodHJ1ZSk7XHJcblxyXG4gICAgY29uc3QgcGF5bG9hZCA9IHtcclxuICAgICAgdGl0bGU6IGJsb2dUaXRsZS50cmltKCksXHJcbiAgICAgIGNvbnRlbnQ6IGJsb2dDb250ZW50LnRyaW0oKSxcclxuICAgICAgbWVkaWFVcmw6IGJsb2dNZWRpYT8udXJsID8/IG51bGwsXHJcbiAgICAgIG1lZGlhVHlwZTogYmxvZ01lZGlhPy50eXBlID8/IG51bGwsXHJcbiAgICB9O1xyXG5cclxuICAgIHRyeSB7XHJcbiAgICAgIGNvbnN0IHVybCA9IGVkaXRpbmdQb3N0XHJcbiAgICAgICAgPyBhcGlVcmwoYC9hcGkvYmxvZy8ke2VkaXRpbmdQb3N0LmlkfWApXHJcbiAgICAgICAgOiBhcGlVcmwoJy9hcGkvYmxvZycpO1xyXG4gICAgICBjb25zdCBtZXRob2QgPSBlZGl0aW5nUG9zdCA/ICdQVVQnIDogJ1BPU1QnO1xyXG5cclxuICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2godXJsLCB7XHJcbiAgICAgICAgbWV0aG9kLFxyXG4gICAgICAgIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LFxyXG4gICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHBheWxvYWQpLFxyXG4gICAgICB9KTtcclxuXHJcbiAgICAgIGlmICghcmVzLm9rKSB7XHJcbiAgICAgICAgY29uc3QgdGV4dCA9IGF3YWl0IHJlcy50ZXh0KCk7XHJcbiAgICAgICAgY29uc29sZS5lcnJvcignU2VydmVyIGVycm9yOicsIHRleHQpO1xyXG4gICAgICAgIGFsZXJ0KGBTZXJ2ZXIgZXJyb3IgJHtyZXMuc3RhdHVzfSDigJQgY2hlY2sgeW91ciBiYWNrZW5kIGhhcyB0aGUgQmxvZyBtb2RlbCBhbmQgL2FwaS9ibG9nIHJvdXRlcy5gKTtcclxuICAgICAgICByZXR1cm47XHJcbiAgICAgIH1cclxuXHJcbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbigpO1xyXG4gICAgICBpZiAoZGF0YS5lcnJvcikgeyBhbGVydChkYXRhLmVycm9yKTsgcmV0dXJuOyB9XHJcblxyXG4gICAgICBmZXRjaEJsb2dzKCk7XHJcbiAgICAgIHJlc2V0QmxvZ0Zvcm0oKTtcclxuICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICBjb25zb2xlLmVycm9yKGVycik7XHJcbiAgICAgIGFsZXJ0KCdDb3VsZCBub3QgcmVhY2ggc2VydmVyLiBNYWtlIHN1cmUgdGhlIGJhY2tlbmQgaXMgcnVubmluZyBhbmQgaGFzIEJsb2cgcm91dGVzLicpO1xyXG4gICAgfSBmaW5hbGx5IHtcclxuICAgICAgc2V0QmxvZ1NhdmluZyhmYWxzZSk7XHJcbiAgICB9XHJcbiAgfTtcclxuXHJcbiAgY29uc3QgZWRpdFBvc3QgPSAocG9zdDogQmxvZ1Bvc3QpID0+IHtcclxuICAgIHNldEVkaXRpbmdQb3N0KHBvc3QpO1xyXG4gICAgc2V0QmxvZ1RpdGxlKHBvc3QudGl0bGUpO1xyXG4gICAgc2V0QmxvZ0NvbnRlbnQocG9zdC5jb250ZW50KTtcclxuICAgIGlmIChwb3N0Lm1lZGlhVXJsKSB7XHJcbiAgICAgIGNvbnN0IHR5cGUgPSBzbmlmZk1lZGlhVHlwZShwb3N0Lm1lZGlhVXJsLCBwb3N0Lm1lZGlhVHlwZSk7XHJcbiAgICAgIHNldEJsb2dNZWRpYSh0eXBlID8geyB1cmw6IHBvc3QubWVkaWFVcmwsIHR5cGUgfSA6IG51bGwpO1xyXG4gICAgfSBlbHNlIHtcclxuICAgICAgc2V0QmxvZ01lZGlhKG51bGwpO1xyXG4gICAgfVxyXG4gICAgc2V0U2hvd0Jsb2dGb3JtKHRydWUpO1xyXG4gIH07XHJcblxyXG4gIGNvbnN0IGRlbGV0ZVBvc3QgPSBhc3luYyAoaWQ6IHN0cmluZykgPT4ge1xyXG4gICAgaWYgKCFjb25maXJtKCdEZWxldGUgdGhpcyBibG9nIHBvc3Q/JykpIHJldHVybjtcclxuICAgIHRyeSB7XHJcbiAgICAgIGNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKGFwaVVybChgL2FwaS9ibG9nLyR7aWR9YCksIHsgbWV0aG9kOiAnREVMRVRFJyB9KTtcclxuICAgICAgaWYgKCFyZXMub2spIHsgYWxlcnQoJ0RlbGV0ZSBmYWlsZWQnKTsgcmV0dXJuOyB9XHJcbiAgICAgIHNldEJsb2dQb3N0TGlzdChwcmV2ID0+IHByZXYuZmlsdGVyKHBvc3QgPT4gcG9zdC5pZCAhPT0gaWQpKTtcclxuICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICBjb25zb2xlLmVycm9yKGVycik7XHJcbiAgICAgIGFsZXJ0KCdEZWxldGUgZmFpbGVkJyk7XHJcbiAgICB9XHJcbiAgfTtcclxuXHJcbiAgLy8g4pSA4pSAIFJlbmRlciDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gYmctY3JlYW1cIj5cclxuXHJcbiAgICAgIHsvKiBIRUFERVIgKi99XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctY2FyZCBib3JkZXItYiBib3JkZXItYm9yZGVyIHN0aWNreSB0b3AtMCB6LTQwXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy02eGwgbXgtYXV0byBweC00IHB5LTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuXCI+XHJcbiAgICAgICAgICA8aDEgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQteGwgZm9udC1zZW1pYm9sZFwiPkFkbWluIERhc2hib2FyZDwvaDE+XHJcbiAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IHNldElzTG9nZ2VkSW4oZmFsc2UpfSBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LXNtXCI+XHJcbiAgICAgICAgICAgIDxMb2dPdXQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+IExvZ291dFxyXG4gICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy02eGwgbXgtYXV0byBweC00IHB5LThcIj5cclxuXHJcbiAgICAgICAgey8qIFRBQlMgKi99XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGdhcC00IG1iLThcIj5cclxuICAgICAgICAgIHtbXHJcbiAgICAgICAgICAgIHsga2V5OiAnZ2FsbGVyeScgYXMgY29uc3QsIGljb246IEltYWdlLCBsYWJlbDogJ1BvcnRmb2xpbycgfSxcclxuICAgICAgICAgICAgeyBrZXk6ICdibG9nJyBhcyBjb25zdCwgaWNvbjogRmlsZVRleHQsIGxhYmVsOiAnQmxvZycgfSxcclxuICAgICAgICAgICAgeyBrZXk6ICdib29raW5ncycgYXMgY29uc3QsIGljb246IEV5ZSwgbGFiZWw6ICdCb29raW5ncycgfSxcclxuICAgICAgICAgIF0ubWFwKHRhYiA9PiAoXHJcbiAgICAgICAgICAgIDxidXR0b25cclxuICAgICAgICAgICAgICBrZXk9e3RhYi5rZXl9XHJcbiAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2V0QWN0aXZlVGFiKHRhYi5rZXkpfVxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT17YGZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHB4LTUgcHktMiByb3VuZGVkLWZ1bGwgdGV4dC1zbSB0cmFuc2l0aW9uICR7XHJcbiAgICAgICAgICAgICAgICBhY3RpdmVUYWIgPT09IHRhYi5rZXkgPyAnYmctYmxhY2sgdGV4dC13aGl0ZScgOiAnYm9yZGVyJ1xyXG4gICAgICAgICAgICAgIH1gfVxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgPHRhYi5pY29uIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPlxyXG4gICAgICAgICAgICAgIHt0YWIubGFiZWx9XHJcbiAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgKSl9XHJcbiAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgIHsvKiDilIDilIAgUE9SVEZPTElPIFRBQiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgKi99XHJcbiAgICAgICAge2FjdGl2ZVRhYiA9PT0gJ2dhbGxlcnknICYmIChcclxuICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCB9fSBhbmltYXRlPXt7IG9wYWNpdHk6IDEgfX0+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItNiBwLTQgYm9yZGVyLTIgYm9yZGVyLWRhc2hlZCByb3VuZGVkLXhsXCI+XHJcbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWdyYXktNTAwIG1iLTNcIj5VcGxvYWQgaW1hZ2Ugb3IgdmlkZW8gdG8gUG9ydGZvbGlvPC9wPlxyXG4gICAgICAgICAgICAgIDxpbnB1dCB0eXBlPVwiZmlsZVwiIGFjY2VwdD1cImltYWdlLyosdmlkZW8vKlwiIG9uQ2hhbmdlPXtoYW5kbGVJbWFnZVVwbG9hZH0gY2xhc3NOYW1lPVwibWItM1wiIC8+XHJcbiAgICAgICAgICAgICAge3ByZXZpZXdJbWFnZSAmJiAoXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTRcIj5cclxuICAgICAgICAgICAgICAgICAge3VwbG9hZFR5cGUgPT09ICdpbWFnZSdcclxuICAgICAgICAgICAgICAgICAgICA/IDxpbWcgc3JjPXtyZXNvbHZlTWVkaWFVcmwocHJldmlld0ltYWdlKX0gY2xhc3NOYW1lPVwiaC00MCByb3VuZGVkIG9iamVjdC1jb3ZlclwiIGFsdD1cIlByZXZpZXdcIiAvPlxyXG4gICAgICAgICAgICAgICAgICAgIDogPHZpZGVvIHNyYz17cmVzb2x2ZU1lZGlhVXJsKHByZXZpZXdJbWFnZSl9IGNsYXNzTmFtZT1cImgtNDAgcm91bmRlZFwiIGNvbnRyb2xzIC8+fVxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTMgZmxleCBnYXAtM1wiPlxyXG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17Y29uZmlybVVwbG9hZH0gZGlzYWJsZWQ9e3VwbG9hZGluZ31cclxuICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInB4LTQgcHktMiBiZy1ibGFjayB0ZXh0LXdoaXRlIHJvdW5kZWQgZGlzYWJsZWQ6b3BhY2l0eS01MFwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAge3VwbG9hZGluZyA/ICdVcGxvYWRpbmcuLi4nIDogJ1NhdmUgdG8gUG9ydGZvbGlvJ31cclxuICAgICAgICAgICAgICAgICAgICA8L2J1dHRvbj5cclxuICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IHNldFByZXZpZXdJbWFnZShudWxsKX0gY2xhc3NOYW1lPVwicHgtNCBweS0yIGJvcmRlciByb3VuZGVkXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICBDYW5jZWxcclxuICAgICAgICAgICAgICAgICAgICA8L2J1dHRvbj5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgIHtnYWxsZXJ5SW1hZ2VzLmxlbmd0aCA9PT0gMFxyXG4gICAgICAgICAgICAgID8gPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTQwMCB0ZXh0LXNtXCI+Tm8gcG9ydGZvbGlvIGl0ZW1zIHlldC48L3A+XHJcbiAgICAgICAgICAgICAgOiAoXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTIgbWQ6Z3JpZC1jb2xzLTMgZ2FwLTRcIj5cclxuICAgICAgICAgICAgICAgICAge2dhbGxlcnlJbWFnZXMubWFwKGltZyA9PiAoXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBrZXk9e2ltZy5pZH0gY2xhc3NOYW1lPVwicmVsYXRpdmUgZ3JvdXBcIj5cclxuICAgICAgICAgICAgICAgICAgICAgIHtpbWcudHlwZSA9PT0gJ3ZpZGVvJ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICA/IDx2aWRlbyBzcmM9e3Jlc29sdmVNZWRpYVVybChpbWcudXJsKX0gY2xhc3NOYW1lPVwiaC00MCB3LWZ1bGwgb2JqZWN0LWNvdmVyIHJvdW5kZWRcIiBtdXRlZCAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA6IDxpbWcgc3JjPXtyZXNvbHZlTWVkaWFVcmwoaW1nLnVybCl9IGNsYXNzTmFtZT1cImgtNDAgdy1mdWxsIG9iamVjdC1jb3ZlciByb3VuZGVkXCIgYWx0PVwiUG9ydGZvbGlvIGl0ZW1cIiAvPn1cclxuICAgICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17KCkgPT4gZGVsZXRlSW1hZ2UoaW1nLmlkKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTIgcmlnaHQtMiBiZy1yZWQtNTAwIHRleHQtd2hpdGUgcC0xIHJvdW5kZWQgb3BhY2l0eS0wIGdyb3VwLWhvdmVyOm9wYWNpdHktMTAwIHRyYW5zaXRpb25cIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPFRyYXNoMiBzaXplPXsxNH0gLz5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWdyYXktNDAwIG10LTFcIj57aW1nLnR5cGV9IMK3IHtpbWcuZGF0ZX08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgICkpfVxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgKX1cclxuICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICApfVxyXG5cclxuICAgICAgICB7Lyog4pSA4pSAIEJMT0cgVEFCIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCAqL31cclxuICAgICAgICB7YWN0aXZlVGFiID09PSAnYmxvZycgJiYgKFxyXG4gICAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSB9fT5cclxuXHJcbiAgICAgICAgICAgIHtzaG93QmxvZ0Zvcm0gPyAoXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi02IHAtNSBib3JkZXIgcm91bmRlZC14bCBzcGFjZS15LTRcIj5cclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuXCI+XHJcbiAgICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkXCI+e2VkaXRpbmdQb3N0ID8gJ0VkaXQgUG9zdCcgOiAnTmV3IFBvc3QnfTwvaDM+XHJcbiAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17cmVzZXRCbG9nRm9ybX0+PFggc2l6ZT17MTZ9IC8+PC9idXR0b24+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICA8aW5wdXRcclxuICAgICAgICAgICAgICAgICAgdHlwZT1cInRleHRcIlxyXG4gICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cIlBvc3QgdGl0bGVcIlxyXG4gICAgICAgICAgICAgICAgICB2YWx1ZT17YmxvZ1RpdGxlfVxyXG4gICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBzZXRCbG9nVGl0bGUoZS50YXJnZXQudmFsdWUpfVxyXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgYm9yZGVyIHAtMiByb3VuZGVkIHRleHQtc21cIlxyXG4gICAgICAgICAgICAgICAgLz5cclxuXHJcbiAgICAgICAgICAgICAgICA8dGV4dGFyZWFcclxuICAgICAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9XCJXcml0ZSB5b3VyIHBvc3QgY29udGVudCBoZXJlLi4uXCJcclxuICAgICAgICAgICAgICAgICAgdmFsdWU9e2Jsb2dDb250ZW50fVxyXG4gICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBzZXRCbG9nQ29udGVudChlLnRhcmdldC52YWx1ZSl9XHJcbiAgICAgICAgICAgICAgICAgIHJvd3M9ezZ9XHJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBib3JkZXIgcC0yIHJvdW5kZWQgdGV4dC1zbVwiXHJcbiAgICAgICAgICAgICAgICAvPlxyXG5cclxuICAgICAgICAgICAgICAgIHsvKiBNZWRpYSBVcGxvYWQgKi99XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImJvcmRlci0yIGJvcmRlci1kYXNoZWQgcm91bmRlZC14bCBwLTRcIj5cclxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWdyYXktNTAwIG1iLTIgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTFcIj5cclxuICAgICAgICAgICAgICAgICAgICA8SW1hZ2Ugc2l6ZT17MTN9IC8+IDxWaWRlbyBzaXplPXsxM30gLz4gQXR0YWNoIGltYWdlIG9yIHZpZGVvIHRvIHRoaXMgcG9zdCAob3B0aW9uYWwpXHJcbiAgICAgICAgICAgICAgICAgIDwvcD5cclxuICAgICAgICAgICAgICAgICAgPGlucHV0XHJcbiAgICAgICAgICAgICAgICAgICAgcmVmPXtibG9nTWVkaWFSZWZ9XHJcbiAgICAgICAgICAgICAgICAgICAgdHlwZT1cImZpbGVcIlxyXG4gICAgICAgICAgICAgICAgICAgIGFjY2VwdD1cImltYWdlLyosdmlkZW8vKlwiXHJcbiAgICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9e2hhbmRsZUJsb2dNZWRpYVVwbG9hZH1cclxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ0ZXh0LXNtXCJcclxuICAgICAgICAgICAgICAgICAgLz5cclxuXHJcbiAgICAgICAgICAgICAgICAgIHtibG9nTWVkaWEgJiYgKFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtMyByZWxhdGl2ZSBpbmxpbmUtYmxvY2tcIj5cclxuICAgICAgICAgICAgICAgICAgICAgIHtibG9nTWVkaWEudHlwZSA9PT0gJ2ltYWdlJ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICA/IDxpbWcgc3JjPXtyZXNvbHZlTWVkaWFVcmwoYmxvZ01lZGlhLnVybCl9IGNsYXNzTmFtZT1cImgtMzYgcm91bmRlZCBvYmplY3QtY292ZXJcIiBhbHQ9XCJCbG9nIG1lZGlhXCIgLz5cclxuICAgICAgICAgICAgICAgICAgICAgICAgOiA8dmlkZW8gc3JjPXtyZXNvbHZlTWVkaWFVcmwoYmxvZ01lZGlhLnVybCl9IGNsYXNzTmFtZT1cImgtMzYgcm91bmRlZFwiIGNvbnRyb2xzIC8+fVxyXG4gICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiB7IHNldEJsb2dNZWRpYShudWxsKTsgaWYgKGJsb2dNZWRpYVJlZi5jdXJyZW50KSBibG9nTWVkaWFSZWYuY3VycmVudC52YWx1ZSA9ICcnOyB9fVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJhYnNvbHV0ZSAtdG9wLTIgLXJpZ2h0LTIgYmctcmVkLTUwMCB0ZXh0LXdoaXRlIHJvdW5kZWQtZnVsbCBwLTAuNVwiXHJcbiAgICAgICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxYIHNpemU9ezEyfSAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgICl9XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZ2FwLTNcIj5cclxuICAgICAgICAgICAgICAgICAgPGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICAgIG9uQ2xpY2s9e3NhdmVCbG9nUG9zdH1cclxuICAgICAgICAgICAgICAgICAgICBkaXNhYmxlZD17YmxvZ1NhdmluZ31cclxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJiZy1ibGFjayB0ZXh0LXdoaXRlIHB4LTUgcHktMiByb3VuZGVkIGRpc2FibGVkOm9wYWNpdHktNTAgdGV4dC1zbVwiXHJcbiAgICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgICB7YmxvZ1NhdmluZyA/ICdTYXZpbmcuLi4nIDogZWRpdGluZ1Bvc3QgPyAnVXBkYXRlIFBvc3QnIDogJ1B1Ymxpc2ggUG9zdCd9XHJcbiAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9e3Jlc2V0QmxvZ0Zvcm19IGNsYXNzTmFtZT1cImJvcmRlciBweC00IHB5LTIgcm91bmRlZCB0ZXh0LXNtXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgQ2FuY2VsXHJcbiAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICkgOiAoXHJcbiAgICAgICAgICAgICAgPGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2V0U2hvd0Jsb2dGb3JtKHRydWUpfVxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibWItNiBmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBiZy1ibGFjayB0ZXh0LXdoaXRlIHB4LTQgcHktMiByb3VuZGVkLWZ1bGwgdGV4dC1zbVwiXHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgPFBsdXMgc2l6ZT17MTR9IC8+IE5ldyBQb3N0XHJcbiAgICAgICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgICAgICl9XHJcblxyXG4gICAgICAgICAgICB7YmxvZ1Bvc3RMaXN0Lmxlbmd0aCA9PT0gMCA/IChcclxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNDAwIHRleHQtc21cIj5ObyBibG9nIHBvc3RzIHlldC48L3A+XHJcbiAgICAgICAgICAgICkgOiAoXHJcbiAgICAgICAgICAgICAgYmxvZ1Bvc3RMaXN0Lm1hcChwb3N0ID0+IHtcclxuICAgICAgICAgICAgICAgIGNvbnN0IG1lZGlhVHlwZSA9IHNuaWZmTWVkaWFUeXBlKHBvc3QubWVkaWFVcmwsIHBvc3QubWVkaWFUeXBlKTtcclxuICAgICAgICAgICAgICAgIGNvbnN0IHBvc3REYXRlID0gcG9zdC5jcmVhdGVkQXQgfHwgcG9zdC5kYXRlO1xyXG4gICAgICAgICAgICAgICAgcmV0dXJuIChcclxuICAgICAgICAgICAgICAgICAgPGRpdiBrZXk9e3Bvc3QuaWR9IGNsYXNzTmFtZT1cImJvcmRlciBwLTQgbWItMyByb3VuZGVkLXhsXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGp1c3RpZnktYmV0d2VlbiBpdGVtcy1zdGFydCBnYXAtNFwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGdhcC0zIGl0ZW1zLXN0YXJ0XCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHsvKiBUaHVtYm5haWwg4oCUIHNob3dzIGV2ZW4gaWYgbWVkaWFUeXBlIHdhc24ndCBzYXZlZCAqL31cclxuICAgICAgICAgICAgICAgICAgICAgICAge21lZGlhVHlwZSA9PT0gJ2ltYWdlJyAmJiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgc3JjPXtyZXNvbHZlTWVkaWFVcmwocG9zdC5tZWRpYVVybCEpfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy0xNiBoLTE2IG9iamVjdC1jb3ZlciByb3VuZGVkIGZsZXgtc2hyaW5rLTBcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYWx0PVwiXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAvPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICB7bWVkaWFUeXBlID09PSAndmlkZW8nICYmIChcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8dmlkZW9cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNyYz17cmVzb2x2ZU1lZGlhVXJsKHBvc3QubWVkaWFVcmwhKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctMTYgaC0xNiBvYmplY3QtY292ZXIgcm91bmRlZCBmbGV4LXNocmluay0wXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG11dGVkXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgICAgICAgICAgKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LXNtXCI+e3Bvc3QudGl0bGV9PC9oMz5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtZ3JheS01MDAgbXQtMSBsaW5lLWNsYW1wLTJcIj57cG9zdC5jb250ZW50fTwvcD5cclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtZ3JheS00MDAgbXQtMVwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAge3Bvc3REYXRlID8gbmV3IERhdGUocG9zdERhdGUpLnRvTG9jYWxlRGF0ZVN0cmluZygnZW4tSU4nLCB7IGRheTogJ251bWVyaWMnLCBtb250aDogJ3Nob3J0JywgeWVhcjogJ251bWVyaWMnIH0pIDogJyd9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB7bWVkaWFUeXBlICYmIDxzcGFuIGNsYXNzTmFtZT1cIm1sLTIgY2FwaXRhbGl6ZSB0ZXh0LWdyYXktMzAwXCI+wrcge21lZGlhVHlwZX08L3NwYW4+fVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDwvcD5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBnYXAtMiBzaHJpbmstMFwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IGVkaXRQb3N0KHBvc3QpfSBjbGFzc05hbWU9XCJwLTEgdGV4dC1ncmF5LTQwMCBob3Zlcjp0ZXh0LWJsYWNrXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPEVkaXQgc2l6ZT17MTR9IC8+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9eygpID0+IGRlbGV0ZVBvc3QocG9zdC5pZCl9IGNsYXNzTmFtZT1cInAtMSB0ZXh0LWdyYXktNDAwIGhvdmVyOnRleHQtcmVkLTUwMFwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDxUcmFzaDIgc2l6ZT17MTR9IC8+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgICB9KVxyXG4gICAgICAgICAgICApfVxyXG4gICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgICl9XHJcblxyXG4gICAgICAgIHsvKiDilIDilIAgQk9PS0lOR1MgVEFCIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCAqL31cclxuICAgICAgICB7YWN0aXZlVGFiID09PSAnYm9va2luZ3MnICYmIChcclxuICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCB9fSBhbmltYXRlPXt7IG9wYWNpdHk6IDEgfX0+XHJcbiAgICAgICAgICAgIHtib29raW5ncy5sZW5ndGggPT09IDAgPyAoXHJcbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTQwMCB0ZXh0LXNtXCI+Tm8gYm9va2luZ3MgeWV0LjwvcD5cclxuICAgICAgICAgICAgKSA6IChcclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNFwiPlxyXG4gICAgICAgICAgICAgICAgey8qIE5ld2VzdCBmaXJzdCDigJQgc29ydGVkIGluIGZldGNoQm9va2luZ3MoKSAqL31cclxuICAgICAgICAgICAgICAgIHtib29raW5ncy5tYXAoKGIsIGluZGV4KSA9PiAoXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYga2V5PXtiLmlkfSBjbGFzc05hbWU9XCJiZy1jYXJkIHAtNCByb3VuZGVkLXhsIHNoYWRvdyBib3JkZXJcIj5cclxuICAgICAgICAgICAgICAgICAgICB7LyogTW9zdCByZWNlbnQgYmFkZ2UgKi99XHJcbiAgICAgICAgICAgICAgICAgICAge2luZGV4ID09PSAwICYmIChcclxuICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImlubGluZS1ibG9jayB0ZXh0LXhzIGZvbnQtc2VtaWJvbGQgcHgtMiBweS0wLjUgcm91bmRlZC1mdWxsIG1iLTJcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICBzdHlsZT17eyBiYWNrZ3JvdW5kOiAnaHNsKDM1MCw0MCUsOTUlKScsIGNvbG9yOiAnaHNsKDM1MCw0MCUsNDglKScgfX0+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIE1vc3QgUmVjZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICA8L3NwYW4+XHJcbiAgICAgICAgICAgICAgICAgICAgKX1cclxuICAgICAgICAgICAgICAgICAgICA8cD48Yj5OYW1lOjwvYj4ge2IubmFtZX08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPHA+PGI+UGhvbmU6PC9iPiB7Yi5waG9uZX08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPHA+PGI+U2VydmljZTo8L2I+IHtiLnNlcnZpY2V9PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwPjxiPkRhdGU6PC9iPiB7bmV3IERhdGUoYi5kYXRlKS50b0xvY2FsZURhdGVTdHJpbmcoJ2VuLUlOJywgeyBkYXk6ICdudW1lcmljJywgbW9udGg6ICdzaG9ydCcsIHllYXI6ICdudW1lcmljJyB9KX08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPHA+PGI+VGltZTo8L2I+IHtiLnRpbWVTbG90fTwvcD5cclxuICAgICAgICAgICAgICAgICAgICB7Yi5jcmVhdGVkQXQgJiYgKFxyXG4gICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWdyYXktNDAwIG10LTFcIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgQm9va2VkOiB7bmV3IERhdGUoYi5jcmVhdGVkQXQpLnRvTG9jYWxlU3RyaW5nKCdlbi1JTicsIHsgZGF5OiAnbnVtZXJpYycsIG1vbnRoOiAnc2hvcnQnLCBob3VyOiAnMi1kaWdpdCcsIG1pbnV0ZTogJzItZGlnaXQnIH0pfVxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9wPlxyXG4gICAgICAgICAgICAgICAgICAgICl9XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgKSl9XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICl9XHJcbiAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgKX1cclxuXHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9kaXY+XHJcbiAgKTtcclxufTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IEFkbWluRGFzaGJvYXJkOyJdLCJuYW1lcyI6WyJ1c2VTdGF0ZSIsInVzZUVmZmVjdCIsInVzZVJlZiIsIm1vdGlvbiIsIkltYWdlIiwiRmlsZVRleHQiLCJMb2dPdXQiLCJUcmFzaDIiLCJQbHVzIiwiRWRpdCIsIkV5ZSIsIlgiLCJWaWRlbyIsImFwaVVybCIsInJlc29sdmVNZWRpYVVybCIsIkFkbWluTG9naW4iLCJzbmlmZk1lZGlhVHlwZSIsIm1lZGlhVXJsIiwibWVkaWFUeXBlIiwic3RhcnRzV2l0aCIsInRlc3QiLCJBZG1pbkRhc2hib2FyZCIsImlzTG9nZ2VkSW4iLCJzZXRJc0xvZ2dlZEluIiwiYWN0aXZlVGFiIiwic2V0QWN0aXZlVGFiIiwiZ2FsbGVyeUltYWdlcyIsInNldEdhbGxlcnlJbWFnZXMiLCJwcmV2aWV3SW1hZ2UiLCJzZXRQcmV2aWV3SW1hZ2UiLCJ1cGxvYWRUeXBlIiwic2V0VXBsb2FkVHlwZSIsInVwbG9hZGluZyIsInNldFVwbG9hZGluZyIsImJsb2dQb3N0TGlzdCIsInNldEJsb2dQb3N0TGlzdCIsInNob3dCbG9nRm9ybSIsInNldFNob3dCbG9nRm9ybSIsImVkaXRpbmdQb3N0Iiwic2V0RWRpdGluZ1Bvc3QiLCJibG9nVGl0bGUiLCJzZXRCbG9nVGl0bGUiLCJibG9nQ29udGVudCIsInNldEJsb2dDb250ZW50IiwiYmxvZ01lZGlhIiwic2V0QmxvZ01lZGlhIiwiYmxvZ1NhdmluZyIsInNldEJsb2dTYXZpbmciLCJibG9nTWVkaWFSZWYiLCJib29raW5ncyIsInNldEJvb2tpbmdzIiwiZmV0Y2hQb3J0Zm9saW8iLCJmZXRjaEJsb2dzIiwiZmV0Y2hCb29raW5ncyIsImZldGNoIiwidGhlbiIsInJlcyIsImpzb24iLCJkYXRhIiwibWFwcGVkIiwibWFwIiwiaXRlbSIsImlkIiwidXJsIiwidHlwZSIsImRhdGUiLCJjcmVhdGVkQXQiLCJzcGxpdCIsImNhdGNoIiwiZXJyIiwiY29uc29sZSIsImVycm9yIiwiQXJyYXkiLCJpc0FycmF5Iiwic29ydGVkIiwic29ydCIsImEiLCJiIiwiYVRpbWUiLCJEYXRlIiwiZ2V0VGltZSIsImJUaW1lIiwib25Mb2dpbiIsImhhbmRsZUltYWdlVXBsb2FkIiwiZSIsImZpbGUiLCJ0YXJnZXQiLCJmaWxlcyIsImZpbGVUeXBlIiwicmVhZGVyIiwiRmlsZVJlYWRlciIsIm9ubG9hZGVuZCIsInJlc3VsdCIsInJlYWRBc0RhdGFVUkwiLCJjb25maXJtVXBsb2FkIiwibWV0aG9kIiwiaGVhZGVycyIsImJvZHkiLCJKU09OIiwic3RyaW5naWZ5IiwiYWxlcnQiLCJwcmV2IiwidG9JU09TdHJpbmciLCJkZWxldGVJbWFnZSIsImNvbmZpcm0iLCJmaWx0ZXIiLCJpbWciLCJoYW5kbGVCbG9nTWVkaWFVcGxvYWQiLCJyZXNldEJsb2dGb3JtIiwiY3VycmVudCIsInZhbHVlIiwic2F2ZUJsb2dQb3N0IiwidHJpbSIsInBheWxvYWQiLCJ0aXRsZSIsImNvbnRlbnQiLCJvayIsInRleHQiLCJzdGF0dXMiLCJlZGl0UG9zdCIsInBvc3QiLCJkZWxldGVQb3N0IiwiZGl2IiwiY2xhc3NOYW1lIiwiaDEiLCJidXR0b24iLCJvbkNsaWNrIiwia2V5IiwiaWNvbiIsImxhYmVsIiwidGFiIiwiaW5pdGlhbCIsIm9wYWNpdHkiLCJhbmltYXRlIiwicCIsImlucHV0IiwiYWNjZXB0Iiwib25DaGFuZ2UiLCJzcmMiLCJhbHQiLCJ2aWRlbyIsImNvbnRyb2xzIiwiZGlzYWJsZWQiLCJsZW5ndGgiLCJtdXRlZCIsInNpemUiLCJoMyIsInBsYWNlaG9sZGVyIiwidGV4dGFyZWEiLCJyb3dzIiwicmVmIiwicG9zdERhdGUiLCJ0b0xvY2FsZURhdGVTdHJpbmciLCJkYXkiLCJtb250aCIsInllYXIiLCJzcGFuIiwiaW5kZXgiLCJzdHlsZSIsImJhY2tncm91bmQiLCJjb2xvciIsIm5hbWUiLCJwaG9uZSIsInNlcnZpY2UiLCJ0aW1lU2xvdCIsInRvTG9j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

@@ -1,0 +1,679 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Portfolio.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"];const useEffect = __vite__cjsImport1_react["useEffect"]; const useState = __vite__cjsImport1_react["useState"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$(), _s1 = $RefreshSig$();
+import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { AnimatePresence, motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { ChevronLeft, ChevronRight, Play, Plus, X } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { useInView } from "/src/hooks/useAnimations.ts";
+import salonImg from "/src/assets/salon-interior.jpg?import";
+import { apiUrl, resolveMediaUrl } from "/src/lib/api.ts";
+const SKELETON_HEIGHTS = [
+    220,
+    160,
+    280,
+    190,
+    240,
+    170,
+    300,
+    150,
+    210,
+    260,
+    180,
+    230
+];
+const SkeletonCard = ({ height })=>/*#__PURE__*/ _jsxDEV("div", {
+        className: "break-inside-avoid mb-4 md:mb-5",
+        style: {
+            borderRadius: '4px',
+            overflow: 'hidden'
+        },
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            style: {
+                height,
+                background: 'linear-gradient(90deg, #f0ebe4 25%, #e8e2da 50%, #f0ebe4 75%)',
+                backgroundSize: '200% 100%',
+                animation: 'shimmer 1.4s infinite'
+            }
+        }, void 0, false, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+            lineNumber: 18,
+            columnNumber: 5
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+        lineNumber: 17,
+        columnNumber: 3
+    }, this);
+_c = SkeletonCard;
+const ProgressiveImage = ({ src, alt, eager })=>{
+    _s();
+    const [loaded, setLoaded] = useState(false);
+    return /*#__PURE__*/ _jsxDEV("img", {
+        src: src,
+        alt: alt,
+        loading: eager ? 'eager' : 'lazy',
+        decoding: eager ? 'sync' : 'async',
+        onLoad: ()=>setLoaded(true),
+        className: "w-full h-auto block",
+        style: {
+            display: 'block',
+            filter: loaded ? 'none' : 'blur(8px)',
+            transform: loaded ? 'scale(1)' : 'scale(1.04)',
+            transition: 'filter 0.4s ease, transform 0.4s ease'
+        }
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+        lineNumber: 33,
+        columnNumber: 5
+    }, this);
+};
+_s(ProgressiveImage, "5HkI/FtSFoHY/ZszUPbNWJy51d0=");
+_c1 = ProgressiveImage;
+const Portfolio = ()=>{
+    _s1();
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [selected, setSelected] = useState(null);
+    const { ref, isInView } = useInView();
+    useEffect(()=>{
+        fetch(apiUrl('/api/portfolio')).then((res)=>res.json()).then((data)=>{
+            setItems(Array.isArray(data) ? data : []);
+        }).catch((err)=>{
+            console.error(err);
+            setItems([]);
+        }).finally(()=>setLoading(false));
+    }, []);
+    const navigate = (dir)=>{
+        if (selected === null || items.length === 0) return;
+        setSelected((selected + dir + items.length) % items.length);
+    };
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "min-h-screen",
+        style: {
+            background: 'hsl(30, 20%, 98%)'
+        },
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "relative h-64 md:h-80 flex items-end justify-center overflow-hidden",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("img", {
+                        src: salonImg,
+                        alt: "",
+                        className: "absolute inset-0 w-full h-full object-cover",
+                        loading: "eager"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                        lineNumber: 77,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "absolute inset-0",
+                        style: {
+                            background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 60%, transparent 100%)'
+                        }
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                        lineNumber: 78,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "relative z-10 text-center px-4 pb-10 md:pb-14",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "flex items-center justify-center gap-4 mb-4",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "h-px w-12",
+                                        style: {
+                                            background: 'linear-gradient(to right, transparent, #c9a96e)'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                        lineNumber: 84,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("span", {
+                                        className: "font-accent tracking-[0.35em] uppercase text-xs",
+                                        style: {
+                                            color: '#c9a96e'
+                                        },
+                                        children: "Our Work"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                        lineNumber: 85,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "h-px w-12",
+                                        style: {
+                                            background: 'linear-gradient(to left, transparent, #c9a96e)'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                        lineNumber: 86,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 83,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("h1", {
+                                className: "font-heading text-5xl md:text-6xl font-light text-white tracking-wide",
+                                children: "Portfolio"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 88,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-body text-white/60 mt-3 text-sm tracking-widest uppercase",
+                                children: "A curated collection of our finest artistry"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 89,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                        lineNumber: 82,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                lineNumber: 76,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                ref: ref,
+                className: "px-4 md:px-8 lg:px-16 py-16 md:py-24",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-7xl mx-auto",
+                    children: [
+                        loading && /*#__PURE__*/ _jsxDEV("div", {
+                            className: "columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-5",
+                            children: SKELETON_HEIGHTS.map((height, index)=>/*#__PURE__*/ _jsxDEV(SkeletonCard, {
+                                    height: height
+                                }, index, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 98,
+                                    columnNumber: 17
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 96,
+                            columnNumber: 13
+                        }, this),
+                        !loading && items.length === 0 && /*#__PURE__*/ _jsxDEV("div", {
+                            className: "text-center py-32",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "w-16 h-px mx-auto mb-8",
+                                    style: {
+                                        background: '#c9a96e'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 105,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-heading text-2xl font-light text-gray-400 mb-2",
+                                    children: "No items yet"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 106,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-body text-sm text-gray-400",
+                                    children: "Upload images from the admin panel to populate the gallery."
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 107,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 104,
+                            columnNumber: 13
+                        }, this),
+                        !loading && items.length > 0 && /*#__PURE__*/ _jsxDEV(_Fragment, {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(motion.div, {
+                                    initial: {
+                                        opacity: 0,
+                                        y: 20
+                                    },
+                                    animate: isInView ? {
+                                        opacity: 1,
+                                        y: 0
+                                    } : {},
+                                    transition: {
+                                        duration: 0.6
+                                    },
+                                    className: "flex items-center gap-4 mb-12",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "h-px flex-1",
+                                            style: {
+                                                background: 'linear-gradient(to right, #c9a96e, transparent)'
+                                            }
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                            lineNumber: 119,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "font-accent text-xs tracking-[0.3em] uppercase",
+                                            style: {
+                                                color: '#c9a96e'
+                                            },
+                                            children: [
+                                                items.length,
+                                                " ",
+                                                items.length === 1 ? 'Creation' : 'Creations'
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                            lineNumber: 120,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "h-px flex-1",
+                                            style: {
+                                                background: 'linear-gradient(to left, #c9a96e, transparent)'
+                                            }
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                            lineNumber: 123,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 113,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-5 space-y-0",
+                                    children: items.map((item, index)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                                            initial: {
+                                                opacity: 0,
+                                                y: 30
+                                            },
+                                            animate: isInView ? {
+                                                opacity: 1,
+                                                y: 0
+                                            } : {},
+                                            transition: {
+                                                duration: 0.7,
+                                                delay: Math.min(index * 0.06, 0.5)
+                                            },
+                                            onClick: ()=>setSelected(index),
+                                            className: "break-inside-avoid mb-4 md:mb-5 group cursor-pointer",
+                                            children: /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative overflow-hidden",
+                                                style: {
+                                                    borderRadius: '4px',
+                                                    boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
+                                                    transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                                                    minHeight: '80px',
+                                                    background: '#f0ebe4'
+                                                },
+                                                onMouseEnter: (event)=>{
+                                                    event.currentTarget.style.boxShadow = '0 12px 48px rgba(0,0,0,0.18)';
+                                                    event.currentTarget.style.transform = 'translateY(-3px)';
+                                                },
+                                                onMouseLeave: (event)=>{
+                                                    event.currentTarget.style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
+                                                    event.currentTarget.style.transform = 'translateY(0)';
+                                                },
+                                                children: [
+                                                    item.type === 'image' ? /*#__PURE__*/ _jsxDEV(ProgressiveImage, {
+                                                        src: resolveMediaUrl(item.url),
+                                                        alt: "Portfolio",
+                                                        eager: index < 4
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                        lineNumber: 155,
+                                                        columnNumber: 25
+                                                    }, this) : /*#__PURE__*/ _jsxDEV("video", {
+                                                        src: resolveMediaUrl(item.url),
+                                                        className: "w-full h-auto block",
+                                                        muted: true,
+                                                        playsInline: true,
+                                                        preload: "metadata"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                        lineNumber: 157,
+                                                        columnNumber: 25
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                                                        style: {
+                                                            background: 'rgba(201,169,110,0.15)',
+                                                            backdropFilter: 'blur(1px)'
+                                                        },
+                                                        children: /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "w-10 h-10 rounded-full flex items-center justify-center border",
+                                                            style: {
+                                                                borderColor: 'rgba(255,255,255,0.8)',
+                                                                background: 'rgba(255,255,255,0.2)'
+                                                            },
+                                                            children: item.type === 'video' ? /*#__PURE__*/ _jsxDEV(Play, {
+                                                                className: "w-5 h-5 text-white",
+                                                                "aria-hidden": "true"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                                lineNumber: 175,
+                                                                columnNumber: 29
+                                                            }, this) : /*#__PURE__*/ _jsxDEV(Plus, {
+                                                                className: "w-5 h-5 text-white",
+                                                                "aria-hidden": "true"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                                lineNumber: 177,
+                                                                columnNumber: 29
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                            lineNumber: 170,
+                                                            columnNumber: 25
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                        lineNumber: 166,
+                                                        columnNumber: 23
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                                lineNumber: 136,
+                                                columnNumber: 21
+                                            }, this)
+                                        }, item.id, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                            lineNumber: 128,
+                                            columnNumber: 19
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 126,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                    lineNumber: 94,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                lineNumber: 93,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV(AnimatePresence, {
+                children: selected !== null && items[selected] && /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0
+                    },
+                    animate: {
+                        opacity: 1
+                    },
+                    exit: {
+                        opacity: 0
+                    },
+                    transition: {
+                        duration: 0.3
+                    },
+                    className: "fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8",
+                    style: {
+                        background: 'rgba(10,8,6,0.96)',
+                        backdropFilter: 'blur(16px)'
+                    },
+                    onClick: ()=>setSelected(null),
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("button", {
+                            onClick: ()=>setSelected(null),
+                            className: "absolute top-6 right-6 flex items-center gap-2 transition-opacity hover:opacity-70",
+                            style: {
+                                color: 'rgba(255,255,255,0.7)'
+                            },
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(X, {
+                                    className: "w-5 h-5"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 206,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("span", {
+                                    className: "font-body text-xs tracking-widest uppercase",
+                                    children: "Close"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 207,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 201,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "absolute top-6 left-6 font-accent text-xs tracking-[0.25em]",
+                            style: {
+                                color: '#c9a96e'
+                            },
+                            children: [
+                                String(selected + 1).padStart(2, '0'),
+                                " / ",
+                                String(items.length).padStart(2, '0')
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 210,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("button", {
+                            onClick: (event)=>{
+                                event.stopPropagation();
+                                navigate(-1);
+                            },
+                            className: "absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:bg-white/10",
+                            style: {
+                                borderColor: 'rgba(255,255,255,0.2)',
+                                color: 'rgba(255,255,255,0.7)'
+                            },
+                            children: /*#__PURE__*/ _jsxDEV(ChevronLeft, {
+                                className: "w-5 h-5"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 222,
+                                columnNumber: 15
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 214,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("button", {
+                            onClick: (event)=>{
+                                event.stopPropagation();
+                                navigate(1);
+                            },
+                            className: "absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:bg-white/10",
+                            style: {
+                                borderColor: 'rgba(255,255,255,0.2)',
+                                color: 'rgba(255,255,255,0.7)'
+                            },
+                            children: /*#__PURE__*/ _jsxDEV(ChevronRight, {
+                                className: "w-5 h-5"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 233,
+                                columnNumber: 15
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 225,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                scale: 0.92,
+                                opacity: 0
+                            },
+                            animate: {
+                                scale: 1,
+                                opacity: 1
+                            },
+                            exit: {
+                                scale: 0.92,
+                                opacity: 0
+                            },
+                            transition: {
+                                duration: 0.25
+                            },
+                            onClick: (event)=>event.stopPropagation(),
+                            children: items[selected].type === 'image' ? /*#__PURE__*/ _jsxDEV("img", {
+                                src: resolveMediaUrl(items[selected].url),
+                                className: "max-w-full max-h-[82vh] object-contain",
+                                style: {
+                                    borderRadius: '3px',
+                                    boxShadow: '0 32px 80px rgba(0,0,0,0.6)'
+                                },
+                                alt: "Portfolio"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 245,
+                                columnNumber: 17
+                            }, this) : /*#__PURE__*/ _jsxDEV("video", {
+                                src: resolveMediaUrl(items[selected].url),
+                                controls: true,
+                                className: "max-w-full max-h-[82vh]",
+                                style: {
+                                    borderRadius: '3px'
+                                }
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                lineNumber: 252,
+                                columnNumber: 17
+                            }, this)
+                        }, selected, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 236,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "h-px w-8",
+                                    style: {
+                                        background: 'linear-gradient(to right, transparent, #c9a96e)'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 262,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("span", {
+                                    className: "font-accent text-xs tracking-[0.3em] uppercase",
+                                    style: {
+                                        color: '#c9a96e40'
+                                    },
+                                    children: "Beauty & The Brush"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 263,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "h-px w-8",
+                                    style: {
+                                        background: 'linear-gradient(to left, transparent, #c9a96e)'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                                    lineNumber: 264,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                            lineNumber: 261,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                    lineNumber: 192,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                lineNumber: 190,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("style", {
+                children: `
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+                lineNumber: 270,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx",
+        lineNumber: 75,
+        columnNumber: 5
+    }, this);
+};
+_s1(Portfolio, "CrCysnB7JnO4idqRJBIsu02xiP8=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c2 = Portfolio;
+export default Portfolio;
+var _c, _c1, _c2;
+$RefreshReg$(_c, "SkeletonCard");
+$RefreshReg$(_c1, "ProgressiveImage");
+$RefreshReg$(_c2, "Portfolio");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Portfolio.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlBvcnRmb2xpby50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IEFuaW1hdGVQcmVzZW5jZSwgbW90aW9uIH0gZnJvbSAnZnJhbWVyLW1vdGlvbic7XG5pbXBvcnQgeyBDaGV2cm9uTGVmdCwgQ2hldnJvblJpZ2h0LCBQbGF5LCBQbHVzLCBYIH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcbmltcG9ydCB7IHVzZUluVmlldyB9IGZyb20gJ0AvaG9va3MvdXNlQW5pbWF0aW9ucyc7XG5pbXBvcnQgc2Fsb25JbWcgZnJvbSAnQC9hc3NldHMvc2Fsb24taW50ZXJpb3IuanBnJztcbmltcG9ydCB7IGFwaVVybCwgcmVzb2x2ZU1lZGlhVXJsIH0gZnJvbSAnQC9saWIvYXBpJztcblxuaW50ZXJmYWNlIFBvcnRmb2xpb0l0ZW0ge1xuICBpZDogc3RyaW5nO1xuICB1cmw6IHN0cmluZztcbiAgdHlwZTogJ2ltYWdlJyB8ICd2aWRlbyc7XG59XG5cbmNvbnN0IFNLRUxFVE9OX0hFSUdIVFMgPSBbMjIwLCAxNjAsIDI4MCwgMTkwLCAyNDAsIDE3MCwgMzAwLCAxNTAsIDIxMCwgMjYwLCAxODAsIDIzMF07XG5cbmNvbnN0IFNrZWxldG9uQ2FyZCA9ICh7IGhlaWdodCB9OiB7IGhlaWdodDogbnVtYmVyIH0pID0+IChcbiAgPGRpdiBjbGFzc05hbWU9XCJicmVhay1pbnNpZGUtYXZvaWQgbWItNCBtZDptYi01XCIgc3R5bGU9e3sgYm9yZGVyUmFkaXVzOiAnNHB4Jywgb3ZlcmZsb3c6ICdoaWRkZW4nIH19PlxuICAgIDxkaXZcbiAgICAgIHN0eWxlPXt7XG4gICAgICAgIGhlaWdodCxcbiAgICAgICAgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCg5MGRlZywgI2YwZWJlNCAyNSUsICNlOGUyZGEgNTAlLCAjZjBlYmU0IDc1JSknLFxuICAgICAgICBiYWNrZ3JvdW5kU2l6ZTogJzIwMCUgMTAwJScsXG4gICAgICAgIGFuaW1hdGlvbjogJ3NoaW1tZXIgMS40cyBpbmZpbml0ZScsXG4gICAgICB9fVxuICAgIC8+XG4gIDwvZGl2PlxuKTtcblxuY29uc3QgUHJvZ3Jlc3NpdmVJbWFnZSA9ICh7IHNyYywgYWx0LCBlYWdlciB9OiB7IHNyYzogc3RyaW5nOyBhbHQ6IHN0cmluZzsgZWFnZXI6IGJvb2xlYW4gfSkgPT4ge1xuICBjb25zdCBbbG9hZGVkLCBzZXRMb2FkZWRdID0gdXNlU3RhdGUoZmFsc2UpO1xuXG4gIHJldHVybiAoXG4gICAgPGltZ1xuICAgICAgc3JjPXtzcmN9XG4gICAgICBhbHQ9e2FsdH1cbiAgICAgIGxvYWRpbmc9e2VhZ2VyID8gJ2VhZ2VyJyA6ICdsYXp5J31cbiAgICAgIGRlY29kaW5nPXtlYWdlciA/ICdzeW5jJyA6ICdhc3luYyd9XG4gICAgICBvbkxvYWQ9eygpID0+IHNldExvYWRlZCh0cnVlKX1cbiAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBoLWF1dG8gYmxvY2tcIlxuICAgICAgc3R5bGU9e3tcbiAgICAgICAgZGlzcGxheTogJ2Jsb2NrJyxcbiAgICAgICAgZmlsdGVyOiBsb2FkZWQgPyAnbm9uZScgOiAnYmx1cig4cHgpJyxcbiAgICAgICAgdHJhbnNmb3JtOiBsb2FkZWQgPyAnc2NhbGUoMSknIDogJ3NjYWxlKDEuMDQpJyxcbiAgICAgICAgdHJhbnNpdGlvbjogJ2ZpbHRlciAwLjRzIGVhc2UsIHRyYW5zZm9ybSAwLjRzIGVhc2UnLFxuICAgICAgfX1cbiAgICAvPlxuICApO1xufTtcblxuY29uc3QgUG9ydGZvbGlvID0gKCkgPT4ge1xuICBjb25zdCBbaXRlbXMsIHNldEl0ZW1zXSA9IHVzZVN0YXRlPFBvcnRmb2xpb0l0ZW1bXT4oW10pO1xuICBjb25zdCBbbG9hZGluZywgc2V0TG9hZGluZ10gPSB1c2VTdGF0ZSh0cnVlKTtcbiAgY29uc3QgW3NlbGVjdGVkLCBzZXRTZWxlY3RlZF0gPSB1c2VTdGF0ZTxudW1iZXIgfCBudWxsPihudWxsKTtcbiAgY29uc3QgeyByZWYsIGlzSW5WaWV3IH0gPSB1c2VJblZpZXcoKTtcblxuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIGZldGNoKGFwaVVybCgnL2FwaS9wb3J0Zm9saW8nKSlcbiAgICAgIC50aGVuKHJlcyA9PiByZXMuanNvbigpKVxuICAgICAgLnRoZW4oZGF0YSA9PiB7XG4gICAgICAgIHNldEl0ZW1zKEFycmF5LmlzQXJyYXkoZGF0YSkgPyBkYXRhIDogW10pO1xuICAgICAgfSlcbiAgICAgIC5jYXRjaChlcnIgPT4ge1xuICAgICAgICBjb25zb2xlLmVycm9yKGVycik7XG4gICAgICAgIHNldEl0ZW1zKFtdKTtcbiAgICAgIH0pXG4gICAgICAuZmluYWxseSgoKSA9PiBzZXRMb2FkaW5nKGZhbHNlKSk7XG4gIH0sIFtdKTtcblxuICBjb25zdCBuYXZpZ2F0ZSA9IChkaXI6IDEgfCAtMSkgPT4ge1xuICAgIGlmIChzZWxlY3RlZCA9PT0gbnVsbCB8fCBpdGVtcy5sZW5ndGggPT09IDApIHJldHVybjtcbiAgICBzZXRTZWxlY3RlZCgoc2VsZWN0ZWQgKyBkaXIgKyBpdGVtcy5sZW5ndGgpICUgaXRlbXMubGVuZ3RoKTtcbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuXCIgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2hzbCgzMCwgMjAlLCA5OCUpJyB9fT5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmUgaC02NCBtZDpoLTgwIGZsZXggaXRlbXMtZW5kIGp1c3RpZnktY2VudGVyIG92ZXJmbG93LWhpZGRlblwiPlxuICAgICAgICA8aW1nIHNyYz17c2Fsb25JbWd9IGFsdD1cIlwiIGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgdy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIiBsb2FkaW5nPVwiZWFnZXJcIiAvPlxuICAgICAgICA8ZGl2XG4gICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMFwiXG4gICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCh0byB0b3AsIHJnYmEoMCwwLDAsMC43MikgMCUsIHJnYmEoMCwwLDAsMC4xOCkgNjAlLCB0cmFuc3BhcmVudCAxMDAlKScgfX1cbiAgICAgICAgLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSB6LTEwIHRleHQtY2VudGVyIHB4LTQgcGItMTAgbWQ6cGItMTRcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC00IG1iLTRcIj5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC1weCB3LTEyXCIgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCh0byByaWdodCwgdHJhbnNwYXJlbnQsICNjOWE5NmUpJyB9fSAvPlxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZm9udC1hY2NlbnQgdHJhY2tpbmctWzAuMzVlbV0gdXBwZXJjYXNlIHRleHQteHNcIiBzdHlsZT17eyBjb2xvcjogJyNjOWE5NmUnIH19Pk91ciBXb3JrPC9zcGFuPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLXB4IHctMTJcIiBzdHlsZT17eyBiYWNrZ3JvdW5kOiAnbGluZWFyLWdyYWRpZW50KHRvIGxlZnQsIHRyYW5zcGFyZW50LCAjYzlhOTZlKScgfX0gLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8aDEgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtNXhsIG1kOnRleHQtNnhsIGZvbnQtbGlnaHQgdGV4dC13aGl0ZSB0cmFja2luZy13aWRlXCI+UG9ydGZvbGlvPC9oMT5cbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC13aGl0ZS82MCBtdC0zIHRleHQtc20gdHJhY2tpbmctd2lkZXN0IHVwcGVyY2FzZVwiPkEgY3VyYXRlZCBjb2xsZWN0aW9uIG9mIG91ciBmaW5lc3QgYXJ0aXN0cnk8L3A+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG5cbiAgICAgIDxzZWN0aW9uIHJlZj17cmVmfSBjbGFzc05hbWU9XCJweC00IG1kOnB4LTggbGc6cHgtMTYgcHktMTYgbWQ6cHktMjRcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0b1wiPlxuICAgICAgICAgIHtsb2FkaW5nICYmIChcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sdW1ucy0yIG1kOmNvbHVtbnMtMyBsZzpjb2x1bW5zLTQgZ2FwLTQgbWQ6Z2FwLTVcIj5cbiAgICAgICAgICAgICAge1NLRUxFVE9OX0hFSUdIVFMubWFwKChoZWlnaHQsIGluZGV4KSA9PiAoXG4gICAgICAgICAgICAgICAgPFNrZWxldG9uQ2FyZCBrZXk9e2luZGV4fSBoZWlnaHQ9e2hlaWdodH0gLz5cbiAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICApfVxuXG4gICAgICAgICAgeyFsb2FkaW5nICYmIGl0ZW1zLmxlbmd0aCA9PT0gMCAmJiAoXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIHB5LTMyXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xNiBoLXB4IG14LWF1dG8gbWItOFwiIHN0eWxlPXt7IGJhY2tncm91bmQ6ICcjYzlhOTZlJyB9fSAvPlxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgZm9udC1saWdodCB0ZXh0LWdyYXktNDAwIG1iLTJcIj5ObyBpdGVtcyB5ZXQ8L3A+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXNtIHRleHQtZ3JheS00MDBcIj5VcGxvYWQgaW1hZ2VzIGZyb20gdGhlIGFkbWluIHBhbmVsIHRvIHBvcHVsYXRlIHRoZSBnYWxsZXJ5LjwvcD5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICl9XG5cbiAgICAgICAgICB7IWxvYWRpbmcgJiYgaXRlbXMubGVuZ3RoID4gMCAmJiAoXG4gICAgICAgICAgICA8PlxuICAgICAgICAgICAgICA8bW90aW9uLmRpdlxuICAgICAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMjAgfX1cbiAgICAgICAgICAgICAgICBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319XG4gICAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC42IH19XG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQgbWItMTJcIlxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLXB4IGZsZXgtMVwiIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICNjOWE5NmUsIHRyYW5zcGFyZW50KScgfX0gLz5cbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXhzIHRyYWNraW5nLVswLjNlbV0gdXBwZXJjYXNlXCIgc3R5bGU9e3sgY29sb3I6ICcjYzlhOTZlJyB9fT5cbiAgICAgICAgICAgICAgICAgIHtpdGVtcy5sZW5ndGh9IHtpdGVtcy5sZW5ndGggPT09IDEgPyAnQ3JlYXRpb24nIDogJ0NyZWF0aW9ucyd9XG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC1weCBmbGV4LTFcIiBzdHlsZT17eyBiYWNrZ3JvdW5kOiAnbGluZWFyLWdyYWRpZW50KHRvIGxlZnQsICNjOWE5NmUsIHRyYW5zcGFyZW50KScgfX0gLz5cbiAgICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxuXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sdW1ucy0yIG1kOmNvbHVtbnMtMyBsZzpjb2x1bW5zLTQgZ2FwLTQgbWQ6Z2FwLTUgc3BhY2UteS0wXCI+XG4gICAgICAgICAgICAgICAge2l0ZW1zLm1hcCgoaXRlbSwgaW5kZXgpID0+IChcbiAgICAgICAgICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICAgICAgICAgIGtleT17aXRlbS5pZH1cbiAgICAgICAgICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fVxuICAgICAgICAgICAgICAgICAgICBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319XG4gICAgICAgICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNywgZGVsYXk6IE1hdGgubWluKGluZGV4ICogMC4wNiwgMC41KSB9fVxuICAgICAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRTZWxlY3RlZChpbmRleCl9XG4gICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImJyZWFrLWluc2lkZS1hdm9pZCBtYi00IG1kOm1iLTUgZ3JvdXAgY3Vyc29yLXBvaW50ZXJcIlxuICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicmVsYXRpdmUgb3ZlcmZsb3ctaGlkZGVuXCJcbiAgICAgICAgICAgICAgICAgICAgICBzdHlsZT17e1xuICAgICAgICAgICAgICAgICAgICAgICAgYm9yZGVyUmFkaXVzOiAnNHB4JyxcbiAgICAgICAgICAgICAgICAgICAgICAgIGJveFNoYWRvdzogJzAgMnB4IDIwcHggcmdiYSgwLDAsMCwwLjA2KScsXG4gICAgICAgICAgICAgICAgICAgICAgICB0cmFuc2l0aW9uOiAnYm94LXNoYWRvdyAwLjRzIGVhc2UsIHRyYW5zZm9ybSAwLjRzIGVhc2UnLFxuICAgICAgICAgICAgICAgICAgICAgICAgbWluSGVpZ2h0OiAnODBweCcsXG4gICAgICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiAnI2YwZWJlNCcsXG4gICAgICAgICAgICAgICAgICAgICAgfX1cbiAgICAgICAgICAgICAgICAgICAgICBvbk1vdXNlRW50ZXI9e2V2ZW50ID0+IHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGV2ZW50LmN1cnJlbnRUYXJnZXQuc3R5bGUuYm94U2hhZG93ID0gJzAgMTJweCA0OHB4IHJnYmEoMCwwLDAsMC4xOCknO1xuICAgICAgICAgICAgICAgICAgICAgICAgZXZlbnQuY3VycmVudFRhcmdldC5zdHlsZS50cmFuc2Zvcm0gPSAndHJhbnNsYXRlWSgtM3B4KSc7XG4gICAgICAgICAgICAgICAgICAgICAgfX1cbiAgICAgICAgICAgICAgICAgICAgICBvbk1vdXNlTGVhdmU9e2V2ZW50ID0+IHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGV2ZW50LmN1cnJlbnRUYXJnZXQuc3R5bGUuYm94U2hhZG93ID0gJzAgMnB4IDIwcHggcmdiYSgwLDAsMCwwLjA2KSc7XG4gICAgICAgICAgICAgICAgICAgICAgICBldmVudC5jdXJyZW50VGFyZ2V0LnN0eWxlLnRyYW5zZm9ybSA9ICd0cmFuc2xhdGVZKDApJztcbiAgICAgICAgICAgICAgICAgICAgICB9fVxuICAgICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgICAge2l0ZW0udHlwZSA9PT0gJ2ltYWdlJyA/IChcbiAgICAgICAgICAgICAgICAgICAgICAgIDxQcm9ncmVzc2l2ZUltYWdlIHNyYz17cmVzb2x2ZU1lZGlhVXJsKGl0ZW0udXJsKX0gYWx0PVwiUG9ydGZvbGlvXCIgZWFnZXI9e2luZGV4IDwgNH0gLz5cbiAgICAgICAgICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgICAgICAgICAgPHZpZGVvXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHNyYz17cmVzb2x2ZU1lZGlhVXJsKGl0ZW0udXJsKX1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIGgtYXV0byBibG9ja1wiXG4gICAgICAgICAgICAgICAgICAgICAgICAgIG11dGVkXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHBsYXlzSW5saW5lXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHByZWxvYWQ9XCJtZXRhZGF0YVwiXG4gICAgICAgICAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgICAgICAgICl9XG5cbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG9wYWNpdHktMCBncm91cC1ob3ZlcjpvcGFjaXR5LTEwMCB0cmFuc2l0aW9uLW9wYWNpdHkgZHVyYXRpb24tMzAwXCJcbiAgICAgICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdyZ2JhKDIwMSwxNjksMTEwLDAuMTUpJywgYmFja2Ryb3BGaWx0ZXI6ICdibHVyKDFweCknIH19XG4gICAgICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdlxuICAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LTEwIGgtMTAgcm91bmRlZC1mdWxsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGJvcmRlclwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGJvcmRlckNvbG9yOiAncmdiYSgyNTUsMjU1LDI1NSwwLjgpJywgYmFja2dyb3VuZDogJ3JnYmEoMjU1LDI1NSwyNTUsMC4yKScgfX1cbiAgICAgICAgICAgICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICAgICAgICAgICAge2l0ZW0udHlwZSA9PT0gJ3ZpZGVvJyA/IChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8UGxheSBjbGFzc05hbWU9XCJ3LTUgaC01IHRleHQtd2hpdGVcIiBhcmlhLWhpZGRlbj1cInRydWVcIiAvPlxuICAgICAgICAgICAgICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxQbHVzIGNsYXNzTmFtZT1cInctNSBoLTUgdGV4dC13aGl0ZVwiIGFyaWEtaGlkZGVuPVwidHJ1ZVwiIC8+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICl9XG4gICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L21vdGlvbi5kaXY+XG4gICAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC8+XG4gICAgICAgICAgKX1cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIDxBbmltYXRlUHJlc2VuY2U+XG4gICAgICAgIHtzZWxlY3RlZCAhPT0gbnVsbCAmJiBpdGVtc1tzZWxlY3RlZF0gJiYgKFxuICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAgfX1cbiAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSB9fVxuICAgICAgICAgICAgZXhpdD17eyBvcGFjaXR5OiAwIH19XG4gICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjMgfX1cbiAgICAgICAgICAgIGNsYXNzTmFtZT1cImZpeGVkIGluc2V0LTAgei01MCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBwLTQgbWQ6cC04XCJcbiAgICAgICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdyZ2JhKDEwLDgsNiwwLjk2KScsIGJhY2tkcm9wRmlsdGVyOiAnYmx1cigxNnB4KScgfX1cbiAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IHNldFNlbGVjdGVkKG51bGwpfVxuICAgICAgICAgID5cbiAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2V0U2VsZWN0ZWQobnVsbCl9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC02IHJpZ2h0LTYgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgdHJhbnNpdGlvbi1vcGFjaXR5IGhvdmVyOm9wYWNpdHktNzBcIlxuICAgICAgICAgICAgICBzdHlsZT17eyBjb2xvcjogJ3JnYmEoMjU1LDI1NSwyNTUsMC43KScgfX1cbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPFggY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXhzIHRyYWNraW5nLXdpZGVzdCB1cHBlcmNhc2VcIj5DbG9zZTwvc3Bhbj5cbiAgICAgICAgICAgIDwvYnV0dG9uPlxuXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC02IGxlZnQtNiBmb250LWFjY2VudCB0ZXh0LXhzIHRyYWNraW5nLVswLjI1ZW1dXCIgc3R5bGU9e3sgY29sb3I6ICcjYzlhOTZlJyB9fT5cbiAgICAgICAgICAgICAge1N0cmluZyhzZWxlY3RlZCArIDEpLnBhZFN0YXJ0KDIsICcwJyl9IC8ge1N0cmluZyhpdGVtcy5sZW5ndGgpLnBhZFN0YXJ0KDIsICcwJyl9XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgPGJ1dHRvblxuICAgICAgICAgICAgICBvbkNsaWNrPXtldmVudCA9PiB7XG4gICAgICAgICAgICAgICAgZXZlbnQuc3RvcFByb3BhZ2F0aW9uKCk7XG4gICAgICAgICAgICAgICAgbmF2aWdhdGUoLTEpO1xuICAgICAgICAgICAgICB9fVxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJhYnNvbHV0ZSBsZWZ0LTQgbWQ6bGVmdC04IHRvcC0xLzIgLXRyYW5zbGF0ZS15LTEvMiB3LTEwIGgtMTAgcm91bmRlZC1mdWxsIGJvcmRlciBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciB0cmFuc2l0aW9uLWFsbCBob3ZlcjpiZy13aGl0ZS8xMFwiXG4gICAgICAgICAgICAgIHN0eWxlPXt7IGJvcmRlckNvbG9yOiAncmdiYSgyNTUsMjU1LDI1NSwwLjIpJywgY29sb3I6ICdyZ2JhKDI1NSwyNTUsMjU1LDAuNyknIH19XG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIDxDaGV2cm9uTGVmdCBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz5cbiAgICAgICAgICAgIDwvYnV0dG9uPlxuXG4gICAgICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgICAgIG9uQ2xpY2s9e2V2ZW50ID0+IHtcbiAgICAgICAgICAgICAgICBldmVudC5zdG9wUHJvcGFnYXRpb24oKTtcbiAgICAgICAgICAgICAgICBuYXZpZ2F0ZSgxKTtcbiAgICAgICAgICAgICAgfX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgcmlnaHQtNCBtZDpyaWdodC04IHRvcC0xLzIgLXRyYW5zbGF0ZS15LTEvMiB3LTEwIGgtMTAgcm91bmRlZC1mdWxsIGJvcmRlciBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciB0cmFuc2l0aW9uLWFsbCBob3ZlcjpiZy13aGl0ZS8xMFwiXG4gICAgICAgICAgICAgIHN0eWxlPXt7IGJvcmRlckNvbG9yOiAncmdiYSgyNTUsMjU1LDI1NSwwLjIpJywgY29sb3I6ICdyZ2JhKDI1NSwyNTUsMjU1LDAuNyknIH19XG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIDxDaGV2cm9uUmlnaHQgY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICA8L2J1dHRvbj5cblxuICAgICAgICAgICAgPG1vdGlvbi5kaXZcbiAgICAgICAgICAgICAga2V5PXtzZWxlY3RlZH1cbiAgICAgICAgICAgICAgaW5pdGlhbD17eyBzY2FsZTogMC45Miwgb3BhY2l0eTogMCB9fVxuICAgICAgICAgICAgICBhbmltYXRlPXt7IHNjYWxlOiAxLCBvcGFjaXR5OiAxIH19XG4gICAgICAgICAgICAgIGV4aXQ9e3sgc2NhbGU6IDAuOTIsIG9wYWNpdHk6IDAgfX1cbiAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC4yNSB9fVxuICAgICAgICAgICAgICBvbkNsaWNrPXtldmVudCA9PiBldmVudC5zdG9wUHJvcGFnYXRpb24oKX1cbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAge2l0ZW1zW3NlbGVjdGVkXS50eXBlID09PSAnaW1hZ2UnID8gKFxuICAgICAgICAgICAgICAgIDxpbWdcbiAgICAgICAgICAgICAgICAgIHNyYz17cmVzb2x2ZU1lZGlhVXJsKGl0ZW1zW3NlbGVjdGVkXS51cmwpfVxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibWF4LXctZnVsbCBtYXgtaC1bODJ2aF0gb2JqZWN0LWNvbnRhaW5cIlxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYm9yZGVyUmFkaXVzOiAnM3B4JywgYm94U2hhZG93OiAnMCAzMnB4IDgwcHggcmdiYSgwLDAsMCwwLjYpJyB9fVxuICAgICAgICAgICAgICAgICAgYWx0PVwiUG9ydGZvbGlvXCJcbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgIDx2aWRlb1xuICAgICAgICAgICAgICAgICAgc3JjPXtyZXNvbHZlTWVkaWFVcmwoaXRlbXNbc2VsZWN0ZWRdLnVybCl9XG4gICAgICAgICAgICAgICAgICBjb250cm9sc1xuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibWF4LXctZnVsbCBtYXgtaC1bODJ2aF1cIlxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYm9yZGVyUmFkaXVzOiAnM3B4JyB9fVxuICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgICl9XG4gICAgICAgICAgICA8L21vdGlvbi5kaXY+XG5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTYgbGVmdC0xLzIgLXRyYW5zbGF0ZS14LTEvMiBmbGV4IGl0ZW1zLWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtcHggdy04XCIgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCh0byByaWdodCwgdHJhbnNwYXJlbnQsICNjOWE5NmUpJyB9fSAvPlxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXhzIHRyYWNraW5nLVswLjNlbV0gdXBwZXJjYXNlXCIgc3R5bGU9e3sgY29sb3I6ICcjYzlhOTZlNDAnIH19PkJlYXV0eSAmIFRoZSBCcnVzaDwvc3Bhbj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLXB4IHctOFwiIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQodG8gbGVmdCwgdHJhbnNwYXJlbnQsICNjOWE5NmUpJyB9fSAvPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9tb3Rpb24uZGl2PlxuICAgICAgICApfVxuICAgICAgPC9BbmltYXRlUHJlc2VuY2U+XG5cbiAgICAgIDxzdHlsZT57YFxuICAgICAgICBAa2V5ZnJhbWVzIHNoaW1tZXIge1xuICAgICAgICAgIDAlIHsgYmFja2dyb3VuZC1wb3NpdGlvbjogMjAwJSAwOyB9XG4gICAgICAgICAgMTAwJSB7IGJhY2tncm91bmQtcG9zaXRpb246IC0yMDAlIDA7IH1cbiAgICAgICAgfVxuICAgICAgYH08L3N0eWxlPlxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgUG9ydGZvbGlvO1xuIl0sIm5hbWVzIjpbInVzZUVmZmVjdCIsInVzZVN0YXRlIiwiQW5pbWF0ZVByZXNlbmNlIiwibW90aW9uIiwiQ2hldnJvbkxlZnQiLCJDaGV2cm9uUmlnaHQiLCJQbGF5IiwiUGx1cyIsIlgiLCJ1c2VJblZpZXciLCJzYWxvbkltZyIsImFwaVVybCIsInJlc29sdmVNZWRpYVVybCIsIlNLRUxFVE9OX0hFSUdIVFMiLCJTa2VsZXRvbkNhcmQiLCJoZWlnaHQiLCJkaXYiLCJjbGFzc05hbWUiLCJzdHlsZSIsImJvcmRlclJhZGl1cyIsIm92ZXJmbG93IiwiYmFja2dyb3VuZCIsImJhY2tncm91bmRTaXplIiwiYW5pbWF0aW9uIiwiUHJvZ3Jlc3NpdmVJbWFnZSIsInNyYyIsImFsdCIsImVhZ2VyIiwibG9hZGVkIiwic2V0TG9hZGVkIiwiaW1nIiwibG9hZGluZyIsImRlY29kaW5nIiwib25Mb2FkIiwiZGlzcGxheSIsImZpbHRlciIsInRyYW5zZm9ybSIsInRyYW5zaXRpb24iLCJQb3J0Zm9saW8iLCJpdGVtcyIsInNldEl0ZW1zIiwic2V0TG9hZGluZyIsInNlbGVjdGVkIiwic2V0U2VsZWN0ZWQiLCJyZWYiLCJpc0luVmlldyIsImZldGNoIiwidGhlbiIsInJlcyIsImpzb24iLCJkYXRhIiwiQXJyYXkiLCJpc0FycmF5IiwiY2F0Y2giLCJlcnIiLCJjb25zb2xlIiwiZXJyb3IiLCJmaW5hbGx5IiwibmF2aWdhdGUiLCJkaXIiLCJsZW5ndGgiLCJzcGFuIiwiY29sb3IiLCJoMSIsInAiLCJzZWN0aW9uIiwibWFwIiwiaW5kZXgiLCJpbml0aWFsIiwib3BhY2l0eSIsInkiLCJhbmltYXRlIiwiZHVyYXRpb24iLCJpdGVtIiwiZGVsYXkiLCJNYXRoIiwibWluIiwib25DbGljayIsImJveFNoYWRvdyIsIm1pbkhlaWdodCIsIm9uTW91c2VFbnRlciIsImV2ZW50IiwiY3VycmVudFRhcmdldCIsIm9uTW91c2VMZWF2ZSIsInR5cGUiLCJ1cmwiLCJ2aWRlbyIsIm11dGVkIiwicGxheXNJbmxpbmUiLCJwcmVsb2FkIiwiYmFja2Ryb3BGaWx0ZXIiLCJib3JkZXJDb2xvciIsImFyaWEtaGlkZGVuIiwiaWQiLCJleGl0IiwiYnV0dG9uIiwiU3RyaW5nIiwicGFkU3RhcnQiLCJzdG9wUHJvcGFnYXRpb24iLCJzY2FsZSIsImNv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

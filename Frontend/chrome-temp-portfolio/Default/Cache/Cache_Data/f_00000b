@@ -1,0 +1,318 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/Footer.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { Instagram, MapPin, Phone, Mail } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+const Footer = ()=>{
+    return /*#__PURE__*/ _jsxDEV("footer", {
+        className: "bg-foreground text-background/80",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-7xl mx-auto section-padding",
+            children: [
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("h3", {
+                                    className: "font-heading text-2xl text-background mb-4",
+                                    children: [
+                                        "Beauty ",
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "text-blush",
+                                            children: "&"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 11,
+                                            columnNumber: 22
+                                        }, this),
+                                        " The Brush"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 10,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "text-sm leading-relaxed text-background/60 font-body",
+                                    children: "Enhancing beauty with artistry. Premium makeup & salon services in Bangalore for your most special moments."
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 13,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                            lineNumber: 9,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("h4", {
+                                    className: "font-heading text-lg text-background mb-4",
+                                    children: "Quick Links"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 19,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "space-y-2",
+                                    children: [
+                                        {
+                                            label: 'About',
+                                            path: '/about'
+                                        },
+                                        {
+                                            label: 'Services',
+                                            path: '/services'
+                                        },
+                                        {
+                                            label: 'Portfolio',
+                                            path: '/portfolio'
+                                        },
+                                        {
+                                            label: 'Blog',
+                                            path: '/blog'
+                                        },
+                                        {
+                                            label: 'Contact',
+                                            path: '/contact'
+                                        },
+                                        {
+                                            label: 'Book Appointment',
+                                            path: '/booking'
+                                        }
+                                    ].map((link)=>/*#__PURE__*/ _jsxDEV(Link, {
+                                            to: link.path,
+                                            className: "block text-sm text-background/60 hover:text-blush transition-colors font-body",
+                                            children: link.label
+                                        }, link.label, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 29,
+                                            columnNumber: 17
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 20,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                            lineNumber: 18,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("h4", {
+                                    className: "font-heading text-lg text-background mb-4",
+                                    children: "Contact"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 41,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "space-y-3",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "flex items-start gap-3",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(MapPin, {
+                                                    className: "w-4 h-4 text-blush mt-0.5 shrink-0"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 44,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("span", {
+                                                    className: "text-sm text-background/60 font-body",
+                                                    children: "#173/2, 2nd Cross Road, Emerald Layout, Shakti Nagar, Bangalore 560077"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 45,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 43,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("a", {
+                                            href: "https://wa.me/919148768958?text=Hello%20I%20want%20to%20inquire%20about%20your%20services",
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "flex items-center gap-3 hover:text-blush transition-colors",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Phone, {
+                                                    className: "w-4 h-4 text-blush shrink-0"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 55,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("span", {
+                                                    className: "text-sm text-background/60 font-body",
+                                                    children: "+91 91487 68958"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 56,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 49,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("a", {
+                                            href: "mailto:shaziatheshaikh@gmail.com?subject=Service%20Inquiry",
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "flex items-center gap-3 hover:text-blush transition-colors",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Mail, {
+                                                    className: "w-4 h-4 text-blush shrink-0"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 64,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("span", {
+                                                    className: "text-sm text-background/60 font-body",
+                                                    children: "shaziatheshaikh@gmail.com"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                    lineNumber: 65,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 58,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 42,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                            lineNumber: 40,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("h4", {
+                                    className: "font-heading text-lg text-background mb-4",
+                                    children: "Follow Us"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 72,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("a", {
+                                    href: "https://www.instagram.com/artisteshaikh/",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    className: "flex items-center gap-3 group",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "w-10 h-10 rounded-full border border-background/20 flex items-center justify-center hover:border-blush hover:text-blush transition-all",
+                                            children: /*#__PURE__*/ _jsxDEV(Instagram, {
+                                                className: "w-4 h-4"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                                lineNumber: 80,
+                                                columnNumber: 17
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 79,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "text-sm text-background/60 group-hover:text-blush transition-colors font-body",
+                                            children: "@artisteshaikh"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                            lineNumber: 82,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                                    lineNumber: 73,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                            lineNumber: 71,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                    lineNumber: 8,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "mt-12 pt-8 border-t border-background/10 text-center",
+                    children: /*#__PURE__*/ _jsxDEV("p", {
+                        className: "text-sm text-background/40 font-body",
+                        children: "© 2026 Beauty And The Brush. All rights reserved."
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                        lineNumber: 90,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+                    lineNumber: 89,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+            lineNumber: 7,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx",
+        lineNumber: 6,
+        columnNumber: 5
+    }, this);
+};
+_c = Footer;
+export default Footer;
+var _c;
+$RefreshReg$(_c, "Footer");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/components/Footer.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkZvb3Rlci50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTGluayB9IGZyb20gJ3JlYWN0LXJvdXRlci1kb20nO1xyXG5pbXBvcnQgeyBJbnN0YWdyYW0sIE1hcFBpbiwgUGhvbmUsIE1haWwgfSBmcm9tICdsdWNpZGUtcmVhY3QnO1xyXG5cclxuY29uc3QgRm9vdGVyID0gKCkgPT4ge1xyXG4gIHJldHVybiAoXHJcbiAgICA8Zm9vdGVyIGNsYXNzTmFtZT1cImJnLWZvcmVncm91bmQgdGV4dC1iYWNrZ3JvdW5kLzgwXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG8gc2VjdGlvbi1wYWRkaW5nXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIG1kOmdyaWQtY29scy0yIGxnOmdyaWQtY29scy00IGdhcC0xMlwiPlxyXG4gICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTJ4bCB0ZXh0LWJhY2tncm91bmQgbWItNFwiPlxyXG4gICAgICAgICAgICAgIEJlYXV0eSA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWJsdXNoXCI+Jjwvc3Bhbj4gVGhlIEJydXNoXHJcbiAgICAgICAgICAgIDwvaDM+XHJcbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gbGVhZGluZy1yZWxheGVkIHRleHQtYmFja2dyb3VuZC82MCBmb250LWJvZHlcIj5cclxuICAgICAgICAgICAgICBFbmhhbmNpbmcgYmVhdXR5IHdpdGggYXJ0aXN0cnkuIFByZW1pdW0gbWFrZXVwICYgc2Fsb24gc2VydmljZXMgaW4gQmFuZ2Fsb3JlIGZvciB5b3VyIG1vc3Qgc3BlY2lhbCBtb21lbnRzLlxyXG4gICAgICAgICAgICA8L3A+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtbGcgdGV4dC1iYWNrZ3JvdW5kIG1iLTRcIj5RdWljayBMaW5rczwvaDQ+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0yXCI+XHJcbiAgICAgICAgICAgICAge1tcclxuICAgICAgICAgICAgICAgIHsgbGFiZWw6ICdBYm91dCcsIHBhdGg6ICcvYWJvdXQnIH0sXHJcbiAgICAgICAgICAgICAgICB7IGxhYmVsOiAnU2VydmljZXMnLCBwYXRoOiAnL3NlcnZpY2VzJyB9LFxyXG4gICAgICAgICAgICAgICAgeyBsYWJlbDogJ1BvcnRmb2xpbycsIHBhdGg6ICcvcG9ydGZvbGlvJyB9LFxyXG4gICAgICAgICAgICAgICAgeyBsYWJlbDogJ0Jsb2cnLCBwYXRoOiAnL2Jsb2cnIH0sXHJcbiAgICAgICAgICAgICAgICB7IGxhYmVsOiAnQ29udGFjdCcsIHBhdGg6ICcvY29udGFjdCcgfSxcclxuICAgICAgICAgICAgICAgIHsgbGFiZWw6ICdCb29rIEFwcG9pbnRtZW50JywgcGF0aDogJy9ib29raW5nJyB9LFxyXG4gICAgICAgICAgICAgIF0ubWFwKChsaW5rKSA9PiAoXHJcbiAgICAgICAgICAgICAgICA8TGlua1xyXG4gICAgICAgICAgICAgICAgICBrZXk9e2xpbmsubGFiZWx9XHJcbiAgICAgICAgICAgICAgICAgIHRvPXtsaW5rLnBhdGh9XHJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImJsb2NrIHRleHQtc20gdGV4dC1iYWNrZ3JvdW5kLzYwIGhvdmVyOnRleHQtYmx1c2ggdHJhbnNpdGlvbi1jb2xvcnMgZm9udC1ib2R5XCJcclxuICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAge2xpbmsubGFiZWx9XHJcbiAgICAgICAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICAgICAgKSl9XHJcbiAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LWxnIHRleHQtYmFja2dyb3VuZCBtYi00XCI+Q29udGFjdDwvaDQ+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0zXCI+XHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0zXCI+XHJcbiAgICAgICAgICAgICAgICA8TWFwUGluIGNsYXNzTmFtZT1cInctNCBoLTQgdGV4dC1ibHVzaCBtdC0wLjUgc2hyaW5rLTBcIiAvPlxyXG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWJhY2tncm91bmQvNjAgZm9udC1ib2R5XCI+XHJcbiAgICAgICAgICAgICAgICAgICMxNzMvMiwgMm5kIENyb3NzIFJvYWQsIEVtZXJhbGQgTGF5b3V0LCBTaGFrdGkgTmFnYXIsIEJhbmdhbG9yZSA1NjAwNzdcclxuICAgICAgICAgICAgICAgIDwvc3Bhbj5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICA8YVxyXG4gICAgICAgICAgICAgICAgaHJlZj1cImh0dHBzOi8vd2EubWUvOTE5MTQ4NzY4OTU4P3RleHQ9SGVsbG8lMjBJJTIwd2FudCUyMHRvJTIwaW5xdWlyZSUyMGFib3V0JTIweW91ciUyMHNlcnZpY2VzXCJcclxuICAgICAgICAgICAgICAgIHRhcmdldD1cIl9ibGFua1wiXHJcbiAgICAgICAgICAgICAgICByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGdhcC0zIGhvdmVyOnRleHQtYmx1c2ggdHJhbnNpdGlvbi1jb2xvcnNcIlxyXG4gICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgIDxQaG9uZSBjbGFzc05hbWU9XCJ3LTQgaC00IHRleHQtYmx1c2ggc2hyaW5rLTBcIiAvPlxyXG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWJhY2tncm91bmQvNjAgZm9udC1ib2R5XCI+KzkxIDkxNDg3IDY4OTU4PC9zcGFuPlxyXG4gICAgICAgICAgICAgIDwvYT5cclxuICAgICAgICAgICAgICA8YVxyXG4gICAgICAgICAgICAgICAgaHJlZj1cIm1haWx0bzpzaGF6aWF0aGVzaGFpa2hAZ21haWwuY29tP3N1YmplY3Q9U2VydmljZSUyMElucXVpcnlcIlxyXG4gICAgICAgICAgICAgICAgdGFyZ2V0PVwiX2JsYW5rXCJcclxuICAgICAgICAgICAgICAgIHJlbD1cIm5vb3BlbmVyIG5vcmVmZXJyZXJcIlxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgaG92ZXI6dGV4dC1ibHVzaCB0cmFuc2l0aW9uLWNvbG9yc1wiXHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgPE1haWwgY2xhc3NOYW1lPVwidy00IGgtNCB0ZXh0LWJsdXNoIHNocmluay0wXCIgLz5cclxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1iYWNrZ3JvdW5kLzYwIGZvbnQtYm9keVwiPnNoYXppYXRoZXNoYWlraEBnbWFpbC5jb208L3NwYW4+XHJcbiAgICAgICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIHsvKiDinIUgSU5TVEFHUkFNIE9OTFkg4oCUIEZhY2Vib29rIGFuZCBZb3VUdWJlIHJlbW92ZWQgKi99XHJcbiAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtbGcgdGV4dC1iYWNrZ3JvdW5kIG1iLTRcIj5Gb2xsb3cgVXM8L2g0PlxyXG4gICAgICAgICAgICA8YVxyXG4gICAgICAgICAgICAgIGhyZWY9XCJodHRwczovL3d3dy5pbnN0YWdyYW0uY29tL2FydGlzdGVzaGFpa2gvXCJcclxuICAgICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIlxyXG4gICAgICAgICAgICAgIHJlbD1cIm5vb3BlbmVyIG5vcmVmZXJyZXJcIlxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGdhcC0zIGdyb3VwXCJcclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMCBoLTEwIHJvdW5kZWQtZnVsbCBib3JkZXIgYm9yZGVyLWJhY2tncm91bmQvMjAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgaG92ZXI6Ym9yZGVyLWJsdXNoIGhvdmVyOnRleHQtYmx1c2ggdHJhbnNpdGlvbi1hbGxcIj5cclxuICAgICAgICAgICAgICAgIDxJbnN0YWdyYW0gY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWJhY2tncm91bmQvNjAgZ3JvdXAtaG92ZXI6dGV4dC1ibHVzaCB0cmFuc2l0aW9uLWNvbG9ycyBmb250LWJvZHlcIj5cclxuICAgICAgICAgICAgICAgIEBhcnRpc3Rlc2hhaWtoXHJcbiAgICAgICAgICAgICAgPC9zcGFuPlxyXG4gICAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC0xMiBwdC04IGJvcmRlci10IGJvcmRlci1iYWNrZ3JvdW5kLzEwIHRleHQtY2VudGVyXCI+XHJcbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtYmFja2dyb3VuZC80MCBmb250LWJvZHlcIj5cclxuICAgICAgICAgICAgwqkgMjAyNiBCZWF1dHkgQW5kIFRoZSBCcnVzaC4gQWxsIHJpZ2h0cyByZXNlcnZlZC5cclxuICAgICAgICAgIDwvcD5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L2Zvb3Rlcj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgRm9vdGVyOyJdLCJuYW1lcyI6WyJMaW5rIiwiSW5zdGFncmFtIiwiTWFwUGluIiwiUGhvbmUiLCJNYWlsIiwiRm9vdGVyIiwiZm9vdGVyIiwiY2xhc3NOYW1lIiwiZGl2IiwiaDMiLCJzcGFuIiwicCIsImg0IiwibGFiZWwiLCJwYXRoIiwibWFwIiwibGluayIsInRvIiwiYSIsImhyZWYiLCJ0YXJnZXQiLCJyZWwiXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTQSxJQUFJLFFBQVEsbUJBQW1CO0FBQ3hDLFNBQVNDLFNBQVMsRUFBRUMsTUFBTSxFQUFFQyxLQUFLLEVBQUVDLElBQUksUUFBUSxlQUFlO0FBRTlELE1BQU1DLFNBQVM7SUFDYixxQkFDRSxRQUFDQztRQUFPQyxXQUFVO2tCQUNoQixjQUFBLFFBQUNDO1lBQUlELFdBQVU7OzhCQUNiLFFBQUNDO29CQUFJRCxXQUFVOztzQ0FDYixRQUFDQzs7OENBQ0MsUUFBQ0M7b0NBQUdGLFdBQVU7O3dDQUE2QztzREFDbEQsUUFBQ0c7NENBQUtILFdBQVU7c0RBQWE7Ozs7Ozt3Q0FBUTs7Ozs7Ozs4Q0FFOUMsUUFBQ0k7b0NBQUVKLFdBQVU7OENBQXVEOzs7Ozs7Ozs7Ozs7c0NBS3RFLFFBQUNDOzs4Q0FDQyxRQUFDSTtvQ0FBR0wsV0FBVTs4Q0FBNEM7Ozs7Ozs4Q0FDMUQsUUFBQ0M7b0NBQUlELFdBQVU7OENBQ1o7d0NBQ0M7NENBQUVNLE9BQU87NENBQVNDLE1BQU07d0NBQVM7d0NBQ2pDOzRDQUFFRCxPQUFPOzRDQUFZQyxNQUFNO3dDQUFZO3dDQUN2Qzs0Q0FBRUQsT0FBTzs0Q0FBYUMsTUFBTTt3Q0FBYTt3Q0FDekM7NENBQUVELE9BQU87NENBQVFDLE1BQU07d0NBQVE7d0NBQy9COzRDQUFFRCxPQUFPOzRDQUFXQyxNQUFNO3dDQUFXO3dDQUNyQzs0Q0FBRUQsT0FBTzs0Q0FBb0JDLE1BQU07d0NBQVc7cUNBQy9DLENBQUNDLEdBQUcsQ0FBQyxDQUFDQyxxQkFDTCxRQUFDaEI7NENBRUNpQixJQUFJRCxLQUFLRixJQUFJOzRDQUNiUCxXQUFVO3NEQUVUUyxLQUFLSCxLQUFLOzJDQUpORyxLQUFLSCxLQUFLOzs7Ozs7Ozs7Ozs7Ozs7O3NDQVV2QixRQUFDTDs7OENBQ0MsUUFBQ0k7b0NBQUdMLFdBQVU7OENBQTRDOzs7Ozs7OENBQzFELFFBQUNDO29DQUFJRCxXQUFVOztzREFDYixRQUFDQzs0Q0FBSUQsV0FBVTs7OERBQ2IsUUFBQ0w7b0RBQU9LLFdBQVU7Ozs7Ozs4REFDbEIsUUFBQ0c7b0RBQUtILFdBQVU7OERBQXVDOzs7Ozs7Ozs7Ozs7c0RBSXpELFFBQUNXOzRDQUNDQyxNQUFLOzRDQUNMQyxRQUFPOzRDQUNQQyxLQUFJOzRDQUNKZCxXQUFVOzs4REFFVixRQUFDSjtvREFBTUksV0FBVTs7Ozs7OzhEQUNqQixRQUFDRztvREFBS0gsV0FBVTs4REFBdUM7Ozs7Ozs7Ozs7OztzREFFekQsUUFBQ1c7NENBQ0NDLE1BQUs7NENBQ0xDLFFBQU87NENBQ1BDLEtBQUk7NENBQ0pkLFdBQVU7OzhEQUVWLFFBQUNIO29EQUFLRyxXQUFVOzs7Ozs7OERBQ2hCLFFBQUNHO29EQUFLSCxXQUFVOzhEQUF1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O3NDQU03RCxRQUFDQzs7OENBQ0MsUUFBQ0k7b0NBQUdMLFdBQVU7OENBQTRDOzs7Ozs7OENBQzFELFFBQUNXO29DQUNDQyxNQUFLO29DQUNMQyxRQUFPO29DQUNQQyxLQUFJO29DQUNKZCxXQUFVOztzREFFVixRQUFDQzs0Q0FBSUQsV0FBVTtzREFDYixjQUFBLFFBQUNOO2dEQUFVTSxXQUFVOzs7Ozs7Ozs7OztzREFFdkIsUUFBQ0c7NENBQUtILFdBQVU7c0RBQWdGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OEJBT3RHLFFBQUNDO29CQUFJRCxXQUFVOzhCQUNiLGNBQUEsUUFBQ0k7d0JBQUVKLFdBQVU7a0NBQXVDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBTzlEO0tBN0ZNRjtBQStGTixlQUFlQSxPQUFPIn0=

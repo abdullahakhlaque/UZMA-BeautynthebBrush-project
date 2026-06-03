@@ -1,0 +1,430 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/App.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"];const useEffect = __vite__cjsImport13_react["useEffect"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import BlogDetail from "/src/pages/BlogDetails.tsx";
+import { QueryClient, QueryClientProvider } from "/node_modules/.vite/deps/@tanstack_react-query.js?v=44223405";
+import { BrowserRouter, Route, Routes, useLocation } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { Toaster as Sonner } from "/src/components/ui/sonner.tsx";
+import { Toaster } from "/src/components/ui/toaster.tsx";
+import { TooltipProvider } from "/src/components/ui/tooltip.tsx";
+import { LenisProvider, useLenis } from "/src/components/LenisProvider.tsx";
+import Navbar from "/src/components/Navbar.tsx";
+import Footer from "/src/components/Footer.tsx";
+import CustomCursor from "/src/components/CustomCursor.tsx";
+import WhatsAppFloat from "/src/components/WhatsAppFloat.tsx";
+import { CartProvider } from "/src/context/CartContext.tsx";
+import __vite__cjsImport13_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import Index from "/src/pages/Index.tsx";
+import About from "/src/pages/About.tsx";
+import Services from "/src/pages/Services.tsx";
+import ServiceDetail from "/src/pages/ServiceDetail.tsx";
+import SalonServices from "/src/pages/services/SalonServices.tsx";
+import MakeupHair from "/src/pages/services/MakeupHair.tsx";
+import Styling from "/src/pages/services/Styling.tsx";
+import HairTreatments from "/src/pages/services/HairTreatments.tsx";
+import Portfolio from "/src/pages/Portfolio.tsx";
+import Blog from "/src/pages/Blog.tsx";
+import Contact from "/src/pages/Contact.tsx";
+import Booking from "/src/pages/Booking.tsx";
+import AdminDashboard from "/src/pages/admin/AdminDashboard.tsx";
+import NotFound from "/src/pages/NotFound.tsx";
+const queryClient = new QueryClient();
+// ─── Scroll to top on every route change ───
+const ScrollToTop = ()=>{
+    _s();
+    const { scrollTo } = useLenis();
+    const { pathname } = useLocation();
+    useEffect(()=>{
+        scrollTo(0, {
+            immediate: true
+        });
+    }, [
+        pathname,
+        scrollTo
+    ]);
+    return null;
+};
+_s(ScrollToTop, "EL6mDKCsWucQYlvfClu+B1JzHeo=", false, function() {
+    return [
+        useLenis,
+        useLocation
+    ];
+});
+_c = ScrollToTop;
+const PublicLayout = ({ children })=>/*#__PURE__*/ _jsxDEV(_Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxDEV(Navbar, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                lineNumber: 43,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV("main", {
+                children: children
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                lineNumber: 44,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(Footer, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                lineNumber: 45,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(WhatsAppFloat, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                lineNumber: 46,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true);
+_c1 = PublicLayout;
+const App = ()=>/*#__PURE__*/ _jsxDEV(QueryClientProvider, {
+        client: queryClient,
+        children: /*#__PURE__*/ _jsxDEV(LenisProvider, {
+            children: /*#__PURE__*/ _jsxDEV(TooltipProvider, {
+                children: /*#__PURE__*/ _jsxDEV(CartProvider, {
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(CustomCursor, {}, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                            lineNumber: 55,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(Toaster, {}, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                            lineNumber: 56,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(Sonner, {}, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                            lineNumber: 57,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(BrowserRouter, {
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(ScrollToTop, {}, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                    lineNumber: 59,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV(Routes, {
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/admin",
+                                            element: /*#__PURE__*/ _jsxDEV(AdminDashboard, {}, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 61,
+                                                columnNumber: 45
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 61,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Index, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 62,
+                                                    columnNumber: 54
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 62,
+                                                columnNumber: 40
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 62,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/about",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(About, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 63,
+                                                    columnNumber: 59
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 63,
+                                                columnNumber: 45
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 63,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Services, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 64,
+                                                    columnNumber: 62
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 64,
+                                                columnNumber: 48
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 64,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services/salon",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(SalonServices, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 65,
+                                                    columnNumber: 68
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 65,
+                                                columnNumber: 54
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 65,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services/makeup-hair",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(MakeupHair, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 66,
+                                                    columnNumber: 74
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 66,
+                                                columnNumber: 60
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 66,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services/styling",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Styling, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 67,
+                                                    columnNumber: 70
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 67,
+                                                columnNumber: 56
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 67,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services/hair-treatments",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(HairTreatments, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 68,
+                                                    columnNumber: 78
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 68,
+                                                columnNumber: 64
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 68,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/services/:slug",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(ServiceDetail, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 69,
+                                                    columnNumber: 68
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 69,
+                                                columnNumber: 54
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 69,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/portfolio",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Portfolio, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 70,
+                                                    columnNumber: 63
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 70,
+                                                columnNumber: 49
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 70,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/blog",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Blog, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 71,
+                                                    columnNumber: 58
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 71,
+                                                columnNumber: 44
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 71,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/blog/:id",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(BlogDetail, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 72,
+                                                    columnNumber: 62
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 72,
+                                                columnNumber: 48
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 72,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/contact",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Contact, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 73,
+                                                    columnNumber: 61
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 73,
+                                                columnNumber: 47
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 73,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "/booking",
+                                            element: /*#__PURE__*/ _jsxDEV(PublicLayout, {
+                                                children: /*#__PURE__*/ _jsxDEV(Booking, {}, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                    lineNumber: 74,
+                                                    columnNumber: 61
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 74,
+                                                columnNumber: 47
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 74,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Route, {
+                                            path: "*",
+                                            element: /*#__PURE__*/ _jsxDEV(NotFound, {}, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                                lineNumber: 75,
+                                                columnNumber: 40
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                            lineNumber: 75,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                                    lineNumber: 60,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                            lineNumber: 58,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                    lineNumber: 54,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+                lineNumber: 53,
+                columnNumber: 7
+            }, this)
+        }, void 0, false, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+            lineNumber: 52,
+            columnNumber: 5
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx",
+        lineNumber: 51,
+        columnNumber: 3
+    }, this);
+_c2 = App;
+export default App;
+var _c, _c1, _c2;
+$RefreshReg$(_c, "ScrollToTop");
+$RefreshReg$(_c1, "PublicLayout");
+$RefreshReg$(_c2, "App");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/App.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkFwcC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEJsb2dEZXRhaWwgZnJvbSBcIi4vcGFnZXMvQmxvZ0RldGFpbHNcIjtcclxuaW1wb3J0IHsgUXVlcnlDbGllbnQsIFF1ZXJ5Q2xpZW50UHJvdmlkZXIgfSBmcm9tIFwiQHRhbnN0YWNrL3JlYWN0LXF1ZXJ5XCI7XHJcbmltcG9ydCB7IEJyb3dzZXJSb3V0ZXIsIFJvdXRlLCBSb3V0ZXMsIHVzZUxvY2F0aW9uIH0gZnJvbSBcInJlYWN0LXJvdXRlci1kb21cIjtcclxuaW1wb3J0IHsgVG9hc3RlciBhcyBTb25uZXIgfSBmcm9tIFwiQC9jb21wb25lbnRzL3VpL3Nvbm5lclwiO1xyXG5pbXBvcnQgeyBUb2FzdGVyIH0gZnJvbSBcIkAvY29tcG9uZW50cy91aS90b2FzdGVyXCI7XHJcbmltcG9ydCB7IFRvb2x0aXBQcm92aWRlciB9IGZyb20gXCJAL2NvbXBvbmVudHMvdWkvdG9vbHRpcFwiO1xyXG5pbXBvcnQgeyBMZW5pc1Byb3ZpZGVyLCB1c2VMZW5pcyB9IGZyb20gXCIuL2NvbXBvbmVudHMvTGVuaXNQcm92aWRlclwiO1xyXG5pbXBvcnQgTmF2YmFyIGZyb20gXCJAL2NvbXBvbmVudHMvTmF2YmFyXCI7XHJcbmltcG9ydCBGb290ZXIgZnJvbSBcIkAvY29tcG9uZW50cy9Gb290ZXJcIjtcclxuaW1wb3J0IEN1c3RvbUN1cnNvciBmcm9tIFwiQC9jb21wb25lbnRzL0N1c3RvbUN1cnNvclwiO1xyXG5pbXBvcnQgV2hhdHNBcHBGbG9hdCBmcm9tIFwiQC9jb21wb25lbnRzL1doYXRzQXBwRmxvYXRcIjtcclxuaW1wb3J0IHsgQ2FydFByb3ZpZGVyIH0gZnJvbSBcIkAvY29udGV4dC9DYXJ0Q29udGV4dFwiO1xyXG5pbXBvcnQgeyB1c2VFZmZlY3QgfSBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IEluZGV4IGZyb20gXCIuL3BhZ2VzL0luZGV4XCI7XHJcbmltcG9ydCBBYm91dCBmcm9tIFwiLi9wYWdlcy9BYm91dFwiO1xyXG5pbXBvcnQgU2VydmljZXMgZnJvbSBcIi4vcGFnZXMvU2VydmljZXNcIjtcclxuaW1wb3J0IFNlcnZpY2VEZXRhaWwgZnJvbSBcIi4vcGFnZXMvU2VydmljZURldGFpbFwiO1xyXG5pbXBvcnQgU2Fsb25TZXJ2aWNlcyBmcm9tIFwiLi9wYWdlcy9zZXJ2aWNlcy9TYWxvblNlcnZpY2VzXCI7XHJcbmltcG9ydCBNYWtldXBIYWlyIGZyb20gXCIuL3BhZ2VzL3NlcnZpY2VzL01ha2V1cEhhaXJcIjtcclxuaW1wb3J0IFN0eWxpbmcgZnJvbSBcIi4vcGFnZXMvc2VydmljZXMvU3R5bGluZ1wiO1xyXG5pbXBvcnQgSGFpclRyZWF0bWVudHMgZnJvbSBcIi4vcGFnZXMvc2VydmljZXMvSGFpclRyZWF0bWVudHNcIjtcclxuaW1wb3J0IFBvcnRmb2xpbyBmcm9tIFwiLi9wYWdlcy9Qb3J0Zm9saW9cIjtcclxuaW1wb3J0IEJsb2cgZnJvbSBcIi4vcGFnZXMvQmxvZ1wiO1xyXG5pbXBvcnQgQ29udGFjdCBmcm9tIFwiLi9wYWdlcy9Db250YWN0XCI7XHJcbmltcG9ydCBCb29raW5nIGZyb20gXCIuL3BhZ2VzL0Jvb2tpbmdcIjtcclxuaW1wb3J0IEFkbWluRGFzaGJvYXJkIGZyb20gXCIuL3BhZ2VzL2FkbWluL0FkbWluRGFzaGJvYXJkXCI7XHJcbmltcG9ydCBOb3RGb3VuZCBmcm9tIFwiLi9wYWdlcy9Ob3RGb3VuZFwiO1xyXG5cclxuY29uc3QgcXVlcnlDbGllbnQgPSBuZXcgUXVlcnlDbGllbnQoKTtcclxuXHJcbi8vIOKUgOKUgOKUgCBTY3JvbGwgdG8gdG9wIG9uIGV2ZXJ5IHJvdXRlIGNoYW5nZSDilIDilIDilIBcclxuY29uc3QgU2Nyb2xsVG9Ub3AgPSAoKSA9PiB7XHJcbiAgY29uc3QgeyBzY3JvbGxUbyB9ID0gdXNlTGVuaXMoKTtcclxuICBjb25zdCB7IHBhdGhuYW1lIH0gPSB1c2VMb2NhdGlvbigpO1xyXG4gIHVzZUVmZmVjdCgoKSA9PiB7XHJcbiAgICBzY3JvbGxUbygwLCB7IGltbWVkaWF0ZTogdHJ1ZSB9KTtcclxuICB9LCBbcGF0aG5hbWUsIHNjcm9sbFRvXSk7XHJcbiAgcmV0dXJuIG51bGw7XHJcbn07XHJcblxyXG5jb25zdCBQdWJsaWNMYXlvdXQgPSAoeyBjaGlsZHJlbiB9OiB7IGNoaWxkcmVuOiBSZWFjdC5SZWFjdE5vZGUgfSkgPT4gKFxyXG4gIDw+XHJcbiAgICA8TmF2YmFyIC8+XHJcbiAgICA8bWFpbj57Y2hpbGRyZW59PC9tYWluPlxyXG4gICAgPEZvb3RlciAvPlxyXG4gICAgPFdoYXRzQXBwRmxvYXQgLz5cclxuICA8Lz5cclxuKTtcclxuXHJcbmNvbnN0IEFwcCA9ICgpID0+IChcclxuICA8UXVlcnlDbGllbnRQcm92aWRlciBjbGllbnQ9e3F1ZXJ5Q2xpZW50fT5cclxuICAgIDxMZW5pc1Byb3ZpZGVyPlxyXG4gICAgICA8VG9vbHRpcFByb3ZpZGVyPlxyXG4gICAgICAgIDxDYXJ0UHJvdmlkZXI+XHJcbiAgICAgICAgICA8Q3VzdG9tQ3Vyc29yIC8+XHJcbiAgICAgICAgICA8VG9hc3RlciAvPlxyXG4gICAgICAgICAgPFNvbm5lciAvPlxyXG4gICAgICAgICAgPEJyb3dzZXJSb3V0ZXI+XHJcbiAgICAgICAgICAgIDxTY3JvbGxUb1RvcCAvPlxyXG4gICAgICAgICAgICA8Um91dGVzPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL2FkbWluXCIgZWxlbWVudD17PEFkbWluRGFzaGJvYXJkIC8+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL1wiIGVsZW1lbnQ9ezxQdWJsaWNMYXlvdXQ+PEluZGV4IC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL2Fib3V0XCIgZWxlbWVudD17PFB1YmxpY0xheW91dD48QWJvdXQgLz48L1B1YmxpY0xheW91dD59IC8+XHJcbiAgICAgICAgICAgICAgPFJvdXRlIHBhdGg9XCIvc2VydmljZXNcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxTZXJ2aWNlcyAvPjwvUHVibGljTGF5b3V0Pn0gLz5cclxuICAgICAgICAgICAgICA8Um91dGUgcGF0aD1cIi9zZXJ2aWNlcy9zYWxvblwiIGVsZW1lbnQ9ezxQdWJsaWNMYXlvdXQ+PFNhbG9uU2VydmljZXMgLz48L1B1YmxpY0xheW91dD59IC8+XHJcbiAgICAgICAgICAgICAgPFJvdXRlIHBhdGg9XCIvc2VydmljZXMvbWFrZXVwLWhhaXJcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxNYWtldXBIYWlyIC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL3NlcnZpY2VzL3N0eWxpbmdcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxTdHlsaW5nIC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL3NlcnZpY2VzL2hhaXItdHJlYXRtZW50c1wiIGVsZW1lbnQ9ezxQdWJsaWNMYXlvdXQ+PEhhaXJUcmVhdG1lbnRzIC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL3NlcnZpY2VzLzpzbHVnXCIgZWxlbWVudD17PFB1YmxpY0xheW91dD48U2VydmljZURldGFpbCAvPjwvUHVibGljTGF5b3V0Pn0gLz5cclxuICAgICAgICAgICAgICA8Um91dGUgcGF0aD1cIi9wb3J0Zm9saW9cIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxQb3J0Zm9saW8gLz48L1B1YmxpY0xheW91dD59IC8+XHJcbiAgICAgICAgICAgICAgPFJvdXRlIHBhdGg9XCIvYmxvZ1wiIGVsZW1lbnQ9ezxQdWJsaWNMYXlvdXQ+PEJsb2cgLz48L1B1YmxpY0xheW91dD59IC8+XHJcbiAgICAgICAgICAgICAgPFJvdXRlIHBhdGg9XCIvYmxvZy86aWRcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxCbG9nRGV0YWlsIC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL2NvbnRhY3RcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxDb250YWN0IC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiL2Jvb2tpbmdcIiBlbGVtZW50PXs8UHVibGljTGF5b3V0PjxCb29raW5nIC8+PC9QdWJsaWNMYXlvdXQ+fSAvPlxyXG4gICAgICAgICAgICAgIDxSb3V0ZSBwYXRoPVwiKlwiIGVsZW1lbnQ9ezxOb3RGb3VuZCAvPn0gLz5cclxuICAgICAgICAgICAgPC9Sb3V0ZXM+XHJcbiAgICAgICAgICA8L0Jyb3dzZXJSb3V0ZXI+XHJcbiAgICAgICAgPC9DYXJ0UHJvdmlkZXI+XHJcbiAgICAgIDwvVG9vbHRpcFByb3ZpZGVyPlxyXG4gICAgPC9MZW5pc1Byb3ZpZGVyPlxyXG4gIDwvUXVlcnlDbGllbnRQcm92aWRlcj5cclxuKTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IEFwcDsiXSwibmFtZXMiOlsiQmxvZ0RldGFpbCIsIlF1ZXJ5Q2xpZW50IiwiUXVlcnlDbGllbnRQcm92aWRlciIsIkJyb3dzZXJSb3V0ZXIiLCJSb3V0ZSIsIlJvdXRlcyIsInVzZUxvY2F0aW9uIiwiVG9hc3RlciIsIlNvbm5lciIsIlRvb2x0aXBQcm92aWRlciIsIkxlbmlzUHJvdmlkZXIiLCJ1c2VMZW5pcyIsIk5hdmJhciIsIkZvb3RlciIsIkN1c3RvbUN1cnNvciIsIldoYXRzQXBwRmxvYXQiLCJDYXJ0UHJvdmlkZXIiLCJ1c2VFZmZlY3QiLCJJbmRleCIsIkFib3V0IiwiU2VydmljZXMiLCJTZXJ2aWNlRGV0YWlsIiwiU2Fsb25TZXJ2aWNlcyIsIk1ha2V1cEhhaXIiLCJTdHlsaW5nIiwiSGFpclRyZWF0bWVudHMiLCJQb3J0Zm9saW8iLCJCbG9nIiwiQ29udGFjdCIsIkJvb2tpbmciLCJBZG1pbkRhc2hib2FyZCIsIk5vdEZvdW5kIiwicXVlcnlDbGllbnQiLCJTY3JvbGxUb1RvcCIsInNjcm9sbFRvIiwicGF0aG5hbWUiLCJpbW1lZGlhdGUiLCJQdWJsaWNMYXlvdXQiLCJjaGlsZHJlbiIsIm1haW4iLCJBcHAiLCJjbGllbnQiLCJwYXRoIiwiZWxlbWVudCJdLCJtYXBwaW5ncyI6Ijs7QUFBQSxPQUFPQSxnQkFBZ0Isc0JBQXNCO0FBQzdDLFNBQVNDLFdBQVcsRUFBRUMsbUJBQW1CLFFBQVEsd0JBQXdCO0FBQ3pFLFNBQVNDLGFBQWEsRUFBRUMsS0FBSyxFQUFFQyxNQUFNLEVBQUVDLFdBQVcsUUFBUSxtQkFBbUI7QUFDN0UsU0FBU0MsV0FBV0MsTUFBTSxRQUFRLHlCQUF5QjtBQUMzRCxTQUFTRCxPQUFPLFFBQVEsMEJBQTBCO0FBQ2xELFNBQVNFLGVBQWUsUUFBUSwwQkFBMEI7QUFDMUQsU0FBU0MsYUFBYSxFQUFFQyxRQUFRLFFBQVEsNkJBQTZCO0FBQ3JFLE9BQU9DLFlBQVksc0JBQXNCO0FBQ3pDLE9BQU9DLFlBQVksc0JBQXNCO0FBQ3pDLE9BQU9DLGtCQUFrQiw0QkFBNEI7QUFDckQsT0FBT0MsbUJBQW1CLDZCQUE2QjtBQUN2RCxTQUFTQyxZQUFZLFFBQVEsd0JBQXdCO0FBQ3JELFNBQVNDLFNBQVMsUUFBUSxRQUFRO0FBQ2xDLE9BQU9DLFdBQVcsZ0JBQWdCO0FBQ2xDLE9BQU9DLFdBQVcsZ0JBQWdCO0FBQ2xDLE9BQU9DLGNBQWMsbUJBQW1CO0FBQ3hDLE9BQU9DLG1CQUFtQix3QkFBd0I7QUFDbEQsT0FBT0MsbUJBQW1CLGlDQUFpQztBQUMzRCxPQUFPQyxnQkFBZ0IsOEJBQThCO0FBQ3JELE9BQU9DLGFBQWEsMkJBQTJCO0FBQy9DLE9BQU9DLG9CQUFvQixrQ0FBa0M7QUFDN0QsT0FBT0MsZUFBZSxvQkFBb0I7QUFDMUMsT0FBT0MsVUFBVSxlQUFlO0FBQ2hDLE9BQU9DLGFBQWEsa0JBQWtCO0FBQ3RDLE9BQU9DLGFBQWEsa0JBQWtCO0FBQ3RDLE9BQU9DLG9CQUFvQiwrQkFBK0I7QUFDMUQsT0FBT0MsY0FBYyxtQkFBbUI7QUFFeEMsTUFBTUMsY0FBYyxJQUFJL0I7QUFFeEIsOENBQThDO0FBQzlDLE1BQU1nQyxjQUFjOztJQUNsQixNQUFNLEVBQUVDLFFBQVEsRUFBRSxHQUFHdkI7SUFDckIsTUFBTSxFQUFFd0IsUUFBUSxFQUFFLEdBQUc3QjtJQUNyQlcsVUFBVTtRQUNSaUIsU0FBUyxHQUFHO1lBQUVFLFdBQVc7UUFBSztJQUNoQyxHQUFHO1FBQUNEO1FBQVVEO0tBQVM7SUFDdkIsT0FBTztBQUNUO0dBUE1EOztRQUNpQnRCO1FBQ0FMOzs7S0FGakIyQjtBQVNOLE1BQU1JLGVBQWUsQ0FBQyxFQUFFQyxRQUFRLEVBQWlDLGlCQUMvRDs7MEJBQ0UsUUFBQzFCOzs7OzswQkFDRCxRQUFDMkI7MEJBQU1EOzs7Ozs7MEJBQ1AsUUFBQ3pCOzs7OzswQkFDRCxRQUFDRTs7Ozs7OztNQUxDc0I7QUFTTixNQUFNRyxNQUFNLGtCQUNWLFFBQUN0QztRQUFvQnVDLFFBQVFUO2tCQUMzQixjQUFBLFFBQUN0QjtzQkFDQyxjQUFBLFFBQUNEOzBCQUNDLGNBQUEsUUFBQ087O3NDQUNDLFFBQUNGOzs7OztzQ0FDRCxRQUFDUDs7Ozs7c0NBQ0QsUUFBQ0M7Ozs7O3NDQUNELFFBQUNMOzs4Q0FDQyxRQUFDOEI7Ozs7OzhDQUNELFFBQUM1Qjs7c0RBQ0MsUUFBQ0Q7NENBQU1zQyxNQUFLOzRDQUFTQyx1QkFBUyxRQUFDYjs7Ozs7Ozs7OztzREFDL0IsUUFBQzFCOzRDQUFNc0MsTUFBSzs0Q0FBSUMsdUJBQVMsUUFBQ047MERBQWEsY0FBQSxRQUFDbkI7Ozs7Ozs7Ozs7Ozs7OztzREFDeEMsUUFBQ2Q7NENBQU1zQyxNQUFLOzRDQUFTQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNsQjs7Ozs7Ozs7Ozs7Ozs7O3NEQUM3QyxRQUFDZjs0Q0FBTXNDLE1BQUs7NENBQVlDLHVCQUFTLFFBQUNOOzBEQUFhLGNBQUEsUUFBQ2pCOzs7Ozs7Ozs7Ozs7Ozs7c0RBQ2hELFFBQUNoQjs0Q0FBTXNDLE1BQUs7NENBQWtCQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNmOzs7Ozs7Ozs7Ozs7Ozs7c0RBQ3RELFFBQUNsQjs0Q0FBTXNDLE1BQUs7NENBQXdCQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNkOzs7Ozs7Ozs7Ozs7Ozs7c0RBQzVELFFBQUNuQjs0Q0FBTXNDLE1BQUs7NENBQW9CQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNiOzs7Ozs7Ozs7Ozs7Ozs7c0RBQ3hELFFBQUNwQjs0Q0FBTXNDLE1BQUs7NENBQTRCQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNaOzs7Ozs7Ozs7Ozs7Ozs7c0RBQ2hFLFFBQUNyQjs0Q0FBTXNDLE1BQUs7NENBQWtCQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNoQjs7Ozs7Ozs7Ozs7Ozs7O3NEQUN0RCxRQUFDakI7NENBQU1zQyxNQUFLOzRDQUFhQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNYOzs7Ozs7Ozs7Ozs7Ozs7c0RBQ2pELFFBQUN0Qjs0Q0FBTXNDLE1BQUs7NENBQVFDLHVCQUFTLFFBQUNOOzBEQUFhLGNBQUEsUUFBQ1Y7Ozs7Ozs7Ozs7Ozs7OztzREFDNUMsUUFBQ3ZCOzRDQUFNc0MsTUFBSzs0Q0FBWUMsdUJBQVMsUUFBQ047MERBQWEsY0FBQSxRQUFDckM7Ozs7Ozs7Ozs7Ozs7OztzREFDaEQsUUFBQ0k7NENBQU1zQyxNQUFLOzRDQUFXQyx1QkFBUyxRQUFDTjswREFBYSxjQUFBLFFBQUNUOzs7Ozs7Ozs7Ozs7Ozs7c0RBQy9DLFFBQUN4Qjs0Q0FBTXNDLE1BQUs7NENBQVdDLHVCQUFTLFFBQUNOOzBEQUFhLGNBQUEsUUFBQ1I7Ozs7Ozs7Ozs7Ozs7OztzREFDL0MsUUFBQ3pCOzRDQUFNc0MsTUFBSzs0Q0FBSUMsdUJBQVMsUUFBQ1o7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUF6QmxDUztBQWtDTixlQUFlQSxJQUFJIn0=

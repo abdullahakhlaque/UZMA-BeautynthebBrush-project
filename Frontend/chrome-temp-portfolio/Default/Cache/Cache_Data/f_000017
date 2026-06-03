@@ -1,0 +1,939 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Booking.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];const useState = __vite__cjsImport1_react["useState"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import __vite__cjsImport1_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { motion, AnimatePresence } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { Calendar, Clock, User, Phone, CheckCircle } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { apiUrl } from "/src/lib/api.ts";
+// ✅ FULL SERVICE LIST matching the website's offerings
+const allServices = [
+    // Salon Services — Skin
+    {
+        id: 'facial',
+        category: 'Salon — Skin',
+        title: 'Facials',
+        description: 'Basic, hydrating, fruit, anti-aging, firming & brightening facials'
+    },
+    {
+        id: 'cleanup',
+        category: 'Salon — Skin',
+        title: 'Deep Cleansing / Clean-ups',
+        description: 'Remove impurities, blackheads and excess oil'
+    },
+    {
+        id: 'exfoliation',
+        category: 'Salon — Skin',
+        title: 'Exfoliation Treatments',
+        description: 'Microdermabrasion, peel-off masks to improve skin texture'
+    },
+    {
+        id: 'acne',
+        category: 'Salon — Skin',
+        title: 'Acne Treatments',
+        description: 'Anti-bacterial treatments to reduce acne and inflammation'
+    },
+    {
+        id: 'advanced-skin',
+        category: 'Salon — Skin',
+        title: 'Advanced Skin Treatments',
+        description: 'Chemical peels, Botox, dermal fillers'
+    },
+    {
+        id: 'brightening',
+        category: 'Salon — Skin',
+        title: 'Skin Brightening / Lightening',
+        description: 'Reduce pigmentation and even out skin tone'
+    },
+    {
+        id: 'hair-removal',
+        category: 'Salon — Skin',
+        title: 'Hair Removal',
+        description: 'Threading, waxing for facial and body hair'
+    },
+    {
+        id: 'body-treatment',
+        category: 'Salon — Skin',
+        title: 'Body Treatments',
+        description: 'Body scrubs, exfoliation and body polishing'
+    },
+    // Salon Services — Hair
+    {
+        id: 'haircut',
+        category: 'Salon — Hair',
+        title: 'Haircuts & Styling',
+        description: 'Precision cuts, blow-drying, curling, ironing, updos'
+    },
+    {
+        id: 'hair-color',
+        category: 'Salon — Hair',
+        title: 'Hair Coloring',
+        description: 'Root touch-ups, global coloring, balayage, highlights'
+    },
+    {
+        id: 'hair-spa',
+        category: 'Salon — Hair',
+        title: 'Hair Treatments & Spa',
+        description: 'Deep conditioning, steam hair spa, dandruff & hair fall treatment'
+    },
+    {
+        id: 'texture',
+        category: 'Salon — Hair',
+        title: 'Texture Services',
+        description: 'Chemical straightening, smoothening, perms, relaxers'
+    },
+    {
+        id: 'extensions',
+        category: 'Salon — Hair',
+        title: 'Extensions & Add-ons',
+        description: 'Hair extensions for length or volume'
+    },
+    // Makeup & Hair (MUH)
+    {
+        id: 'bridal-makeup',
+        category: 'Makeup & Hair',
+        title: 'Bridal Makeup',
+        description: 'Complete bridal look tailored to your style'
+    },
+    {
+        id: 'party-makeup',
+        category: 'Makeup & Hair',
+        title: 'Party Makeup',
+        description: 'Glamorous looks for every celebration'
+    },
+    // Styling
+    {
+        id: 'saree-draping',
+        category: 'Styling',
+        title: 'Saree Draping',
+        description: 'Professional saree draping for all occasions'
+    },
+    {
+        id: 'general-styling',
+        category: 'Styling',
+        title: 'General Styling',
+        description: 'Outfit and accessory styling guidance'
+    },
+    // Hair Treatments
+    {
+        id: 'keratin',
+        category: 'Hair Treatments',
+        title: 'Keratin Treatment',
+        description: 'Smooth and straighten hair, reducing frizz significantly'
+    },
+    {
+        id: 'cysteine',
+        category: 'Hair Treatments',
+        title: 'Cysteine Treatment',
+        description: 'Softer, more natural hair straightening option'
+    },
+    {
+        id: 'botox-hair',
+        category: 'Hair Treatments',
+        title: 'Hair Botox',
+        description: 'Smoothing treatment suitable for all hair types, lasts ~4 months'
+    },
+    {
+        id: 'relaxer',
+        category: 'Hair Treatments',
+        title: 'Hair Relaxer',
+        description: 'Stronger chemical process to straighten hair'
+    },
+    {
+        id: 'deep-conditioning',
+        category: 'Hair Treatments',
+        title: 'Deep Conditioning / Hair Masks',
+        description: 'Intense moisture-rich treatment for dryness'
+    },
+    {
+        id: 'hot-oil',
+        category: 'Hair Treatments',
+        title: 'Hot Oil Treatment',
+        description: 'Nourishment through warm oil infusions for dry, brittle hair'
+    },
+    {
+        id: 'olaplex',
+        category: 'Hair Treatments',
+        title: 'Olaplex Treatment',
+        description: 'Repairs damaged hair by strengthening hair bonds'
+    },
+    {
+        id: 'scalp-treatment',
+        category: 'Hair Treatments',
+        title: 'Scalp Treatment',
+        description: 'Rejuvenates scalp, promotes hair growth and minimises hair loss'
+    },
+    {
+        id: 'detox',
+        category: 'Hair Treatments',
+        title: 'Detox Treatment',
+        description: 'Cleanses the scalp and hair thoroughly'
+    },
+    {
+        id: 'color-protection',
+        category: 'Hair Treatments',
+        title: 'Color Protection Treatment',
+        description: 'Maintain and protect hair color'
+    },
+    {
+        id: 'anti-breakage',
+        category: 'Hair Treatments',
+        title: 'Anti-Breakage Treatment',
+        description: 'Strengthens hair to reduce breakage'
+    }
+];
+const categories = [
+    ...new Set(allServices.map((s)=>s.category))
+];
+const timeSlots = [
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '2:00 PM',
+    '3:00 PM',
+    '4:00 PM'
+];
+const steps = [
+    'Select Service',
+    'Choose Date & Time',
+    'Your Details',
+    'Confirmation'
+];
+const Booking = ()=>{
+    _s();
+    const [step, setStep] = useState(0);
+    const [activeCategory, setActiveCategory] = useState(categories[0]);
+    const [selectedService, setSelectedService] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState('');
+    const selectedServiceData = allServices.find((s)=>s.id === selectedService);
+    const handleBooking = async ()=>{
+        setIsSubmitting(true);
+        setError('');
+        try {
+            const res = await fetch(apiUrl('/api/book'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    service: selectedServiceData?.title || selectedService,
+                    date: new Date(selectedDate).toISOString(),
+                    timeSlot: selectedTime
+                })
+            });
+            const data = await res.json();
+            if (data.error) {
+                setError(data.error);
+                setIsSubmitting(false);
+                return;
+            }
+            setStep(3);
+        } catch  {
+            setError('Could not connect to server. Please try again.');
+        } finally{
+            setIsSubmitting(false);
+        }
+    };
+    const next = ()=>{
+        setError('');
+        if (step === 2) {
+            handleBooking();
+            return;
+        }
+        setStep((s)=>Math.min(s + 1, 3));
+    };
+    const prev = ()=>{
+        setError('');
+        setStep((s)=>Math.max(s - 1, 0));
+    };
+    const whatsappMessage = encodeURIComponent(`Hi, I booked an appointment:\nName: ${name}\nService: ${selectedServiceData?.title}\nDate: ${selectedDate}\nTime: ${selectedTime}`);
+    const filteredServices = allServices.filter((s)=>s.category === activeCategory);
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20 min-h-screen relative overflow-hidden",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed inset-0 -z-10 bg-gradient-to-b from-[hsl(30,20%,97%)] via-[hsl(350,30%,96%)] to-[hsl(0,0%,100%)]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                lineNumber: 120,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed top-1/3 left-1/3 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.1] blur-[120px]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                lineNumber: 121,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "section-padding",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "max-w-2xl mx-auto",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: {
+                                opacity: 1,
+                                y: 0
+                            },
+                            transition: {
+                                duration: 0.8
+                            },
+                            className: "text-center mb-12",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                    children: "Booking"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 131,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("h1", {
+                                    className: "font-heading text-4xl md:text-5xl font-semibold",
+                                    children: "Book Your Appointment"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 132,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                            lineNumber: 125,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            className: "flex items-center justify-between mb-12",
+                            children: steps.map((s, i)=>/*#__PURE__*/ _jsxDEV("div", {
+                                    className: "flex items-center",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: `w-8 h-8 rounded-full flex items-center justify-center text-sm font-body transition-colors ${i <= step ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`,
+                                            children: i + 1
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                            lineNumber: 139,
+                                            columnNumber: 17
+                                        }, this),
+                                        i < steps.length - 1 && /*#__PURE__*/ _jsxDEV("div", {
+                                            className: `hidden sm:block w-12 md:w-20 h-px mx-2 ${i < step ? 'bg-primary' : 'bg-border'}`
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                            lineNumber: 145,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, s, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 138,
+                                    columnNumber: 15
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                            lineNumber: 136,
+                            columnNumber: 11
+                        }, this),
+                        error && /*#__PURE__*/ _jsxDEV("div", {
+                            className: "mb-6 p-4 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive text-sm font-body",
+                            children: error
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                            lineNumber: 152,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV(AnimatePresence, {
+                            mode: "wait",
+                            children: /*#__PURE__*/ _jsxDEV(motion.div, {
+                                initial: {
+                                    opacity: 0,
+                                    x: 20
+                                },
+                                animate: {
+                                    opacity: 1,
+                                    x: 0
+                                },
+                                exit: {
+                                    opacity: 0,
+                                    x: -20
+                                },
+                                transition: {
+                                    duration: 0.3
+                                },
+                                children: [
+                                    step === 0 && /*#__PURE__*/ _jsxDEV("div", {
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-xl font-semibold mb-4",
+                                                children: "Select a Service"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 168,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "flex flex-wrap gap-2 mb-6",
+                                                children: categories.map((cat)=>/*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>setActiveCategory(cat),
+                                                        className: `px-4 py-1.5 rounded-full text-xs font-body font-medium transition-all ${activeCategory === cat ? 'bg-primary text-primary-foreground' : 'border border-border text-muted-foreground hover:border-primary/40'}`,
+                                                        children: cat
+                                                    }, cat, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 173,
+                                                        columnNumber: 23
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 171,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "space-y-3 max-h-[420px] overflow-y-auto pr-1",
+                                                children: filteredServices.map((service)=>/*#__PURE__*/ _jsxDEV("button", {
+                                                        onClick: ()=>setSelectedService(service.id),
+                                                        className: `w-full text-left p-4 rounded-xl border-2 transition-all duration-300 ${selectedService === service.id ? 'border-primary bg-accent/30' : 'border-border hover:border-primary/30'}`,
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "font-heading font-semibold block",
+                                                                children: service.title
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 199,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "font-body text-sm text-muted-foreground mt-0.5",
+                                                                children: service.description
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 200,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        ]
+                                                    }, service.id, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 190,
+                                                        columnNumber: 23
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 188,
+                                                columnNumber: 19
+                                            }, this),
+                                            selectedServiceData && /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "mt-4 p-3 rounded-xl bg-accent/40 text-sm font-body text-primary",
+                                                children: [
+                                                    "✓ Selected: ",
+                                                    /*#__PURE__*/ _jsxDEV("strong", {
+                                                        children: selectedServiceData.title
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 207,
+                                                        columnNumber: 35
+                                                    }, this),
+                                                    " (",
+                                                    selectedServiceData.category,
+                                                    ")"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 206,
+                                                columnNumber: 21
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                        lineNumber: 167,
+                                        columnNumber: 17
+                                    }, this),
+                                    step === 1 && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "space-y-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-xl font-semibold mb-6",
+                                                children: "Choose Date & Time"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 216,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("label", {
+                                                        className: "block font-body text-sm font-medium mb-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV(Calendar, {
+                                                                className: "w-4 h-4 inline mr-2"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 219,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            "Select Date"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 218,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("input", {
+                                                        type: "date",
+                                                        value: selectedDate,
+                                                        onChange: (e)=>setSelectedDate(e.target.value),
+                                                        min: new Date().toISOString().split('T')[0],
+                                                        className: "w-full px-4 py-3 rounded-xl border border-border bg-card font-body focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 221,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 217,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("label", {
+                                                        className: "block font-body text-sm font-medium mb-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV(Clock, {
+                                                                className: "w-4 h-4 inline mr-2"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 231,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            "Select Time"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 230,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "grid grid-cols-3 gap-3",
+                                                        children: timeSlots.map((time)=>/*#__PURE__*/ _jsxDEV("button", {
+                                                                onClick: ()=>setSelectedTime(time),
+                                                                className: `px-4 py-3 rounded-xl border-2 text-sm font-body transition-all ${selectedTime === time ? 'border-primary bg-accent/30 text-primary' : 'border-border hover:border-primary/30'}`,
+                                                                children: time
+                                                            }, time, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 235,
+                                                                columnNumber: 25
+                                                            }, this))
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 233,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 229,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                        lineNumber: 215,
+                                        columnNumber: 17
+                                    }, this),
+                                    step === 2 && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "space-y-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-xl font-semibold mb-6",
+                                                children: "Your Details"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 255,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("label", {
+                                                        className: "block font-body text-sm font-medium mb-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV(User, {
+                                                                className: "w-4 h-4 inline mr-2"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 258,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            "Full Name"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 257,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("input", {
+                                                        type: "text",
+                                                        value: name,
+                                                        onChange: (e)=>setName(e.target.value),
+                                                        placeholder: "Your full name",
+                                                        className: "w-full px-4 py-3 rounded-xl border border-border bg-card font-body focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 260,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 256,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("label", {
+                                                        className: "block font-body text-sm font-medium mb-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV(Phone, {
+                                                                className: "w-4 h-4 inline mr-2"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 270,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            "Phone Number"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 269,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("input", {
+                                                        type: "tel",
+                                                        value: phone,
+                                                        onChange: (e)=>setPhone(e.target.value),
+                                                        placeholder: "+91 XXXXX XXXXX",
+                                                        className: "w-full px-4 py-3 rounded-xl border border-border bg-card font-body focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 272,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 268,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "p-4 rounded-xl bg-accent/30 space-y-1.5 text-sm font-body",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Service:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 282,
+                                                                columnNumber: 24
+                                                            }, this),
+                                                            " ",
+                                                            selectedServiceData?.title
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 282,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Date:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 283,
+                                                                columnNumber: 24
+                                                            }, this),
+                                                            " ",
+                                                            selectedDate
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 283,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Time:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 284,
+                                                                columnNumber: 24
+                                                            }, this),
+                                                            " ",
+                                                            selectedTime
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 284,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 281,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                        lineNumber: 254,
+                                        columnNumber: 17
+                                    }, this),
+                                    step === 3 && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "text-center py-8",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV(motion.div, {
+                                                initial: {
+                                                    scale: 0
+                                                },
+                                                animate: {
+                                                    scale: 1
+                                                },
+                                                transition: {
+                                                    type: 'spring',
+                                                    stiffness: 200
+                                                },
+                                                children: /*#__PURE__*/ _jsxDEV(CheckCircle, {
+                                                    className: "w-20 h-20 text-primary mx-auto mb-6"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                    lineNumber: 293,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 292,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-2xl font-semibold mb-4",
+                                                children: "Booking Confirmed!"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 295,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "bg-cream rounded-2xl p-6 text-left space-y-3 mb-6",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "font-body text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Service:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 297,
+                                                                columnNumber: 54
+                                                            }, this),
+                                                            " ",
+                                                            selectedServiceData?.title
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 297,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "font-body text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Date:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 298,
+                                                                columnNumber: 54
+                                                            }, this),
+                                                            " ",
+                                                            selectedDate
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 298,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "font-body text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Time:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 299,
+                                                                columnNumber: 54
+                                                            }, this),
+                                                            " ",
+                                                            selectedTime
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 299,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "font-body text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Name:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 300,
+                                                                columnNumber: 54
+                                                            }, this),
+                                                            " ",
+                                                            name
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 300,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "font-body text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("strong", {
+                                                                children: "Phone:"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                                lineNumber: 301,
+                                                                columnNumber: 54
+                                                            }, this),
+                                                            " ",
+                                                            phone
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                        lineNumber: 301,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 296,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("a", {
+                                                href: `https://wa.me/919148768958?text=${whatsappMessage}`,
+                                                target: "_blank",
+                                                rel: "noopener noreferrer",
+                                                className: "inline-flex items-center gap-2 px-8 py-4 text-base font-medium bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg",
+                                                children: "Confirm via WhatsApp"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                                lineNumber: 303,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                        lineNumber: 291,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, step, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                lineNumber: 158,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                            lineNumber: 157,
+                            columnNumber: 11
+                        }, this),
+                        step < 3 && /*#__PURE__*/ _jsxDEV("div", {
+                            className: "flex justify-between mt-8",
+                            children: [
+                                step > 0 ? /*#__PURE__*/ _jsxDEV("button", {
+                                    onClick: prev,
+                                    className: "px-6 py-3 text-sm font-body text-muted-foreground hover:text-foreground transition-colors",
+                                    children: "← Back"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 319,
+                                    columnNumber: 17
+                                }, this) : /*#__PURE__*/ _jsxDEV("div", {}, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 322,
+                                    columnNumber: 19
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("button", {
+                                    onClick: next,
+                                    disabled: isSubmitting || step === 0 && !selectedService || step === 1 && (!selectedDate || !selectedTime) || step === 2 && (!name || !phone),
+                                    className: "px-8 py-3 text-base font-medium bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed luxury-glow shadow-lg",
+                                    children: isSubmitting ? 'Submitting...' : step === 2 ? 'Confirm Booking' : 'Continue →'
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                                    lineNumber: 323,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                            lineNumber: 317,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                    lineNumber: 124,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+                lineNumber: 123,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx",
+        lineNumber: 119,
+        columnNumber: 5
+    }, this);
+};
+_s(Booking, "Ba5UzcXS/99R5JwtDHR32PyXUlo=");
+_c = Booking;
+export default Booking;
+var _c;
+$RefreshReg$(_c, "Booking");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Booking.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkJvb2tpbmcudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgbW90aW9uLCBBbmltYXRlUHJlc2VuY2UgfSBmcm9tICdmcmFtZXItbW90aW9uJztcbmltcG9ydCB7IENhbGVuZGFyLCBDbG9jaywgVXNlciwgUGhvbmUsIENoZWNrQ2lyY2xlIH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcbmltcG9ydCB7IGFwaVVybCB9IGZyb20gJ0AvbGliL2FwaSc7XG5cclxuLy8g4pyFIEZVTEwgU0VSVklDRSBMSVNUIG1hdGNoaW5nIHRoZSB3ZWJzaXRlJ3Mgb2ZmZXJpbmdzXHJcbmNvbnN0IGFsbFNlcnZpY2VzID0gW1xyXG4gIC8vIFNhbG9uIFNlcnZpY2VzIOKAlCBTa2luXHJcbiAgeyBpZDogJ2ZhY2lhbCcsIGNhdGVnb3J5OiAnU2Fsb24g4oCUIFNraW4nLCB0aXRsZTogJ0ZhY2lhbHMnLCBkZXNjcmlwdGlvbjogJ0Jhc2ljLCBoeWRyYXRpbmcsIGZydWl0LCBhbnRpLWFnaW5nLCBmaXJtaW5nICYgYnJpZ2h0ZW5pbmcgZmFjaWFscycgfSxcclxuICB7IGlkOiAnY2xlYW51cCcsIGNhdGVnb3J5OiAnU2Fsb24g4oCUIFNraW4nLCB0aXRsZTogJ0RlZXAgQ2xlYW5zaW5nIC8gQ2xlYW4tdXBzJywgZGVzY3JpcHRpb246ICdSZW1vdmUgaW1wdXJpdGllcywgYmxhY2toZWFkcyBhbmQgZXhjZXNzIG9pbCcgfSxcclxuICB7IGlkOiAnZXhmb2xpYXRpb24nLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBTa2luJywgdGl0bGU6ICdFeGZvbGlhdGlvbiBUcmVhdG1lbnRzJywgZGVzY3JpcHRpb246ICdNaWNyb2Rlcm1hYnJhc2lvbiwgcGVlbC1vZmYgbWFza3MgdG8gaW1wcm92ZSBza2luIHRleHR1cmUnIH0sXHJcbiAgeyBpZDogJ2FjbmUnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBTa2luJywgdGl0bGU6ICdBY25lIFRyZWF0bWVudHMnLCBkZXNjcmlwdGlvbjogJ0FudGktYmFjdGVyaWFsIHRyZWF0bWVudHMgdG8gcmVkdWNlIGFjbmUgYW5kIGluZmxhbW1hdGlvbicgfSxcclxuICB7IGlkOiAnYWR2YW5jZWQtc2tpbicsIGNhdGVnb3J5OiAnU2Fsb24g4oCUIFNraW4nLCB0aXRsZTogJ0FkdmFuY2VkIFNraW4gVHJlYXRtZW50cycsIGRlc2NyaXB0aW9uOiAnQ2hlbWljYWwgcGVlbHMsIEJvdG94LCBkZXJtYWwgZmlsbGVycycgfSxcclxuICB7IGlkOiAnYnJpZ2h0ZW5pbmcnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBTa2luJywgdGl0bGU6ICdTa2luIEJyaWdodGVuaW5nIC8gTGlnaHRlbmluZycsIGRlc2NyaXB0aW9uOiAnUmVkdWNlIHBpZ21lbnRhdGlvbiBhbmQgZXZlbiBvdXQgc2tpbiB0b25lJyB9LFxyXG4gIHsgaWQ6ICdoYWlyLXJlbW92YWwnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBTa2luJywgdGl0bGU6ICdIYWlyIFJlbW92YWwnLCBkZXNjcmlwdGlvbjogJ1RocmVhZGluZywgd2F4aW5nIGZvciBmYWNpYWwgYW5kIGJvZHkgaGFpcicgfSxcclxuICB7IGlkOiAnYm9keS10cmVhdG1lbnQnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBTa2luJywgdGl0bGU6ICdCb2R5IFRyZWF0bWVudHMnLCBkZXNjcmlwdGlvbjogJ0JvZHkgc2NydWJzLCBleGZvbGlhdGlvbiBhbmQgYm9keSBwb2xpc2hpbmcnIH0sXHJcblxyXG4gIC8vIFNhbG9uIFNlcnZpY2VzIOKAlCBIYWlyXHJcbiAgeyBpZDogJ2hhaXJjdXQnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBIYWlyJywgdGl0bGU6ICdIYWlyY3V0cyAmIFN0eWxpbmcnLCBkZXNjcmlwdGlvbjogJ1ByZWNpc2lvbiBjdXRzLCBibG93LWRyeWluZywgY3VybGluZywgaXJvbmluZywgdXBkb3MnIH0sXHJcbiAgeyBpZDogJ2hhaXItY29sb3InLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBIYWlyJywgdGl0bGU6ICdIYWlyIENvbG9yaW5nJywgZGVzY3JpcHRpb246ICdSb290IHRvdWNoLXVwcywgZ2xvYmFsIGNvbG9yaW5nLCBiYWxheWFnZSwgaGlnaGxpZ2h0cycgfSxcclxuICB7IGlkOiAnaGFpci1zcGEnLCBjYXRlZ29yeTogJ1NhbG9uIOKAlCBIYWlyJywgdGl0bGU6ICdIYWlyIFRyZWF0bWVudHMgJiBTcGEnLCBkZXNjcmlwdGlvbjogJ0RlZXAgY29uZGl0aW9uaW5nLCBzdGVhbSBoYWlyIHNwYSwgZGFuZHJ1ZmYgJiBoYWlyIGZhbGwgdHJlYXRtZW50JyB9LFxyXG4gIHsgaWQ6ICd0ZXh0dXJlJywgY2F0ZWdvcnk6ICdTYWxvbiDigJQgSGFpcicsIHRpdGxlOiAnVGV4dHVyZSBTZXJ2aWNlcycsIGRlc2NyaXB0aW9uOiAnQ2hlbWljYWwgc3RyYWlnaHRlbmluZywgc21vb3RoZW5pbmcsIHBlcm1zLCByZWxheGVycycgfSxcclxuICB7IGlkOiAnZXh0ZW5zaW9ucycsIGNhdGVnb3J5OiAnU2Fsb24g4oCUIEhhaXInLCB0aXRsZTogJ0V4dGVuc2lvbnMgJiBBZGQtb25zJywgZGVzY3JpcHRpb246ICdIYWlyIGV4dGVuc2lvbnMgZm9yIGxlbmd0aCBvciB2b2x1bWUnIH0sXHJcblxyXG4gIC8vIE1ha2V1cCAmIEhhaXIgKE1VSClcclxuICB7IGlkOiAnYnJpZGFsLW1ha2V1cCcsIGNhdGVnb3J5OiAnTWFrZXVwICYgSGFpcicsIHRpdGxlOiAnQnJpZGFsIE1ha2V1cCcsIGRlc2NyaXB0aW9uOiAnQ29tcGxldGUgYnJpZGFsIGxvb2sgdGFpbG9yZWQgdG8geW91ciBzdHlsZScgfSxcclxuICB7IGlkOiAncGFydHktbWFrZXVwJywgY2F0ZWdvcnk6ICdNYWtldXAgJiBIYWlyJywgdGl0bGU6ICdQYXJ0eSBNYWtldXAnLCBkZXNjcmlwdGlvbjogJ0dsYW1vcm91cyBsb29rcyBmb3IgZXZlcnkgY2VsZWJyYXRpb24nIH0sXHJcblxyXG4gIC8vIFN0eWxpbmdcclxuICB7IGlkOiAnc2FyZWUtZHJhcGluZycsIGNhdGVnb3J5OiAnU3R5bGluZycsIHRpdGxlOiAnU2FyZWUgRHJhcGluZycsIGRlc2NyaXB0aW9uOiAnUHJvZmVzc2lvbmFsIHNhcmVlIGRyYXBpbmcgZm9yIGFsbCBvY2Nhc2lvbnMnIH0sXHJcbiAgeyBpZDogJ2dlbmVyYWwtc3R5bGluZycsIGNhdGVnb3J5OiAnU3R5bGluZycsIHRpdGxlOiAnR2VuZXJhbCBTdHlsaW5nJywgZGVzY3JpcHRpb246ICdPdXRmaXQgYW5kIGFjY2Vzc29yeSBzdHlsaW5nIGd1aWRhbmNlJyB9LFxyXG5cclxuICAvLyBIYWlyIFRyZWF0bWVudHNcclxuICB7IGlkOiAna2VyYXRpbicsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdLZXJhdGluIFRyZWF0bWVudCcsIGRlc2NyaXB0aW9uOiAnU21vb3RoIGFuZCBzdHJhaWdodGVuIGhhaXIsIHJlZHVjaW5nIGZyaXp6IHNpZ25pZmljYW50bHknIH0sXHJcbiAgeyBpZDogJ2N5c3RlaW5lJywgY2F0ZWdvcnk6ICdIYWlyIFRyZWF0bWVudHMnLCB0aXRsZTogJ0N5c3RlaW5lIFRyZWF0bWVudCcsIGRlc2NyaXB0aW9uOiAnU29mdGVyLCBtb3JlIG5hdHVyYWwgaGFpciBzdHJhaWdodGVuaW5nIG9wdGlvbicgfSxcclxuICB7IGlkOiAnYm90b3gtaGFpcicsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdIYWlyIEJvdG94JywgZGVzY3JpcHRpb246ICdTbW9vdGhpbmcgdHJlYXRtZW50IHN1aXRhYmxlIGZvciBhbGwgaGFpciB0eXBlcywgbGFzdHMgfjQgbW9udGhzJyB9LFxyXG4gIHsgaWQ6ICdyZWxheGVyJywgY2F0ZWdvcnk6ICdIYWlyIFRyZWF0bWVudHMnLCB0aXRsZTogJ0hhaXIgUmVsYXhlcicsIGRlc2NyaXB0aW9uOiAnU3Ryb25nZXIgY2hlbWljYWwgcHJvY2VzcyB0byBzdHJhaWdodGVuIGhhaXInIH0sXHJcbiAgeyBpZDogJ2RlZXAtY29uZGl0aW9uaW5nJywgY2F0ZWdvcnk6ICdIYWlyIFRyZWF0bWVudHMnLCB0aXRsZTogJ0RlZXAgQ29uZGl0aW9uaW5nIC8gSGFpciBNYXNrcycsIGRlc2NyaXB0aW9uOiAnSW50ZW5zZSBtb2lzdHVyZS1yaWNoIHRyZWF0bWVudCBmb3IgZHJ5bmVzcycgfSxcclxuICB7IGlkOiAnaG90LW9pbCcsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdIb3QgT2lsIFRyZWF0bWVudCcsIGRlc2NyaXB0aW9uOiAnTm91cmlzaG1lbnQgdGhyb3VnaCB3YXJtIG9pbCBpbmZ1c2lvbnMgZm9yIGRyeSwgYnJpdHRsZSBoYWlyJyB9LFxyXG4gIHsgaWQ6ICdvbGFwbGV4JywgY2F0ZWdvcnk6ICdIYWlyIFRyZWF0bWVudHMnLCB0aXRsZTogJ09sYXBsZXggVHJlYXRtZW50JywgZGVzY3JpcHRpb246ICdSZXBhaXJzIGRhbWFnZWQgaGFpciBieSBzdHJlbmd0aGVuaW5nIGhhaXIgYm9uZHMnIH0sXHJcbiAgeyBpZDogJ3NjYWxwLXRyZWF0bWVudCcsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdTY2FscCBUcmVhdG1lbnQnLCBkZXNjcmlwdGlvbjogJ1JlanV2ZW5hdGVzIHNjYWxwLCBwcm9tb3RlcyBoYWlyIGdyb3d0aCBhbmQgbWluaW1pc2VzIGhhaXIgbG9zcycgfSxcclxuICB7IGlkOiAnZGV0b3gnLCBjYXRlZ29yeTogJ0hhaXIgVHJlYXRtZW50cycsIHRpdGxlOiAnRGV0b3ggVHJlYXRtZW50JywgZGVzY3JpcHRpb246ICdDbGVhbnNlcyB0aGUgc2NhbHAgYW5kIGhhaXIgdGhvcm91Z2hseScgfSxcclxuICB7IGlkOiAnY29sb3ItcHJvdGVjdGlvbicsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdDb2xvciBQcm90ZWN0aW9uIFRyZWF0bWVudCcsIGRlc2NyaXB0aW9uOiAnTWFpbnRhaW4gYW5kIHByb3RlY3QgaGFpciBjb2xvcicgfSxcclxuICB7IGlkOiAnYW50aS1icmVha2FnZScsIGNhdGVnb3J5OiAnSGFpciBUcmVhdG1lbnRzJywgdGl0bGU6ICdBbnRpLUJyZWFrYWdlIFRyZWF0bWVudCcsIGRlc2NyaXB0aW9uOiAnU3RyZW5ndGhlbnMgaGFpciB0byByZWR1Y2UgYnJlYWthZ2UnIH0sXHJcbl07XHJcblxyXG5jb25zdCBjYXRlZ29yaWVzID0gWy4uLm5ldyBTZXQoYWxsU2VydmljZXMubWFwKHMgPT4gcy5jYXRlZ29yeSkpXTtcclxuXHJcbmNvbnN0IHRpbWVTbG90cyA9IFsnMTA6MDAgQU0nLCAnMTE6MDAgQU0nLCAnMTI6MDAgUE0nLCAnMjowMCBQTScsICczOjAwIFBNJywgJzQ6MDAgUE0nXTtcclxuXHJcbmNvbnN0IHN0ZXBzID0gWydTZWxlY3QgU2VydmljZScsICdDaG9vc2UgRGF0ZSAmIFRpbWUnLCAnWW91ciBEZXRhaWxzJywgJ0NvbmZpcm1hdGlvbiddO1xyXG5cclxuY29uc3QgQm9va2luZyA9ICgpID0+IHtcclxuICBjb25zdCBbc3RlcCwgc2V0U3RlcF0gPSB1c2VTdGF0ZSgwKTtcclxuICBjb25zdCBbYWN0aXZlQ2F0ZWdvcnksIHNldEFjdGl2ZUNhdGVnb3J5XSA9IHVzZVN0YXRlKGNhdGVnb3JpZXNbMF0pO1xyXG4gIGNvbnN0IFtzZWxlY3RlZFNlcnZpY2UsIHNldFNlbGVjdGVkU2VydmljZV0gPSB1c2VTdGF0ZSgnJyk7XHJcbiAgY29uc3QgW3NlbGVjdGVkRGF0ZSwgc2V0U2VsZWN0ZWREYXRlXSA9IHVzZVN0YXRlKCcnKTtcclxuICBjb25zdCBbc2VsZWN0ZWRUaW1lLCBzZXRTZWxlY3RlZFRpbWVdID0gdXNlU3RhdGUoJycpO1xyXG4gIGNvbnN0IFtuYW1lLCBzZXROYW1lXSA9IHVzZVN0YXRlKCcnKTtcclxuICBjb25zdCBbcGhvbmUsIHNldFBob25lXSA9IHVzZVN0YXRlKCcnKTtcclxuICBjb25zdCBbaXNTdWJtaXR0aW5nLCBzZXRJc1N1Ym1pdHRpbmddID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFtlcnJvciwgc2V0RXJyb3JdID0gdXNlU3RhdGUoJycpO1xyXG5cclxuICBjb25zdCBzZWxlY3RlZFNlcnZpY2VEYXRhID0gYWxsU2VydmljZXMuZmluZChzID0+IHMuaWQgPT09IHNlbGVjdGVkU2VydmljZSk7XHJcblxyXG4gIGNvbnN0IGhhbmRsZUJvb2tpbmcgPSBhc3luYyAoKSA9PiB7XG4gICAgc2V0SXNTdWJtaXR0aW5nKHRydWUpO1xuICAgIHNldEVycm9yKCcnKTtcbiAgICB0cnkge1xuICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goYXBpVXJsKCcvYXBpL2Jvb2snKSwge1xuICAgICAgICBtZXRob2Q6ICdQT1NUJyxcbiAgICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sXG4gICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KHtcbiAgICAgICAgICBuYW1lLFxyXG4gICAgICAgICAgcGhvbmUsXHJcbiAgICAgICAgICBzZXJ2aWNlOiBzZWxlY3RlZFNlcnZpY2VEYXRhPy50aXRsZSB8fCBzZWxlY3RlZFNlcnZpY2UsXHJcbiAgICAgICAgICBkYXRlOiBuZXcgRGF0ZShzZWxlY3RlZERhdGUpLnRvSVNPU3RyaW5nKCksXHJcbiAgICAgICAgICB0aW1lU2xvdDogc2VsZWN0ZWRUaW1lLFxyXG4gICAgICAgIH0pLFxyXG4gICAgICB9KTtcclxuXHJcbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXMuanNvbigpO1xyXG5cclxuICAgICAgaWYgKGRhdGEuZXJyb3IpIHtcclxuICAgICAgICBzZXRFcnJvcihkYXRhLmVycm9yKTtcclxuICAgICAgICBzZXRJc1N1Ym1pdHRpbmcoZmFsc2UpO1xyXG4gICAgICAgIHJldHVybjtcclxuICAgICAgfVxyXG5cclxuICAgICAgc2V0U3RlcCgzKTtcclxuICAgIH0gY2F0Y2gge1xyXG4gICAgICBzZXRFcnJvcignQ291bGQgbm90IGNvbm5lY3QgdG8gc2VydmVyLiBQbGVhc2UgdHJ5IGFnYWluLicpO1xyXG4gICAgfSBmaW5hbGx5IHtcclxuICAgICAgc2V0SXNTdWJtaXR0aW5nKGZhbHNlKTtcclxuICAgIH1cclxuICB9O1xyXG5cclxuICBjb25zdCBuZXh0ID0gKCkgPT4ge1xyXG4gICAgc2V0RXJyb3IoJycpO1xyXG4gICAgaWYgKHN0ZXAgPT09IDIpIHtcclxuICAgICAgaGFuZGxlQm9va2luZygpO1xyXG4gICAgICByZXR1cm47XHJcbiAgICB9XHJcbiAgICBzZXRTdGVwKHMgPT4gTWF0aC5taW4ocyArIDEsIDMpKTtcclxuICB9O1xyXG5cclxuICBjb25zdCBwcmV2ID0gKCkgPT4ge1xyXG4gICAgc2V0RXJyb3IoJycpO1xyXG4gICAgc2V0U3RlcChzID0+IE1hdGgubWF4KHMgLSAxLCAwKSk7XHJcbiAgfTtcclxuXHJcbiAgY29uc3Qgd2hhdHNhcHBNZXNzYWdlID0gZW5jb2RlVVJJQ29tcG9uZW50KFxyXG4gICAgYEhpLCBJIGJvb2tlZCBhbiBhcHBvaW50bWVudDpcXG5OYW1lOiAke25hbWV9XFxuU2VydmljZTogJHtzZWxlY3RlZFNlcnZpY2VEYXRhPy50aXRsZX1cXG5EYXRlOiAke3NlbGVjdGVkRGF0ZX1cXG5UaW1lOiAke3NlbGVjdGVkVGltZX1gXHJcbiAgKTtcclxuXHJcbiAgY29uc3QgZmlsdGVyZWRTZXJ2aWNlcyA9IGFsbFNlcnZpY2VzLmZpbHRlcihzID0+IHMuY2F0ZWdvcnkgPT09IGFjdGl2ZUNhdGVnb3J5KTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwicHQtMjAgbWluLWgtc2NyZWVuIHJlbGF0aXZlIG92ZXJmbG93LWhpZGRlblwiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZpeGVkIGluc2V0LTAgLXotMTAgYmctZ3JhZGllbnQtdG8tYiBmcm9tLVtoc2woMzAsMjAlLDk3JSldIHZpYS1baHNsKDM1MCwzMCUsOTYlKV0gdG8tW2hzbCgwLDAlLDEwMCUpXVwiIC8+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZml4ZWQgdG9wLTEvMyBsZWZ0LTEvMyAtei0xMCB3LVs1MDBweF0gaC1bNTAwcHhdIHJvdW5kZWQtZnVsbCBiZy1baHNsKDM1MCwzMCUsODUlKV0gb3BhY2l0eS1bMC4xXSBibHVyLVsxMjBweF1cIiAvPlxyXG5cclxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy0yeGwgbXgtYXV0b1wiPlxyXG4gICAgICAgICAgPG1vdGlvbi5kaXZcclxuICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fVxyXG4gICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHk6IDAgfX1cclxuICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44IH19XHJcbiAgICAgICAgICAgIGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTEyXCJcclxuICAgICAgICAgID5cclxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1hY2NlbnQgdGV4dC1wcmltYXJ5IHRyYWNraW5nLVswLjJlbV0gdXBwZXJjYXNlIHRleHQtc20gbWItMlwiPkJvb2tpbmc8L3A+XHJcbiAgICAgICAgICAgIDxoMSBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC00eGwgbWQ6dGV4dC01eGwgZm9udC1zZW1pYm9sZFwiPkJvb2sgWW91ciBBcHBvaW50bWVudDwvaDE+XHJcbiAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcblxyXG4gICAgICAgICAgey8qIFByb2dyZXNzIFN0ZXBzICovfVxyXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gbWItMTJcIj5cclxuICAgICAgICAgICAge3N0ZXBzLm1hcCgocywgaSkgPT4gKFxyXG4gICAgICAgICAgICAgIDxkaXYga2V5PXtzfSBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlclwiPlxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9e2B3LTggaC04IHJvdW5kZWQtZnVsbCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciB0ZXh0LXNtIGZvbnQtYm9keSB0cmFuc2l0aW9uLWNvbG9ycyAke1xyXG4gICAgICAgICAgICAgICAgICBpIDw9IHN0ZXAgPyAnYmctcHJpbWFyeSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZCcgOiAnYmctbXV0ZWQgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kJ1xyXG4gICAgICAgICAgICAgICAgfWB9PlxyXG4gICAgICAgICAgICAgICAgICB7aSArIDF9XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgIHtpIDwgc3RlcHMubGVuZ3RoIC0gMSAmJiAoXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXtgaGlkZGVuIHNtOmJsb2NrIHctMTIgbWQ6dy0yMCBoLXB4IG14LTIgJHtpIDwgc3RlcCA/ICdiZy1wcmltYXJ5JyA6ICdiZy1ib3JkZXInfWB9IC8+XHJcbiAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICApKX1cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIHtlcnJvciAmJiAoXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItNiBwLTQgcm91bmRlZC14bCBiZy1kZXN0cnVjdGl2ZS8xMCBib3JkZXIgYm9yZGVyLWRlc3RydWN0aXZlLzMwIHRleHQtZGVzdHJ1Y3RpdmUgdGV4dC1zbSBmb250LWJvZHlcIj5cclxuICAgICAgICAgICAgICB7ZXJyb3J9XHJcbiAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICA8QW5pbWF0ZVByZXNlbmNlIG1vZGU9XCJ3YWl0XCI+XHJcbiAgICAgICAgICAgIDxtb3Rpb24uZGl2XHJcbiAgICAgICAgICAgICAga2V5PXtzdGVwfVxyXG4gICAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeDogMjAgfX1cclxuICAgICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHg6IDAgfX1cclxuICAgICAgICAgICAgICBleGl0PXt7IG9wYWNpdHk6IDAsIHg6IC0yMCB9fVxyXG4gICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuMyB9fVxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgey8qIOKUgOKUgCBTVEVQIDA6IFNFTEVDVCBTRVJWSUNFIOKUgOKUgCAqL31cclxuICAgICAgICAgICAgICB7c3RlcCA9PT0gMCAmJiAoXHJcbiAgICAgICAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQteGwgZm9udC1zZW1pYm9sZCBtYi00XCI+U2VsZWN0IGEgU2VydmljZTwvaDI+XHJcblxyXG4gICAgICAgICAgICAgICAgICB7LyogQ2F0ZWdvcnkgdGFicyAqL31cclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtd3JhcCBnYXAtMiBtYi02XCI+XHJcbiAgICAgICAgICAgICAgICAgICAge2NhdGVnb3JpZXMubWFwKGNhdCA9PiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGtleT17Y2F0fVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRBY3RpdmVDYXRlZ29yeShjYXQpfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9e2BweC00IHB5LTEuNSByb3VuZGVkLWZ1bGwgdGV4dC14cyBmb250LWJvZHkgZm9udC1tZWRpdW0gdHJhbnNpdGlvbi1hbGwgJHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICBhY3RpdmVDYXRlZ29yeSA9PT0gY2F0XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA/ICdiZy1wcmltYXJ5IHRleHQtcHJpbWFyeS1mb3JlZ3JvdW5kJ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgOiAnYm9yZGVyIGJvcmRlci1ib3JkZXIgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIGhvdmVyOmJvcmRlci1wcmltYXJ5LzQwJ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICB9YH1cclxuICAgICAgICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgICAgICAge2NhdH1cclxuICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICkpfVxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIHsvKiBTZXJ2aWNlcyBsaXN0ICovfVxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktMyBtYXgtaC1bNDIwcHhdIG92ZXJmbG93LXktYXV0byBwci0xXCI+XHJcbiAgICAgICAgICAgICAgICAgICAge2ZpbHRlcmVkU2VydmljZXMubWFwKHNlcnZpY2UgPT4gKFxyXG4gICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICAgICAgICBrZXk9e3NlcnZpY2UuaWR9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IHNldFNlbGVjdGVkU2VydmljZShzZXJ2aWNlLmlkKX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPXtgdy1mdWxsIHRleHQtbGVmdCBwLTQgcm91bmRlZC14bCBib3JkZXItMiB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgJHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICBzZWxlY3RlZFNlcnZpY2UgPT09IHNlcnZpY2UuaWRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgID8gJ2JvcmRlci1wcmltYXJ5IGJnLWFjY2VudC8zMCdcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDogJ2JvcmRlci1ib3JkZXIgaG92ZXI6Ym9yZGVyLXByaW1hcnkvMzAnXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIH1gfVxyXG4gICAgICAgICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgZm9udC1zZW1pYm9sZCBibG9ja1wiPntzZXJ2aWNlLnRpdGxlfTwvc3Bhbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtc20gdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIG10LTAuNVwiPntzZXJ2aWNlLmRlc2NyaXB0aW9ufTwvcD5cclxuICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICkpfVxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIHtzZWxlY3RlZFNlcnZpY2VEYXRhICYmIChcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTQgcC0zIHJvdW5kZWQteGwgYmctYWNjZW50LzQwIHRleHQtc20gZm9udC1ib2R5IHRleHQtcHJpbWFyeVwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAg4pyTIFNlbGVjdGVkOiA8c3Ryb25nPntzZWxlY3RlZFNlcnZpY2VEYXRhLnRpdGxlfTwvc3Ryb25nPiAoe3NlbGVjdGVkU2VydmljZURhdGEuY2F0ZWdvcnl9KVxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICAgICAgey8qIOKUgOKUgCBTVEVQIDE6IERBVEUgJiBUSU1FIOKUgOKUgCAqL31cclxuICAgICAgICAgICAgICB7c3RlcCA9PT0gMSAmJiAoXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNlwiPlxyXG4gICAgICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQteGwgZm9udC1zZW1pYm9sZCBtYi02XCI+Q2hvb3NlIERhdGUgJiBUaW1lPC9oMj5cclxuICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwiYmxvY2sgZm9udC1ib2R5IHRleHQtc20gZm9udC1tZWRpdW0gbWItMlwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPENhbGVuZGFyIGNsYXNzTmFtZT1cInctNCBoLTQgaW5saW5lIG1yLTJcIiAvPlNlbGVjdCBEYXRlXHJcbiAgICAgICAgICAgICAgICAgICAgPC9sYWJlbD5cclxuICAgICAgICAgICAgICAgICAgICA8aW5wdXRcclxuICAgICAgICAgICAgICAgICAgICAgIHR5cGU9XCJkYXRlXCJcclxuICAgICAgICAgICAgICAgICAgICAgIHZhbHVlPXtzZWxlY3RlZERhdGV9XHJcbiAgICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBzZXRTZWxlY3RlZERhdGUoZS50YXJnZXQudmFsdWUpfVxyXG4gICAgICAgICAgICAgICAgICAgICAgbWluPXtuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCkuc3BsaXQoJ1QnKVswXX1cclxuICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBweC00IHB5LTMgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLWJvcmRlciBiZy1jYXJkIGZvbnQtYm9keSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzIwIGZvY3VzOmJvcmRlci1wcmltYXJ5IG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgIDxkaXY+XHJcbiAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cImJsb2NrIGZvbnQtYm9keSB0ZXh0LXNtIGZvbnQtbWVkaXVtIG1iLTJcIj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxDbG9jayBjbGFzc05hbWU9XCJ3LTQgaC00IGlubGluZSBtci0yXCIgLz5TZWxlY3QgVGltZVxyXG4gICAgICAgICAgICAgICAgICAgIDwvbGFiZWw+XHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0zIGdhcC0zXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICB7dGltZVNsb3RzLm1hcCh0aW1lID0+IChcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGtleT17dGltZX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRTZWxlY3RlZFRpbWUodGltZSl9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPXtgcHgtNCBweS0zIHJvdW5kZWQteGwgYm9yZGVyLTIgdGV4dC1zbSBmb250LWJvZHkgdHJhbnNpdGlvbi1hbGwgJHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNlbGVjdGVkVGltZSA9PT0gdGltZVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA/ICdib3JkZXItcHJpbWFyeSBiZy1hY2NlbnQvMzAgdGV4dC1wcmltYXJ5J1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6ICdib3JkZXItYm9yZGVyIGhvdmVyOmJvcmRlci1wcmltYXJ5LzMwJ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIH1gfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAge3RpbWV9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgKSl9XHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICAgICAgey8qIOKUgOKUgCBTVEVQIDI6IERFVEFJTFMg4pSA4pSAICovfVxyXG4gICAgICAgICAgICAgIHtzdGVwID09PSAyICYmIChcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XHJcbiAgICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC14bCBmb250LXNlbWlib2xkIG1iLTZcIj5Zb3VyIERldGFpbHM8L2gyPlxyXG4gICAgICAgICAgICAgICAgICA8ZGl2PlxyXG4gICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJibG9jayBmb250LWJvZHkgdGV4dC1zbSBmb250LW1lZGl1bSBtYi0yXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8VXNlciBjbGFzc05hbWU9XCJ3LTQgaC00IGlubGluZSBtci0yXCIgLz5GdWxsIE5hbWVcclxuICAgICAgICAgICAgICAgICAgICA8L2xhYmVsPlxyXG4gICAgICAgICAgICAgICAgICAgIDxpbnB1dFxyXG4gICAgICAgICAgICAgICAgICAgICAgdHlwZT1cInRleHRcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgdmFsdWU9e25hbWV9XHJcbiAgICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBzZXROYW1lKGUudGFyZ2V0LnZhbHVlKX1cclxuICAgICAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiWW91ciBmdWxsIG5hbWVcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHB4LTQgcHktMyByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItYm9yZGVyIGJnLWNhcmQgZm9udC1ib2R5IGZvY3VzOnJpbmctMiBmb2N1czpyaW5nLXByaW1hcnkvMjAgZm9jdXM6Ym9yZGVyLXByaW1hcnkgb3V0bGluZS1ub25lIHRyYW5zaXRpb24tYWxsXCJcclxuICAgICAgICAgICAgICAgICAgICAvPlxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgPGRpdj5cclxuICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwiYmxvY2sgZm9udC1ib2R5IHRleHQtc20gZm9udC1tZWRpdW0gbWItMlwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPFBob25lIGNsYXNzTmFtZT1cInctNCBoLTQgaW5saW5lIG1yLTJcIiAvPlBob25lIE51bWJlclxyXG4gICAgICAgICAgICAgICAgICAgIDwvbGFiZWw+XHJcbiAgICAgICAgICAgICAgICAgICAgPGlucHV0XHJcbiAgICAgICAgICAgICAgICAgICAgICB0eXBlPVwidGVsXCJcclxuICAgICAgICAgICAgICAgICAgICAgIHZhbHVlPXtwaG9uZX1cclxuICAgICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXtlID0+IHNldFBob25lKGUudGFyZ2V0LnZhbHVlKX1cclxuICAgICAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiKzkxIFhYWFhYIFhYWFhYXCJcclxuICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBweC00IHB5LTMgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLWJvcmRlciBiZy1jYXJkIGZvbnQtYm9keSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1wcmltYXJ5LzIwIGZvY3VzOmJvcmRlci1wcmltYXJ5IG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgIHsvKiBTdW1tYXJ5ICovfVxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNCByb3VuZGVkLXhsIGJnLWFjY2VudC8zMCBzcGFjZS15LTEuNSB0ZXh0LXNtIGZvbnQtYm9keVwiPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwPjxzdHJvbmc+U2VydmljZTo8L3N0cm9uZz4ge3NlbGVjdGVkU2VydmljZURhdGE/LnRpdGxlfTwvcD5cclxuICAgICAgICAgICAgICAgICAgICA8cD48c3Ryb25nPkRhdGU6PC9zdHJvbmc+IHtzZWxlY3RlZERhdGV9PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwPjxzdHJvbmc+VGltZTo8L3N0cm9uZz4ge3NlbGVjdGVkVGltZX08L3A+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICAgICAgey8qIOKUgOKUgCBTVEVQIDM6IENPTkZJUk1BVElPTiDilIDilIAgKi99XHJcbiAgICAgICAgICAgICAge3N0ZXAgPT09IDMgJiYgKFxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBweS04XCI+XHJcbiAgICAgICAgICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgc2NhbGU6IDAgfX0gYW5pbWF0ZT17eyBzY2FsZTogMSB9fSB0cmFuc2l0aW9uPXt7IHR5cGU6ICdzcHJpbmcnLCBzdGlmZm5lc3M6IDIwMCB9fT5cclxuICAgICAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUgY2xhc3NOYW1lPVwidy0yMCBoLTIwIHRleHQtcHJpbWFyeSBteC1hdXRvIG1iLTZcIiAvPlxyXG4gICAgICAgICAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgZm9udC1zZW1pYm9sZCBtYi00XCI+Qm9va2luZyBDb25maXJtZWQhPC9oMj5cclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy1jcmVhbSByb3VuZGVkLTJ4bCBwLTYgdGV4dC1sZWZ0IHNwYWNlLXktMyBtYi02XCI+XHJcbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtc21cIj48c3Ryb25nPlNlcnZpY2U6PC9zdHJvbmc+IHtzZWxlY3RlZFNlcnZpY2VEYXRhPy50aXRsZX08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtc21cIj48c3Ryb25nPkRhdGU6PC9zdHJvbmc+IHtzZWxlY3RlZERhdGV9PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXNtXCI+PHN0cm9uZz5UaW1lOjwvc3Ryb25nPiB7c2VsZWN0ZWRUaW1lfTwvcD5cclxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1zbVwiPjxzdHJvbmc+TmFtZTo8L3N0cm9uZz4ge25hbWV9PC9wPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXNtXCI+PHN0cm9uZz5QaG9uZTo8L3N0cm9uZz4ge3Bob25lfTwvcD5cclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgICAgIDxhXHJcbiAgICAgICAgICAgICAgICAgICAgaHJlZj17YGh0dHBzOi8vd2EubWUvOTE5MTQ4NzY4OTU4P3RleHQ9JHt3aGF0c2FwcE1lc3NhZ2V9YH1cclxuICAgICAgICAgICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIlxyXG4gICAgICAgICAgICAgICAgICAgIHJlbD1cIm5vb3BlbmVyIG5vcmVmZXJyZXJcIlxyXG4gICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBweC04IHB5LTQgdGV4dC1iYXNlIGZvbnQtbWVkaXVtIGJnLWdyZWVuLTYwMCB0ZXh0LXdoaXRlIHJvdW5kZWQtZnVsbCBob3ZlcjpiZy1ncmVlbi03MDAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIHNoYWRvdy1sZ1wiXHJcbiAgICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgICBDb25maXJtIHZpYSBXaGF0c0FwcFxyXG4gICAgICAgICAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgICA8L0FuaW1hdGVQcmVzZW5jZT5cclxuXHJcbiAgICAgICAgICB7c3RlcCA8IDMgJiYgKFxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1iZXR3ZWVuIG10LThcIj5cclxuICAgICAgICAgICAgICB7c3RlcCA+IDAgPyAoXHJcbiAgICAgICAgICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9e3ByZXZ9IGNsYXNzTmFtZT1cInB4LTYgcHktMyB0ZXh0LXNtIGZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgaG92ZXI6dGV4dC1mb3JlZ3JvdW5kIHRyYW5zaXRpb24tY29sb3JzXCI+XHJcbiAgICAgICAgICAgICAgICAgIOKGkCBCYWNrXHJcbiAgICAgICAgICAgICAgICA8L2J1dHRvbj5cclxuICAgICAgICAgICAgICApIDogPGRpdiAvPn1cclxuICAgICAgICAgICAgICA8YnV0dG9uXHJcbiAgICAgICAgICAgICAgICBvbkNsaWNrPXtuZXh0fVxyXG4gICAgICAgICAgICAgICAgZGlzYWJsZWQ9e1xyXG4gICAgICAgICAgICAgICAgICBpc1N1Ym1pdHRpbmcgfHxcclxuICAgICAgICAgICAgICAgICAgKHN0ZXAgPT09IDAgJiYgIXNlbGVjdGVkU2VydmljZSkgfHxcclxuICAgICAgICAgICAgICAgICAgKHN0ZXAgPT09IDEgJiYgKCFzZWxlY3RlZERhdGUgfHwgIXNlbGVjdGVkVGltZSkpIHx8XHJcbiAgICAgICAgICAgICAgICAgIChzdGVwID09PSAyICYmICghbmFtZSB8fCAhcGhvbmUpKVxyXG4gICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicHgtOCBweS0zIHRleHQtYmFzZSBmb250LW1lZGl1bSBiZy1wcmltYXJ5IHRleHQtcHJpbWFyeS1mb3JlZ3JvdW5kIHJvdW5kZWQtZnVsbCBob3ZlcjpiZy1wcmltYXJ5LzkwIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTMwMCBkaXNhYmxlZDpvcGFjaXR5LTQwIGRpc2FibGVkOmN1cnNvci1ub3QtYWxsb3dlZCBsdXh1cnktZ2xvdyBzaGFkb3ctbGdcIlxyXG4gICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgIHtpc1N1Ym1pdHRpbmcgPyAnU3VibWl0dGluZy4uLicgOiBzdGVwID09PSAyID8gJ0NvbmZpcm0gQm9va2luZycgOiAnQ29udGludWUg4oaSJ31cclxuICAgICAgICAgICAgICA8L2J1dHRvbj5cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICApfVxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L3NlY3Rpb24+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgQm9va2luZztcbiJdLCJuYW1lcyI6WyJ1c2VTdGF0ZSIsIm1vdGlvbiIsIkFuaW1hdGVQcmVzZW5jZSIsIkNhbGVuZGFyIiwiQ2xvY2siLCJVc2VyIiwiUGhvbmUiLCJDaGVja0NpcmNsZSIsImFwaVVybCIsImFsbFNlcnZpY2VzIiwiaWQiLCJjYXRlZ29yeSIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJjYXRlZ29yaWVzIiwiU2V0IiwibWFwIiwicyIsInRpbWVTbG90cyIsInN0ZXBzIiwiQm9va2luZyIsInN0ZXAiLCJzZXRTdGVwIiwiYWN0aXZlQ2F0ZWdvcnkiLCJzZXRBY3RpdmVDYXRlZ29yeSIsInNlbGVjdGVkU2VydmljZSIsInNldFNlbGVjdGVkU2VydmljZSIsInNlbGVjdGVkRGF0ZSIsInNldFNlbGVjdGVkRGF0ZSIsInNlbGVjdGVkVGltZSIsInNldFNlbGVjdGVkVGltZSIsIm5hbWUiLCJzZXROYW1lIiwicGhvbmUiLCJzZXRQaG9uZSIsImlzU3VibWl0dGluZyIsInNldElzU3VibWl0dGluZyIsImVycm9yIiwic2V0RXJyb3IiLCJzZWxlY3RlZFNlcnZpY2VEYXRhIiwiZmluZCIsImhhbmRsZUJvb2tpbmciLCJyZXMiLCJmZXRjaCIsIm1ldGhvZCIsImhlYWRlcnMiLCJib2R5IiwiSlNPTiIsInN0cmluZ2lmeSIsInNlcnZpY2UiLCJkYXRlIiwiRGF0ZSIsInRvSVNPU3RyaW5nIiwidGltZVNsb3QiLCJkYXRhIiwianNvbiIsIm5leHQiLCJNYXRoIiwibWluIiwicHJldiIsIm1heCIsIndoYXRzYXBwTWVzc2FnZSIsImVuY29kZVVSSUNvbXBvbmVudCIsImZpbHRlcmVkU2VydmljZXMiLCJmaWx0ZXIiLCJkaXYiLCJjbGFzc05hbWUiLCJzZWN0aW9uIiwiaW5pdGlhbCIsIm9wYWNpdHkiLCJ5IiwiYW5pbWF0ZSIsInRyYW5zaXRpb24iLCJkdXJhdGlvbiIsInAiLCJoMSIsImkiLCJsZW5ndGgiLCJtb2RlIiwieCIsImV4aXQiLCJoMiIsImNhdCIsImJ1dHRvbiIsIm9uQ2xpY2siLCJzcGFuIiwic3Ryb25nIiwibGFiZWwiLCJpbnB1dCIsInR5cGUiLCJ2YWx1ZSIsIm9uQ2hhbmdlIiwiZSIsInRhcmdldCIsInNwbGl0IiwidGltZSIsInBsYWNlaG9sZGVyIiwic2NhbGUiLCJzdGlmZm5lc3MiLCJhIiwiaHJlZiIsInJlbCIsImRpc2FibGVkIl0sIm1hcHBpbmdzIjoiOztBQUFBLFNBQVNBLFFBQVEsUUFBUSxRQUFRO0FBQ2pDLFNBQVNDLE1BQU0sRUFBRUMsZUFBZSxRQUFRLGdCQUFnQjtBQUN4RCxTQUFTQyxRQUFRLEVBQUVDLEtBQUssRUFBRUMsSUFBSSxFQUFFQyxLQUFLLEVBQUVDLFdBQVcsUUFBUSxlQUFlO0FBQ3pFLFNBQVNDLE1BQU0sUUFBUSxZQUFZO0FBRW5DLHVEQUF1RDtBQUN2RCxNQUFNQyxjQUFjO0lBQ2xCLHdCQUF3QjtJQUN4QjtRQUFFQyxJQUFJO1FBQVVDLFVBQVU7UUFBZ0JDLE9BQU87UUFBV0MsYUFBYTtJQUFxRTtJQUM5STtRQUFFSCxJQUFJO1FBQVdDLFVBQVU7UUFBZ0JDLE9BQU87UUFBOEJDLGFBQWE7SUFBK0M7SUFDNUk7UUFBRUgsSUFBSTtRQUFlQyxVQUFVO1FBQWdCQyxPQUFPO1FBQTBCQyxhQUFhO0lBQTREO0lBQ3pKO1FBQUVILElBQUk7UUFBUUMsVUFBVTtRQUFnQkMsT0FBTztRQUFtQkMsYUFBYTtJQUE0RDtJQUMzSTtRQUFFSCxJQUFJO1FBQWlCQyxVQUFVO1FBQWdCQyxPQUFPO1FBQTRCQyxhQUFhO0lBQXdDO0lBQ3pJO1FBQUVILElBQUk7UUFBZUMsVUFBVTtRQUFnQkMsT0FBTztRQUFpQ0MsYUFBYTtJQUE2QztJQUNqSjtRQUFFSCxJQUFJO1FBQWdCQyxVQUFVO1FBQWdCQyxPQUFPO1FBQWdCQyxhQUFhO0lBQTZDO0lBQ2pJO1FBQUVILElBQUk7UUFBa0JDLFVBQVU7UUFBZ0JDLE9BQU87UUFBbUJDLGFBQWE7SUFBOEM7SUFFdkksd0JBQXdCO0lBQ3hCO1FBQUVILElBQUk7UUFBV0MsVUFBVTtRQUFnQkMsT0FBTztRQUFzQkMsYUFBYTtJQUF1RDtJQUM1STtRQUFFSCxJQUFJO1FBQWNDLFVBQVU7UUFBZ0JDLE9BQU87UUFBaUJDLGFBQWE7SUFBd0Q7SUFDM0k7UUFBRUgsSUFBSTtRQUFZQyxVQUFVO1FBQWdCQyxPQUFPO1FBQXlCQyxhQUFhO0lBQW9FO0lBQzdKO1FBQUVILElBQUk7UUFBV0MsVUFBVTtRQUFnQkMsT0FBTztRQUFvQkMsYUFBYTtJQUF1RDtJQUMxSTtRQUFFSCxJQUFJO1FBQWNDLFVBQVU7UUFBZ0JDLE9BQU87UUFBd0JDLGFBQWE7SUFBdUM7SUFFakksc0JBQXNCO0lBQ3RCO1FBQUVILElBQUk7UUFBaUJDLFVBQVU7UUFBaUJDLE9BQU87UUFBaUJDLGFBQWE7SUFBOEM7SUFDckk7UUFBRUgsSUFBSTtRQUFnQkMsVUFBVTtRQUFpQkMsT0FBTztRQUFnQkMsYUFBYTtJQUF3QztJQUU3SCxVQUFVO0lBQ1Y7UUFBRUgsSUFBSTtRQUFpQkMsVUFBVTtRQUFXQyxPQUFPO1FBQWlCQyxhQUFhO0lBQStDO0lBQ2hJO1FBQUVILElBQUk7UUFBbUJDLFVBQVU7UUFBV0MsT0FBTztRQUFtQkMsYUFBYTtJQUF3QztJQUU3SCxrQkFBa0I7SUFDbEI7UUFBRUgsSUFBSTtRQUFXQyxVQUFVO1FBQW1CQyxPQUFPO1FBQXFCQyxhQUFhO0lBQTJEO0lBQ2xKO1FBQUVILElBQUk7UUFBWUMsVUFBVTtRQUFtQkMsT0FBTztRQUFzQkMsYUFBYTtJQUFpRDtJQUMxSTtRQUFFSCxJQUFJO1FBQWNDLFVBQVU7UUFBbUJDLE9BQU87UUFBY0MsYUFBYTtJQUFtRTtJQUN0SjtRQUFFSCxJQUFJO1FBQVdDLFVBQVU7UUFBbUJDLE9BQU87UUFBZ0JDLGFBQWE7SUFBK0M7SUFDakk7UUFBRUgsSUFBSTtRQUFxQkMsVUFBVTtRQUFtQkMsT0FBTztRQUFrQ0MsYUFBYTtJQUE4QztJQUM1SjtRQUFFSCxJQUFJO1FBQVdDLFVBQVU7UUFBbUJDLE9BQU87UUFBcUJDLGFBQWE7SUFBK0Q7SUFDdEo7UUFBRUgsSUFBSTtRQUFXQyxVQUFVO1FBQW1CQyxPQUFPO1FBQXFCQyxhQUFhO0lBQW1EO0lBQzFJO1FBQUVILElBQUk7UUFBbUJDLFVBQVU7UUFBbUJDLE9BQU87UUFBbUJDLGFBQWE7SUFBa0U7SUFDL0o7UUFBRUgsSUFBSTtRQUFTQyxVQUFVO1FBQW1CQyxPQUFPO1FBQW1CQyxhQUFhO0lBQXlDO0lBQzVIO1FBQUVILElBQUk7UUFBb0JDLFVBQVU7UUFBbUJDLE9BQU87UUFBOEJDLGFBQWE7SUFBa0M7SUFDM0k7UUFBRUgsSUFBSTtRQUFpQkMsVUFBVTtRQUFtQkMsT0FBTztRQUEyQkMsYUFBYTtJQUFzQztDQUMxSTtBQUVELE1BQU1DLGFBQWE7T0FBSSxJQUFJQyxJQUFJTixZQUFZTyxHQUFHLENBQUNDLENBQUFBLElBQUtBLEVBQUVOLFFBQVE7Q0FBRztBQUVqRSxNQUFNTyxZQUFZO0lBQUM7SUFBWTtJQUFZO0lBQVk7SUFBVztJQUFXO0NBQVU7QUFFdkYsTUFBTUMsUUFBUTtJQUFDO0lBQWtCO0lBQXNCO0lBQWdCO0NBQWU7QUFFdEYsTUFBTUMsVUFBVTs7SUFDZCxNQUFNLENBQUNDLE1BQU1DLFFBQVEsR0FBR3RCLFNBQVM7SUFDakMsTUFBTSxDQUFDdUIsZ0JBQWdCQyxrQkFBa0IsR0FBR3hCLFNBQVNjLFVBQVUsQ0FBQyxFQUFFO0lBQ2xFLE1BQU0sQ0FBQ1csaUJBQWlCQyxtQkFBbUIsR0FBRzFCLFNBQVM7SUFDdkQsTUFBTSxDQUFDMkIsY0FBY0MsZ0JBQWdCLEdBQUc1QixTQUFTO0lBQ2pELE1BQU0sQ0FBQzZCLGNBQWNDLGdCQUFnQixHQUFHOUIsU0FBUztJQUNqRCxNQUFNLENBQUMrQixNQUFNQyxRQUFRLEdBQUdoQyxTQUFTO0lBQ2pDLE1BQU0sQ0FBQ2lDLE9BQU9DLFNBQVMsR0FBR2xDLFNBQVM7SUFDbkMsTUFBTSxDQUFDbUMsY0FBY0MsZ0JBQWdCLEdBQUdwQyxTQUFTO0lBQ2pELE1BQU0sQ0FBQ3FDLE9BQU9DLFNBQVMsR0FBR3RDLFNBQVM7SUFFbkMsTUFBTXVDLHNCQUFzQjlCLFlBQVkrQixJQUFJLENBQUN2QixDQUFBQSxJQUFLQSxFQUFFUCxFQUFFLEtBQUtlO0lBRTNELE1BQU1nQixnQkFBZ0I7UUFDcEJMLGdCQUFnQjtRQUNoQkUsU0FBUztRQUNULElBQUk7WUFDRixNQUFNSSxNQUFNLE1BQU1DLE1BQU1uQyxPQUFPLGNBQWM7Z0JBQzNDb0MsUUFBUTtnQkFDUkMsU0FBUztvQkFBRSxnQkFBZ0I7Z0JBQW1CO2dCQUM5Q0MsTUFBTUMsS0FBS0MsU0FBUyxDQUFDO29CQUNuQmpCO29CQUNBRTtvQkFDQWdCLFNBQVNWLHFCQUFxQjNCLFNBQVNhO29CQUN2Q3lCLE1BQU0sSUFBSUMsS0FBS3hCLGNBQWN5QixXQUFXO29CQUN4Q0MsVUFBVXhCO2dCQUNaO1lBQ0Y7WUFFQSxNQUFNeUIsT0FBTyxNQUFNWixJQUFJYSxJQUFJO1lBRTNCLElBQUlELEtBQUtqQixLQUFLLEVBQUU7Z0JBQ2RDLFNBQVNnQixLQUFLakIsS0FBSztnQkFDbkJELGdCQUFnQjtnQkFDaEI7WUFDRjtZQUVBZCxRQUFRO1FBQ1YsRUFBRSxPQUFNO1lBQ05nQixTQUFTO1FBQ1gsU0FBVTtZQUNSRixnQkFBZ0I7UUFDbEI7SUFDRjtJQUVBLE1BQU1vQixPQUFPO1FBQ1hsQixTQUFTO1FBQ1QsSUFBSWpCLFNBQVMsR0FBRztZQUNkb0I7WUFDQTtRQUNGO1FBQ0FuQixRQUFRTCxDQUFBQSxJQUFLd0MsS0FBS0MsR0FBRyxDQUFDekMsSUFBSSxHQUFHO0lBQy9CO0lBRUEsTUFBTTBDLE9BQU87UUFDWHJCLFNBQVM7UUFDVGhCLFFBQVFMLENBQUFBLElBQUt3QyxLQUFLRyxHQUFHLENBQUMzQyxJQUFJLEdBQUc7SUFDL0I7SUFFQSxNQUFNNEMsa0JBQWtCQyxtQkFDdEIsQ0FBQyxvQ0FBb0MsRUFBRS9CLEtBQUssV0FBVyxFQUFFUSxxQkFBcUIzQixNQUFNLFFBQVEsRUFBRWUsYUFBYSxRQUFRLEVBQUVFLGNBQWM7SUFHckksTUFBTWtDLG1CQUFtQnRELFlBQVl1RCxNQUFNLENBQUMvQyxDQUFBQSxJQUFLQSxFQUFFTixRQUFRLEtBQUtZO0lBRWhFLHFCQUNFLFFBQUMwQztRQUFJQyxXQUFVOzswQkFDYixRQUFDRDtnQkFBSUMsV0FBVTs7Ozs7OzBCQUNmLFFBQUNEO2dCQUFJQyxXQUFVOzs7Ozs7MEJBRWYsUUFBQ0M7Z0JBQVFELFdBQVU7MEJBQ2pCLGNBQUEsUUFBQ0Q7b0JBQUlDLFdBQVU7O3NDQUNiLFFBQUNqRSxPQUFPZ0UsR0FBRzs0QkFDVEcsU0FBUztnQ0FBRUMsU0FBUztnQ0FBR0MsR0FBRzs0QkFBRzs0QkFDN0JDLFNBQVM7Z0NBQUVGLFNBQVM7Z0NBQUdDLEdBQUc7NEJBQUU7NEJBQzVCRSxZQUFZO2dDQUFFQyxVQUFVOzRCQUFJOzRCQUM1QlAsV0FBVTs7OENBRVYsUUFBQ1E7b0NBQUVSLFdBQVU7OENBQW1FOzs7Ozs7OENBQ2hGLFFBQUNTO29DQUFHVCxXQUFVOzhDQUFrRDs7Ozs7Ozs7Ozs7O3NDQUlsRSxRQUFDRDs0QkFBSUMsV0FBVTtzQ0FDWi9DLE1BQU1ILEdBQUcsQ0FBQyxDQUFDQyxHQUFHMkQsa0JBQ2IsUUFBQ1g7b0NBQVlDLFdBQVU7O3NEQUNyQixRQUFDRDs0Q0FBSUMsV0FBVyxDQUFDLDBGQUEwRixFQUN6R1UsS0FBS3ZELE9BQU8sdUNBQXVDLGtDQUNuRDtzREFDQ3VELElBQUk7Ozs7Ozt3Q0FFTkEsSUFBSXpELE1BQU0wRCxNQUFNLEdBQUcsbUJBQ2xCLFFBQUNaOzRDQUFJQyxXQUFXLENBQUMsdUNBQXVDLEVBQUVVLElBQUl2RCxPQUFPLGVBQWUsYUFBYTs7Ozs7OzttQ0FQM0ZKOzs7Ozs7Ozs7O3dCQWFib0IsdUJBQ0MsUUFBQzRCOzRCQUFJQyxXQUFVO3NDQUNaN0I7Ozs7OztzQ0FJTCxRQUFDbkM7NEJBQWdCNEUsTUFBSztzQ0FDcEIsY0FBQSxRQUFDN0UsT0FBT2dFLEdBQUc7Z0NBRVRHLFNBQVM7b0NBQUVDLFNBQVM7b0NBQUdVLEdBQUc7Z0NBQUc7Z0NBQzdCUixTQUFTO29DQUFFRixTQUFTO29DQUFHVSxHQUFHO2dDQUFFO2dDQUM1QkMsTUFBTTtvQ0FBRVgsU0FBUztvQ0FBR1UsR0FBRyxDQUFDO2dDQUFHO2dDQUMzQlAsWUFBWTtvQ0FBRUMsVUFBVTtnQ0FBSTs7b0NBRzNCcEQsU0FBUyxtQkFDUixRQUFDNEM7OzBEQUNDLFFBQUNnQjtnREFBR2YsV0FBVTswREFBMEM7Ozs7OzswREFHeEQsUUFBQ0Q7Z0RBQUlDLFdBQVU7MERBQ1pwRCxXQUFXRSxHQUFHLENBQUNrRSxDQUFBQSxvQkFDZCxRQUFDQzt3REFFQ0MsU0FBUyxJQUFNNUQsa0JBQWtCMEQ7d0RBQ2pDaEIsV0FBVyxDQUFDLHNFQUFzRSxFQUNoRjNDLG1CQUFtQjJELE1BQ2YsdUNBQ0Esc0VBQ0o7a0VBRURBO3VEQVJJQTs7Ozs7Ozs7OzswREFjWCxRQUFDakI7Z0RBQUlDLFdBQVU7MERBQ1pILGlCQUFpQi9DLEdBQUcsQ0FBQ2lDLENBQUFBLHdCQUNwQixRQUFDa0M7d0RBRUNDLFNBQVMsSUFBTTFELG1CQUFtQnVCLFFBQVF2QyxFQUFFO3dEQUM1Q3dELFdBQVcsQ0FBQyxxRUFBcUUsRUFDL0V6QyxvQkFBb0J3QixRQUFRdkMsRUFBRSxHQUMxQixnQ0FDQSx5Q0FDSjs7MEVBRUYsUUFBQzJFO2dFQUFLbkIsV0FBVTswRUFBb0NqQixRQUFRckMsS0FBSzs7Ozs7OzBFQUNqRSxRQUFDOEQ7Z0VBQUVSLFdBQVU7MEVBQWtEakIsUUFBUXBDLFdBQVc7Ozs7Ozs7dURBVDdFb0MsUUFBUXZDLEVBQUU7Ozs7Ozs7Ozs7NENBY3BCNkIscUNBQ0MsUUFBQzBCO2dEQUFJQyxXQUFVOztvREFBa0U7a0VBQ25FLFFBQUNvQjtrRUFBUS9DLG9CQUFvQjNCLEtBQUs7Ozs7OztvREFBVTtvREFBRzJCLG9CQUFvQjVCLFFBQVE7b0RBQUM7Ozs7Ozs7Ozs7Ozs7b0NBTy9GVSxTQUFTLG1CQUNSLFFBQUM0Qzt3Q0FBSUMsV0FBVTs7MERBQ2IsUUFBQ2U7Z0RBQUdmLFdBQVU7MERBQTBDOzs7Ozs7MERBQ3hELFFBQUNEOztrRUFDQyxRQUFDc0I7d0RBQU1yQixXQUFVOzswRUFDZixRQUFDL0Q7Z0VBQVMrRCxXQUFVOzs7Ozs7NERBQXdCOzs7Ozs7O2tFQUU5QyxRQUFDc0I7d0RBQ0NDLE1BQUs7d0RBQ0xDLE9BQU8vRDt3REFDUGdFLFVBQVVDLENBQUFBLElBQUtoRSxnQkFBZ0JnRSxFQUFFQyxNQUFNLENBQUNILEtBQUs7d0RBQzdDaEMsS0FBSyxJQUFJUCxPQUFPQyxXQUFXLEdBQUcwQyxLQUFLLENBQUMsSUFBSSxDQUFDLEVBQUU7d0RBQzNDNUIsV0FBVTs7Ozs7Ozs7Ozs7OzBEQUdkLFFBQUNEOztrRUFDQyxRQUFDc0I7d0RBQU1yQixXQUFVOzswRUFDZixRQUFDOUQ7Z0VBQU04RCxXQUFVOzs7Ozs7NERBQXdCOzs7Ozs7O2tFQUUzQyxRQUFDRDt3REFBSUMsV0FBVTtrRUFDWmhELFVBQVVGLEdBQUcsQ0FBQytFLENBQUFBLHFCQUNiLFFBQUNaO2dFQUVDQyxTQUFTLElBQU10RCxnQkFBZ0JpRTtnRUFDL0I3QixXQUFXLENBQUMsK0RBQStELEVBQ3pFckMsaUJBQWlCa0UsT0FDYiw2Q0FDQSx5Q0FDSjswRUFFREE7K0RBUklBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O29DQWlCaEIxRSxTQUFTLG1CQUNSLFFBQUM0Qzt3Q0FBSUMsV0FBVTs7MERBQ2IsUUFBQ2U7Z0RBQUdmLFdBQVU7MERBQTBDOzs7Ozs7MERBQ3hELFFBQUNEOztrRUFDQyxRQUFDc0I7d0RBQU1yQixXQUFVOzswRUFDZixRQUFDN0Q7Z0VBQUs2RCxXQUFVOzs7Ozs7NERBQXdCOzs7Ozs7O2tFQUUxQyxRQUFDc0I7d0RBQ0NDLE1BQUs7d0RBQ0xDLE9BQU8zRDt3REFDUDRELFVBQVVDLENBQUFBLElBQUs1RCxRQUFRNEQsRUFBRUMsTUFBTSxDQUFDSCxLQUFLO3dEQUNyQ00sYUFBWTt3REFDWjlCLFdBQVU7Ozs7Ozs7Ozs7OzswREFHZCxRQUFDRDs7a0VBQ0MsUUFBQ3NCO3dEQUFNckIsV0FBVTs7MEVBQ2YsUUFBQzVEO2dFQUFNNEQsV0FBVTs7Ozs7OzREQUF3Qjs7Ozs7OztrRUFFM0MsUUFBQ3NCO3dEQUNDQyxNQUFLO3dEQUNMQyxPQUFPekQ7d0RBQ1AwRCxVQUFVQyxDQUFBQSxJQUFLMUQsU0FBUzBELEVBQUVDLE1BQU0sQ0FBQ0gsS0FBSzt3REFDdENNLGFBQVk7d0RBQ1o5QixXQUFVOzs7Ozs7Ozs7Ozs7MERBSWQsUUFBQ0Q7Z0RBQUlDLFdBQVU7O2tFQUNiLFFBQUNROzswRUFBRSxRQUFDWTswRUFBTzs7Ozs7OzREQUFpQjs0REFBRS9DLHFCQUFxQjNCOzs7Ozs7O2tFQUNuRCxRQUFDOEQ7OzBFQUFFLFFBQUNZOzBFQUFPOzs7Ozs7NERBQWM7NERBQUUzRDs7Ozs7OztrRUFDM0IsUUFBQytDOzswRUFBRSxRQUFDWTswRUFBTzs7Ozs7OzREQUFjOzREQUFFekQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7b0NBTWhDUixTQUFTLG1CQUNSLFFBQUM0Qzt3Q0FBSUMsV0FBVTs7MERBQ2IsUUFBQ2pFLE9BQU9nRSxHQUFHO2dEQUFDRyxTQUFTO29EQUFFNkIsT0FBTztnREFBRTtnREFBRzFCLFNBQVM7b0RBQUUwQixPQUFPO2dEQUFFO2dEQUFHekIsWUFBWTtvREFBRWlCLE1BQU07b0RBQVVTLFdBQVc7Z0RBQUk7MERBQ3JHLGNBQUEsUUFBQzNGO29EQUFZMkQsV0FBVTs7Ozs7Ozs7Ozs7MERBRXpCLFFBQUNlO2dEQUFHZixXQUFVOzBEQUEyQzs7Ozs7OzBEQUN6RCxRQUFDRDtnREFBSUMsV0FBVTs7a0VBQ2IsUUFBQ1E7d0RBQUVSLFdBQVU7OzBFQUFvQixRQUFDb0I7MEVBQU87Ozs7Ozs0REFBaUI7NERBQUUvQyxxQkFBcUIzQjs7Ozs7OztrRUFDakYsUUFBQzhEO3dEQUFFUixXQUFVOzswRUFBb0IsUUFBQ29COzBFQUFPOzs7Ozs7NERBQWM7NERBQUUzRDs7Ozs7OztrRUFDekQsUUFBQytDO3dEQUFFUixXQUFVOzswRUFBb0IsUUFBQ29COzBFQUFPOzs7Ozs7NERBQWM7NERBQUV6RDs7Ozs7OztrRUFDekQsUUFBQzZDO3dEQUFFUixXQUFVOzswRUFBb0IsUUFBQ29COzBFQUFPOzs7Ozs7NERBQWM7NERBQUV2RDs7Ozs7OztrRUFDekQsUUFBQzJDO3dEQUFFUixXQUFVOzswRUFBb0IsUUFBQ29COzBFQUFPOzs7Ozs7NERBQWU7NERBQUVyRDs7Ozs7Ozs7Ozs7OzswREFFNUQsUUFBQ2tFO2dEQUNDQyxNQUFNLENBQUMsZ0NBQWdDLEVBQUV2QyxpQkFBaUI7Z0RBQzFEZ0MsUUFBTztnREFDUFEsS0FBSTtnREFDSm5DLFdBQVU7MERBQ1g7Ozs7Ozs7Ozs7Ozs7K0JBckpBN0M7Ozs7Ozs7Ozs7d0JBNkpSQSxPQUFPLG1CQUNOLFFBQUM0Qzs0QkFBSUMsV0FBVTs7Z0NBQ1o3QyxPQUFPLGtCQUNOLFFBQUM4RDtvQ0FBT0MsU0FBU3pCO29DQUFNTyxXQUFVOzhDQUE0Rjs7Ozs7eURBRzNILFFBQUNEOzs7Ozs4Q0FDTCxRQUFDa0I7b0NBQ0NDLFNBQVM1QjtvQ0FDVDhDLFVBQ0VuRSxnQkFDQ2QsU0FBUyxLQUFLLENBQUNJLG1CQUNmSixTQUFTLEtBQU0sQ0FBQSxDQUFDTSxnQkFBZ0IsQ0FBQ0UsWUFBVyxLQUM1Q1IsU0FBUyxLQUFNLENBQUEsQ0FBQ1UsUUFBUSxDQUFDRSxLQUFJO29DQUVoQ2lDLFdBQVU7OENBRVQvQixlQUFlLGtCQUFrQmQsU0FBUyxJQUFJLG9CQUFvQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFRbkY7R0FoU01EO0tBQUFBO0FBa1NOLGVBQWVBLFFBQVEifQ==

@@ -1,0 +1,219 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Services.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { ArrowRight } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { services } from "/src/data/siteData.ts";
+import { useInView } from "/src/hooks/useAnimations.ts";
+const Services = ()=>{
+    _s();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20",
+        children: /*#__PURE__*/ _jsxDEV("section", {
+            ref: ref,
+            className: "section-padding",
+            children: /*#__PURE__*/ _jsxDEV("div", {
+                className: "max-w-7xl mx-auto",
+                children: [
+                    /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0,
+                            y: 30
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 0.8
+                        },
+                        className: "text-center mb-16",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                children: "What We Offer"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                lineNumber: 15,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("h1", {
+                                className: "font-heading text-4xl md:text-5xl font-semibold",
+                                children: "Our Services"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                lineNumber: 16,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-body text-muted-foreground mt-4 max-w-xl mx-auto",
+                                children: "Every service is crafted with precision, passion, and the finest products to make you look and feel extraordinary."
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                lineNumber: 17,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                        lineNumber: 14,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+                        children: services.map((service, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                                initial: {
+                                    opacity: 0,
+                                    y: 40,
+                                    scale: 0.95
+                                },
+                                animate: isInView ? {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1
+                                } : {},
+                                transition: {
+                                    duration: 0.6,
+                                    delay: i * 0.1
+                                },
+                                className: "group bg-card rounded-2xl overflow-hidden luxury-shadow-card hover:luxury-glow transition-all duration-500",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "relative h-64 overflow-hidden",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("img", {
+                                                src: service.image,
+                                                alt: service.title,
+                                                className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+                                                loading: "lazy"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 30,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 31,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "absolute bottom-4 right-4 font-heading text-2xl font-bold text-background",
+                                                children: service.price
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 32,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                        lineNumber: 29,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "p-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "font-heading text-xl font-semibold mb-2",
+                                                children: service.title
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 35,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "font-body text-muted-foreground text-sm mb-4 leading-relaxed",
+                                                children: service.description
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 36,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV(Link, {
+                                                to: `/services/${service.slug}`,
+                                                className: "inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all",
+                                                children: [
+                                                    "View Details ",
+                                                    /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                        lineNumber: 38,
+                                                        columnNumber: 34
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                                lineNumber: 37,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                        lineNumber: 34,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, service.id, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                                lineNumber: 22,
+                                columnNumber: 15
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                        lineNumber: 20,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+                lineNumber: 13,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+            lineNumber: 12,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, this);
+};
+_s(Services, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c = Services;
+export default Services;
+var _c;
+$RefreshReg$(_c, "Services");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Services.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNlcnZpY2VzLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBMaW5rIH0gZnJvbSAncmVhY3Qtcm91dGVyLWRvbSc7XHJcbmltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ2ZyYW1lci1tb3Rpb24nO1xyXG5pbXBvcnQgeyBBcnJvd1JpZ2h0IH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcclxuaW1wb3J0IHsgc2VydmljZXMgfSBmcm9tICdAL2RhdGEvc2l0ZURhdGEnO1xyXG5pbXBvcnQgeyB1c2VJblZpZXcgfSBmcm9tICdAL2hvb2tzL3VzZUFuaW1hdGlvbnMnO1xyXG5cclxuY29uc3QgU2VydmljZXMgPSAoKSA9PiB7XHJcbiAgY29uc3QgeyByZWYsIGlzSW5WaWV3IH0gPSB1c2VJblZpZXcoKTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwicHQtMjBcIj5cclxuICAgICAgPHNlY3Rpb24gcmVmPXtyZWZ9IGNsYXNzTmFtZT1cInNlY3Rpb24tcGFkZGluZ1wiPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG9cIj5cclxuICAgICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX0gYW5pbWF0ZT17eyBvcGFjaXR5OiAxLCB5OiAwIH19IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCB9fSBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBtYi0xNlwiPlxyXG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXByaW1hcnkgdHJhY2tpbmctWzAuMmVtXSB1cHBlcmNhc2UgdGV4dC1zbSBtYi0yXCI+V2hhdCBXZSBPZmZlcjwvcD5cclxuICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LXNlbWlib2xkXCI+T3VyIFNlcnZpY2VzPC9oMT5cclxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBtdC00IG1heC13LXhsIG14LWF1dG9cIj5FdmVyeSBzZXJ2aWNlIGlzIGNyYWZ0ZWQgd2l0aCBwcmVjaXNpb24sIHBhc3Npb24sIGFuZCB0aGUgZmluZXN0IHByb2R1Y3RzIHRvIG1ha2UgeW91IGxvb2sgYW5kIGZlZWwgZXh0cmFvcmRpbmFyeS48L3A+XHJcbiAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcblxyXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIG1kOmdyaWQtY29scy0yIGxnOmdyaWQtY29scy0zIGdhcC04XCI+XHJcbiAgICAgICAgICAgIHtzZXJ2aWNlcy5tYXAoKHNlcnZpY2UsIGkpID0+IChcclxuICAgICAgICAgICAgICA8bW90aW9uLmRpdlxyXG4gICAgICAgICAgICAgICAga2V5PXtzZXJ2aWNlLmlkfVxyXG4gICAgICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiA0MCwgc2NhbGU6IDAuOTUgfX1cclxuICAgICAgICAgICAgICAgIGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB5OiAwLCBzY2FsZTogMSB9IDoge319XHJcbiAgICAgICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjYsIGRlbGF5OiBpICogMC4xIH19XHJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJncm91cCBiZy1jYXJkIHJvdW5kZWQtMnhsIG92ZXJmbG93LWhpZGRlbiBsdXh1cnktc2hhZG93LWNhcmQgaG92ZXI6bHV4dXJ5LWdsb3cgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNTAwXCJcclxuICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIGgtNjQgb3ZlcmZsb3ctaGlkZGVuXCI+XHJcbiAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPXtzZXJ2aWNlLmltYWdlfSBhbHQ9e3NlcnZpY2UudGl0bGV9IGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgb2JqZWN0LWNvdmVyIHRyYW5zaXRpb24tdHJhbnNmb3JtIGR1cmF0aW9uLTcwMCBncm91cC1ob3ZlcjpzY2FsZS0xMDVcIiBsb2FkaW5nPVwibGF6eVwiIC8+XHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBiZy1ncmFkaWVudC10by10IGZyb20tZm9yZWdyb3VuZC81MCB0by10cmFuc3BhcmVudFwiIC8+XHJcbiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS00IHJpZ2h0LTQgZm9udC1oZWFkaW5nIHRleHQtMnhsIGZvbnQtYm9sZCB0ZXh0LWJhY2tncm91bmRcIj57c2VydmljZS5wcmljZX08L3NwYW4+XHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC02XCI+XHJcbiAgICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC14bCBmb250LXNlbWlib2xkIG1iLTJcIj57c2VydmljZS50aXRsZX08L2gyPlxyXG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIHRleHQtc20gbWItNCBsZWFkaW5nLXJlbGF4ZWRcIj57c2VydmljZS5kZXNjcmlwdGlvbn08L3A+XHJcbiAgICAgICAgICAgICAgICAgIDxMaW5rIHRvPXtgL3NlcnZpY2VzLyR7c2VydmljZS5zbHVnfWB9IGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRleHQtcHJpbWFyeSBob3ZlcjpnYXAtMyB0cmFuc2l0aW9uLWFsbFwiPlxyXG4gICAgICAgICAgICAgICAgICAgIFZpZXcgRGV0YWlscyA8QXJyb3dSaWdodCBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz5cclxuICAgICAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgICAgICApKX1cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L3NlY3Rpb24+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59O1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgU2VydmljZXM7XHJcbiJdLCJuYW1lcyI6WyJMaW5rIiwibW90aW9uIiwiQXJyb3dSaWdodCIsInNlcnZpY2VzIiwidXNlSW5WaWV3IiwiU2VydmljZXMiLCJyZWYiLCJpc0luVmlldyIsImRpdiIsImNsYXNzTmFtZSIsInNlY3Rpb24iLCJpbml0aWFsIiwib3BhY2l0eSIsInkiLCJhbmltYXRlIiwidHJhbnNpdGlvbiIsImR1cmF0aW9uIiwicCIsImgxIiwibWFwIiwic2VydmljZSIsImkiLCJzY2FsZSIsImRlbGF5IiwiaW1nIiwic3JjIiwiaW1hZ2UiLCJhbHQiLCJ0aXRsZSIsImxvYWRpbmciLCJzcGFuIiwicHJpY2UiLCJoMiIsImRlc2NyaXB0aW9uIiwidG8iLCJzbHVnIiwiaWQiXSwibWFwcGluZ3MiOiI7O0FBQUEsU0FBU0EsSUFBSSxRQUFRLG1CQUFtQjtBQUN4QyxTQUFTQyxNQUFNLFFBQVEsZ0JBQWdCO0FBQ3ZDLFNBQVNDLFVBQVUsUUFBUSxlQUFlO0FBQzFDLFNBQVNDLFFBQVEsUUFBUSxrQkFBa0I7QUFDM0MsU0FBU0MsU0FBUyxRQUFRLHdCQUF3QjtBQUVsRCxNQUFNQyxXQUFXOztJQUNmLE1BQU0sRUFBRUMsR0FBRyxFQUFFQyxRQUFRLEVBQUUsR0FBR0g7SUFFMUIscUJBQ0UsUUFBQ0k7UUFBSUMsV0FBVTtrQkFDYixjQUFBLFFBQUNDO1lBQVFKLEtBQUtBO1lBQUtHLFdBQVU7c0JBQzNCLGNBQUEsUUFBQ0Q7Z0JBQUlDLFdBQVU7O2tDQUNiLFFBQUNSLE9BQU9PLEdBQUc7d0JBQUNHLFNBQVM7NEJBQUVDLFNBQVM7NEJBQUdDLEdBQUc7d0JBQUc7d0JBQUdDLFNBQVM7NEJBQUVGLFNBQVM7NEJBQUdDLEdBQUc7d0JBQUU7d0JBQUdFLFlBQVk7NEJBQUVDLFVBQVU7d0JBQUk7d0JBQUdQLFdBQVU7OzBDQUNsSCxRQUFDUTtnQ0FBRVIsV0FBVTswQ0FBbUU7Ozs7OzswQ0FDaEYsUUFBQ1M7Z0NBQUdULFdBQVU7MENBQWtEOzs7Ozs7MENBQ2hFLFFBQUNRO2dDQUFFUixXQUFVOzBDQUF3RDs7Ozs7Ozs7Ozs7O2tDQUd2RSxRQUFDRDt3QkFBSUMsV0FBVTtrQ0FDWk4sU0FBU2dCLEdBQUcsQ0FBQyxDQUFDQyxTQUFTQyxrQkFDdEIsUUFBQ3BCLE9BQU9PLEdBQUc7Z0NBRVRHLFNBQVM7b0NBQUVDLFNBQVM7b0NBQUdDLEdBQUc7b0NBQUlTLE9BQU87Z0NBQUs7Z0NBQzFDUixTQUFTUCxXQUFXO29DQUFFSyxTQUFTO29DQUFHQyxHQUFHO29DQUFHUyxPQUFPO2dDQUFFLElBQUksQ0FBQztnQ0FDdERQLFlBQVk7b0NBQUVDLFVBQVU7b0NBQUtPLE9BQU9GLElBQUk7Z0NBQUk7Z0NBQzVDWixXQUFVOztrREFFVixRQUFDRDt3Q0FBSUMsV0FBVTs7MERBQ2IsUUFBQ2U7Z0RBQUlDLEtBQUtMLFFBQVFNLEtBQUs7Z0RBQUVDLEtBQUtQLFFBQVFRLEtBQUs7Z0RBQUVuQixXQUFVO2dEQUFxRm9CLFNBQVE7Ozs7OzswREFDcEosUUFBQ3JCO2dEQUFJQyxXQUFVOzs7Ozs7MERBQ2YsUUFBQ3FCO2dEQUFLckIsV0FBVTswREFBNkVXLFFBQVFXLEtBQUs7Ozs7Ozs7Ozs7OztrREFFNUcsUUFBQ3ZCO3dDQUFJQyxXQUFVOzswREFDYixRQUFDdUI7Z0RBQUd2QixXQUFVOzBEQUEyQ1csUUFBUVEsS0FBSzs7Ozs7OzBEQUN0RSxRQUFDWDtnREFBRVIsV0FBVTswREFBZ0VXLFFBQVFhLFdBQVc7Ozs7OzswREFDaEcsUUFBQ2pDO2dEQUFLa0MsSUFBSSxDQUFDLFVBQVUsRUFBRWQsUUFBUWUsSUFBSSxFQUFFO2dEQUFFMUIsV0FBVTs7b0RBQTZGO2tFQUMvSCxRQUFDUDt3REFBV08sV0FBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsrQkFmbENXLFFBQVFnQixFQUFFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQXlCL0I7R0F6Q00vQjs7UUFDc0JEOzs7S0FEdEJDO0FBMkNOLGVBQWVBLFNBQVMifQ==

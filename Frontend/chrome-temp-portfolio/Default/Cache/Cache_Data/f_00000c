@@ -1,0 +1,2058 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Index.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"];const useState = __vite__cjsImport19_react["useState"]; const useEffect = __vite__cjsImport19_react["useEffect"]; const lazy = __vite__cjsImport19_react["lazy"]; const Suspense = __vite__cjsImport19_react["Suspense"]; const useRef = __vite__cjsImport19_react["useRef"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$(), _s3 = $RefreshSig$(), _s4 = $RefreshSig$(), _s5 = $RefreshSig$(), _s6 = $RefreshSig$(), _s7 = $RefreshSig$(), _s8 = $RefreshSig$(), _s9 = $RefreshSig$(), _s10 = $RefreshSig$();
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { Star, Award, Heart, Sparkles, ArrowRight, Play, Pause, Volume2, VolumeX } from "/node_modules/.vite/deps/lucide-react.js?v=44223405";
+import { useInView, useAnimatedCounter } from "/src/hooks/useAnimations.ts";
+import { services, testimonials } from "/src/data/siteData.ts";
+import heroSlide1 from "/src/assets/hero-slide-1.jpg?import";
+import heroSlide2 from "/src/assets/hero-slide-2.jpg?import";
+import heroSlide4 from "/src/assets/hero-slide-4.jpg?import";
+import salonInterior from "/src/assets/salon-interior.jpg?import";
+import salonSetup from "/src/assets/salon-setup.jpg?import";
+import soapProduct1 from "/src/assets/soap-product-1.jpg?import";
+import soapProduct2 from "/src/assets/soap-product-2.jpg?import";
+import soapProduct3 from "/src/assets/soap-product-3.jpg?import";
+// Static fallback images for portfolio preview
+import bridalMakeup from "/src/assets/bridal-makeup.jpg?import";
+import engagementMakeup from "/src/assets/engagement-makeup.jpg?import";
+import partyMakeup from "/src/assets/party-makeup.jpg?import";
+import hairStyling from "/src/assets/hair-styling.jpg?import";
+import HomeBlogSection from "/src/components/Homeblogsection.tsx";
+import __vite__cjsImport19_react from "/node_modules/.vite/deps/react.js?v=44223405";
+import { apiUrl, resolveMediaUrl } from "/src/lib/api.ts";
+const SoapScrollSection = /*#__PURE__*/ lazy(()=>import("/src/components/SoapScrollSection.tsx"));
+_c = SoapScrollSection;
+// ✅ Removed heroBg1 & heroBg2 (blurry slots 5 & 6) — now 5 crisp slides
+const heroSlides = [
+    heroSlide1,
+    heroSlide2,
+    heroSlide4,
+    salonInterior,
+    salonSetup
+];
+// Static fallback for when no portfolio items uploaded yet
+const FALLBACK_PORTFOLIO = [
+    {
+        id: 'f1',
+        url: bridalMakeup,
+        type: 'image'
+    },
+    {
+        id: 'f2',
+        url: engagementMakeup,
+        type: 'image'
+    },
+    {
+        id: 'f3',
+        url: partyMakeup,
+        type: 'image'
+    },
+    {
+        id: 'f4',
+        url: hairStyling,
+        type: 'image'
+    }
+];
+// ─────────────────────────────────────────
+// HERO
+// ─────────────────────────────────────────
+const HeroSection = ()=>{
+    _s();
+    const [current, setCurrent] = useState(0);
+    useEffect(()=>{
+        const t = setInterval(()=>setCurrent((p)=>(p + 1) % heroSlides.length), 5000);
+        return ()=>clearInterval(t);
+    }, []);
+    return /*#__PURE__*/ _jsxDEV("section", {
+        className: "relative min-h-screen flex items-center justify-center overflow-hidden",
+        children: [
+            heroSlides.map((bg, i)=>/*#__PURE__*/ _jsxDEV("div", {
+                    className: "absolute inset-0 transition-opacity duration-[2000ms]",
+                    style: {
+                        opacity: current === i ? 1 : 0
+                    },
+                    children: /*#__PURE__*/ _jsxDEV("img", {
+                        src: bg,
+                        alt: "",
+                        className: "w-full h-full object-cover",
+                        style: {
+                            animation: current === i ? 'kenBurns 15s ease-in-out forwards' : 'none'
+                        },
+                        ...i === 0 ? {} : {
+                            loading: 'lazy'
+                        }
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 50,
+                        columnNumber: 11
+                    }, this)
+                }, i, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 49,
+                    columnNumber: 9
+                }, this)),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 55,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "relative z-10 text-center px-4 max-w-4xl mx-auto",
+                children: [
+                    /*#__PURE__*/ _jsxDEV(motion.p, {
+                        initial: {
+                            opacity: 0,
+                            y: 20
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 1,
+                            delay: 0.2
+                        },
+                        className: "font-accent text-lg md:text-xl tracking-[0.3em] uppercase text-white/80 mb-4",
+                        children: "Beauty And The Brush"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 57,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV(motion.h1, {
+                        initial: {
+                            opacity: 0,
+                            y: 30
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 1,
+                            delay: 0.4
+                        },
+                        className: "font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6",
+                        children: [
+                            "Enhancing Beauty",
+                            /*#__PURE__*/ _jsxDEV("br", {}, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 63,
+                                columnNumber: 27
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("span", {
+                                className: "text-blush italic font-normal",
+                                children: "With Artistry."
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 64,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 61,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV(motion.p, {
+                        initial: {
+                            opacity: 0,
+                            y: 20
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 1,
+                            delay: 0.6
+                        },
+                        className: "font-body text-white/80 text-lg md:text-xl mb-10 max-w-xl mx-auto",
+                        children: "Premium makeup artistry for brides, engagements & celebrations in Bangalore"
+                    }, void 0, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 66,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0,
+                            y: 20
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        transition: {
+                            duration: 1,
+                            delay: 0.8
+                        },
+                        className: "flex flex-col sm:flex-row gap-4 justify-center",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV(Link, {
+                                to: "/booking",
+                                className: "px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white rounded-full font-medium hover:bg-white hover:text-foreground transition-all duration-500 tracking-wide",
+                                children: "Book Appointment"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 72,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("a", {
+                                href: "https://wa.me/919148768958?text=Hello%20I%20want%20to%20inquire%20about%20your%20services",
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                                className: "px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/40 text-white rounded-full font-medium hover:bg-white hover:text-foreground transition-all duration-500 tracking-wide",
+                                children: "WhatsApp Us"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 75,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2",
+                children: heroSlides.map((_, i)=>/*#__PURE__*/ _jsxDEV("button", {
+                        onClick: ()=>setCurrent(i),
+                        className: `h-1.5 rounded-full transition-all duration-500 ${current === i ? 'w-8 bg-white' : 'w-2 bg-white/40'}`
+                    }, i, false, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 84,
+                        columnNumber: 11
+                    }, this))
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 82,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 47,
+        columnNumber: 5
+    }, this);
+};
+_s(HeroSection, "Ce5S7Zpl2S4YgGoPn+G4m52qKq8=");
+_c1 = HeroSection;
+// ─────────────────────────────────────────
+// COUNTERS
+// ─────────────────────────────────────────
+const CounterItem = ({ end, suffix, label })=>{
+    _s1();
+    const { ref, isInView } = useInView();
+    const count = useAnimatedCounter(end, 2500, isInView);
+    return /*#__PURE__*/ _jsxDEV("div", {
+        ref: ref,
+        className: "text-center",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "font-heading text-4xl md:text-5xl font-bold text-primary",
+                children: [
+                    count.toLocaleString(),
+                    suffix
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 100,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("p", {
+                className: "font-body text-muted-foreground mt-2 text-sm tracking-wide uppercase",
+                children: label
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 101,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 99,
+        columnNumber: 5
+    }, this);
+};
+_s1(CounterItem, "Nvi0yl56Ow+fsn/eGpW4XmkLswg=", false, function() {
+    return [
+        useInView,
+        useAnimatedCounter
+    ];
+});
+_c2 = CounterItem;
+const CountersSection = ()=>{
+    _s2();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding bg-cream",
+        children: /*#__PURE__*/ _jsxDEV(motion.div, {
+            initial: {
+                opacity: 0,
+                y: 40
+            },
+            animate: isInView ? {
+                opacity: 1,
+                y: 0
+            } : {},
+            transition: {
+                duration: 0.8
+            },
+            className: "max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12",
+            children: [
+                /*#__PURE__*/ _jsxDEV(CounterItem, {
+                    end: 20,
+                    suffix: "+",
+                    label: "Years Experience"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 112,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV(CounterItem, {
+                    end: 30000,
+                    suffix: "+",
+                    label: "Happy Clients"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 113,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV(CounterItem, {
+                    end: 1000,
+                    suffix: "+",
+                    label: "Bridal Looks"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 114,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV(CounterItem, {
+                    end: 500,
+                    suffix: "+",
+                    label: "Party Makeovers"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 115,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 110,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 109,
+        columnNumber: 5
+    }, this);
+};
+_s2(CountersSection, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c3 = CountersSection;
+// ─────────────────────────────────────────
+// SERVICES PREVIEW
+// ─────────────────────────────────────────
+const ServicesPreview = ()=>{
+    _s3();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-7xl mx-auto",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    className: "text-center mb-16",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "What We Offer"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 130,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold",
+                            children: "Our Services"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 131,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 129,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8",
+                    children: services.map((service, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 40,
+                                scale: 0.95
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1
+                            } : {},
+                            transition: {
+                                duration: 0.6,
+                                delay: i * 0.1
+                            },
+                            className: "group bg-card rounded-2xl overflow-hidden luxury-shadow-card hover:luxury-glow transition-all duration-500",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "relative h-56 overflow-hidden",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("img", {
+                                            src: service.image,
+                                            alt: service.title,
+                                            className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+                                            loading: "lazy"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 139,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 140,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "absolute bottom-4 right-4 font-heading text-xl font-bold text-white",
+                                            children: service.price
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 141,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 138,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "p-6",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("h3", {
+                                            className: "font-heading text-lg font-semibold mb-2",
+                                            children: service.title
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 144,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            className: "font-body text-muted-foreground text-sm mb-4 leading-relaxed",
+                                            children: service.description
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 145,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Link, {
+                                            to: `/services/${service.slug}`,
+                                            className: "inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all",
+                                            children: [
+                                                "View Details ",
+                                                /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                    className: "w-4 h-4"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                    lineNumber: 147,
+                                                    columnNumber: 32
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 146,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 143,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, service.id, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 135,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 133,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 128,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 127,
+        columnNumber: 5
+    }, this);
+};
+_s3(ServicesPreview, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c4 = ServicesPreview;
+const PortfolioPreview = ()=>{
+    _s4();
+    const { ref, isInView } = useInView();
+    const [items, setItems] = useState(FALLBACK_PORTFOLIO);
+    useEffect(()=>{
+        fetch('http://localhost:5000/api/portfolio').then((res)=>res.json()).then((data)=>{
+            if (Array.isArray(data) && data.length > 0) {
+                setItems(data.slice(0, 4));
+            }
+        }).catch(()=>{});
+    }, []);
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding bg-cream",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-7xl mx-auto",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    className: "text-center mb-16",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "Our Work"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 182,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold",
+                            children: "Portfolio"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 183,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-body text-muted-foreground mt-4 max-w-lg mx-auto",
+                            children: "A glimpse of our finest transformations."
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 184,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 181,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-2 md:grid-cols-4 gap-4",
+                    children: items.map((item, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                y: 0
+                            } : {},
+                            transition: {
+                                duration: 0.6,
+                                delay: i * 0.1
+                            },
+                            className: "group relative rounded-2xl overflow-hidden aspect-[4/5] luxury-shadow hover:shadow-lg transition-all duration-500",
+                            children: [
+                                item.type === 'video' ? /*#__PURE__*/ _jsxDEV("video", {
+                                    src: item.url,
+                                    className: "w-full h-full object-cover",
+                                    muted: true,
+                                    playsInline: true
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 195,
+                                    columnNumber: 17
+                                }, this) : /*#__PURE__*/ _jsxDEV("img", {
+                                    src: item.url,
+                                    alt: "Portfolio",
+                                    className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110",
+                                    loading: "lazy"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 197,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 199,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, item.id, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 189,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 187,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "text-center mt-10",
+                    children: /*#__PURE__*/ _jsxDEV(Link, {
+                        to: "/portfolio",
+                        className: "inline-flex items-center gap-2 px-8 py-4 text-base font-medium border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300",
+                        children: [
+                            "View Full Portfolio ",
+                            /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                className: "w-4 h-4"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 207,
+                                columnNumber: 33
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 205,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 204,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 180,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 179,
+        columnNumber: 5
+    }, this);
+};
+_s4(PortfolioPreview, "eaU40Xi3nh+EyQF4+mGJOFzX25I=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c5 = PortfolioPreview;
+// ─────────────────────────────────────────
+// VIDEO SECTION
+// Left: uploaded local video player
+// Right: Instagram reel card (unchanged)
+// ─────────────────────────────────────────
+// ✅ Put your video in public/videos/ and set the filename here
+const VIDEO_FILE_NAME = 'reel.mp4';
+const INSTAGRAM_REEL_URL = 'https://www.instagram.com/reel/DW1lsCWgT-G/?igsh=cHhjeTF3emRndzR5';
+const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/beautyandthebrush2026';
+const VideoSection = ()=>{
+    _s5();
+    const { ref, isInView } = useInView();
+    const videoRef = useRef(null);
+    const [playing, setPlaying] = useState(false);
+    const [muted, setMuted] = useState(true);
+    const [started, setStarted] = useState(false);
+    const togglePlay = ()=>{
+        const v = videoRef.current;
+        if (!v) return;
+        if (v.paused) {
+            v.play();
+            setPlaying(true);
+            setStarted(true);
+        } else {
+            v.pause();
+            setPlaying(false);
+        }
+    };
+    const toggleMute = (e)=>{
+        e.stopPropagation();
+        const v = videoRef.current;
+        if (!v) return;
+        v.muted = !v.muted;
+        setMuted(v.muted);
+    };
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "max-w-5xl mx-auto",
+                children: [
+                    /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0,
+                            y: 30
+                        },
+                        animate: isInView ? {
+                            opacity: 1,
+                            y: 0
+                        } : {},
+                        transition: {
+                            duration: 0.8
+                        },
+                        className: "text-center mb-12",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                children: "Watch"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 259,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("h2", {
+                                className: "font-heading text-3xl md:text-4xl font-semibold",
+                                children: "Our Work in Motion"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 260,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 253,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV(motion.div, {
+                        initial: {
+                            opacity: 0,
+                            scale: 0.95
+                        },
+                        animate: isInView ? {
+                            opacity: 1,
+                            scale: 1
+                        } : {},
+                        transition: {
+                            duration: 0.8,
+                            delay: 0.2
+                        },
+                        className: "flex flex-col md:flex-row items-start justify-center gap-8 md:gap-10",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "flex flex-col items-center w-full md:w-auto",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "relative group",
+                                        style: {
+                                            width: '100%',
+                                            maxWidth: '260px'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "absolute -inset-1 rounded-3xl opacity-50 blur-md",
+                                                style: {
+                                                    background: 'linear-gradient(135deg, hsl(350,45%,68%), hsl(35,55%,62%))'
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 275,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative rounded-2xl overflow-hidden cursor-pointer",
+                                                style: {
+                                                    aspectRatio: '9/16',
+                                                    background: 'hsl(20,15%,10%)',
+                                                    boxShadow: '0 20px 60px rgba(0,0,0,0.22)'
+                                                },
+                                                onClick: togglePlay,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("video", {
+                                                        ref: videoRef,
+                                                        src: `/videos/${VIDEO_FILE_NAME}`,
+                                                        className: "w-full h-full object-cover",
+                                                        muted: true,
+                                                        playsInline: true,
+                                                        loop: true,
+                                                        onEnded: ()=>setPlaying(false)
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                        lineNumber: 289,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    !started && /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "absolute inset-0 bg-black/35 flex flex-col items-center justify-center gap-3",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                                className: "w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110",
+                                                                style: {
+                                                                    background: 'rgba(255,255,255,0.15)',
+                                                                    backdropFilter: 'blur(8px)',
+                                                                    border: '2px solid rgba(255,255,255,0.55)'
+                                                                },
+                                                                children: /*#__PURE__*/ _jsxDEV(Play, {
+                                                                    className: "w-6 h-6 text-white fill-white ml-0.5"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 310,
+                                                                    columnNumber: 23
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 302,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "font-body text-white/70 text-xs",
+                                                                children: "Tap to play"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 312,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                        lineNumber: 301,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    started && /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                                                        style: {
+                                                            background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)'
+                                                        },
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                                onClick: togglePlay,
+                                                                className: "text-white hover:text-white/80 transition-colors",
+                                                                children: playing ? /*#__PURE__*/ _jsxDEV(Pause, {
+                                                                    className: "w-5 h-5"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 323,
+                                                                    columnNumber: 34
+                                                                }, this) : /*#__PURE__*/ _jsxDEV(Play, {
+                                                                    className: "w-5 h-5 fill-white"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 323,
+                                                                    columnNumber: 66
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 322,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                                onClick: toggleMute,
+                                                                className: "text-white hover:text-white/80 transition-colors",
+                                                                children: muted ? /*#__PURE__*/ _jsxDEV(VolumeX, {
+                                                                    className: "w-5 h-5"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 326,
+                                                                    columnNumber: 32
+                                                                }, this) : /*#__PURE__*/ _jsxDEV(Volume2, {
+                                                                    className: "w-5 h-5"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 326,
+                                                                    columnNumber: 66
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 325,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                        lineNumber: 318,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "absolute top-3 left-3 px-2.5 py-1 rounded-full text-white text-[10px] font-body font-semibold tracking-wide",
+                                                        style: {
+                                                            background: 'linear-gradient(135deg, hsl(350,45%,58%), hsl(35,55%,52%))'
+                                                        },
+                                                        children: "✦ Our Reel"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                        lineNumber: 332,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 280,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 273,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("p", {
+                                        className: "font-body text-muted-foreground text-xs mt-3 text-center",
+                                        children: "Behind the brush ✨"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 340,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 272,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "flex flex-col items-center w-full md:w-auto",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        style: {
+                                            width: '100%',
+                                            maxWidth: '260px'
+                                        },
+                                        children: /*#__PURE__*/ _jsxDEV("a", {
+                                            href: INSTAGRAM_REEL_URL,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "group relative block rounded-2xl overflow-hidden",
+                                            style: {
+                                                aspectRatio: '9/16',
+                                                background: 'linear-gradient(135deg, hsl(350,30%,15%) 0%, hsl(20,15%,10%) 100%)',
+                                                boxShadow: '0 20px 60px rgba(0,0,0,0.22)'
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "absolute inset-0 bg-gradient-to-br from-[hsl(350,40%,20%)] via-[hsl(20,20%,12%)] to-[hsl(350,30%,8%)]"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                    lineNumber: 359,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "absolute inset-0 opacity-20",
+                                                    style: {
+                                                        background: 'linear-gradient(45deg, transparent 30%, hsl(350,50%,60%) 50%, transparent 70%)',
+                                                        backgroundSize: '200% 200%',
+                                                        animation: 'shimmer 3s ease-in-out infinite'
+                                                    }
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                    lineNumber: 362,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "absolute inset-0 flex flex-col items-center justify-center gap-4 z-10",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl",
+                                                            style: {
+                                                                background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)'
+                                                            },
+                                                            children: /*#__PURE__*/ _jsxDEV("svg", {
+                                                                viewBox: "0 0 24 24",
+                                                                className: "w-8 h-8 fill-white",
+                                                                children: /*#__PURE__*/ _jsxDEV("path", {
+                                                                    d: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 378,
+                                                                    columnNumber: 23
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 377,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                            lineNumber: 373,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "w-14 h-14 rounded-full border-2 border-white/60 flex items-center justify-center group-hover:border-white group-hover:scale-110 transition-all duration-300 bg-white/10 backdrop-blur-sm",
+                                                            children: /*#__PURE__*/ _jsxDEV(Play, {
+                                                                className: "w-6 h-6 text-white fill-white ml-0.5"
+                                                            }, void 0, false, {
+                                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                lineNumber: 384,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                            lineNumber: 383,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("div", {
+                                                            className: "text-center px-6",
+                                                            children: [
+                                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                                    className: "font-heading text-white text-lg font-semibold mb-1",
+                                                                    children: "Watch on Instagram"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 388,
+                                                                    columnNumber: 21
+                                                                }, this),
+                                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                                    className: "font-body text-white/60 text-sm",
+                                                                    children: "Tap to view our latest reel"
+                                                                }, void 0, false, {
+                                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                                    lineNumber: 389,
+                                                                    columnNumber: 21
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                            lineNumber: 387,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                    lineNumber: 372,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                                }, void 0, false, {
+                                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                    lineNumber: 394,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 348,
+                                            columnNumber: 15
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 347,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("p", {
+                                        className: "text-center font-body text-muted-foreground text-sm mt-4",
+                                        children: [
+                                            "Follow us",
+                                            ' ',
+                                            /*#__PURE__*/ _jsxDEV("a", {
+                                                href: INSTAGRAM_PROFILE_URL,
+                                                target: "_blank",
+                                                rel: "noopener noreferrer",
+                                                className: "text-primary hover:underline",
+                                                children: "@beautyandthebrush2026"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 401,
+                                                columnNumber: 15
+                                            }, this),
+                                            ' ',
+                                            "for more"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 399,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 346,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 264,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 250,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("style", {
+                children: `
+        @keyframes shimmer {
+          0% { background-position: 200% 200%; }
+          50% { background-position: 0% 0%; }
+          100% { background-position: 200% 200%; }
+        }
+      `
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 412,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 249,
+        columnNumber: 5
+    }, this);
+};
+_s5(VideoSection, "W/Tu1uDfFe/chiAZNgKt66H+GP8=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c6 = VideoSection;
+// ─────────────────────────────────────────
+// PRODUCTS
+// ─────────────────────────────────────────
+const products = [
+    {
+        name: 'Almond & Honey Soap',
+        image: soapProduct1
+    },
+    {
+        name: 'Rose Petal Soap',
+        image: soapProduct2
+    },
+    {
+        name: 'Lavender Bliss Soap',
+        image: soapProduct3
+    }
+];
+const ProductSection = ()=>{
+    _s6();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-5xl mx-auto",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    className: "text-center mb-16",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "Launching Soon"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 438,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold",
+                            children: "Our Products"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 439,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 437,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-1 sm:grid-cols-3 gap-8",
+                    children: products.map((product, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                y: 0
+                            } : {},
+                            transition: {
+                                duration: 0.6,
+                                delay: i * 0.15
+                            },
+                            className: "group bg-card rounded-2xl overflow-hidden luxury-shadow hover:luxury-shadow-card transition-all duration-500",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "aspect-square overflow-hidden",
+                                    children: /*#__PURE__*/ _jsxDEV("img", {
+                                        src: product.image,
+                                        alt: product.name,
+                                        className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+                                        loading: "lazy"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 446,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 445,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "p-5 text-center",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("h3", {
+                                            className: "font-heading text-lg font-semibold mb-2",
+                                            children: product.name
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 449,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("span", {
+                                            className: "inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-body font-medium tracking-wider uppercase",
+                                            children: "Coming Soon"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 450,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 448,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, product.name, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 443,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 441,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 436,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 435,
+        columnNumber: 5
+    }, this);
+};
+_s6(ProductSection, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c7 = ProductSection;
+// ─────────────────────────────────────────
+// COUNTDOWN
+// ─────────────────────────────────────────
+const CountdownTimer = ()=>{
+    _s7();
+    const { ref, isInView } = useInView();
+    const targetDate = new Date('2026-08-15T00:00:00');
+    const [timeLeft, setTimeLeft] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    });
+    useEffect(()=>{
+        const tick = ()=>{
+            const diff = targetDate.getTime() - Date.now();
+            if (diff <= 0) return;
+            setTimeLeft({
+                days: Math.floor(diff / 86400000),
+                hours: Math.floor(diff / 3600000 % 24),
+                minutes: Math.floor(diff / 60000 % 60),
+                seconds: Math.floor(diff / 1000 % 60)
+            });
+        };
+        tick();
+        const id = setInterval(tick, 1000);
+        return ()=>clearInterval(id);
+    }, []);
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "py-16 bg-cream",
+        children: /*#__PURE__*/ _jsxDEV(motion.div, {
+            initial: {
+                opacity: 0,
+                y: 30
+            },
+            animate: isInView ? {
+                opacity: 1,
+                y: 0
+            } : {},
+            transition: {
+                duration: 0.8
+            },
+            className: "max-w-3xl mx-auto text-center px-4",
+            children: [
+                /*#__PURE__*/ _jsxDEV("p", {
+                    className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-3",
+                    children: "Product Launch"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 480,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("h3", {
+                    className: "font-heading text-2xl md:text-3xl font-semibold mb-8",
+                    children: "Launching August 2026"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 481,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "flex justify-center gap-4 md:gap-8",
+                    children: [
+                        {
+                            label: 'Days',
+                            value: timeLeft.days
+                        },
+                        {
+                            label: 'Hours',
+                            value: timeLeft.hours
+                        },
+                        {
+                            label: 'Minutes',
+                            value: timeLeft.minutes
+                        },
+                        {
+                            label: 'Seconds',
+                            value: timeLeft.seconds
+                        }
+                    ].map((u)=>/*#__PURE__*/ _jsxDEV("div", {
+                            className: "bg-card rounded-xl p-4 md:p-6 luxury-shadow min-w-[70px] md:min-w-[90px]",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "font-heading text-2xl md:text-4xl font-bold text-primary tabular-nums",
+                                    children: String(u.value).padStart(2, '0')
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 485,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-body text-xs text-muted-foreground mt-1 uppercase tracking-wider",
+                                    children: u.label
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 486,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, u.label, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 484,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 482,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 479,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 478,
+        columnNumber: 5
+    }, this);
+};
+_s7(CountdownTimer, "XdkUX/A6CLA6x0itn5KBUftWp4g=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c8 = CountdownTimer;
+// ─────────────────────────────────────────
+// TESTIMONIALS
+// ─────────────────────────────────────────
+const TestimonialsSection = ()=>{
+    _s8();
+    const [active, setActive] = useState(0);
+    const { ref, isInView } = useInView();
+    useEffect(()=>{
+        const t = setInterval(()=>setActive((p)=>(p + 1) % testimonials.length), 5000);
+        return ()=>clearInterval(t);
+    }, []);
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-3xl mx-auto text-center",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "Testimonials"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 509,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold mb-12",
+                            children: "What Our Clients Say"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 510,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 508,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "relative min-h-[200px]",
+                    children: testimonials.map((t, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: false,
+                            animate: {
+                                opacity: active === i ? 1 : 0,
+                                y: active === i ? 0 : 20
+                            },
+                            transition: {
+                                duration: 0.6
+                            },
+                            className: `absolute inset-0 ${active !== i ? 'pointer-events-none' : ''}`,
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "flex justify-center mb-4",
+                                    children: Array.from({
+                                        length: t.rating
+                                    }).map((_, j)=>/*#__PURE__*/ _jsxDEV(Star, {
+                                            className: "w-5 h-5 text-primary fill-primary"
+                                        }, j, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 516,
+                                            columnNumber: 105
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 516,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-accent text-xl md:text-2xl italic text-foreground/80 leading-relaxed mb-6",
+                                    children: [
+                                        '"',
+                                        t.text,
+                                        '"'
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 517,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-body text-sm font-medium tracking-wide uppercase text-muted-foreground",
+                                    children: [
+                                        "— ",
+                                        t.name
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 518,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, i, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 514,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 512,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "flex justify-center gap-2 mt-8",
+                    children: testimonials.map((_, i)=>/*#__PURE__*/ _jsxDEV("button", {
+                            onClick: ()=>setActive(i),
+                            className: `w-2.5 h-2.5 rounded-full transition-all duration-300 ${active === i ? 'bg-primary w-8' : 'bg-border'}`
+                        }, i, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 524,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 522,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 507,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 506,
+        columnNumber: 5
+    }, this);
+};
+_s8(TestimonialsSection, "O5CVm+0B+iTqQmTis40hRCO2TDA=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c9 = TestimonialsSection;
+// ─────────────────────────────────────────
+// WHY CHOOSE US
+// ─────────────────────────────────────────
+const WhyChooseUs = ()=>{
+    _s9();
+    const { ref, isInView } = useInView();
+    const reasons = [
+        {
+            icon: Award,
+            title: '20+ Years Expertise',
+            desc: 'Two decades of perfecting the art of beauty.'
+        },
+        {
+            icon: Heart,
+            title: 'Premium Products',
+            desc: 'Only the finest international brands used.'
+        },
+        {
+            icon: Sparkles,
+            title: 'Personalized Service',
+            desc: 'Every look is tailored to your unique beauty.'
+        },
+        {
+            icon: Star,
+            title: 'Trusted by Thousands',
+            desc: '30,000+ happy clients and counting.'
+        }
+    ];
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding bg-cream",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-5xl mx-auto",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    className: "text-center mb-16",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "Why Us"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 547,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold",
+                            children: "Why Choose Beauty And The Brush"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 548,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 546,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8",
+                    children: reasons.map((r, i)=>/*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                y: 0
+                            } : {},
+                            transition: {
+                                duration: 0.6,
+                                delay: i * 0.1
+                            },
+                            className: "text-center p-6 bg-card rounded-2xl luxury-shadow hover:luxury-glow transition-all duration-500",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "w-14 h-14 rounded-full bg-accent flex items-center justify-center mx-auto mb-4",
+                                    children: /*#__PURE__*/ _jsxDEV(r.icon, {
+                                        className: "w-6 h-6 text-primary"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 554,
+                                        columnNumber: 111
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 554,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("h3", {
+                                    className: "font-heading text-lg font-semibold mb-2",
+                                    children: r.title
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 555,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "font-body text-muted-foreground text-sm",
+                                    children: r.desc
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                    lineNumber: 556,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, r.title, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 552,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 550,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 545,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 544,
+        columnNumber: 5
+    }, this);
+};
+_s9(WhyChooseUs, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c10 = WhyChooseUs;
+const BlogPreview = ()=>{
+    _s10();
+    const { ref, isInView } = useInView();
+    const [posts, setPosts] = useState([]);
+    useEffect(()=>{
+        fetch(apiUrl('/api/blog')).then((res)=>res.json()).then((data)=>{
+            if (Array.isArray(data)) setPosts(data.slice(0, 4));
+        }).catch(()=>{});
+    }, []);
+    if (posts.length === 0) return null;
+    return /*#__PURE__*/ _jsxDEV("section", {
+        ref: ref,
+        className: "section-padding",
+        children: /*#__PURE__*/ _jsxDEV("div", {
+            className: "max-w-7xl mx-auto",
+            children: [
+                /*#__PURE__*/ _jsxDEV(motion.div, {
+                    initial: {
+                        opacity: 0,
+                        y: 30
+                    },
+                    animate: isInView ? {
+                        opacity: 1,
+                        y: 0
+                    } : {},
+                    transition: {
+                        duration: 0.8
+                    },
+                    className: "text-center mb-16",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV("p", {
+                            className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                            children: "Latest"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 589,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("h2", {
+                            className: "font-heading text-3xl md:text-4xl font-semibold",
+                            children: "From Our Blog"
+                        }, void 0, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 590,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 588,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+                    children: posts.map((post, i)=>{
+                        const postId = post.id || post._id;
+                        const postDate = post.createdAt || post.date;
+                        return /*#__PURE__*/ _jsxDEV(motion.div, {
+                            initial: {
+                                opacity: 0,
+                                y: 30
+                            },
+                            animate: isInView ? {
+                                opacity: 1,
+                                y: 0
+                            } : {},
+                            transition: {
+                                duration: 0.6,
+                                delay: i * 0.1
+                            },
+                            className: "group bg-card rounded-2xl overflow-hidden luxury-shadow hover:luxury-shadow-card transition-all duration-500 hover:-translate-y-1 cursor-pointer",
+                            children: /*#__PURE__*/ _jsxDEV(Link, {
+                                to: `/blog/${postId}`,
+                                className: "block h-full",
+                                children: [
+                                    post.mediaUrl && post.mediaType === 'image' && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "h-40 overflow-hidden",
+                                        children: /*#__PURE__*/ _jsxDEV("img", {
+                                            src: resolveMediaUrl(post.mediaUrl),
+                                            alt: post.title,
+                                            className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+                                            loading: "lazy"
+                                        }, void 0, false, {
+                                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                            lineNumber: 603,
+                                            columnNumber: 23
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 602,
+                                        columnNumber: 21
+                                    }, this),
+                                    !post.mediaUrl && /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "h-28 bg-gradient-to-br from-[hsl(350,30%,92%)] to-[hsl(30,20%,90%)]"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 607,
+                                        columnNumber: 21
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "p-5",
+                                        children: [
+                                            postDate && /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "text-xs text-muted-foreground font-body mb-2",
+                                                children: new Date(postDate).toLocaleDateString('en-IN', {
+                                                    day: 'numeric',
+                                                    month: 'short',
+                                                    year: 'numeric'
+                                                })
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 611,
+                                                columnNumber: 23
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("h3", {
+                                                className: "font-heading text-base font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2",
+                                                children: post.title
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 615,
+                                                columnNumber: 21
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "font-body text-muted-foreground text-xs leading-relaxed line-clamp-3",
+                                                children: post.content
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 616,
+                                                columnNumber: 21
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "inline-flex items-center gap-1 text-xs font-medium text-primary mt-3 group-hover:gap-2 transition-all",
+                                                children: [
+                                                    "Read More ",
+                                                    /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                        className: "w-3 h-3"
+                                                    }, void 0, false, {
+                                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                        lineNumber: 618,
+                                                        columnNumber: 33
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                                lineNumber: 617,
+                                                columnNumber: 21
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                        lineNumber: 609,
+                                        columnNumber: 19
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 600,
+                                columnNumber: 17
+                            }, this)
+                        }, postId, false, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                            lineNumber: 598,
+                            columnNumber: 15
+                        }, this);
+                    })
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 593,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("div", {
+                    className: "text-center mt-8",
+                    children: /*#__PURE__*/ _jsxDEV(Link, {
+                        to: "/blog",
+                        className: "inline-flex items-center gap-2 px-8 py-4 text-base font-medium border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300",
+                        children: [
+                            "View All Posts ",
+                            /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                className: "w-4 h-4"
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                                lineNumber: 629,
+                                columnNumber: 28
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                        lineNumber: 628,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 627,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+            lineNumber: 587,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+        lineNumber: 586,
+        columnNumber: 5
+    }, this);
+};
+_s10(BlogPreview, "NUQtK8KghHhBXXGRUbaxEpzTQi8=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c11 = BlogPreview;
+// ─────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────
+const Index = ()=>/*#__PURE__*/ _jsxDEV(_Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxDEV(HeroSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 642,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(CountersSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 643,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(ServicesPreview, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 644,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(PortfolioPreview, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 645,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(VideoSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 646,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(ProductSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 647,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(CountdownTimer, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 648,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(Suspense, {
+                fallback: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "h-screen bg-cream"
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 649,
+                    columnNumber: 25
+                }, this),
+                children: /*#__PURE__*/ _jsxDEV(SoapScrollSection, {}, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                    lineNumber: 650,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 649,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(TestimonialsSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 652,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(WhyChooseUs, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 653,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ _jsxDEV(HomeBlogSection, {}, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx",
+                lineNumber: 654,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true);
+_c12 = Index;
+export default Index;
+var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12;
+$RefreshReg$(_c, "SoapScrollSection");
+$RefreshReg$(_c1, "HeroSection");
+$RefreshReg$(_c2, "CounterItem");
+$RefreshReg$(_c3, "CountersSection");
+$RefreshReg$(_c4, "ServicesPreview");
+$RefreshReg$(_c5, "PortfolioPreview");
+$RefreshReg$(_c6, "VideoSection");
+$RefreshReg$(_c7, "ProductSection");
+$RefreshReg$(_c8, "CountdownTimer");
+$RefreshReg$(_c9, "TestimonialsSection");
+$RefreshReg$(_c10, "WhyChooseUs");
+$RefreshReg$(_c11, "BlogPreview");
+$RefreshReg$(_c12, "Index");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/Index.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkluZGV4LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBMaW5rIH0gZnJvbSAncmVhY3Qtcm91dGVyLWRvbSc7XHJcbmltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ2ZyYW1lci1tb3Rpb24nO1xyXG5pbXBvcnQgeyBTdGFyLCBBd2FyZCwgSGVhcnQsIFNwYXJrbGVzLCBBcnJvd1JpZ2h0LCBQbGF5LCBQYXVzZSwgVm9sdW1lMiwgVm9sdW1lWCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XHJcbmltcG9ydCB7IHVzZUluVmlldywgdXNlQW5pbWF0ZWRDb3VudGVyIH0gZnJvbSAnQC9ob29rcy91c2VBbmltYXRpb25zJztcclxuaW1wb3J0IHsgc2VydmljZXMsIHRlc3RpbW9uaWFscyB9IGZyb20gJ0AvZGF0YS9zaXRlRGF0YSc7XHJcbmltcG9ydCBoZXJvU2xpZGUxIGZyb20gJ0AvYXNzZXRzL2hlcm8tc2xpZGUtMS5qcGcnO1xyXG5pbXBvcnQgaGVyb1NsaWRlMiBmcm9tICdAL2Fzc2V0cy9oZXJvLXNsaWRlLTIuanBnJztcclxuaW1wb3J0IGhlcm9TbGlkZTQgZnJvbSAnQC9hc3NldHMvaGVyby1zbGlkZS00LmpwZyc7XHJcbmltcG9ydCBzYWxvbkludGVyaW9yIGZyb20gJ0AvYXNzZXRzL3NhbG9uLWludGVyaW9yLmpwZyc7XHJcbmltcG9ydCBzYWxvblNldHVwIGZyb20gJ0AvYXNzZXRzL3NhbG9uLXNldHVwLmpwZyc7XHJcbmltcG9ydCBzb2FwUHJvZHVjdDEgZnJvbSAnQC9hc3NldHMvc29hcC1wcm9kdWN0LTEuanBnJztcclxuaW1wb3J0IHNvYXBQcm9kdWN0MiBmcm9tICdAL2Fzc2V0cy9zb2FwLXByb2R1Y3QtMi5qcGcnO1xyXG5pbXBvcnQgc29hcFByb2R1Y3QzIGZyb20gJ0AvYXNzZXRzL3NvYXAtcHJvZHVjdC0zLmpwZyc7XHJcbi8vIFN0YXRpYyBmYWxsYmFjayBpbWFnZXMgZm9yIHBvcnRmb2xpbyBwcmV2aWV3XHJcbmltcG9ydCBicmlkYWxNYWtldXAgZnJvbSAnQC9hc3NldHMvYnJpZGFsLW1ha2V1cC5qcGcnO1xyXG5pbXBvcnQgZW5nYWdlbWVudE1ha2V1cCBmcm9tICdAL2Fzc2V0cy9lbmdhZ2VtZW50LW1ha2V1cC5qcGcnO1xyXG5pbXBvcnQgcGFydHlNYWtldXAgZnJvbSAnQC9hc3NldHMvcGFydHktbWFrZXVwLmpwZyc7XHJcbmltcG9ydCBoYWlyU3R5bGluZyBmcm9tICdAL2Fzc2V0cy9oYWlyLXN0eWxpbmcuanBnJztcclxuaW1wb3J0IEhvbWVCbG9nU2VjdGlvbiBmcm9tICdAL2NvbXBvbmVudHMvSG9tZWJsb2dzZWN0aW9uJztcclxuaW1wb3J0IHsgdXNlU3RhdGUsIHVzZUVmZmVjdCwgbGF6eSwgU3VzcGVuc2UsIHVzZVJlZiB9IGZyb20gJ3JlYWN0JztcclxuaW1wb3J0IHsgYXBpVXJsLCByZXNvbHZlTWVkaWFVcmwgfSBmcm9tICdAL2xpYi9hcGknO1xyXG5cclxuY29uc3QgU29hcFNjcm9sbFNlY3Rpb24gPSBsYXp5KCgpID0+IGltcG9ydCgnQC9jb21wb25lbnRzL1NvYXBTY3JvbGxTZWN0aW9uJykpO1xyXG5cclxuLy8g4pyFIFJlbW92ZWQgaGVyb0JnMSAmIGhlcm9CZzIgKGJsdXJyeSBzbG90cyA1ICYgNikg4oCUIG5vdyA1IGNyaXNwIHNsaWRlc1xyXG5jb25zdCBoZXJvU2xpZGVzID0gW2hlcm9TbGlkZTEsIGhlcm9TbGlkZTIsIGhlcm9TbGlkZTQsIHNhbG9uSW50ZXJpb3IsIHNhbG9uU2V0dXBdO1xyXG5cclxuLy8gU3RhdGljIGZhbGxiYWNrIGZvciB3aGVuIG5vIHBvcnRmb2xpbyBpdGVtcyB1cGxvYWRlZCB5ZXRcclxuY29uc3QgRkFMTEJBQ0tfUE9SVEZPTElPID0gW1xyXG4gIHsgaWQ6ICdmMScsIHVybDogYnJpZGFsTWFrZXVwLCB0eXBlOiAnaW1hZ2UnIH0sXHJcbiAgeyBpZDogJ2YyJywgdXJsOiBlbmdhZ2VtZW50TWFrZXVwLCB0eXBlOiAnaW1hZ2UnIH0sXHJcbiAgeyBpZDogJ2YzJywgdXJsOiBwYXJ0eU1ha2V1cCwgdHlwZTogJ2ltYWdlJyB9LFxyXG4gIHsgaWQ6ICdmNCcsIHVybDogaGFpclN0eWxpbmcsIHR5cGU6ICdpbWFnZScgfSxcclxuXTtcclxuXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4vLyBIRVJPXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5jb25zdCBIZXJvU2VjdGlvbiA9ICgpID0+IHtcclxuICBjb25zdCBbY3VycmVudCwgc2V0Q3VycmVudF0gPSB1c2VTdGF0ZSgwKTtcclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgY29uc3QgdCA9IHNldEludGVydmFsKCgpID0+IHNldEN1cnJlbnQocCA9PiAocCArIDEpICUgaGVyb1NsaWRlcy5sZW5ndGgpLCA1MDAwKTtcclxuICAgIHJldHVybiAoKSA9PiBjbGVhckludGVydmFsKHQpO1xyXG4gIH0sIFtdKTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInJlbGF0aXZlIG1pbi1oLXNjcmVlbiBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBvdmVyZmxvdy1oaWRkZW5cIj5cclxuICAgICAge2hlcm9TbGlkZXMubWFwKChiZywgaSkgPT4gKFxyXG4gICAgICAgIDxkaXYga2V5PXtpfSBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIHRyYW5zaXRpb24tb3BhY2l0eSBkdXJhdGlvbi1bMjAwMG1zXVwiIHN0eWxlPXt7IG9wYWNpdHk6IGN1cnJlbnQgPT09IGkgPyAxIDogMCB9fT5cclxuICAgICAgICAgIDxpbWcgc3JjPXtiZ30gYWx0PVwiXCIgY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIlxyXG4gICAgICAgICAgICBzdHlsZT17eyBhbmltYXRpb246IGN1cnJlbnQgPT09IGkgPyAna2VuQnVybnMgMTVzIGVhc2UtaW4tb3V0IGZvcndhcmRzJyA6ICdub25lJyB9fVxyXG4gICAgICAgICAgICB7Li4uKGkgPT09IDAgPyB7fSA6IHsgbG9hZGluZzogJ2xhenknIGFzIGNvbnN0IH0pfSAvPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICApKX1cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGJnLWdyYWRpZW50LXRvLXQgZnJvbS1ibGFjay81MCB2aWEtYmxhY2svMjAgdG8tdHJhbnNwYXJlbnRcIiAvPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIHotMTAgdGV4dC1jZW50ZXIgcHgtNCBtYXgtdy00eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgIDxtb3Rpb24ucCBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDIwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAxLCBkZWxheTogMC4yIH19XHJcbiAgICAgICAgICBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LWxnIG1kOnRleHQteGwgdHJhY2tpbmctWzAuM2VtXSB1cHBlcmNhc2UgdGV4dC13aGl0ZS84MCBtYi00XCI+XHJcbiAgICAgICAgICBCZWF1dHkgQW5kIFRoZSBCcnVzaFxyXG4gICAgICAgIDwvbW90aW9uLnA+XHJcbiAgICAgICAgPG1vdGlvbi5oMSBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDMwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAxLCBkZWxheTogMC40IH19XHJcbiAgICAgICAgICBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC00eGwgbWQ6dGV4dC02eGwgbGc6dGV4dC03eGwgZm9udC1ib2xkIHRleHQtd2hpdGUgbGVhZGluZy10aWdodCBtYi02XCI+XHJcbiAgICAgICAgICBFbmhhbmNpbmcgQmVhdXR5PGJyIC8+XHJcbiAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWJsdXNoIGl0YWxpYyBmb250LW5vcm1hbFwiPldpdGggQXJ0aXN0cnkuPC9zcGFuPlxyXG4gICAgICAgIDwvbW90aW9uLmgxPlxyXG4gICAgICAgIDxtb3Rpb24ucCBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDIwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAxLCBkZWxheTogMC42IH19XHJcbiAgICAgICAgICBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC13aGl0ZS84MCB0ZXh0LWxnIG1kOnRleHQteGwgbWItMTAgbWF4LXcteGwgbXgtYXV0b1wiPlxyXG4gICAgICAgICAgUHJlbWl1bSBtYWtldXAgYXJ0aXN0cnkgZm9yIGJyaWRlcywgZW5nYWdlbWVudHMgJiBjZWxlYnJhdGlvbnMgaW4gQmFuZ2Fsb3JlXHJcbiAgICAgICAgPC9tb3Rpb24ucD5cclxuICAgICAgICA8bW90aW9uLmRpdiBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDIwIH19IGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAxLCBkZWxheTogMC44IH19XHJcbiAgICAgICAgICBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIHNtOmZsZXgtcm93IGdhcC00IGp1c3RpZnktY2VudGVyXCI+XHJcbiAgICAgICAgICA8TGluayB0bz1cIi9ib29raW5nXCIgY2xhc3NOYW1lPVwicHgtOCBweS00IGJnLXdoaXRlLzEwIGJhY2tkcm9wLWJsdXItc20gYm9yZGVyLTIgYm9yZGVyLXdoaXRlLzYwIHRleHQtd2hpdGUgcm91bmRlZC1mdWxsIGZvbnQtbWVkaXVtIGhvdmVyOmJnLXdoaXRlIGhvdmVyOnRleHQtZm9yZWdyb3VuZCB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi01MDAgdHJhY2tpbmctd2lkZVwiPlxyXG4gICAgICAgICAgICBCb29rIEFwcG9pbnRtZW50XHJcbiAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICA8YSBocmVmPVwiaHR0cHM6Ly93YS5tZS85MTkxNDg3Njg5NTg/dGV4dD1IZWxsbyUyMEklMjB3YW50JTIwdG8lMjBpbnF1aXJlJTIwYWJvdXQlMjB5b3VyJTIwc2VydmljZXNcIlxyXG4gICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCJcclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwicHgtOCBweS00IGJnLXdoaXRlLzEwIGJhY2tkcm9wLWJsdXItc20gYm9yZGVyLTIgYm9yZGVyLXdoaXRlLzQwIHRleHQtd2hpdGUgcm91bmRlZC1mdWxsIGZvbnQtbWVkaXVtIGhvdmVyOmJnLXdoaXRlIGhvdmVyOnRleHQtZm9yZWdyb3VuZCB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi01MDAgdHJhY2tpbmctd2lkZVwiPlxyXG4gICAgICAgICAgICBXaGF0c0FwcCBVc1xyXG4gICAgICAgICAgPC9hPlxyXG4gICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTggbGVmdC0xLzIgLXRyYW5zbGF0ZS14LTEvMiBmbGV4IGdhcC0yXCI+XHJcbiAgICAgICAge2hlcm9TbGlkZXMubWFwKChfLCBpKSA9PiAoXHJcbiAgICAgICAgICA8YnV0dG9uIGtleT17aX0gb25DbGljaz17KCkgPT4gc2V0Q3VycmVudChpKX1cclxuICAgICAgICAgICAgY2xhc3NOYW1lPXtgaC0xLjUgcm91bmRlZC1mdWxsIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTUwMCAke2N1cnJlbnQgPT09IGkgPyAndy04IGJnLXdoaXRlJyA6ICd3LTIgYmctd2hpdGUvNDAnfWB9IC8+XHJcbiAgICAgICAgKSl9XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9zZWN0aW9uPlxyXG4gICk7XHJcbn07XHJcblxyXG4vLyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuLy8gQ09VTlRFUlNcclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbmNvbnN0IENvdW50ZXJJdGVtID0gKHsgZW5kLCBzdWZmaXgsIGxhYmVsIH06IHsgZW5kOiBudW1iZXI7IHN1ZmZpeDogc3RyaW5nOyBsYWJlbDogc3RyaW5nIH0pID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIGNvbnN0IGNvdW50ID0gdXNlQW5pbWF0ZWRDb3VudGVyKGVuZCwgMjUwMCwgaXNJblZpZXcpO1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IHJlZj17cmVmfSBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LWJvbGQgdGV4dC1wcmltYXJ5XCI+e2NvdW50LnRvTG9jYWxlU3RyaW5nKCl9e3N1ZmZpeH08L2Rpdj5cclxuICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBtdC0yIHRleHQtc20gdHJhY2tpbmctd2lkZSB1cHBlcmNhc2VcIj57bGFiZWx9PC9wPlxyXG4gICAgPC9kaXY+XHJcbiAgKTtcclxufTtcclxuXHJcbmNvbnN0IENvdW50ZXJzU2VjdGlvbiA9ICgpID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIHJldHVybiAoXHJcbiAgICA8c2VjdGlvbiByZWY9e3JlZn0gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nIGJnLWNyZWFtXCI+XHJcbiAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogNDAgfX0gYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX1cclxuICAgICAgICBjbGFzc05hbWU9XCJtYXgtdy01eGwgbXgtYXV0byBncmlkIGdyaWQtY29scy0yIG1kOmdyaWQtY29scy00IGdhcC04IG1kOmdhcC0xMlwiPlxyXG4gICAgICAgIDxDb3VudGVySXRlbSBlbmQ9ezIwfSBzdWZmaXg9XCIrXCIgbGFiZWw9XCJZZWFycyBFeHBlcmllbmNlXCIgLz5cclxuICAgICAgICA8Q291bnRlckl0ZW0gZW5kPXszMDAwMH0gc3VmZml4PVwiK1wiIGxhYmVsPVwiSGFwcHkgQ2xpZW50c1wiIC8+XHJcbiAgICAgICAgPENvdW50ZXJJdGVtIGVuZD17MTAwMH0gc3VmZml4PVwiK1wiIGxhYmVsPVwiQnJpZGFsIExvb2tzXCIgLz5cclxuICAgICAgICA8Q291bnRlckl0ZW0gZW5kPXs1MDB9IHN1ZmZpeD1cIitcIiBsYWJlbD1cIlBhcnR5IE1ha2VvdmVyc1wiIC8+XHJcbiAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgIDwvc2VjdGlvbj5cclxuICApO1xyXG59O1xyXG5cclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbi8vIFNFUlZJQ0VTIFBSRVZJRVdcclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbmNvbnN0IFNlcnZpY2VzUHJldmlldyA9ICgpID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIHJldHVybiAoXHJcbiAgICA8c2VjdGlvbiByZWY9e3JlZn0gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG9cIj5cclxuICAgICAgICA8bW90aW9uLmRpdiBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDMwIH19IGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB5OiAwIH0gOiB7fX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44IH19IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XHJcbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXByaW1hcnkgdHJhY2tpbmctWzAuMmVtXSB1cHBlcmNhc2UgdGV4dC1zbSBtYi0yXCI+V2hhdCBXZSBPZmZlcjwvcD5cclxuICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0zeGwgbWQ6dGV4dC00eGwgZm9udC1zZW1pYm9sZFwiPk91ciBTZXJ2aWNlczwvaDI+XHJcbiAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBzbTpncmlkLWNvbHMtMiBsZzpncmlkLWNvbHMtMyBnYXAtOFwiPlxyXG4gICAgICAgICAge3NlcnZpY2VzLm1hcCgoc2VydmljZSwgaSkgPT4gKFxyXG4gICAgICAgICAgICA8bW90aW9uLmRpdiBrZXk9e3NlcnZpY2UuaWR9IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogNDAsIHNjYWxlOiAwLjk1IH19IGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB5OiAwLCBzY2FsZTogMSB9IDoge319XHJcbiAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC42LCBkZWxheTogaSAqIDAuMSB9fVxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImdyb3VwIGJnLWNhcmQgcm91bmRlZC0yeGwgb3ZlcmZsb3ctaGlkZGVuIGx1eHVyeS1zaGFkb3ctY2FyZCBob3ZlcjpsdXh1cnktZ2xvdyB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi01MDBcIj5cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIGgtNTYgb3ZlcmZsb3ctaGlkZGVuXCI+XHJcbiAgICAgICAgICAgICAgICA8aW1nIHNyYz17c2VydmljZS5pbWFnZX0gYWx0PXtzZXJ2aWNlLnRpdGxlfSBjbGFzc05hbWU9XCJ3LWZ1bGwgaC1mdWxsIG9iamVjdC1jb3ZlciB0cmFuc2l0aW9uLXRyYW5zZm9ybSBkdXJhdGlvbi03MDAgZ3JvdXAtaG92ZXI6c2NhbGUtMTA1XCIgbG9hZGluZz1cImxhenlcIiAvPlxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGJnLWdyYWRpZW50LXRvLXQgZnJvbS1ibGFjay8zMCB0by10cmFuc3BhcmVudFwiIC8+XHJcbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBib3R0b20tNCByaWdodC00IGZvbnQtaGVhZGluZyB0ZXh0LXhsIGZvbnQtYm9sZCB0ZXh0LXdoaXRlXCI+e3NlcnZpY2UucHJpY2V9PC9zcGFuPlxyXG4gICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC02XCI+XHJcbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtbGcgZm9udC1zZW1pYm9sZCBtYi0yXCI+e3NlcnZpY2UudGl0bGV9PC9oMz5cclxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgdGV4dC1zbSBtYi00IGxlYWRpbmctcmVsYXhlZFwiPntzZXJ2aWNlLmRlc2NyaXB0aW9ufTwvcD5cclxuICAgICAgICAgICAgICAgIDxMaW5rIHRvPXtgL3NlcnZpY2VzLyR7c2VydmljZS5zbHVnfWB9IGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRleHQtcHJpbWFyeSBob3ZlcjpnYXAtMyB0cmFuc2l0aW9uLWFsbFwiPlxyXG4gICAgICAgICAgICAgICAgICBWaWV3IERldGFpbHMgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+XHJcbiAgICAgICAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICkpfVxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvc2VjdGlvbj5cclxuICApO1xyXG59O1xyXG5cclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbi8vIFBPUlRGT0xJTyBQUkVWSUVXXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5pbnRlcmZhY2UgUG9ydGZvbGlvSXRlbSB7IGlkOiBzdHJpbmc7IHVybDogc3RyaW5nOyB0eXBlOiBzdHJpbmc7IH1cclxuXHJcbmNvbnN0IFBvcnRmb2xpb1ByZXZpZXcgPSAoKSA9PiB7XHJcbiAgY29uc3QgeyByZWYsIGlzSW5WaWV3IH0gPSB1c2VJblZpZXcoKTtcclxuICBjb25zdCBbaXRlbXMsIHNldEl0ZW1zXSA9IHVzZVN0YXRlPFBvcnRmb2xpb0l0ZW1bXT4oRkFMTEJBQ0tfUE9SVEZPTElPKTtcclxuXHJcbiAgdXNlRWZmZWN0KCgpID0+IHtcclxuICAgIGZldGNoKCdodHRwOi8vbG9jYWxob3N0OjUwMDAvYXBpL3BvcnRmb2xpbycpXHJcbiAgICAgIC50aGVuKHJlcyA9PiByZXMuanNvbigpKVxyXG4gICAgICAudGhlbihkYXRhID0+IHtcclxuICAgICAgICBpZiAoQXJyYXkuaXNBcnJheShkYXRhKSAmJiBkYXRhLmxlbmd0aCA+IDApIHtcclxuICAgICAgICAgIHNldEl0ZW1zKGRhdGEuc2xpY2UoMCwgNCkpO1xyXG4gICAgICAgIH1cclxuICAgICAgfSlcclxuICAgICAgLmNhdGNoKCgpID0+IHt9KTtcclxuICB9LCBbXSk7XHJcblxyXG4gIHJldHVybiAoXHJcbiAgICA8c2VjdGlvbiByZWY9e3JlZn0gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nIGJnLWNyZWFtXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG9cIj5cclxuICAgICAgICA8bW90aW9uLmRpdiBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDMwIH19IGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB5OiAwIH0gOiB7fX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44IH19IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XHJcbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXByaW1hcnkgdHJhY2tpbmctWzAuMmVtXSB1cHBlcmNhc2UgdGV4dC1zbSBtYi0yXCI+T3VyIFdvcms8L3A+XHJcbiAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtM3hsIG1kOnRleHQtNHhsIGZvbnQtc2VtaWJvbGRcIj5Qb3J0Zm9saW88L2gyPlxyXG4gICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBtdC00IG1heC13LWxnIG14LWF1dG9cIj5BIGdsaW1wc2Ugb2Ygb3VyIGZpbmVzdCB0cmFuc2Zvcm1hdGlvbnMuPC9wPlxyXG4gICAgICAgIDwvbW90aW9uLmRpdj5cclxuXHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0yIG1kOmdyaWQtY29scy00IGdhcC00XCI+XHJcbiAgICAgICAgICB7aXRlbXMubWFwKChpdGVtLCBpKSA9PiAoXHJcbiAgICAgICAgICAgIDxtb3Rpb24uZGl2IGtleT17aXRlbS5pZH1cclxuICAgICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHk6IDMwIH19XHJcbiAgICAgICAgICAgICAgYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fVxyXG4gICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNiwgZGVsYXk6IGkgKiAwLjEgfX1cclxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJncm91cCByZWxhdGl2ZSByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW4gYXNwZWN0LVs0LzVdIGx1eHVyeS1zaGFkb3cgaG92ZXI6c2hhZG93LWxnIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTUwMFwiPlxyXG4gICAgICAgICAgICAgIHtpdGVtLnR5cGUgPT09ICd2aWRlbycgPyAoXHJcbiAgICAgICAgICAgICAgICA8dmlkZW8gc3JjPXtpdGVtLnVybH0gY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIiBtdXRlZCBwbGF5c0lubGluZSAvPlxyXG4gICAgICAgICAgICAgICkgOiAoXHJcbiAgICAgICAgICAgICAgICA8aW1nIHNyYz17aXRlbS51cmx9IGFsdD1cIlBvcnRmb2xpb1wiIGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgb2JqZWN0LWNvdmVyIHRyYW5zaXRpb24tdHJhbnNmb3JtIGR1cmF0aW9uLTcwMCBncm91cC1ob3ZlcjpzY2FsZS0xMTBcIiBsb2FkaW5nPVwibGF6eVwiIC8+XHJcbiAgICAgICAgICAgICAgKX1cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgYmctZ3JhZGllbnQtdG8tdCBmcm9tLWJsYWNrLzQwIHZpYS10cmFuc3BhcmVudCB0by10cmFuc3BhcmVudCBvcGFjaXR5LTAgZ3JvdXAtaG92ZXI6b3BhY2l0eS0xMDAgdHJhbnNpdGlvbi1vcGFjaXR5IGR1cmF0aW9uLTMwMFwiIC8+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICkpfVxyXG4gICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG10LTEwXCI+XHJcbiAgICAgICAgICA8TGluayB0bz1cIi9wb3J0Zm9saW9cIlxyXG4gICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgcHgtOCBweS00IHRleHQtYmFzZSBmb250LW1lZGl1bSBib3JkZXItMiBib3JkZXItcHJpbWFyeSB0ZXh0LXByaW1hcnkgcm91bmRlZC1mdWxsIGhvdmVyOmJnLXByaW1hcnkgaG92ZXI6dGV4dC1wcmltYXJ5LWZvcmVncm91bmQgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwXCI+XHJcbiAgICAgICAgICAgIFZpZXcgRnVsbCBQb3J0Zm9saW8gPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+XHJcbiAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9zZWN0aW9uPlxyXG4gICk7XHJcbn07XHJcblxyXG4vLyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuLy8gVklERU8gU0VDVElPTlxyXG4vLyBMZWZ0OiB1cGxvYWRlZCBsb2NhbCB2aWRlbyBwbGF5ZXJcclxuLy8gUmlnaHQ6IEluc3RhZ3JhbSByZWVsIGNhcmQgKHVuY2hhbmdlZClcclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcblxyXG4vLyDinIUgUHV0IHlvdXIgdmlkZW8gaW4gcHVibGljL3ZpZGVvcy8gYW5kIHNldCB0aGUgZmlsZW5hbWUgaGVyZVxyXG5jb25zdCBWSURFT19GSUxFX05BTUUgPSAncmVlbC5tcDQnO1xyXG5jb25zdCBJTlNUQUdSQU1fUkVFTF9VUkwgPSAnaHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9yZWVsL0RXMWxzQ1dnVC1HLz9pZ3NoPWNIaGplVEYzZW1SbmR6UjUnO1xyXG5jb25zdCBJTlNUQUdSQU1fUFJPRklMRV9VUkwgPSAnaHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9iZWF1dHlhbmR0aGVicnVzaDIwMjYnO1xyXG5cclxuY29uc3QgVmlkZW9TZWN0aW9uID0gKCkgPT4ge1xyXG4gIGNvbnN0IHsgcmVmLCBpc0luVmlldyB9ID0gdXNlSW5WaWV3KCk7XHJcbiAgY29uc3QgdmlkZW9SZWYgPSB1c2VSZWY8SFRNTFZpZGVvRWxlbWVudD4obnVsbCk7XHJcbiAgY29uc3QgW3BsYXlpbmcsIHNldFBsYXlpbmddID0gdXNlU3RhdGUoZmFsc2UpO1xyXG4gIGNvbnN0IFttdXRlZCwgc2V0TXV0ZWRdID0gdXNlU3RhdGUodHJ1ZSk7XHJcbiAgY29uc3QgW3N0YXJ0ZWQsIHNldFN0YXJ0ZWRdID0gdXNlU3RhdGUoZmFsc2UpO1xyXG5cclxuICBjb25zdCB0b2dnbGVQbGF5ID0gKCkgPT4ge1xyXG4gICAgY29uc3QgdiA9IHZpZGVvUmVmLmN1cnJlbnQ7XHJcbiAgICBpZiAoIXYpIHJldHVybjtcclxuICAgIGlmICh2LnBhdXNlZCkgeyB2LnBsYXkoKTsgc2V0UGxheWluZyh0cnVlKTsgc2V0U3RhcnRlZCh0cnVlKTsgfVxyXG4gICAgZWxzZSB7IHYucGF1c2UoKTsgc2V0UGxheWluZyhmYWxzZSk7IH1cclxuICB9O1xyXG5cclxuICBjb25zdCB0b2dnbGVNdXRlID0gKGU6IFJlYWN0Lk1vdXNlRXZlbnQpID0+IHtcclxuICAgIGUuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgICBjb25zdCB2ID0gdmlkZW9SZWYuY3VycmVudDtcclxuICAgIGlmICghdikgcmV0dXJuO1xyXG4gICAgdi5tdXRlZCA9ICF2Lm11dGVkO1xyXG4gICAgc2V0TXV0ZWQodi5tdXRlZCk7XHJcbiAgfTtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxzZWN0aW9uIHJlZj17cmVmfSBjbGFzc05hbWU9XCJzZWN0aW9uLXBhZGRpbmdcIj5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy01eGwgbXgtYXV0b1wiPlxyXG5cclxuICAgICAgICB7LyogU2VjdGlvbiBIZWFkZXIgKi99XHJcbiAgICAgICAgPG1vdGlvbi5kaXZcclxuICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX1cclxuICAgICAgICAgIGFuaW1hdGU9e2lzSW5WaWV3ID8geyBvcGFjaXR5OiAxLCB5OiAwIH0gOiB7fX1cclxuICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCB9fVxyXG4gICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbWItMTJcIlxyXG4gICAgICAgID5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5XYXRjaDwvcD5cclxuICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0zeGwgbWQ6dGV4dC00eGwgZm9udC1zZW1pYm9sZFwiPk91ciBXb3JrIGluIE1vdGlvbjwvaDI+XHJcbiAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG5cclxuICAgICAgICB7LyogVHdvIGNhcmRzIHNpZGUgYnkgc2lkZSAqL31cclxuICAgICAgICA8bW90aW9uLmRpdlxyXG4gICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCBzY2FsZTogMC45NSB9fVxyXG4gICAgICAgICAgYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHNjYWxlOiAxIH0gOiB7fX1cclxuICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCwgZGVsYXk6IDAuMiB9fVxyXG4gICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBmbGV4LWNvbCBtZDpmbGV4LXJvdyBpdGVtcy1zdGFydCBqdXN0aWZ5LWNlbnRlciBnYXAtOCBtZDpnYXAtMTBcIlxyXG4gICAgICAgID5cclxuXHJcbiAgICAgICAgICB7Lyog4pSA4pSAIExFRlQ6IExvY2FsIHZpZGVvIHBsYXllciDilIDilIAgKi99XHJcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIHctZnVsbCBtZDp3LWF1dG9cIj5cclxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSBncm91cFwiIHN0eWxlPXt7IHdpZHRoOiAnMTAwJScsIG1heFdpZHRoOiAnMjYwcHgnIH19PlxyXG4gICAgICAgICAgICAgIHsvKiBHbG93IHJpbmcgKi99XHJcbiAgICAgICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgLWluc2V0LTEgcm91bmRlZC0zeGwgb3BhY2l0eS01MCBibHVyLW1kXCJcclxuICAgICAgICAgICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBoc2woMzUwLDQ1JSw2OCUpLCBoc2woMzUsNTUlLDYyJSkpJyB9fVxyXG4gICAgICAgICAgICAgIC8+XHJcbiAgICAgICAgICAgICAgey8qIFBsYXllciAqL31cclxuICAgICAgICAgICAgICA8ZGl2XHJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJyZWxhdGl2ZSByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW4gY3Vyc29yLXBvaW50ZXJcIlxyXG4gICAgICAgICAgICAgICAgc3R5bGU9e3tcclxuICAgICAgICAgICAgICAgICAgYXNwZWN0UmF0aW86ICc5LzE2JyxcclxuICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZDogJ2hzbCgyMCwxNSUsMTAlKScsXHJcbiAgICAgICAgICAgICAgICAgIGJveFNoYWRvdzogJzAgMjBweCA2MHB4IHJnYmEoMCwwLDAsMC4yMiknLFxyXG4gICAgICAgICAgICAgICAgfX1cclxuICAgICAgICAgICAgICAgIG9uQ2xpY2s9e3RvZ2dsZVBsYXl9XHJcbiAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgPHZpZGVvXHJcbiAgICAgICAgICAgICAgICAgIHJlZj17dmlkZW9SZWZ9XHJcbiAgICAgICAgICAgICAgICAgIHNyYz17YC92aWRlb3MvJHtWSURFT19GSUxFX05BTUV9YH1cclxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXJcIlxyXG4gICAgICAgICAgICAgICAgICBtdXRlZFxyXG4gICAgICAgICAgICAgICAgICBwbGF5c0lubGluZVxyXG4gICAgICAgICAgICAgICAgICBsb29wXHJcbiAgICAgICAgICAgICAgICAgIG9uRW5kZWQ9eygpID0+IHNldFBsYXlpbmcoZmFsc2UpfVxyXG4gICAgICAgICAgICAgICAgLz5cclxuXHJcbiAgICAgICAgICAgICAgICB7LyogUGxheSBvdmVybGF5IHdoZW4gbm90IHN0YXJ0ZWQgKi99XHJcbiAgICAgICAgICAgICAgICB7IXN0YXJ0ZWQgJiYgKFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgYmctYmxhY2svMzUgZmxleCBmbGV4LWNvbCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTNcIj5cclxuICAgICAgICAgICAgICAgICAgICA8ZGl2XHJcbiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LTE0IGgtMTQgcm91bmRlZC1mdWxsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHRyYW5zaXRpb24tdHJhbnNmb3JtIGR1cmF0aW9uLTMwMCBncm91cC1ob3ZlcjpzY2FsZS0xMTBcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3tcclxuICAgICAgICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZDogJ3JnYmEoMjU1LDI1NSwyNTUsMC4xNSknLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBiYWNrZHJvcEZpbHRlcjogJ2JsdXIoOHB4KScsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGJvcmRlcjogJzJweCBzb2xpZCByZ2JhKDI1NSwyNTUsMjU1LDAuNTUpJyxcclxuICAgICAgICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICAgICAgPFBsYXkgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LXdoaXRlIGZpbGwtd2hpdGUgbWwtMC41XCIgLz5cclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC13aGl0ZS83MCB0ZXh0LXhzXCI+VGFwIHRvIHBsYXk8L3A+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICAgICAgICB7LyogQ29udHJvbHMgb24gaG92ZXIgb25jZSBzdGFydGVkICovfVxyXG4gICAgICAgICAgICAgICAge3N0YXJ0ZWQgJiYgKFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2XHJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTAgbGVmdC0wIHJpZ2h0LTAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIHB4LTQgcHktMyBvcGFjaXR5LTAgZ3JvdXAtaG92ZXI6b3BhY2l0eS0xMDAgdHJhbnNpdGlvbi1vcGFjaXR5IGR1cmF0aW9uLTMwMFwiXHJcbiAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCh0byB0b3AsIHJnYmEoMCwwLDAsMC42KSwgdHJhbnNwYXJlbnQpJyB9fVxyXG4gICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXt0b2dnbGVQbGF5fSBjbGFzc05hbWU9XCJ0ZXh0LXdoaXRlIGhvdmVyOnRleHQtd2hpdGUvODAgdHJhbnNpdGlvbi1jb2xvcnNcIj5cclxuICAgICAgICAgICAgICAgICAgICAgIHtwbGF5aW5nID8gPFBhdXNlIGNsYXNzTmFtZT1cInctNSBoLTVcIiAvPiA6IDxQbGF5IGNsYXNzTmFtZT1cInctNSBoLTUgZmlsbC13aGl0ZVwiIC8+fVxyXG4gICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgIDxidXR0b24gb25DbGljaz17dG9nZ2xlTXV0ZX0gY2xhc3NOYW1lPVwidGV4dC13aGl0ZSBob3Zlcjp0ZXh0LXdoaXRlLzgwIHRyYW5zaXRpb24tY29sb3JzXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICB7bXV0ZWQgPyA8Vm9sdW1lWCBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz4gOiA8Vm9sdW1lMiBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz59XHJcbiAgICAgICAgICAgICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgKX1cclxuXHJcbiAgICAgICAgICAgICAgICB7LyogTGFiZWwgYmFkZ2UgKi99XHJcbiAgICAgICAgICAgICAgICA8ZGl2XHJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC0zIGxlZnQtMyBweC0yLjUgcHktMSByb3VuZGVkLWZ1bGwgdGV4dC13aGl0ZSB0ZXh0LVsxMHB4XSBmb250LWJvZHkgZm9udC1zZW1pYm9sZCB0cmFja2luZy13aWRlXCJcclxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCgxMzVkZWcsIGhzbCgzNTAsNDUlLDU4JSksIGhzbCgzNSw1NSUsNTIlKSknIH19XHJcbiAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgIOKcpiBPdXIgUmVlbFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIHRleHQteHMgbXQtMyB0ZXh0LWNlbnRlclwiPlxyXG4gICAgICAgICAgICAgIEJlaGluZCB0aGUgYnJ1c2gg4pyoXHJcbiAgICAgICAgICAgIDwvcD5cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIHsvKiDilIDilIAgUklHSFQ6IEluc3RhZ3JhbSByZWVsIGNhcmQgKG9yaWdpbmFsLCB1bmNoYW5nZWQpIOKUgOKUgCAqL31cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBmbGV4LWNvbCBpdGVtcy1jZW50ZXIgdy1mdWxsIG1kOnctYXV0b1wiPlxyXG4gICAgICAgICAgICA8ZGl2IHN0eWxlPXt7IHdpZHRoOiAnMTAwJScsIG1heFdpZHRoOiAnMjYwcHgnIH19PlxyXG4gICAgICAgICAgICAgIDxhXHJcbiAgICAgICAgICAgICAgICBocmVmPXtJTlNUQUdSQU1fUkVFTF9VUkx9XHJcbiAgICAgICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIlxyXG4gICAgICAgICAgICAgICAgcmVsPVwibm9vcGVuZXIgbm9yZWZlcnJlclwiXHJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJncm91cCByZWxhdGl2ZSBibG9jayByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW5cIlxyXG4gICAgICAgICAgICAgICAgc3R5bGU9e3tcclxuICAgICAgICAgICAgICAgICAgYXNwZWN0UmF0aW86ICc5LzE2JyxcclxuICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZDogJ2xpbmVhci1ncmFkaWVudCgxMzVkZWcsIGhzbCgzNTAsMzAlLDE1JSkgMCUsIGhzbCgyMCwxNSUsMTAlKSAxMDAlKScsXHJcbiAgICAgICAgICAgICAgICAgIGJveFNoYWRvdzogJzAgMjBweCA2MHB4IHJnYmEoMCwwLDAsMC4yMiknLFxyXG4gICAgICAgICAgICAgICAgfX1cclxuICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1baHNsKDM1MCw0MCUsMjAlKV0gdmlhLVtoc2woMjAsMjAlLDEyJSldIHRvLVtoc2woMzUwLDMwJSw4JSldXCIgLz5cclxuXHJcbiAgICAgICAgICAgICAgICB7LyogQW5pbWF0ZWQgc2hpbW1lciAqL31cclxuICAgICAgICAgICAgICAgIDxkaXZcclxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCBvcGFjaXR5LTIwXCJcclxuICAgICAgICAgICAgICAgICAgc3R5bGU9e3tcclxuICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiAnbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCB0cmFuc3BhcmVudCAzMCUsIGhzbCgzNTAsNTAlLDYwJSkgNTAlLCB0cmFuc3BhcmVudCA3MCUpJyxcclxuICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kU2l6ZTogJzIwMCUgMjAwJScsXHJcbiAgICAgICAgICAgICAgICAgICAgYW5pbWF0aW9uOiAnc2hpbW1lciAzcyBlYXNlLWluLW91dCBpbmZpbml0ZScsXHJcbiAgICAgICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgICAgICAvPlxyXG5cclxuICAgICAgICAgICAgICAgIHsvKiBJbnN0YWdyYW0gaWNvbiArIGJyYW5kaW5nICovfVxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC00IHotMTBcIj5cclxuICAgICAgICAgICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctMTYgaC0xNiByb3VuZGVkLTJ4bCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBzaGFkb3cteGxcIlxyXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6ICdsaW5lYXItZ3JhZGllbnQoNDVkZWcsICNmMDk0MzMsICNlNjY4M2MsICNkYzI3NDMsICNjYzIzNjYsICNiYzE4ODgpJyB9fVxyXG4gICAgICAgICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgICAgICAgPHN2ZyB2aWV3Qm94PVwiMCAwIDI0IDI0XCIgY2xhc3NOYW1lPVwidy04IGgtOCBmaWxsLXdoaXRlXCI+XHJcbiAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPVwiTTEyIDIuMTYzYzMuMjA0IDAgMy41ODQuMDEyIDQuODUuMDcgMy4yNTIuMTQ4IDQuNzcxIDEuNjkxIDQuOTE5IDQuOTE5LjA1OCAxLjI2NS4wNjkgMS42NDUuMDY5IDQuODQ5IDAgMy4yMDUtLjAxMiAzLjU4NC0uMDY5IDQuODQ5LS4xNDkgMy4yMjUtMS42NjQgNC43NzEtNC45MTkgNC45MTktMS4yNjYuMDU4LTEuNjQ0LjA3LTQuODUuMDctMy4yMDQgMC0zLjU4NC0uMDEyLTQuODQ5LS4wNy0zLjI2LS4xNDktNC43NzEtMS42OTktNC45MTktNC45Mi0uMDU4LTEuMjY1LS4wNy0xLjY0NC0uMDctNC44NDkgMC0zLjIwNC4wMTMtMy41ODMuMDctNC44NDkuMTQ5LTMuMjI3IDEuNjY0LTQuNzcxIDQuOTE5LTQuOTE5IDEuMjY2LS4wNTcgMS42NDUtLjA2OSA0Ljg0OS0uMDY5em0wLTIuMTYzYy0zLjI1OSAwLTMuNjY3LjAxNC00Ljk0Ny4wNzItNC4zNTguMi02Ljc4IDIuNjE4LTYuOTggNi45OC0uMDU5IDEuMjgxLS4wNzMgMS42ODktLjA3MyA0Ljk0OCAwIDMuMjU5LjAxNCAzLjY2OC4wNzIgNC45NDguMiA0LjM1OCAyLjYxOCA2Ljc4IDYuOTggNi45OCAxLjI4MS4wNTggMS42ODkuMDcyIDQuOTQ4LjA3MiAzLjI1OSAwIDMuNjY4LS4wMTQgNC45NDgtLjA3MiA0LjM1NC0uMiA2Ljc4Mi0yLjYxOCA2Ljk3OS02Ljk4LjA1OS0xLjI4LjA3My0xLjY4OS4wNzMtNC45NDggMC0zLjI1OS0uMDE0LTMuNjY3LS4wNzItNC45NDctLjE5Ni00LjM1NC0yLjYxNy02Ljc4LTYuOTc5LTYuOTgtMS4yODEtLjA1OS0xLjY5LS4wNzMtNC45NDktLjA3M3ptMCA1LjgzOGMtMy40MDMgMC02LjE2MiAyLjc1OS02LjE2MiA2LjE2MnMyLjc1OSA2LjE2MyA2LjE2MiA2LjE2MyA2LjE2Mi0yLjc1OSA2LjE2Mi02LjE2M2MwLTMuNDAzLTIuNzU5LTYuMTYyLTYuMTYyLTYuMTYyem0wIDEwLjE2MmMtMi4yMDkgMC00LTEuNzktNC00IDAtMi4yMDkgMS43OTEtNCA0LTRzNCAxLjc5MSA0IDRjMCAyLjIxLTEuNzkxIDQtNCA0em02LjQwNi0xMS44NDVjLS43OTYgMC0xLjQ0MS42NDUtMS40NDEgMS40NHMuNjQ1IDEuNDQgMS40NDEgMS40NGMuNzk1IDAgMS40MzktLjY0NSAxLjQzOS0xLjQ0cy0uNjQ0LTEuNDQtMS40MzktMS40NHpcIi8+XHJcbiAgICAgICAgICAgICAgICAgICAgPC9zdmc+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgICAgICAgICAgey8qIFBsYXkgYnV0dG9uICovfVxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMTQgaC0xNCByb3VuZGVkLWZ1bGwgYm9yZGVyLTIgYm9yZGVyLXdoaXRlLzYwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdyb3VwLWhvdmVyOmJvcmRlci13aGl0ZSBncm91cC1ob3ZlcjpzY2FsZS0xMTAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGJnLXdoaXRlLzEwIGJhY2tkcm9wLWJsdXItc21cIj5cclxuICAgICAgICAgICAgICAgICAgICA8UGxheSBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtd2hpdGUgZmlsbC13aGl0ZSBtbC0wLjVcIiAvPlxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgcHgtNlwiPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LXdoaXRlIHRleHQtbGcgZm9udC1zZW1pYm9sZCBtYi0xXCI+V2F0Y2ggb24gSW5zdGFncmFtPC9wPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXdoaXRlLzYwIHRleHQtc21cIj5UYXAgdG8gdmlldyBvdXIgbGF0ZXN0IHJlZWw8L3A+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICAgICAgey8qIEhvdmVyIG92ZXJsYXkgKi99XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgYmctd2hpdGUvNSBvcGFjaXR5LTAgZ3JvdXAtaG92ZXI6b3BhY2l0eS0xMDAgdHJhbnNpdGlvbi1vcGFjaXR5IGR1cmF0aW9uLTMwMFwiIC8+XHJcbiAgICAgICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICAgIHsvKiBDYXB0aW9uIGJlbG93ICovfVxyXG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBmb250LWJvZHkgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIHRleHQtc20gbXQtNFwiPlxyXG4gICAgICAgICAgICAgIEZvbGxvdyB1c3snICd9XHJcbiAgICAgICAgICAgICAgPGEgaHJlZj17SU5TVEFHUkFNX1BST0ZJTEVfVVJMfSB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lciBub3JlZmVycmVyXCIgY2xhc3NOYW1lPVwidGV4dC1wcmltYXJ5IGhvdmVyOnVuZGVybGluZVwiPlxyXG4gICAgICAgICAgICAgICAgQGJlYXV0eWFuZHRoZWJydXNoMjAyNlxyXG4gICAgICAgICAgICAgIDwvYT57JyAnfVxyXG4gICAgICAgICAgICAgIGZvciBtb3JlXHJcbiAgICAgICAgICAgIDwvcD5cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgey8qIEtleWZyYW1lIGZvciBzaGltbWVyICovfVxyXG4gICAgICA8c3R5bGU+e2BcclxuICAgICAgICBAa2V5ZnJhbWVzIHNoaW1tZXIge1xyXG4gICAgICAgICAgMCUgeyBiYWNrZ3JvdW5kLXBvc2l0aW9uOiAyMDAlIDIwMCU7IH1cclxuICAgICAgICAgIDUwJSB7IGJhY2tncm91bmQtcG9zaXRpb246IDAlIDAlOyB9XHJcbiAgICAgICAgICAxMDAlIHsgYmFja2dyb3VuZC1wb3NpdGlvbjogMjAwJSAyMDAlOyB9XHJcbiAgICAgICAgfVxyXG4gICAgICBgfTwvc3R5bGU+XHJcbiAgICA8L3NlY3Rpb24+XHJcbiAgKTtcclxufTtcclxuXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4vLyBQUk9EVUNUU1xyXG4vLyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuY29uc3QgcHJvZHVjdHMgPSBbXHJcbiAgeyBuYW1lOiAnQWxtb25kICYgSG9uZXkgU29hcCcsIGltYWdlOiBzb2FwUHJvZHVjdDEgfSxcclxuICB7IG5hbWU6ICdSb3NlIFBldGFsIFNvYXAnLCBpbWFnZTogc29hcFByb2R1Y3QyIH0sXHJcbiAgeyBuYW1lOiAnTGF2ZW5kZXIgQmxpc3MgU29hcCcsIGltYWdlOiBzb2FwUHJvZHVjdDMgfSxcclxuXTtcclxuXHJcbmNvbnN0IFByb2R1Y3RTZWN0aW9uID0gKCkgPT4ge1xyXG4gIGNvbnN0IHsgcmVmLCBpc0luVmlldyB9ID0gdXNlSW5WaWV3KCk7XHJcbiAgcmV0dXJuIChcclxuICAgIDxzZWN0aW9uIHJlZj17cmVmfSBjbGFzc05hbWU9XCJzZWN0aW9uLXBhZGRpbmdcIj5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy01eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX0gYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX0gY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbWItMTZcIj5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5MYXVuY2hpbmcgU29vbjwvcD5cclxuICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0zeGwgbWQ6dGV4dC00eGwgZm9udC1zZW1pYm9sZFwiPk91ciBQcm9kdWN0czwvaDI+XHJcbiAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBzbTpncmlkLWNvbHMtMyBnYXAtOFwiPlxyXG4gICAgICAgICAge3Byb2R1Y3RzLm1hcCgocHJvZHVjdCwgaSkgPT4gKFxyXG4gICAgICAgICAgICA8bW90aW9uLmRpdiBrZXk9e3Byb2R1Y3QubmFtZX0gaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNiwgZGVsYXk6IGkgKiAwLjE1IH19XHJcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZ3JvdXAgYmctY2FyZCByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW4gbHV4dXJ5LXNoYWRvdyBob3ZlcjpsdXh1cnktc2hhZG93LWNhcmQgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNTAwXCI+XHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhc3BlY3Qtc3F1YXJlIG92ZXJmbG93LWhpZGRlblwiPlxyXG4gICAgICAgICAgICAgICAgPGltZyBzcmM9e3Byb2R1Y3QuaW1hZ2V9IGFsdD17cHJvZHVjdC5uYW1lfSBjbGFzc05hbWU9XCJ3LWZ1bGwgaC1mdWxsIG9iamVjdC1jb3ZlciB0cmFuc2l0aW9uLXRyYW5zZm9ybSBkdXJhdGlvbi03MDAgZ3JvdXAtaG92ZXI6c2NhbGUtMTA1XCIgbG9hZGluZz1cImxhenlcIiAvPlxyXG4gICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC01IHRleHQtY2VudGVyXCI+XHJcbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtbGcgZm9udC1zZW1pYm9sZCBtYi0yXCI+e3Byb2R1Y3QubmFtZX08L2gzPlxyXG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWJsb2NrIHB4LTQgcHktMS41IHJvdW5kZWQtZnVsbCBiZy1hY2NlbnQgdGV4dC1hY2NlbnQtZm9yZWdyb3VuZCB0ZXh0LXhzIGZvbnQtYm9keSBmb250LW1lZGl1bSB0cmFja2luZy13aWRlciB1cHBlcmNhc2VcIj5Db21pbmcgU29vbjwvc3Bhbj5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgICAgKSl9XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9zZWN0aW9uPlxyXG4gICk7XHJcbn07XHJcblxyXG4vLyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuLy8gQ09VTlRET1dOXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5jb25zdCBDb3VudGRvd25UaW1lciA9ICgpID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIGNvbnN0IHRhcmdldERhdGUgPSBuZXcgRGF0ZSgnMjAyNi0wOC0xNVQwMDowMDowMCcpO1xyXG4gIGNvbnN0IFt0aW1lTGVmdCwgc2V0VGltZUxlZnRdID0gdXNlU3RhdGUoeyBkYXlzOiAwLCBob3VyczogMCwgbWludXRlczogMCwgc2Vjb25kczogMCB9KTtcclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgY29uc3QgdGljayA9ICgpID0+IHtcclxuICAgICAgY29uc3QgZGlmZiA9IHRhcmdldERhdGUuZ2V0VGltZSgpIC0gRGF0ZS5ub3coKTtcclxuICAgICAgaWYgKGRpZmYgPD0gMCkgcmV0dXJuO1xyXG4gICAgICBzZXRUaW1lTGVmdCh7IGRheXM6IE1hdGguZmxvb3IoZGlmZiAvIDg2NDAwMDAwKSwgaG91cnM6IE1hdGguZmxvb3IoKGRpZmYgLyAzNjAwMDAwKSAlIDI0KSwgbWludXRlczogTWF0aC5mbG9vcigoZGlmZiAvIDYwMDAwKSAlIDYwKSwgc2Vjb25kczogTWF0aC5mbG9vcigoZGlmZiAvIDEwMDApICUgNjApIH0pO1xyXG4gICAgfTtcclxuICAgIHRpY2soKTtcclxuICAgIGNvbnN0IGlkID0gc2V0SW50ZXJ2YWwodGljaywgMTAwMCk7XHJcbiAgICByZXR1cm4gKCkgPT4gY2xlYXJJbnRlcnZhbChpZCk7XHJcbiAgfSwgW10pO1xyXG4gIHJldHVybiAoXHJcbiAgICA8c2VjdGlvbiByZWY9e3JlZn0gY2xhc3NOYW1lPVwicHktMTYgYmctY3JlYW1cIj5cclxuICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCB9fSBjbGFzc05hbWU9XCJtYXgtdy0zeGwgbXgtYXV0byB0ZXh0LWNlbnRlciBweC00XCI+XHJcbiAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1hY2NlbnQgdGV4dC1wcmltYXJ5IHRyYWNraW5nLVswLjJlbV0gdXBwZXJjYXNlIHRleHQtc20gbWItM1wiPlByb2R1Y3QgTGF1bmNoPC9wPlxyXG4gICAgICAgIDxoMyBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgbWQ6dGV4dC0zeGwgZm9udC1zZW1pYm9sZCBtYi04XCI+TGF1bmNoaW5nIEF1Z3VzdCAyMDI2PC9oMz5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1jZW50ZXIgZ2FwLTQgbWQ6Z2FwLThcIj5cclxuICAgICAgICAgIHtbeyBsYWJlbDogJ0RheXMnLCB2YWx1ZTogdGltZUxlZnQuZGF5cyB9LCB7IGxhYmVsOiAnSG91cnMnLCB2YWx1ZTogdGltZUxlZnQuaG91cnMgfSwgeyBsYWJlbDogJ01pbnV0ZXMnLCB2YWx1ZTogdGltZUxlZnQubWludXRlcyB9LCB7IGxhYmVsOiAnU2Vjb25kcycsIHZhbHVlOiB0aW1lTGVmdC5zZWNvbmRzIH1dLm1hcCh1ID0+IChcclxuICAgICAgICAgICAgPGRpdiBrZXk9e3UubGFiZWx9IGNsYXNzTmFtZT1cImJnLWNhcmQgcm91bmRlZC14bCBwLTQgbWQ6cC02IGx1eHVyeS1zaGFkb3cgbWluLXctWzcwcHhdIG1kOm1pbi13LVs5MHB4XVwiPlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtMnhsIG1kOnRleHQtNHhsIGZvbnQtYm9sZCB0ZXh0LXByaW1hcnkgdGFidWxhci1udW1zXCI+e1N0cmluZyh1LnZhbHVlKS5wYWRTdGFydCgyLCAnMCcpfTwvZGl2PlxyXG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXhzIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBtdC0xIHVwcGVyY2FzZSB0cmFja2luZy13aWRlclwiPnt1LmxhYmVsfTwvcD5cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICApKX1cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgPC9zZWN0aW9uPlxyXG4gICk7XHJcbn07XHJcblxyXG4vLyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuLy8gVEVTVElNT05JQUxTXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5jb25zdCBUZXN0aW1vbmlhbHNTZWN0aW9uID0gKCkgPT4ge1xyXG4gIGNvbnN0IFthY3RpdmUsIHNldEFjdGl2ZV0gPSB1c2VTdGF0ZSgwKTtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIHVzZUVmZmVjdCgoKSA9PiB7XHJcbiAgICBjb25zdCB0ID0gc2V0SW50ZXJ2YWwoKCkgPT4gc2V0QWN0aXZlKHAgPT4gKHAgKyAxKSAlIHRlc3RpbW9uaWFscy5sZW5ndGgpLCA1MDAwKTtcclxuICAgIHJldHVybiAoKSA9PiBjbGVhckludGVydmFsKHQpO1xyXG4gIH0sIFtdKTtcclxuICByZXR1cm4gKFxyXG4gICAgPHNlY3Rpb24gcmVmPXtyZWZ9IGNsYXNzTmFtZT1cInNlY3Rpb24tcGFkZGluZ1wiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTN4bCBteC1hdXRvIHRleHQtY2VudGVyXCI+XHJcbiAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCB9fT5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5UZXN0aW1vbmlhbHM8L3A+XHJcbiAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtM3hsIG1kOnRleHQtNHhsIGZvbnQtc2VtaWJvbGQgbWItMTJcIj5XaGF0IE91ciBDbGllbnRzIFNheTwvaDI+XHJcbiAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmUgbWluLWgtWzIwMHB4XVwiPlxyXG4gICAgICAgICAge3Rlc3RpbW9uaWFscy5tYXAoKHQsIGkpID0+IChcclxuICAgICAgICAgICAgPG1vdGlvbi5kaXYga2V5PXtpfSBpbml0aWFsPXtmYWxzZX0gYW5pbWF0ZT17eyBvcGFjaXR5OiBhY3RpdmUgPT09IGkgPyAxIDogMCwgeTogYWN0aXZlID09PSBpID8gMCA6IDIwIH19XHJcbiAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC42IH19IGNsYXNzTmFtZT17YGFic29sdXRlIGluc2V0LTAgJHthY3RpdmUgIT09IGkgPyAncG9pbnRlci1ldmVudHMtbm9uZScgOiAnJ31gfT5cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1jZW50ZXIgbWItNFwiPntBcnJheS5mcm9tKHsgbGVuZ3RoOiB0LnJhdGluZyB9KS5tYXAoKF8sIGopID0+IDxTdGFyIGtleT17an0gY2xhc3NOYW1lPVwidy01IGgtNSB0ZXh0LXByaW1hcnkgZmlsbC1wcmltYXJ5XCIgLz4pfTwvZGl2PlxyXG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQteGwgbWQ6dGV4dC0yeGwgaXRhbGljIHRleHQtZm9yZWdyb3VuZC84MCBsZWFkaW5nLXJlbGF4ZWQgbWItNlwiPlwie3QudGV4dH1cIjwvcD5cclxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1zbSBmb250LW1lZGl1bSB0cmFja2luZy13aWRlIHVwcGVyY2FzZSB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj7igJQge3QubmFtZX08L3A+XHJcbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICkpfVxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBqdXN0aWZ5LWNlbnRlciBnYXAtMiBtdC04XCI+XHJcbiAgICAgICAgICB7dGVzdGltb25pYWxzLm1hcCgoXywgaSkgPT4gKFxyXG4gICAgICAgICAgICA8YnV0dG9uIGtleT17aX0gb25DbGljaz17KCkgPT4gc2V0QWN0aXZlKGkpfSBjbGFzc05hbWU9e2B3LTIuNSBoLTIuNSByb3VuZGVkLWZ1bGwgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwICR7YWN0aXZlID09PSBpID8gJ2JnLXByaW1hcnkgdy04JyA6ICdiZy1ib3JkZXInfWB9IC8+XHJcbiAgICAgICAgICApKX1cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L3NlY3Rpb24+XHJcbiAgKTtcclxufTtcclxuXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4vLyBXSFkgQ0hPT1NFIFVTXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5jb25zdCBXaHlDaG9vc2VVcyA9ICgpID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIGNvbnN0IHJlYXNvbnMgPSBbXHJcbiAgICB7IGljb246IEF3YXJkLCB0aXRsZTogJzIwKyBZZWFycyBFeHBlcnRpc2UnLCBkZXNjOiAnVHdvIGRlY2FkZXMgb2YgcGVyZmVjdGluZyB0aGUgYXJ0IG9mIGJlYXV0eS4nIH0sXHJcbiAgICB7IGljb246IEhlYXJ0LCB0aXRsZTogJ1ByZW1pdW0gUHJvZHVjdHMnLCBkZXNjOiAnT25seSB0aGUgZmluZXN0IGludGVybmF0aW9uYWwgYnJhbmRzIHVzZWQuJyB9LFxyXG4gICAgeyBpY29uOiBTcGFya2xlcywgdGl0bGU6ICdQZXJzb25hbGl6ZWQgU2VydmljZScsIGRlc2M6ICdFdmVyeSBsb29rIGlzIHRhaWxvcmVkIHRvIHlvdXIgdW5pcXVlIGJlYXV0eS4nIH0sXHJcbiAgICB7IGljb246IFN0YXIsIHRpdGxlOiAnVHJ1c3RlZCBieSBUaG91c2FuZHMnLCBkZXNjOiAnMzAsMDAwKyBoYXBweSBjbGllbnRzIGFuZCBjb3VudGluZy4nIH0sXHJcbiAgXTtcclxuICByZXR1cm4gKFxyXG4gICAgPHNlY3Rpb24gcmVmPXtyZWZ9IGNsYXNzTmFtZT1cInNlY3Rpb24tcGFkZGluZyBiZy1jcmVhbVwiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTV4bCBteC1hdXRvXCI+XHJcbiAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuOCB9fSBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBtYi0xNlwiPlxyXG4gICAgICAgICAgPHAgY2xhc3NOYW1lPVwiZm9udC1hY2NlbnQgdGV4dC1wcmltYXJ5IHRyYWNraW5nLVswLjJlbV0gdXBwZXJjYXNlIHRleHQtc20gbWItMlwiPldoeSBVczwvcD5cclxuICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0zeGwgbWQ6dGV4dC00eGwgZm9udC1zZW1pYm9sZFwiPldoeSBDaG9vc2UgQmVhdXR5IEFuZCBUaGUgQnJ1c2g8L2gyPlxyXG4gICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTEgc206Z3JpZC1jb2xzLTIgbGc6Z3JpZC1jb2xzLTQgZ2FwLThcIj5cclxuICAgICAgICAgIHtyZWFzb25zLm1hcCgociwgaSkgPT4gKFxyXG4gICAgICAgICAgICA8bW90aW9uLmRpdiBrZXk9e3IudGl0bGV9IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX0gYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjYsIGRlbGF5OiBpICogMC4xIH19XHJcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgcC02IGJnLWNhcmQgcm91bmRlZC0yeGwgbHV4dXJ5LXNoYWRvdyBob3ZlcjpsdXh1cnktZ2xvdyB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi01MDBcIj5cclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMTQgaC0xNCByb3VuZGVkLWZ1bGwgYmctYWNjZW50IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG14LWF1dG8gbWItNFwiPjxyLmljb24gY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LXByaW1hcnlcIiAvPjwvZGl2PlxyXG4gICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC1sZyBmb250LXNlbWlib2xkIG1iLTJcIj57ci50aXRsZX08L2gzPlxyXG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgdGV4dC1zbVwiPntyLmRlc2N9PC9wPlxyXG4gICAgICAgICAgICA8L21vdGlvbi5kaXY+XHJcbiAgICAgICAgICApKX1cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L3NlY3Rpb24+XHJcbiAgKTtcclxufTtcclxuXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG4vLyBCTE9HIFBSRVZJRVcg4oCUIDQgcG9zdHMgZnJvbSBiYWNrZW5kXHJcbi8vIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5pbnRlcmZhY2UgQmxvZ1Bvc3QgeyBpZD86IHN0cmluZzsgX2lkPzogc3RyaW5nOyB0aXRsZTogc3RyaW5nOyBjb250ZW50OiBzdHJpbmc7IGNyZWF0ZWRBdD86IHN0cmluZzsgZGF0ZT86IHN0cmluZzsgbWVkaWFVcmw/OiBzdHJpbmc7IG1lZGlhVHlwZT86IHN0cmluZzsgfVxyXG5cclxuY29uc3QgQmxvZ1ByZXZpZXcgPSAoKSA9PiB7XHJcbiAgY29uc3QgeyByZWYsIGlzSW5WaWV3IH0gPSB1c2VJblZpZXcoKTtcclxuICBjb25zdCBbcG9zdHMsIHNldFBvc3RzXSA9IHVzZVN0YXRlPEJsb2dQb3N0W10+KFtdKTtcclxuXHJcbiAgdXNlRWZmZWN0KCgpID0+IHtcclxuICAgIGZldGNoKGFwaVVybCgnL2FwaS9ibG9nJykpXHJcbiAgICAgIC50aGVuKHJlcyA9PiByZXMuanNvbigpKVxyXG4gICAgICAudGhlbihkYXRhID0+IHtcclxuICAgICAgICBpZiAoQXJyYXkuaXNBcnJheShkYXRhKSkgc2V0UG9zdHMoZGF0YS5zbGljZSgwLCA0KSk7XHJcbiAgICAgIH0pXHJcbiAgICAgIC5jYXRjaCgoKSA9PiB7fSk7XHJcbiAgfSwgW10pO1xyXG5cclxuICBpZiAocG9zdHMubGVuZ3RoID09PSAwKSByZXR1cm4gbnVsbDtcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxzZWN0aW9uIHJlZj17cmVmfSBjbGFzc05hbWU9XCJzZWN0aW9uLXBhZGRpbmdcIj5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgIDxtb3Rpb24uZGl2IGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX0gYW5pbWF0ZT17aXNJblZpZXcgPyB7IG9wYWNpdHk6IDEsIHk6IDAgfSA6IHt9fSB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjggfX0gY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbWItMTZcIj5cclxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5MYXRlc3Q8L3A+XHJcbiAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtM3hsIG1kOnRleHQtNHhsIGZvbnQtc2VtaWJvbGRcIj5Gcm9tIE91ciBCbG9nPC9oMj5cclxuICAgICAgICA8L21vdGlvbi5kaXY+XHJcblxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBtZDpncmlkLWNvbHMtMiBsZzpncmlkLWNvbHMtNCBnYXAtNlwiPlxyXG4gICAgICAgICAge3Bvc3RzLm1hcCgocG9zdCwgaSkgPT4ge1xyXG4gICAgICAgICAgICBjb25zdCBwb3N0SWQgPSBwb3N0LmlkIHx8IHBvc3QuX2lkO1xyXG4gICAgICAgICAgICBjb25zdCBwb3N0RGF0ZSA9IHBvc3QuY3JlYXRlZEF0IHx8IHBvc3QuZGF0ZTtcclxuICAgICAgICAgICAgcmV0dXJuIChcclxuICAgICAgICAgICAgICA8bW90aW9uLmRpdiBrZXk9e3Bvc3RJZH0gaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319IHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNiwgZGVsYXk6IGkgKiAwLjEgfX1cclxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImdyb3VwIGJnLWNhcmQgcm91bmRlZC0yeGwgb3ZlcmZsb3ctaGlkZGVuIGx1eHVyeS1zaGFkb3cgaG92ZXI6bHV4dXJ5LXNoYWRvdy1jYXJkIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTUwMCBob3ZlcjotdHJhbnNsYXRlLXktMSBjdXJzb3ItcG9pbnRlclwiPlxyXG4gICAgICAgICAgICAgICAgPExpbmsgdG89e2AvYmxvZy8ke3Bvc3RJZH1gfSBjbGFzc05hbWU9XCJibG9jayBoLWZ1bGxcIj5cclxuICAgICAgICAgICAgICAgICAge3Bvc3QubWVkaWFVcmwgJiYgcG9zdC5tZWRpYVR5cGUgPT09ICdpbWFnZScgJiYgKFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC00MCBvdmVyZmxvdy1oaWRkZW5cIj5cclxuICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPXtyZXNvbHZlTWVkaWFVcmwocG9zdC5tZWRpYVVybCl9IGFsdD17cG9zdC50aXRsZX0gY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXIgdHJhbnNpdGlvbi10cmFuc2Zvcm0gZHVyYXRpb24tNzAwIGdyb3VwLWhvdmVyOnNjYWxlLTEwNVwiIGxvYWRpbmc9XCJsYXp5XCIgLz5cclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgKX1cclxuICAgICAgICAgICAgICAgICAgeyFwb3N0Lm1lZGlhVXJsICYmIChcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtMjggYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1baHNsKDM1MCwzMCUsOTIlKV0gdG8tW2hzbCgzMCwyMCUsOTAlKV1cIiAvPlxyXG4gICAgICAgICAgICAgICAgICApfVxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNVwiPlxyXG4gICAgICAgICAgICAgICAgICAgIHtwb3N0RGF0ZSAmJiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBmb250LWJvZHkgbWItMlwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICB7bmV3IERhdGUocG9zdERhdGUpLnRvTG9jYWxlRGF0ZVN0cmluZygnZW4tSU4nLCB7IGRheTogJ251bWVyaWMnLCBtb250aDogJ3Nob3J0JywgeWVhcjogJ251bWVyaWMnIH0pfVxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9wPlxyXG4gICAgICAgICAgICAgICAgICAgICl9XHJcbiAgICAgICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LWJhc2UgZm9udC1zZW1pYm9sZCBtYi0yIGdyb3VwLWhvdmVyOnRleHQtcHJpbWFyeSB0cmFuc2l0aW9uLWNvbG9ycyBsaW5lLWNsYW1wLTJcIj57cG9zdC50aXRsZX08L2gzPlxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgdGV4dC14cyBsZWFkaW5nLXJlbGF4ZWQgbGluZS1jbGFtcC0zXCI+e3Bvc3QuY29udGVudH08L3A+XHJcbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0xIHRleHQteHMgZm9udC1tZWRpdW0gdGV4dC1wcmltYXJ5IG10LTMgZ3JvdXAtaG92ZXI6Z2FwLTIgdHJhbnNpdGlvbi1hbGxcIj5cclxuICAgICAgICAgICAgICAgICAgICAgIFJlYWQgTW9yZSA8QXJyb3dSaWdodCBjbGFzc05hbWU9XCJ3LTMgaC0zXCIgLz5cclxuICAgICAgICAgICAgICAgICAgICA8L3NwYW4+XHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cclxuICAgICAgICAgICAgKTtcclxuICAgICAgICAgIH0pfVxyXG4gICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG10LThcIj5cclxuICAgICAgICAgIDxMaW5rIHRvPVwiL2Jsb2dcIiBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgcHgtOCBweS00IHRleHQtYmFzZSBmb250LW1lZGl1bSBib3JkZXItMiBib3JkZXItcHJpbWFyeSB0ZXh0LXByaW1hcnkgcm91bmRlZC1mdWxsIGhvdmVyOmJnLXByaW1hcnkgaG92ZXI6dGV4dC1wcmltYXJ5LWZvcmVncm91bmQgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwXCI+XHJcbiAgICAgICAgICAgIFZpZXcgQWxsIFBvc3RzIDxBcnJvd1JpZ2h0IGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPlxyXG4gICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvc2VjdGlvbj5cclxuICApO1xyXG59O1xyXG5cclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbi8vIFBBR0VcclxuLy8g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbmNvbnN0IEluZGV4ID0gKCkgPT4gKFxyXG4gIDw+XHJcbiAgICA8SGVyb1NlY3Rpb24gLz5cclxuICAgIDxDb3VudGVyc1NlY3Rpb24gLz5cclxuICAgIDxTZXJ2aWNlc1ByZXZpZXcgLz5cclxuICAgIDxQb3J0Zm9saW9QcmV2aWV3IC8+XHJcbiAgICA8VmlkZW9TZWN0aW9uIC8+XHJcbiAgICA8UHJvZHVjdFNlY3Rpb24gLz5cclxuICAgIDxDb3VudGRvd25UaW1lciAvPlxyXG4gICAgPFN1c3BlbnNlIGZhbGxiYWNrPXs8ZGl2IGNsYXNzTmFtZT1cImgtc2NyZWVuIGJnLWNyZWFtXCIgLz59PlxyXG4gICAgICA8U29hcFNjcm9sbFNlY3Rpb24gLz5cclxuICAgIDwvU3VzcGVuc2U+XHJcbiAgICA8VGVzdGltb25pYWxzU2VjdGlvbiAvPlxyXG4gICAgPFdoeUNob29zZVVzIC8+XHJcbiAgICA8SG9tZUJsb2dTZWN0aW9uIC8+XHJcbiAgPC8+XHJcbik7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBJbmRleDtcclxuICJdLCJuYW1lcyI6WyJMaW5rIiwibW90aW9uIiwiU3RhciIsIkF3YXJkIiwiSGVhcnQiLCJTcGFya2xlcyIsIkFycm93UmlnaHQiLCJQbGF5IiwiUGF1c2UiLCJWb2x1bWUyIiwiVm9sdW1lWCIsInVzZUluVmlldyIsInVzZUFuaW1hdGVkQ291bnRlciIsInNlcnZpY2VzIiwidGVzdGltb25pYWxzIiwiaGVyb1NsaWRlMSIsImhlcm9TbGlkZTIiLCJoZXJvU2xpZGU0Iiwic2Fsb25JbnRlcmlvciIsInNhbG9uU2V0dXAiLCJzb2FwUHJvZHVjdDEiLCJzb2FwUHJvZHVjdDIiLCJzb2FwUHJvZHVjdDMiLCJicmlkYWxNYWtldXAiLCJlbmdhZ2VtZW50TWFrZXVwIiwicGFydHlNYWtldXAiLCJoYWlyU3R5bGluZyIsIkhvbWVCbG9nU2VjdGlvbiIsInVzZVN0YXRlIiwidXNlRWZmZWN0IiwibGF6eSIsIlN1c3BlbnNlIiwidXNlUmVmIiwiYXBpVXJsIiwicmVzb2x2ZU1lZGlhVXJsIiwiU29hcFNjcm9sbFNlY3Rpb24iLCJoZXJvU2xpZGVzIiwiRkFMTEJBQ0tfUE9SVEZPTElPIiwiaWQiLCJ1cmwiLCJ0eXBlIiwiSGVyb1NlY3Rpb24iLCJjdXJyZW50Iiwic2V0Q3VycmVudCIsInQiLCJzZXRJbnRlcnZhbCIsInAiLCJsZW5ndGgiLCJjbGVhckludGVydmFsIiwic2VjdGlvbiIsImNsYXNzTmFtZSIsIm1hcCIsImJnIiwiaSIsImRpdiIsInN0eWxlIiwib3BhY2l0eSIsImltZyIsInNyYyIsImFsdCIsImFuaW1hdGlvbiIsImxvYWRpbmciLCJpbml0aWFsIiwieSIsImFuaW1hdGUiLCJ0cmFuc2l0aW9uIiwiZHVyYXRpb24iLCJkZWxheSIsImgxIiwiYnIiLCJzcGFuIiwidG8iLCJhIiwiaHJlZiIsInRhcmdldCIsInJlbCIsIl8iLCJidXR0b24iLCJvbkNsaWNrIiwiQ291bnRlckl0ZW0iLCJlbmQiLCJzdWZmaXgiLCJsYWJlbCIsInJlZiIsImlzSW5WaWV3IiwiY291bnQiLCJ0b0xvY2FsZVN0cmluZyIsIkNvdW50ZXJzU2VjdGlvbiIsIlNlcnZpY2VzUHJldmlldyIsImgyIiwic2VydmljZSIsInNjYWxlIiwiaW1hZ2UiLCJ0aXRsZSIsInByaWNlIiwiaDMiLCJkZXNjcmlwdGlvbiIsInNsdWciLCJQb3J0Zm9saW9QcmV2aWV3IiwiaXRlbXMiLCJzZXRJdGVtcyIsImZldGNoIiwidGhlbiIsInJlcyIsImpzb24iLCJkYXRhIiwiQXJyYXkiLCJpc0FycmF5Iiwic2xpY2UiLCJjYXRjaCIsIml0ZW0iLCJ2aWRlbyIsIm11dGVkIiwicGxheXNJbmxpbmUiLCJWSURFT19GSUxFX05BTUUiLCJJTlNUQUdSQU1fUkVFTF9VUkwiLCJJTlNUQUdSQU1fUFJPRklMRV9VUkwiLCJWaWRlb1NlY3Rpb24iLCJ2aWRlb1JlZiIsInBsYXlpbmciLCJzZXRQbGF5aW5nIiwic2V0TXV0ZWQiLCJzdGFydGVkIiwic2V0U3RhcnRlZCIsInRvZ2dsZVBsYXkiLCJ2IiwicGF1c2VkIiwicGxheSIsInBhdXNlIiwidG9nZ2xlTXV0ZSIsImUiLCJzdG9wUHJvcGFnYXRpb24iLCJ3aWR0aCIsIm1heFdpZHRoIiwiYmFja2dyb3VuZCIsImFzcGVjdFJhdGlvIiwiYm94U2hhZG93IiwibG9vcCIsIm9uRW5kZWQiLCJiYWNrZHJvcEZpbHRlciIsImJvcmRlciIsImJhY2tncm91bmRTaXplIiwic3ZnIiwidmlld0JveCIsInBhdGgiLCJkIiwicHJvZHVjdHMiLCJuYW1lIiwiUHJvZHVjdFNlY3Rpb24iLCJwcm9kdWN0IiwiQ291bnRkb3duVGltZXIiLCJ0YXJnZXREYXRlIiwiRGF0ZSIsInRpbWVMZWZ0Iiwic2V0VGltZUxlZnQiLCJkYXlzIiwiaG91cnMiLCJtaW51dGVzIiwic2Vjb25kcyIsInRpY2siLCJkaWZmIiwiZ2V0VGltZSIsIm5vdyIsIk1hdGgiLCJmbG9vciIsInZhbHVlIiwidSIsIlN0cmluZyIsInBhZFN0YXJ0IiwiVGVzdGltb25pYWxzU2VjdGlvbiIsImFjdGl2ZSIsInNldEFjdGl2ZSIsImZyb20iLCJyYXRpbmciLCJqIiwidGV4dCIsIldoeUNob29zZVVzIiwicmVhc29ucyIsImljb24iLCJkZXNjIiwiciIsIkJsb2dQcmV2aWV3IiwicG9zdHMiLCJzZXRQb3N0cyIsInBvc3QiLCJwb3N0SWQiLCJfaWQiLCJwb3N0RGF0ZSIsImNyZWF0ZWRBdCIsImRhdGUiLCJtZWRpYVVybCIsIm1lZGlhVHlwZSIsInRvTG9jYWxlRGF0ZVN0cmluZyIsImRheSIsIm1vbnRoIiwieWVhciIsImNvbnRlbnQiLCJJbmRleCIsImZhbGxiYWNrIl0sIm1hcHBpbmdzIjoiOztBQUFBLFNBQVNBLElBQUksUUFBUSxtQkFBbUI7QUFDeEMsU0FBU0MsTUFBTSxRQUFRLGdCQUFnQjtBQUN2QyxTQUFTQyxJQUFJLEVBQUVDLEtBQUssRUFBRUMsS0FBSyxFQUFFQyxRQUFRLEVBQUVDLFVBQVUsRUFBRUMsSUFBSSxFQUFFQyxLQUFLLEVBQUVDLE9BQU8sRUFBRUMsT0FBTyxRQUFRLGVBQWU7QUFDdkcsU0FBU0MsU0FBUyxFQUFFQyxrQkFBa0IsUUFBUSx3QkFBd0I7QUFDdEUsU0FBU0MsUUFBUSxFQUFFQyxZ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

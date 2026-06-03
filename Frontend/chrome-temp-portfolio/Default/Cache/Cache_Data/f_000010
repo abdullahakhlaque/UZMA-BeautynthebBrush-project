@@ -1,0 +1,447 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/services/SalonServices.tsx");const _jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=44223405";
+var _s = $RefreshSig$();
+import { motion } from "/node_modules/.vite/deps/framer-motion.js?v=44223405";
+import { PremiumReveal } from "/src/components/PremiumReveal.tsx";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=44223405";
+import { useInView } from "/src/hooks/useAnimations.ts";
+import salonBg from "/src/assets/salon-interior.jpg?import";
+const skinServices = [
+    {
+        category: 'Facials',
+        items: [
+            'Deep Cleansing Facial',
+            'Hydrating Facial',
+            'Anti-aging Facial',
+            'Gold Facial',
+            'Diamond Facial'
+        ]
+    },
+    {
+        category: 'Clean-ups',
+        items: [
+            'Basic Clean-up',
+            'Deep Pore Clean-up',
+            'Fruit Clean-up'
+        ]
+    },
+    {
+        category: 'Exfoliation',
+        items: [
+            'Microdermabrasion',
+            'Chemical Exfoliation',
+            'Enzyme Peel'
+        ]
+    },
+    {
+        category: 'Acne Treatments',
+        items: [
+            'Acne Facial',
+            'Blue Light Therapy',
+            'Extraction Treatment'
+        ]
+    },
+    {
+        category: 'Advanced Treatments',
+        items: [
+            'Chemical Peel',
+            'Botox',
+            'Fillers',
+            'PRP Treatment'
+        ]
+    },
+    {
+        category: 'Skin Brightening',
+        items: [
+            'Glutathione Treatment',
+            'Vitamin C Infusion',
+            'Brightening Facial'
+        ]
+    },
+    {
+        category: 'Hair Removal',
+        items: [
+            'Waxing',
+            'Threading',
+            'Laser Hair Removal',
+            'Upper Lip & Chin'
+        ]
+    },
+    {
+        category: 'Body Treatments',
+        items: [
+            'Body Polishing',
+            'Body Wraps',
+            'De-tan Treatment'
+        ]
+    }
+];
+const hairServices = [
+    {
+        category: 'Haircuts & Styling',
+        items: [
+            'Women\'s Haircut',
+            'Blow Dry & Styling',
+            'Updos & Event Hair'
+        ]
+    },
+    {
+        category: 'Hair Coloring',
+        items: [
+            'Global Color',
+            'Highlights',
+            'Balayage',
+            'Root Touch-up',
+            'Fashion Colors'
+        ]
+    },
+    {
+        category: 'Hair Spa & Treatments',
+        items: [
+            'Hair Spa',
+            'Deep Conditioning',
+            'Keratin Treatment',
+            'Protein Treatment'
+        ]
+    },
+    {
+        category: 'Texture Services',
+        items: [
+            'Hair Smoothening',
+            'Permanent Straightening',
+            'Perm & Waves'
+        ]
+    },
+    {
+        category: 'Extensions',
+        items: [
+            'Clip-in Extensions',
+            'Tape-in Extensions',
+            'Micro-ring Extensions'
+        ]
+    }
+];
+const ServiceCategoryCard = ({ category, items, index })=>{
+    _s();
+    const { ref, isInView } = useInView();
+    return /*#__PURE__*/ _jsxDEV(PremiumReveal, {
+        delay: index * 0.1,
+        children: /*#__PURE__*/ _jsxDEV(motion.div, {
+            ref: ref,
+            initial: {
+                opacity: 0,
+                y: 30
+            },
+            animate: isInView ? {
+                opacity: 1,
+                y: 0
+            } : {},
+            transition: {
+                duration: 0.6,
+                delay: index * 0.08
+            },
+            className: "bg-white/95 backdrop-blur-md rounded-2xl p-6 border border-white/40 shadow-md transition-all duration-400 ease-in-out hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(212,175,55,0.1)] hover:border-[#D4AF37]/20",
+            children: [
+                /*#__PURE__*/ _jsxDEV("h3", {
+                    className: "font-heading text-lg font-semibold text-foreground mb-4",
+                    children: category
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                    lineNumber: 77,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDEV("ul", {
+                    className: "space-y-2",
+                    children: items.map((item)=>/*#__PURE__*/ _jsxDEV("li", {
+                            className: "font-body text-sm text-muted-foreground flex items-center gap-2",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("span", {
+                                    className: "w-1.5 h-1.5 rounded-full bg-primary shrink-0"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                    lineNumber: 81,
+                                    columnNumber: 15
+                                }, this),
+                                item
+                            ]
+                        }, item, true, {
+                            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                            lineNumber: 80,
+                            columnNumber: 13
+                        }, this))
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                    lineNumber: 78,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+            lineNumber: 70,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+        lineNumber: 69,
+        columnNumber: 5
+    }, this);
+};
+_s(ServiceCategoryCard, "CPEX0e8kzed/ypvEqLklhEdlvVk=", false, function() {
+    return [
+        useInView
+    ];
+});
+_c = ServiceCategoryCard;
+const SalonServices = ()=>{
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "pt-20 min-h-screen relative overflow-hidden",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed inset-0 -z-10",
+                style: {
+                    backgroundImage: 'url(' + salonBg + ')',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                lineNumber: 94,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed top-1/4 left-1/4 -z-10 w-[500px] h-[500px] rounded-full bg-[hsl(350,30%,85%)] opacity-[0.12] blur-[120px]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                lineNumber: 95,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "fixed bottom-1/4 right-1/4 -z-10 w-[400px] h-[400px] rounded-full bg-[hsl(30,20%,90%)] opacity-[0.15] blur-[100px]"
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                lineNumber: 96,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV(PremiumReveal, {
+                children: /*#__PURE__*/ _jsxDEV("section", {
+                    className: "section-padding",
+                    children: /*#__PURE__*/ _jsxDEV("div", {
+                        className: "max-w-7xl mx-auto",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV(motion.div, {
+                                initial: {
+                                    opacity: 0,
+                                    y: 30
+                                },
+                                animate: {
+                                    opacity: 1,
+                                    y: 0
+                                },
+                                transition: {
+                                    duration: 0.8
+                                },
+                                className: "text-center mb-16",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("p", {
+                                        className: "font-accent text-primary tracking-[0.2em] uppercase text-sm mb-2",
+                                        children: "Salon Services"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 102,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("h1", {
+                                        className: "font-heading text-4xl md:text-5xl font-semibold",
+                                        children: "Skin & Hair Care"
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 103,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("p", {
+                                        className: "font-body text-muted-foreground mt-4 max-w-xl mx-auto",
+                                        children: "Premium salon treatments to pamper your skin and hair."
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 104,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                lineNumber: 101,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "mb-16",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV(motion.h2, {
+                                        initial: {
+                                            opacity: 0,
+                                            x: -20
+                                        },
+                                        animate: {
+                                            opacity: 1,
+                                            x: 0
+                                        },
+                                        transition: {
+                                            duration: 0.6
+                                        },
+                                        className: "font-heading text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "w-10 h-1 bg-primary rounded-full"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                                lineNumber: 115,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Skin Treatments"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 109,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6",
+                                        children: skinServices.map((s, i)=>/*#__PURE__*/ _jsxDEV(ServiceCategoryCard, {
+                                                category: s.category,
+                                                items: s.items,
+                                                index: i
+                                            }, s.category, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                                lineNumber: 120,
+                                                columnNumber: 17
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 118,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                lineNumber: 108,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "mb-16",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV(motion.h2, {
+                                        initial: {
+                                            opacity: 0,
+                                            x: -20
+                                        },
+                                        animate: {
+                                            opacity: 1,
+                                            x: 0
+                                        },
+                                        transition: {
+                                            duration: 0.6
+                                        },
+                                        className: "font-heading text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "w-10 h-1 bg-primary rounded-full"
+                                            }, void 0, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                                lineNumber: 133,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Hair Services"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 127,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
+                                        children: hairServices.map((s, i)=>/*#__PURE__*/ _jsxDEV(ServiceCategoryCard, {
+                                                category: s.category,
+                                                items: s.items,
+                                                index: i
+                                            }, s.category, false, {
+                                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                                lineNumber: 138,
+                                                columnNumber: 17
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                        lineNumber: 136,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                lineNumber: 126,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "text-center",
+                                children: /*#__PURE__*/ _jsxDEV(Link, {
+                                    to: "/booking",
+                                    className: "inline-flex items-center gap-2 px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300 luxury-glow shadow-lg",
+                                    children: "Book a Treatment"
+                                }, void 0, false, {
+                                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                    lineNumber: 144,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                                lineNumber: 143,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                        lineNumber: 100,
+                        columnNumber: 9
+                    }, this)
+                }, void 0, false, {
+                    fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                    lineNumber: 99,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+                lineNumber: 98,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx",
+        lineNumber: 93,
+        columnNumber: 5
+    }, this);
+};
+_c1 = SalonServices;
+export default SalonServices;
+var _c, _c1;
+$RefreshReg$(_c, "ServiceCategoryCard");
+$RefreshReg$(_c1, "SalonServices");
+
+
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/abdullah/projects/UZMA/Frontend/src/pages/services/SalonServices.tsx" + ' ' + id) }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNhbG9uU2VydmljZXMudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ2ZyYW1lci1tb3Rpb24nO1xyXG5pbXBvcnQgeyBQcmVtaXVtUmV2ZWFsIH0gZnJvbSAnQC9jb21wb25lbnRzL1ByZW1pdW1SZXZlYWwnO1xyXG5pbXBvcnQgeyBTdGFnZ2VyVGV4dCB9IGZyb20gJ0AvY29tcG9uZW50cy9TdGFnZ2VyVGV4dCc7XHJcbmltcG9ydCB7IExpbmsgfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcclxuaW1wb3J0IHsgdXNlSW5WaWV3IH0gZnJvbSAnQC9ob29rcy91c2VBbmltYXRpb25zJztcclxuaW1wb3J0IHNhbG9uQmcgZnJvbSAnQC9hc3NldHMvc2Fsb24taW50ZXJpb3IuanBnJztcclxuXHJcbmNvbnN0IHNraW5TZXJ2aWNlcyA9IFtcclxuICB7XHJcbiAgICBjYXRlZ29yeTogJ0ZhY2lhbHMnLFxyXG4gICAgaXRlbXM6IFsnRGVlcCBDbGVhbnNpbmcgRmFjaWFsJywgJ0h5ZHJhdGluZyBGYWNpYWwnLCAnQW50aS1hZ2luZyBGYWNpYWwnLCAnR29sZCBGYWNpYWwnLCAnRGlhbW9uZCBGYWNpYWwnXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGNhdGVnb3J5OiAnQ2xlYW4tdXBzJyxcclxuICAgIGl0ZW1zOiBbJ0Jhc2ljIENsZWFuLXVwJywgJ0RlZXAgUG9yZSBDbGVhbi11cCcsICdGcnVpdCBDbGVhbi11cCddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdFeGZvbGlhdGlvbicsXHJcbiAgICBpdGVtczogWydNaWNyb2Rlcm1hYnJhc2lvbicsICdDaGVtaWNhbCBFeGZvbGlhdGlvbicsICdFbnp5bWUgUGVlbCddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdBY25lIFRyZWF0bWVudHMnLFxyXG4gICAgaXRlbXM6IFsnQWNuZSBGYWNpYWwnLCAnQmx1ZSBMaWdodCBUaGVyYXB5JywgJ0V4dHJhY3Rpb24gVHJlYXRtZW50J10sXHJcbiAgfSxcclxuICB7XHJcbiAgICBjYXRlZ29yeTogJ0FkdmFuY2VkIFRyZWF0bWVudHMnLFxyXG4gICAgaXRlbXM6IFsnQ2hlbWljYWwgUGVlbCcsICdCb3RveCcsICdGaWxsZXJzJywgJ1BSUCBUcmVhdG1lbnQnXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGNhdGVnb3J5OiAnU2tpbiBCcmlnaHRlbmluZycsXHJcbiAgICBpdGVtczogWydHbHV0YXRoaW9uZSBUcmVhdG1lbnQnLCAnVml0YW1pbiBDIEluZnVzaW9uJywgJ0JyaWdodGVuaW5nIEZhY2lhbCddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdIYWlyIFJlbW92YWwnLFxyXG4gICAgaXRlbXM6IFsnV2F4aW5nJywgJ1RocmVhZGluZycsICdMYXNlciBIYWlyIFJlbW92YWwnLCAnVXBwZXIgTGlwICYgQ2hpbiddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdCb2R5IFRyZWF0bWVudHMnLFxyXG4gICAgaXRlbXM6IFsnQm9keSBQb2xpc2hpbmcnLCAnQm9keSBXcmFwcycsICdEZS10YW4gVHJlYXRtZW50J10sXHJcbiAgfSxcclxuXTtcclxuXHJcbmNvbnN0IGhhaXJTZXJ2aWNlcyA9IFtcclxuICB7XHJcbiAgICBjYXRlZ29yeTogJ0hhaXJjdXRzICYgU3R5bGluZycsXHJcbiAgICBpdGVtczogWydXb21lblxcJ3MgSGFpcmN1dCcsICdCbG93IERyeSAmIFN0eWxpbmcnLCAnVXBkb3MgJiBFdmVudCBIYWlyJ10sXHJcbiAgfSxcclxuICB7XHJcbiAgICBjYXRlZ29yeTogJ0hhaXIgQ29sb3JpbmcnLFxyXG4gICAgaXRlbXM6IFsnR2xvYmFsIENvbG9yJywgJ0hpZ2hsaWdodHMnLCAnQmFsYXlhZ2UnLCAnUm9vdCBUb3VjaC11cCcsICdGYXNoaW9uIENvbG9ycyddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdIYWlyIFNwYSAmIFRyZWF0bWVudHMnLFxyXG4gICAgaXRlbXM6IFsnSGFpciBTcGEnLCAnRGVlcCBDb25kaXRpb25pbmcnLCAnS2VyYXRpbiBUcmVhdG1lbnQnLCAnUHJvdGVpbiBUcmVhdG1lbnQnXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGNhdGVnb3J5OiAnVGV4dHVyZSBTZXJ2aWNlcycsXHJcbiAgICBpdGVtczogWydIYWlyIFNtb290aGVuaW5nJywgJ1Blcm1hbmVudCBTdHJhaWdodGVuaW5nJywgJ1Blcm0gJiBXYXZlcyddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgY2F0ZWdvcnk6ICdFeHRlbnNpb25zJyxcclxuICAgIGl0ZW1zOiBbJ0NsaXAtaW4gRXh0ZW5zaW9ucycsICdUYXBlLWluIEV4dGVuc2lvbnMnLCAnTWljcm8tcmluZyBFeHRlbnNpb25zJ10sXHJcbiAgfSxcclxuXTtcclxuXHJcbmNvbnN0IFNlcnZpY2VDYXRlZ29yeUNhcmQgPSAoeyBjYXRlZ29yeSwgaXRlbXMsIGluZGV4IH06IHsgY2F0ZWdvcnk6IHN0cmluZzsgaXRlbXM6IHN0cmluZ1tdOyBpbmRleDogbnVtYmVyIH0pID0+IHtcclxuICBjb25zdCB7IHJlZiwgaXNJblZpZXcgfSA9IHVzZUluVmlldygpO1xyXG4gIHJldHVybiAoXHJcbiAgICA8UHJlbWl1bVJldmVhbCBkZWxheT17aW5kZXggKiAwLjF9PlxyXG4gICAgICA8bW90aW9uLmRpdlxyXG4gICAgICAgIHJlZj17cmVmfVxyXG4gICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMzAgfX1cclxuICAgICAgICBhbmltYXRlPXtpc0luVmlldyA/IHsgb3BhY2l0eTogMSwgeTogMCB9IDoge319XHJcbiAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC42LCBkZWxheTogaW5kZXggKiAwLjA4IH19XHJcbiAgICAgICAgY2xhc3NOYW1lPVwiYmctd2hpdGUvOTUgYmFja2Ryb3AtYmx1ci1tZCByb3VuZGVkLTJ4bCBwLTYgYm9yZGVyIGJvcmRlci13aGl0ZS80MCBzaGFkb3ctbWQgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNDAwIGVhc2UtaW4tb3V0IGhvdmVyOnNjYWxlLVsxLjAxXSBob3ZlcjotdHJhbnNsYXRlLXktMC41IGhvdmVyOnNoYWRvdy1bMF84cHhfMjBweF9yZ2JhKDIxMiwxNzUsNTUsMC4xKV0gaG92ZXI6Ym9yZGVyLVsjRDRBRjM3XS8yMFwiXHJcbiAgICAgID5cclxuICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1oZWFkaW5nIHRleHQtbGcgZm9udC1zZW1pYm9sZCB0ZXh0LWZvcmVncm91bmQgbWItNFwiPntjYXRlZ29yeX08L2gzPlxyXG4gICAgICAgIDx1bCBjbGFzc05hbWU9XCJzcGFjZS15LTJcIj5cclxuICAgICAgICAgIHtpdGVtcy5tYXAoKGl0ZW0pID0+IChcclxuICAgICAgICAgICAgPGxpIGtleT17aXRlbX0gY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtc20gdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIGZsZXggaXRlbXMtY2VudGVyIGdhcC0yXCI+XHJcbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidy0xLjUgaC0xLjUgcm91bmRlZC1mdWxsIGJnLXByaW1hcnkgc2hyaW5rLTBcIiAvPlxyXG4gICAgICAgICAgICAgIHtpdGVtfVxyXG4gICAgICAgICAgICA8L2xpPlxyXG4gICAgICAgICAgKSl9XHJcbiAgICAgICAgPC91bD5cclxuICAgICAgPC9tb3Rpb24uZGl2PlxyXG4gICAgPC9QcmVtaXVtUmV2ZWFsPlxyXG4gICk7XHJcbn07XHJcblxyXG5jb25zdCBTYWxvblNlcnZpY2VzID0gKCkgPT4ge1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IGNsYXNzTmFtZT1cInB0LTIwIG1pbi1oLXNjcmVlbiByZWxhdGl2ZSBvdmVyZmxvdy1oaWRkZW5cIj5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJmaXhlZCBpbnNldC0wIC16LTEwXCIgc3R5bGU9e3sgYmFja2dyb3VuZEltYWdlOiAndXJsKCcgKyBzYWxvbkJnICsgJyknLCBiYWNrZ3JvdW5kU2l6ZTogJ2NvdmVyJywgYmFja2dyb3VuZFBvc2l0aW9uOiAnY2VudGVyJyB9fSAvPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZpeGVkIHRvcC0xLzQgbGVmdC0xLzQgLXotMTAgdy1bNTAwcHhdIGgtWzUwMHB4XSByb3VuZGVkLWZ1bGwgYmctW2hzbCgzNTAsMzAlLDg1JSldIG9wYWNpdHktWzAuMTJdIGJsdXItWzEyMHB4XVwiIC8+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZml4ZWQgYm90dG9tLTEvNCByaWdodC0xLzQgLXotMTAgdy1bNDAwcHhdIGgtWzQwMHB4XSByb3VuZGVkLWZ1bGwgYmctW2hzbCgzMCwyMCUsOTAlKV0gb3BhY2l0eS1bMC4xNV0gYmx1ci1bMTAwcHhdXCIgLz5cclxuXHJcbiAgICAgIDxQcmVtaXVtUmV2ZWFsPlxyXG4gICAgICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2VjdGlvbi1wYWRkaW5nXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0b1wiPlxyXG4gICAgICAgICAgPG1vdGlvbi5kaXYgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB5OiAzMCB9fSBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHk6IDAgfX0gdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC44IH19IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XHJcbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtcHJpbWFyeSB0cmFja2luZy1bMC4yZW1dIHVwcGVyY2FzZSB0ZXh0LXNtIG1iLTJcIj5TYWxvbiBTZXJ2aWNlczwvcD5cclxuICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTR4bCBtZDp0ZXh0LTV4bCBmb250LXNlbWlib2xkXCI+U2tpbiAmIEhhaXIgQ2FyZTwvaDE+XHJcbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LW11dGVkLWZvcmVncm91bmQgbXQtNCBtYXgtdy14bCBteC1hdXRvXCI+UHJlbWl1bSBzYWxvbiB0cmVhdG1lbnRzIHRvIHBhbXBlciB5b3VyIHNraW4gYW5kIGhhaXIuPC9wPlxyXG4gICAgICAgICAgPC9tb3Rpb24uZGl2PlxyXG5cclxuICAgICAgICAgIHsvKiBTa2luIFNlY3Rpb24gKi99XHJcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTE2XCI+XHJcbiAgICAgICAgICAgIDxtb3Rpb24uaDJcclxuICAgICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHg6IC0yMCB9fVxyXG4gICAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeDogMCB9fVxyXG4gICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNiB9fVxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZvbnQtaGVhZGluZyB0ZXh0LTJ4bCBtZDp0ZXh0LTN4bCBmb250LXNlbWlib2xkIG1iLTggZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTNcIlxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidy0xMCBoLTEgYmctcHJpbWFyeSByb3VuZGVkLWZ1bGxcIiAvPlxyXG4gICAgICAgICAgICAgIFNraW4gVHJlYXRtZW50c1xyXG4gICAgICAgICAgICA8L21vdGlvbi5oMj5cclxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIHNtOmdyaWQtY29scy0yIGxnOmdyaWQtY29scy0zIHhsOmdyaWQtY29scy00IGdhcC02XCI+XHJcbiAgICAgICAgICAgICAge3NraW5TZXJ2aWNlcy5tYXAoKHMsIGkpID0+IChcclxuICAgICAgICAgICAgICAgIDxTZXJ2aWNlQ2F0ZWdvcnlDYXJkIGtleT17cy5jYXRlZ29yeX0gY2F0ZWdvcnk9e3MuY2F0ZWdvcnl9IGl0ZW1zPXtzLml0ZW1zfSBpbmRleD17aX0gLz5cclxuICAgICAgICAgICAgICApKX1cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgICB7LyogSGFpciBTZWN0aW9uICovfVxyXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi0xNlwiPlxyXG4gICAgICAgICAgICA8bW90aW9uLmgyXHJcbiAgICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwLCB4OiAtMjAgfX1cclxuICAgICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEsIHg6IDAgfX1cclxuICAgICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjYgfX1cclxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJmb250LWhlYWRpbmcgdGV4dC0yeGwgbWQ6dGV4dC0zeGwgZm9udC1zZW1pYm9sZCBtYi04IGZsZXggaXRlbXMtY2VudGVyIGdhcC0zXCJcclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInctMTAgaC0xIGJnLXByaW1hcnkgcm91bmRlZC1mdWxsXCIgLz5cclxuICAgICAgICAgICAgICBIYWlyIFNlcnZpY2VzXHJcbiAgICAgICAgICAgIDwvbW90aW9uLmgyPlxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTEgc206Z3JpZC1jb2xzLTIgbGc6Z3JpZC1jb2xzLTMgZ2FwLTZcIj5cclxuICAgICAgICAgICAgICB7aGFpclNlcnZpY2VzLm1hcCgocywgaSkgPT4gKFxyXG4gICAgICAgICAgICAgICAgPFNlcnZpY2VDYXRlZ29yeUNhcmQga2V5PXtzLmNhdGVnb3J5fSBjYXRlZ29yeT17cy5jYXRlZ29yeX0gaXRlbXM9e3MuaXRlbXN9IGluZGV4PXtpfSAvPlxyXG4gICAgICAgICAgICAgICkpfVxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cclxuICAgICAgICAgICAgPExpbmtcclxuICAgICAgICAgICAgICB0bz1cIi9ib29raW5nXCJcclxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgcHgtOCBweS00IHRleHQtYmFzZSBmb250LW1lZGl1bSBiZy1wcmltYXJ5IHRleHQtcHJpbWFyeS1mb3JlZ3JvdW5kIHJvdW5kZWQtZnVsbCBob3ZlcjpiZy1wcmltYXJ5LzkwIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTMwMCBsdXh1cnktZ2xvdyBzaGFkb3ctbGdcIlxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgICAgQm9vayBhIFRyZWF0bWVudFxyXG4gICAgICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9zZWN0aW9uPlxyXG4gICAgPC9QcmVtaXVtUmV2ZWFsPlxyXG4gICAgPC9kaXY+XHJcbiAgKTtcclxufTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IFNhbG9uU2VydmljZXM7XHJcbiJdLCJuYW1lcyI6WyJtb3Rpb24iLCJQcmVtaXVtUmV2ZWFsIiwiTGluayIsInVzZUluVmlldyIsInNhbG9uQmciLCJza2luU2VydmljZXMiLCJjYXRlZ29yeSIsIml0ZW1zIiwiaGFpclNlcnZpY2VzIiwiU2VydmljZUNhdGVnb3J5Q2FyZCIsImluZGV4IiwicmVmIiwiaXNJblZpZXciLCJkZWxheSIsImRpdiIsImluaXRpYWwiLCJvcGFjaXR5IiwieSIsImFuaW1hdGUiLCJ0cmFuc2l0aW9uIiwiZHVyYXRpb24iLCJjbGFzc05hbWUiLCJoMyIsInVsIiwibWFwIiwiaXRlbSIsImxpIiwic3BhbiIsIlNhbG9uU2VydmljZXMiLCJzdHlsZSIsImJhY2tncm91bmRJbWFnZSIsImJhY2tncm91bmRTaXplIiwiYmFja2dyb3VuZFBvc2l0aW9uIiwic2VjdGlvbiIsInAiLCJoMSIsImgyIiwieCIsInMi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

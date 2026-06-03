@@ -1,0 +1,183 @@
+import bridalMakeup from "/src/assets/bridal-makeup.jpg?import";
+import engagementMakeup from "/src/assets/engagement-makeup.jpg?import";
+import partyMakeup from "/src/assets/party-makeup.jpg?import";
+import hairStyling from "/src/assets/hair-styling.jpg?import";
+import sareeDraping from "/src/assets/saree-draping.jpg?import";
+import makeupTools from "/src/assets/makeup-tools.jpg?import";
+export const services = [
+    {
+        id: '1',
+        title: 'Bridal Makeup',
+        slug: 'bridal-makeup',
+        price: '₹20,000',
+        description: 'Complete bridal transformation with premium products for your special day.',
+        longDescription: 'Our signature bridal makeup service is a complete transformation experience. We use only the finest international and premium products to ensure your look lasts through every moment of your celebration. From the initial consultation to the final touch, every detail is curated to perfection.',
+        image: bridalMakeup,
+        includes: [
+            'HD/Airbrush Makeup',
+            'Hair Styling & Setting',
+            'Skin Preparation & Primer',
+            'Nail Grooming',
+            'Draping Assistance',
+            'Touch-up Kit'
+        ],
+        tools: [
+            'MAC',
+            'Bobbi Brown',
+            'Charlotte Tilbury',
+            'Huda Beauty',
+            'Airbrush System'
+        ]
+    },
+    {
+        id: '2',
+        title: 'Engagement Makeup',
+        slug: 'engagement-makeup',
+        price: '₹15,000',
+        description: 'Elegant and radiant look for your engagement ceremony.',
+        longDescription: 'Your engagement is the beginning of a beautiful journey. Our engagement makeup service ensures you look absolutely stunning with a look that\'s elegant yet camera-ready. We blend traditional beauty with contemporary trends.',
+        image: engagementMakeup,
+        includes: [
+            'HD Makeup',
+            'Hair Styling',
+            'Skin Prep',
+            'Lash Application',
+            'Touch-up Kit'
+        ],
+        tools: [
+            'MAC',
+            'Urban Decay',
+            'Too Faced',
+            'Huda Beauty'
+        ]
+    },
+    {
+        id: '3',
+        title: 'Party Makeup',
+        slug: 'party-makeup',
+        price: '₹8,000',
+        description: 'Glamorous looks for any occasion — from cocktail to reception.',
+        longDescription: 'Whether it\'s a cocktail party, reception, or a special night out, our party makeup service creates a glamorous, head-turning look tailored to your outfit and the occasion.',
+        image: partyMakeup,
+        includes: [
+            'Professional Makeup',
+            'Hair Styling',
+            'Skin Prep',
+            'Lash Application'
+        ],
+        tools: [
+            'MAC',
+            'Huda Beauty',
+            'Too Faced',
+            'NYX Professional'
+        ]
+    },
+    {
+        id: '4',
+        title: 'Hair Styling',
+        slug: 'hair-styling',
+        price: '₹5,000',
+        description: 'Professional hair styling — from elegant updos to flowing waves.',
+        longDescription: 'Our expert hair stylists create stunning hairstyles that complement your overall look. From traditional buns to modern waves, we tailor every style to your face shape and outfit.',
+        image: hairStyling,
+        includes: [
+            'Consultation',
+            'Wash & Blow Dry',
+            'Styling & Setting',
+            'Hair Accessories'
+        ],
+        tools: [
+            'GHD',
+            'Dyson',
+            'Professional Grade Products'
+        ]
+    },
+    {
+        id: '5',
+        title: 'Saree Draping',
+        slug: 'saree-draping',
+        price: '₹3,000',
+        description: 'Expert saree draping in multiple styles for every occasion.',
+        longDescription: 'Our professional saree draping service offers multiple styles from classic Nivi to contemporary drapes. Each draping is secured with precision to ensure comfort and elegance throughout your event.',
+        image: sareeDraping,
+        includes: [
+            'Style Consultation',
+            'Professional Draping',
+            'Pleating & Pinning',
+            'Comfort Fitting'
+        ],
+        tools: [
+            'Safety Pins',
+            'Professional Draping Tools'
+        ]
+    },
+    {
+        id: '6',
+        title: 'Skin Preparation',
+        slug: 'skin-prep',
+        price: '₹4,000',
+        description: 'Pre-event skincare ritual for a flawless, glowing canvas.',
+        longDescription: 'Our skin preparation service is the foundation of every beautiful look. Using premium skincare products, we cleanse, exfoliate, and hydrate your skin to create the perfect canvas for makeup application.',
+        image: makeupTools,
+        includes: [
+            'Deep Cleansing',
+            'Exfoliation',
+            'Face Mask',
+            'Moisturizing',
+            'Primer Application'
+        ],
+        tools: [
+            'Dermalogica',
+            'SK-II',
+            'La Mer',
+            'Professional Tools'
+        ]
+    }
+];
+export const testimonials = [
+    {
+        name: 'Priya Sharma',
+        text: 'Beauty And The Brush made me feel like an absolute queen on my wedding day. Their attention to detail is unmatched!',
+        rating: 5
+    },
+    {
+        name: 'Ananya Reddy',
+        text: 'The bridal package was worth every penny. My makeup lasted through 12 hours of celebrations without a single touch-up needed.',
+        rating: 5
+    },
+    {
+        name: 'Fatima Khan',
+        text: 'I\'ve been going to Beauty And The Brush for years. Whether it\'s a party or a wedding, they always create the perfect look.',
+        rating: 5
+    },
+    {
+        name: 'Meera Nair',
+        text: 'The artistry at Beauty And The Brush transformed my engagement look beyond expectations. So professional and talented!',
+        rating: 5
+    }
+];
+export const blogPosts = [
+    {
+        id: '1',
+        title: '10 Bridal Makeup Trends for 2026',
+        excerpt: 'Discover the latest bridal makeup trends that will dominate this wedding season — from dewy glass skin to bold eye looks.',
+        date: 'March 15, 2026',
+        image: bridalMakeup
+    },
+    {
+        id: '2',
+        title: 'Pre-Wedding Skincare Routine',
+        excerpt: 'Start your skincare journey 3 months before the big day. Here\'s a complete guide to achieving flawless bridal skin.',
+        date: 'March 10, 2026',
+        image: makeupTools
+    },
+    {
+        id: '3',
+        title: 'Choosing the Right Makeup for Your Skin Tone',
+        excerpt: 'Understanding your skin tone is the first step to a flawless makeup look. Learn how to identify and enhance your natural beauty.',
+        date: 'March 5, 2026',
+        image: engagementMakeup
+    }
+];
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpdGVEYXRhLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBicmlkYWxNYWtldXAgZnJvbSAnQC9hc3NldHMvYnJpZGFsLW1ha2V1cC5qcGcnO1xyXG5pbXBvcnQgZW5nYWdlbWVudE1ha2V1cCBmcm9tICdAL2Fzc2V0cy9lbmdhZ2VtZW50LW1ha2V1cC5qcGcnO1xyXG5pbXBvcnQgcGFydHlNYWtldXAgZnJvbSAnQC9hc3NldHMvcGFydHktbWFrZXVwLmpwZyc7XHJcbmltcG9ydCBoYWlyU3R5bGluZyBmcm9tICdAL2Fzc2V0cy9oYWlyLXN0eWxpbmcuanBnJztcclxuaW1wb3J0IHNhcmVlRHJhcGluZyBmcm9tICdAL2Fzc2V0cy9zYXJlZS1kcmFwaW5nLmpwZyc7XHJcbmltcG9ydCBtYWtldXBUb29scyBmcm9tICdAL2Fzc2V0cy9tYWtldXAtdG9vbHMuanBnJztcclxuXHJcbmV4cG9ydCBpbnRlcmZhY2UgU2VydmljZSB7XHJcbiAgaWQ6IHN0cmluZztcclxuICB0aXRsZTogc3RyaW5nO1xyXG4gIHNsdWc6IHN0cmluZztcclxuICBwcmljZTogc3RyaW5nO1xyXG4gIGRlc2NyaXB0aW9uOiBzdHJpbmc7XHJcbiAgbG9uZ0Rlc2NyaXB0aW9uOiBzdHJpbmc7XHJcbiAgaW1hZ2U6IHN0cmluZztcclxuICBpbmNsdWRlczogc3RyaW5nW107XHJcbiAgdG9vbHM6IHN0cmluZ1tdO1xyXG59XHJcblxyXG5leHBvcnQgY29uc3Qgc2VydmljZXM6IFNlcnZpY2VbXSA9IFtcclxuICB7XHJcbiAgICBpZDogJzEnLFxyXG4gICAgdGl0bGU6ICdCcmlkYWwgTWFrZXVwJyxcclxuICAgIHNsdWc6ICdicmlkYWwtbWFrZXVwJyxcclxuICAgIHByaWNlOiAn4oK5MjAsMDAwJyxcclxuICAgIGRlc2NyaXB0aW9uOiAnQ29tcGxldGUgYnJpZGFsIHRyYW5zZm9ybWF0aW9uIHdpdGggcHJlbWl1bSBwcm9kdWN0cyBmb3IgeW91ciBzcGVjaWFsIGRheS4nLFxyXG4gICAgbG9uZ0Rlc2NyaXB0aW9uOiAnT3VyIHNpZ25hdHVyZSBicmlkYWwgbWFrZXVwIHNlcnZpY2UgaXMgYSBjb21wbGV0ZSB0cmFuc2Zvcm1hdGlvbiBleHBlcmllbmNlLiBXZSB1c2Ugb25seSB0aGUgZmluZXN0IGludGVybmF0aW9uYWwgYW5kIHByZW1pdW0gcHJvZHVjdHMgdG8gZW5zdXJlIHlvdXIgbG9vayBsYXN0cyB0aHJvdWdoIGV2ZXJ5IG1vbWVudCBvZiB5b3VyIGNlbGVicmF0aW9uLiBGcm9tIHRoZSBpbml0aWFsIGNvbnN1bHRhdGlvbiB0byB0aGUgZmluYWwgdG91Y2gsIGV2ZXJ5IGRldGFpbCBpcyBjdXJhdGVkIHRvIHBlcmZlY3Rpb24uJyxcclxuICAgIGltYWdlOiBicmlkYWxNYWtldXAsXHJcbiAgICBpbmNsdWRlczogWydIRC9BaXJicnVzaCBNYWtldXAnLCAnSGFpciBTdHlsaW5nICYgU2V0dGluZycsICdTa2luIFByZXBhcmF0aW9uICYgUHJpbWVyJywgJ05haWwgR3Jvb21pbmcnLCAnRHJhcGluZyBBc3Npc3RhbmNlJywgJ1RvdWNoLXVwIEtpdCddLFxyXG4gICAgdG9vbHM6IFsnTUFDJywgJ0JvYmJpIEJyb3duJywgJ0NoYXJsb3R0ZSBUaWxidXJ5JywgJ0h1ZGEgQmVhdXR5JywgJ0FpcmJydXNoIFN5c3RlbSddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgaWQ6ICcyJyxcclxuICAgIHRpdGxlOiAnRW5nYWdlbWVudCBNYWtldXAnLFxyXG4gICAgc2x1ZzogJ2VuZ2FnZW1lbnQtbWFrZXVwJyxcclxuICAgIHByaWNlOiAn4oK5MTUsMDAwJyxcclxuICAgIGRlc2NyaXB0aW9uOiAnRWxlZ2FudCBhbmQgcmFkaWFudCBsb29rIGZvciB5b3VyIGVuZ2FnZW1lbnQgY2VyZW1vbnkuJyxcclxuICAgIGxvbmdEZXNjcmlwdGlvbjogJ1lvdXIgZW5nYWdlbWVudCBpcyB0aGUgYmVnaW5uaW5nIG9mIGEgYmVhdXRpZnVsIGpvdXJuZXkuIE91ciBlbmdhZ2VtZW50IG1ha2V1cCBzZXJ2aWNlIGVuc3VyZXMgeW91IGxvb2sgYWJzb2x1dGVseSBzdHVubmluZyB3aXRoIGEgbG9vayB0aGF0XFwncyBlbGVnYW50IHlldCBjYW1lcmEtcmVhZHkuIFdlIGJsZW5kIHRyYWRpdGlvbmFsIGJlYXV0eSB3aXRoIGNvbnRlbXBvcmFyeSB0cmVuZHMuJyxcclxuICAgIGltYWdlOiBlbmdhZ2VtZW50TWFrZXVwLFxyXG4gICAgaW5jbHVkZXM6IFsnSEQgTWFrZXVwJywgJ0hhaXIgU3R5bGluZycsICdTa2luIFByZXAnLCAnTGFzaCBBcHBsaWNhdGlvbicsICdUb3VjaC11cCBLaXQnXSxcclxuICAgIHRvb2xzOiBbJ01BQycsICdVcmJhbiBEZWNheScsICdUb28gRmFjZWQnLCAnSHVkYSBCZWF1dHknXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGlkOiAnMycsXHJcbiAgICB0aXRsZTogJ1BhcnR5IE1ha2V1cCcsXHJcbiAgICBzbHVnOiAncGFydHktbWFrZXVwJyxcclxuICAgIHByaWNlOiAn4oK5OCwwMDAnLFxyXG4gICAgZGVzY3JpcHRpb246ICdHbGFtb3JvdXMgbG9va3MgZm9yIGFueSBvY2Nhc2lvbiDigJQgZnJvbSBjb2NrdGFpbCB0byByZWNlcHRpb24uJyxcclxuICAgIGxvbmdEZXNjcmlwdGlvbjogJ1doZXRoZXIgaXRcXCdzIGEgY29ja3RhaWwgcGFydHksIHJlY2VwdGlvbiwgb3IgYSBzcGVjaWFsIG5pZ2h0IG91dCwgb3VyIHBhcnR5IG1ha2V1cCBzZXJ2aWNlIGNyZWF0ZXMgYSBnbGFtb3JvdXMsIGhlYWQtdHVybmluZyBsb29rIHRhaWxvcmVkIHRvIHlvdXIgb3V0Zml0IGFuZCB0aGUgb2NjYXNpb24uJyxcclxuICAgIGltYWdlOiBwYXJ0eU1ha2V1cCxcclxuICAgIGluY2x1ZGVzOiBbJ1Byb2Zlc3Npb25hbCBNYWtldXAnLCAnSGFpciBTdHlsaW5nJywgJ1NraW4gUHJlcCcsICdMYXNoIEFwcGxpY2F0aW9uJ10sXHJcbiAgICB0b29sczogWydNQUMnLCAnSHVkYSBCZWF1dHknLCAnVG9vIEZhY2VkJywgJ05ZWCBQcm9mZXNzaW9uYWwnXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGlkOiAnNCcsXHJcbiAgICB0aXRsZTogJ0hhaXIgU3R5bGluZycsXHJcbiAgICBzbHVnOiAnaGFpci1zdHlsaW5nJyxcclxuICAgIHByaWNlOiAn4oK5NSwwMDAnLFxyXG4gICAgZGVzY3JpcHRpb246ICdQcm9mZXNzaW9uYWwgaGFpciBzdHlsaW5nIOKAlCBmcm9tIGVsZWdhbnQgdXBkb3MgdG8gZmxvd2luZyB3YXZlcy4nLFxyXG4gICAgbG9uZ0Rlc2NyaXB0aW9uOiAnT3VyIGV4cGVydCBoYWlyIHN0eWxpc3RzIGNyZWF0ZSBzdHVubmluZyBoYWlyc3R5bGVzIHRoYXQgY29tcGxlbWVudCB5b3VyIG92ZXJhbGwgbG9vay4gRnJvbSB0cmFkaXRpb25hbCBidW5zIHRvIG1vZGVybiB3YXZlcywgd2UgdGFpbG9yIGV2ZXJ5IHN0eWxlIHRvIHlvdXIgZmFjZSBzaGFwZSBhbmQgb3V0Zml0LicsXHJcbiAgICBpbWFnZTogaGFpclN0eWxpbmcsXHJcbiAgICBpbmNsdWRlczogWydDb25zdWx0YXRpb24nLCAnV2FzaCAmIEJsb3cgRHJ5JywgJ1N0eWxpbmcgJiBTZXR0aW5nJywgJ0hhaXIgQWNjZXNzb3JpZXMnXSxcclxuICAgIHRvb2xzOiBbJ0dIRCcsICdEeXNvbicsICdQcm9mZXNzaW9uYWwgR3JhZGUgUHJvZHVjdHMnXSxcclxuICB9LFxyXG4gIHtcclxuICAgIGlkOiAnNScsXHJcbiAgICB0aXRsZTogJ1NhcmVlIERyYXBpbmcnLFxyXG4gICAgc2x1ZzogJ3NhcmVlLWRyYXBpbmcnLFxyXG4gICAgcHJpY2U6ICfigrkzLDAwMCcsXHJcbiAgICBkZXNjcmlwdGlvbjogJ0V4cGVydCBzYXJlZSBkcmFwaW5nIGluIG11bHRpcGxlIHN0eWxlcyBmb3IgZXZlcnkgb2NjYXNpb24uJyxcclxuICAgIGxvbmdEZXNjcmlwdGlvbjogJ091ciBwcm9mZXNzaW9uYWwgc2FyZWUgZHJhcGluZyBzZXJ2aWNlIG9mZmVycyBtdWx0aXBsZSBzdHlsZXMgZnJvbSBjbGFzc2ljIE5pdmkgdG8gY29udGVtcG9yYXJ5IGRyYXBlcy4gRWFjaCBkcmFwaW5nIGlzIHNlY3VyZWQgd2l0aCBwcmVjaXNpb24gdG8gZW5zdXJlIGNvbWZvcnQgYW5kIGVsZWdhbmNlIHRocm91Z2hvdXQgeW91ciBldmVudC4nLFxyXG4gICAgaW1hZ2U6IHNhcmVlRHJhcGluZyxcclxuICAgIGluY2x1ZGVzOiBbJ1N0eWxlIENvbnN1bHRhdGlvbicsICdQcm9mZXNzaW9uYWwgRHJhcGluZycsICdQbGVhdGluZyAmIFBpbm5pbmcnLCAnQ29tZm9ydCBGaXR0aW5nJ10sXHJcbiAgICB0b29sczogWydTYWZldHkgUGlucycsICdQcm9mZXNzaW9uYWwgRHJhcGluZyBUb29scyddLFxyXG4gIH0sXHJcbiAge1xyXG4gICAgaWQ6ICc2JyxcclxuICAgIHRpdGxlOiAnU2tpbiBQcmVwYXJhdGlvbicsXHJcbiAgICBzbHVnOiAnc2tpbi1wcmVwJyxcclxuICAgIHByaWNlOiAn4oK5NCwwMDAnLFxyXG4gICAgZGVzY3JpcHRpb246ICdQcmUtZXZlbnQgc2tpbmNhcmUgcml0dWFsIGZvciBhIGZsYXdsZXNzLCBnbG93aW5nIGNhbnZhcy4nLFxyXG4gICAgbG9uZ0Rlc2NyaXB0aW9uOiAnT3VyIHNraW4gcHJlcGFyYXRpb24gc2VydmljZSBpcyB0aGUgZm91bmRhdGlvbiBvZiBldmVyeSBiZWF1dGlmdWwgbG9vay4gVXNpbmcgcHJlbWl1bSBza2luY2FyZSBwcm9kdWN0cywgd2UgY2xlYW5zZSwgZXhmb2xpYXRlLCBhbmQgaHlkcmF0ZSB5b3VyIHNraW4gdG8gY3JlYXRlIHRoZSBwZXJmZWN0IGNhbnZhcyBmb3IgbWFrZXVwIGFwcGxpY2F0aW9uLicsXHJcbiAgICBpbWFnZTogbWFrZXVwVG9vbHMsXHJcbiAgICBpbmNsdWRlczogWydEZWVwIENsZWFuc2luZycsICdFeGZvbGlhdGlvbicsICdGYWNlIE1hc2snLCAnTW9pc3R1cml6aW5nJywgJ1ByaW1lciBBcHBsaWNhdGlvbiddLFxyXG4gICAgdG9vbHM6IFsnRGVybWFsb2dpY2EnLCAnU0stSUknLCAnTGEgTWVyJywgJ1Byb2Zlc3Npb25hbCBUb29scyddLFxyXG4gIH0sXHJcbl07XHJcblxyXG5leHBvcnQgY29uc3QgdGVzdGltb25pYWxzID0gW1xyXG4gIHtcclxuICAgIG5hbWU6ICdQcml5YSBTaGFybWEnLFxyXG4gICAgdGV4dDogJ0JlYXV0eSBBbmQgVGhlIEJydXNoIG1hZGUgbWUgZmVlbCBsaWtlIGFuIGFic29sdXRlIHF1ZWVuIG9uIG15IHdlZGRpbmcgZGF5LiBUaGVpciBhdHRlbnRpb24gdG8gZGV0YWlsIGlzIHVubWF0Y2hlZCEnLFxyXG4gICAgcmF0aW5nOiA1LFxyXG4gIH0sXHJcbiAge1xyXG4gICAgbmFtZTogJ0FuYW55YSBSZWRkeScsXHJcbiAgICB0ZXh0OiAnVGhlIGJyaWRhbCBwYWNrYWdlIHdhcyB3b3J0aCBldmVyeSBwZW5ueS4gTXkgbWFrZXVwIGxhc3RlZCB0aHJvdWdoIDEyIGhvdXJzIG9mIGNlbGVicmF0aW9ucyB3aXRob3V0IGEgc2luZ2xlIHRvdWNoLXVwIG5lZWRlZC4nLFxyXG4gICAgcmF0aW5nOiA1LFxyXG4gIH0sXHJcbiAge1xyXG4gICAgbmFtZTogJ0ZhdGltYSBLaGFuJyxcclxuICAgIHRleHQ6ICdJXFwndmUgYmVlbiBnb2luZyB0byBCZWF1dHkgQW5kIFRoZSBCcnVzaCBmb3IgeWVhcnMuIFdoZXRoZXIgaXRcXCdzIGEgcGFydHkgb3IgYSB3ZWRkaW5nLCB0aGV5IGFsd2F5cyBjcmVhdGUgdGhlIHBlcmZlY3QgbG9vay4nLFxyXG4gICAgcmF0aW5nOiA1LFxyXG4gIH0sXHJcbiAge1xyXG4gICAgbmFtZTogJ01lZXJhIE5haXInLFxyXG4gICAgdGV4dDogJ1RoZSBhcnRpc3RyeSBhdCBCZWF1dHkgQW5kIFRoZSBCcnVzaCB0cmFuc2Zvcm1lZCBteSBlbmdhZ2VtZW50IGxvb2sgYmV5b25kIGV4cGVjdGF0aW9ucy4gU28gcHJvZmVzc2lvbmFsIGFuZCB0YWxlbnRlZCEnLFxyXG4gICAgcmF0aW5nOiA1LFxyXG4gIH0sXHJcbl07XHJcblxyXG5leHBvcnQgY29uc3QgYmxvZ1Bvc3RzID0gW1xyXG4gIHtcclxuICAgIGlkOiAnMScsXHJcbiAgICB0aXRsZTogJzEwIEJyaWRhbCBNYWtldXAgVHJlbmRzIGZvciAyMDI2JyxcclxuICAgIGV4Y2VycHQ6ICdEaXNjb3ZlciB0aGUgbGF0ZXN0IGJyaWRhbCBtYWtldXAgdHJlbmRzIHRoYXQgd2lsbCBkb21pbmF0ZSB0aGlzIHdlZGRpbmcgc2Vhc29uIOKAlCBmcm9tIGRld3kgZ2xhc3Mgc2tpbiB0byBib2xkIGV5ZSBsb29rcy4nLFxyXG4gICAgZGF0ZTogJ01hcmNoIDE1LCAyMDI2JyxcclxuICAgIGltYWdlOiBicmlkYWxNYWtldXAsXHJcbiAgfSxcclxuICB7XHJcbiAgICBpZDogJzInLFxyXG4gICAgdGl0bGU6ICdQcmUtV2VkZGluZyBTa2luY2FyZSBSb3V0aW5lJyxcclxuICAgIGV4Y2VycHQ6ICdTdGFydCB5b3VyIHNraW5jYXJlIGpvdXJuZXkgMyBtb250aHMgYmVmb3JlIHRoZSBiaWcgZGF5LiBIZXJlXFwncyBhIGNvbXBsZXRlIGd1aWRlIHRvIGFjaGlldmluZyBmbGF3bGVzcyBicmlkYWwgc2tpbi4nLFxyXG4gICAgZGF0ZTogJ01hcmNoIDEwLCAyMDI2JyxcclxuICAgIGltYWdlOiBtYWtldXBUb29scyxcclxuICB9LFxyXG4gIHtcclxuICAgIGlkOiAnMycsXHJcbiAgICB0aXRsZTogJ0Nob29zaW5nIHRoZSBSaWdodCBNYWtldXAgZm9yIFlvdXIgU2tpbiBUb25lJyxcclxuICAgIGV4Y2VycHQ6ICdVbmRlcnN0YW5kaW5nIHlvdXIgc2tpbiB0b25lIGlzIHRoZSBmaXJzdCBzdGVwIHRvIGEgZmxhd2xlc3MgbWFrZXVwIGxvb2suIExlYXJuIGhvdyB0byBpZGVudGlmeSBhbmQgZW5oYW5jZSB5b3VyIG5hdHVyYWwgYmVhdXR5LicsXHJcbiAgICBkYXRlOiAnTWFyY2ggNSwgMjAyNicsXHJcbiAgICBpbWFnZTogZW5nYWdlbWVudE1ha2V1cCxcclxuICB9LFxyXG5dO1xyXG4iXSwibmFtZXMiOlsiYnJpZGFsTWFrZXVwIiwiZW5nYWdlbWVudE1ha2V1cCIsInBhcnR5TWFrZXVwIiwiaGFpclN0eWxpbmciLCJzYXJlZURyYXBpbmciLCJtYWtldXBUb29scyIsInNlcnZpY2VzIiwiaWQiLCJ0aXRsZSIsInNsdWciLCJwcmljZSIsImRlc2NyaXB0aW9uIiwibG9uZ0Rlc2NyaXB0aW9uIiwiaW1hZ2UiLCJpbmNsdWRlcyIsInRvb2xzIiwidGVzdGltb25pYWxzIiwibmFtZSIsInRleHQiLCJyYXRpbmciLCJibG9nUG9zdHMiLCJleGNlcnB0IiwiZGF0ZSJdLCJtYXBwaW5ncyI6IkFBQUEsT0FBT0Esa0JBQWtCLDZCQUE2QjtBQUN0RCxPQUFPQyxzQkFBc0IsaUNBQWlDO0FBQzlELE9BQU9DLGlCQUFpQiw0QkFBNEI7QUFDcEQsT0FBT0MsaUJBQWlCLDRCQUE0QjtBQUNwRCxPQUFPQyxrQkFBa0IsNkJBQTZCO0FBQ3RELE9BQU9DLGlCQUFpQiw0QkFBNEI7QUFjcEQsT0FBTyxNQUFNQyxXQUFzQjtJQUNqQztRQUNFQyxJQUFJO1FBQ0pDLE9BQU87UUFDUEMsTUFBTTtRQUNOQyxPQUFPO1FBQ1BDLGFBQWE7UUFDYkMsaUJBQWlCO1FBQ2pCQyxPQUFPYjtRQUNQYyxVQUFVO1lBQUM7WUFBc0I7WUFBMEI7WUFBNkI7WUFBaUI7WUFBc0I7U0FBZTtRQUM5SUMsT0FBTztZQUFDO1lBQU87WUFBZTtZQUFxQjtZQUFlO1NBQWtCO0lBQ3RGO0lBQ0E7UUFDRVIsSUFBSTtRQUNKQyxPQUFPO1FBQ1BDLE1BQU07UUFDTkMsT0FBTztRQUNQQyxhQUFhO1FBQ2JDLGlCQUFpQjtRQUNqQkMsT0FBT1o7UUFDUGEsVUFBVTtZQUFDO1lBQWE7WUFBZ0I7WUFBYTtZQUFvQjtTQUFlO1FBQ3hGQyxPQUFPO1lBQUM7WUFBTztZQUFlO1lBQWE7U0FBYztJQUMzRDtJQUNBO1FBQ0VSLElBQUk7UUFDSkMsT0FBTztRQUNQQyxNQUFNO1FBQ05DLE9BQU87UUFDUEMsYUFBYTtRQUNiQyxpQkFBaUI7UUFDakJDLE9BQU9YO1FBQ1BZLFVBQVU7WUFBQztZQUF1QjtZQUFnQjtZQUFhO1NBQW1CO1FBQ2xGQyxPQUFPO1lBQUM7WUFBTztZQUFlO1lBQWE7U0FBbUI7SUFDaEU7SUFDQTtRQUNFUixJQUFJO1FBQ0pDLE9BQU87UUFDUEMsTUFBTTtRQUNOQyxPQUFPO1FBQ1BDLGFBQWE7UUFDYkMsaUJBQWlCO1FBQ2pCQyxPQUFPVjtRQUNQVyxVQUFVO1lBQUM7WUFBZ0I7WUFBbUI7WUFBcUI7U0FBbUI7UUFDdEZDLE9BQU87WUFBQztZQUFPO1lBQVM7U0FBOEI7SUFDeEQ7SUFDQTtRQUNFUixJQUFJO1FBQ0pDLE9BQU87UUFDUEMsTUFBTTtRQUNOQyxPQUFPO1FBQ1BDLGFBQWE7UUFDYkMsaUJBQWlCO1FBQ2pCQyxPQUFPVDtRQUNQVSxVQUFVO1lBQUM7WUFBc0I7WUFBd0I7WUFBc0I7U0FBa0I7UUFDakdDLE9BQU87WUFBQztZQUFlO1NBQTZCO0lBQ3REO0lBQ0E7UUFDRVIsSUFBSTtRQUNKQyxPQUFPO1FBQ1BDLE1BQU07UUFDTkMsT0FBTztRQUNQQyxhQUFhO1FBQ2JDLGlCQUFpQjtRQUNqQkMsT0FBT1I7UUFDUFMsVUFBVTtZQUFDO1lBQWtCO1lBQWU7WUFBYTtZQUFnQjtTQUFxQjtRQUM5RkMsT0FBTztZQUFDO1lBQWU7WUFBUztZQUFVO1NBQXFCO0lBQ2pFO0NBQ0QsQ0FBQztBQUVGLE9BQU8sTUFBTUMsZUFBZTtJQUMxQjtRQUNFQyxNQUFNO1FBQ05DLE1BQU07UUFDTkMsUUFBUTtJQUNWO0lBQ0E7UUFDRUYsTUFBTTtRQUNOQyxNQUFNO1FBQ05DLFFBQVE7SUFDVjtJQUNBO1FBQ0VGLE1BQU07UUFDTkMsTUFBTTtRQUNOQyxRQUFRO0lBQ1Y7SUFDQTtRQUNFRixNQUFNO1FBQ05DLE1BQU07UUFDTkMsUUFBUTtJQUNWO0NBQ0QsQ0FBQztBQUVGLE9BQU8sTUFBTUMsWUFBWTtJQUN2QjtRQUNFYixJQUFJO1FBQ0pDLE9BQU87UUFDUGEsU0FBUztRQUNUQyxNQUFNO1FBQ05ULE9BQU9iO0lBQ1Q7SUFDQTtRQUNFTyxJQUFJO1FBQ0pDLE9BQU87UUFDUGEsU0FBUztRQUNUQyxNQUFNO1FBQ05ULE9BQU9SO0lBQ1Q7SUFDQTtRQUNFRSxJQUFJO1FBQ0pDLE9BQU87UUFDUGEsU0FBUztRQUNUQyxNQUFNO1FBQ05ULE9BQU9aO0lBQ1Q7Q0FDRCxDQUFDIn0=

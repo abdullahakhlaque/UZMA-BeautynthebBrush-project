@@ -12,17 +12,26 @@ export interface PortfolioItem {
 }
 
 const STORAGE_KEY = 'uzma:portfolio:v1';
-const inMemory: { items: PortfolioItem[]; ts: number } | null = (() => {
-  try {
-    const raw = sessionStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as { items: PortfolioItem[]; ts: number };
-    if (!parsed || !Array.isArray(parsed.items)) return null;
-    return parsed;
-  } catch {
-    return null;
+
+// ── In-memory store (lives for the lifetime of the JS module) ──────────────
+// We use a mutable object so that fetchPortfolio() can update it in-place
+// and getCachedPortfolio() always sees the latest value without re-reading
+// sessionStorage.
+const cache: { items: PortfolioItem[] | null } = { items: null };
+
+// Hydrate from sessionStorage on first load so returning visitors get
+// instant rendering even before the network request completes.
+try {
+  const raw = sessionStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    const parsed = JSON.parse(raw) as { items: PortfolioItem[] };
+    if (Array.isArray(parsed?.items)) {
+      cache.items = parsed.items;
+    }
   }
-})();
+} catch {
+  /* sessionStorage unavailable — ignore */
+}
 
 let inflight: Promise<PortfolioItem[]> | null = null;
 
@@ -30,14 +39,18 @@ const persist = (items: PortfolioItem[]) => {
   try {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ items, ts: Date.now() }));
   } catch {
-    /* sessionStorage may be unavailable (private mode, quota) — ignore */
+    /* quota / private mode — ignore */
   }
 };
 
-export const getCachedPortfolio = (): PortfolioItem[] | null => inMemory?.items ?? null;
+/** Returns cached items if available, otherwise null. */
+export const getCachedPortfolio = (): PortfolioItem[] | null => cache.items;
 
+/** Fetches portfolio from API (or returns cache). Always resolves — never throws. */
 export const fetchPortfolio = async (): Promise<PortfolioItem[]> => {
-  if (inMemory) return inMemory.items;
+  // Return in-memory cache immediately
+  if (cache.items !== null) return cache.items;
+  // De-duplicate concurrent calls
   if (inflight) return inflight;
 
   inflight = (async () => {
@@ -46,10 +59,14 @@ export const fetchPortfolio = async (): Promise<PortfolioItem[]> => {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const items: PortfolioItem[] = Array.isArray(data) ? data : [];
+      // ← KEY FIX: update the in-memory cache so next call is instant
+      cache.items = items;
       persist(items);
       return items;
     } catch (err) {
-      console.error('Failed to load portfolio', err);
+      console.error('[portfolioCache] Failed to load portfolio:', err);
+      // Don't cache failures — let the next call retry
+      cache.items = null;
       return [];
     } finally {
       inflight = null;
@@ -59,19 +76,20 @@ export const fetchPortfolio = async (): Promise<PortfolioItem[]> => {
   return inflight;
 };
 
-// Injects <link rel="preload" as="image"> for the first N images so the
-// browser starts fetching them in parallel with the JS bundle / HTML.
+// ── Image preloader ────────────────────────────────────────────────────────
 const preloaded = new Set<string>();
 
+/**
+ * Injects <link rel="preload" as="image"> for the first N images so the
+ * browser starts fetching them in parallel with JS/HTML parsing.
+ */
 export const preloadFirstImages = (items: PortfolioItem[], count = 4) => {
   if (typeof document === 'undefined') return;
-
-  items.slice(0, count).forEach((item) => {
+  items.slice(0, count).forEach(item => {
     if (item.type !== 'image') return;
     const resolved = resolveMediaUrl(item.url);
     if (!resolved || preloaded.has(resolved)) return;
     preloaded.add(resolved);
-
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
